@@ -155,3 +155,713 @@
             padding: 20px;
             border-radius: 12px;
             text-align: center;
+            margin: 20px 0;
+        }
+        
+        .trend-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .keywords {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        
+        .keyword {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            backdrop-filter: blur(10px);
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.85em;
+        }
+        
+        .emoji-divider {
+            text-align: center;
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+
+        /* AI팁 특별 스타일 */
+        .tip-item {
+            background: linear-gradient(135deg, #fff8e1 0%, #f3e5f5 100%);
+            border-left: 3px solid #ff6b6b;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tip-item::before {
+            content: '💡';
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            font-size: 1.5em;
+            opacity: 0.3;
+        }
+
+        .tip-item:hover {
+            background: linear-gradient(135deg, #fff3c4 0%, #e8cdf1 100%);
+            transform: translateX(8px);
+        }
+
+        .tip-link-text {
+            font-size: 0.8em;
+            color: #ff6b6b;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 600;
+        }
+        
+        /* 모달 스타일 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-content {
+            background: white;
+            margin: 2% auto;
+            padding: 0;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.4s ease;
+        }
+        
+        .modal-header {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 25px;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.4em;
+            font-weight: 700;
+        }
+        
+        .close {
+            font-size: 2em;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        
+        .close:hover {
+            opacity: 1;
+        }
+        
+        .modal-body {
+            padding: 30px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        
+        .tip-day {
+            margin-bottom: 25px;
+            border: 2px solid #f0f0f0;
+            border-radius: 15px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .tip-day.active {
+            border: 2px solid #4ecdc4;
+            background: linear-gradient(135deg, #f0f8ff 0%, #e8f4fd 100%);
+            transform: scale(1.02);
+        }
+        
+        .tip-day:hover {
+            border-color: #ff6b6b;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .day-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            gap: 10px;
+        }
+        
+        .day-emoji {
+            font-size: 1.3em;
+        }
+        
+        .day-header h3 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+        
+        .tip-content {
+            color: #555;
+            line-height: 1.6;
+            font-size: 0.9em;
+        }
+        
+        .tip-content strong {
+            color: #333;
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+        
+        .tip-content strong:first-child {
+            margin-top: 0;
+        }
+        
+        .modal-footer {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 0 0 20px 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .week-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .current-week {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideIn {
+            from { 
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        /* 모바일 최적화 */
+        @media (max-width: 768px) {
+            body { 
+                padding: 10px;
+                font-size: 14px;
+            }
+            
+            .container { 
+                border-radius: 15px;
+                margin: 0 auto;
+            }
+            
+            .header { 
+                padding: 20px 15px;
+                position: relative;
+            }
+            
+            .header::before {
+                font-size: 1.5em;
+                top: 12px;
+                left: 15px;
+            }
+            
+            .title { 
+                font-size: 1.4em;
+                margin-bottom: 8px;
+            }
+            
+            .subtitle {
+                font-size: 0.9em;
+            }
+            
+            .content { 
+                padding: 20px 15px;
+            }
+            
+            .section {
+                margin-bottom: 20px;
+            }
+            
+            .section-title {
+                font-size: 1.1em;
+                margin-bottom: 12px;
+                padding-left: 10px;
+            }
+            
+            .news-item {
+                padding: 15px;
+                margin-bottom: 12px;
+                border-radius: 10px;
+            }
+            
+            .news-item:hover {
+                transform: translateX(3px);
+            }
+            
+            .news-title {
+                font-size: 0.95em;
+                margin-bottom: 6px;
+                line-height: 1.4;
+            }
+            
+            .news-content {
+                font-size: 0.85em;
+                line-height: 1.4;
+            }
+            
+            .external-link {
+                font-size: 0.75em;
+                margin-top: 6px;
+            }
+            
+            .trend-box {
+                padding: 15px;
+                margin: 15px 0;
+            }
+            
+            .trend-title {
+                font-size: 1em;
+                margin-bottom: 8px;
+            }
+            
+            .keywords {
+                gap: 6px;
+                margin-top: 10px;
+            }
+            
+            .keyword {
+                padding: 3px 10px;
+                font-size: 0.75em;
+            }
+            
+            .footer {
+                padding: 15px;
+                font-size: 0.8em;
+            }
+            
+            .emoji-divider {
+                font-size: 1.2em;
+                margin: 15px 0;
+            }
+
+            /* 모바일 모달 최적화 */
+            .modal-content {
+                width: 95%;
+                margin: 5% auto;
+            }
+            
+            .modal-header {
+                padding: 20px 15px;
+            }
+            
+            .modal-header h2 {
+                font-size: 1.2em;
+            }
+            
+            .close {
+                font-size: 1.5em;
+            }
+            
+            .modal-body {
+                padding: 20px 15px;
+            }
+            
+            .tip-day {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            
+            .day-header h3 {
+                font-size: 1em;
+            }
+            
+            .tip-content {
+                font-size: 0.85em;
+            }
+            
+            .modal-footer {
+                padding: 15px;
+            }
+            
+            .nav-btn {
+                padding: 8px 15px;
+                font-size: 0.85em;
+            }
+            
+            .current-week {
+                font-size: 0.85em;
+            }
+        }
+        
+        /* 아주 작은 화면 (360px 이하) */
+        @media (max-width: 360px) {
+            body {
+                padding: 5px;
+                font-size: 13px;
+            }
+            
+            .header {
+                padding: 15px 10px;
+            }
+            
+            .header::before {
+                font-size: 1.3em;
+                top: 10px;
+                left: 10px;
+            }
+            
+            .title {
+                font-size: 1.2em;
+            }
+            
+            .content {
+                padding: 15px 10px;
+            }
+            
+            .news-item {
+                padding: 12px;
+            }
+            
+            .news-title {
+                font-size: 0.9em;
+            }
+            
+            .news-content {
+                font-size: 0.8em;
+            }
+            
+            .trend-box {
+                padding: 12px;
+            }
+            
+            .keywords {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .keyword {
+                padding: 2px 8px;
+                font-size: 0.7em;
+            }
+        }
+        
+        /* 터치 디바이스 최적화 */
+        @media (hover: none) and (pointer: coarse) {
+            .news-item {
+                padding: 16px;
+                margin-bottom: 12px;
+            }
+            
+            .news-item:active {
+                transform: scale(0.98);
+                background: #e8f4fd;
+            }
+            
+            .news-item:hover {
+                transform: none;
+            }
+        }
+        
+        /* 가로 모드 최적화 */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .header {
+                padding: 15px;
+            }
+            
+            .title {
+                font-size: 1.3em;
+            }
+            
+            .content {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="date">2025년 8월 5일 (화)</div>
+            <h1 class="title">AI.Do 일일뉴스</h1>
+            <div class="subtitle">3분 완독! 오늘의 AI 소식</div>
+        </header>
+        
+        <main class="content">
+            <section class="section">
+                <h2 class="section-title">
+                    <span class="emoji">🔥</span>
+                    핫이슈 (30초 읽기)
+                </h2>
+                
+                <a href="https://www.digitaltoday.co.kr/news/articleView.html?idxno=569689" target="_blank" class="news-item">
+                    <h3 class="news-title">🔥 AI 4대 천왕 최강 대결!</h3>
+                    <p class="news-content">
+                        <span class="highlight">챗GPT vs 제미나이 vs 클로드 vs 딥시크</span> 5개 항목 성능 테스트 결과 공개! 
+                        추론 분야에서는 구글 제미나이가 1위를 차지했다는 놀라운 소식 🏆
+                    </p>
+                    <div class="external-link">🔗 디지털투데이 · 클릭해서 자세히 보기</div>
+                </a>
+                
+                <a href="https://blog.kakaocloud.com/190" target="_blank" class="news-item">
+                    <h3 class="news-title">📈 2025년 AI 10대 트렌드 발표</h3>
+                    <p class="news-content">
+                        <span class="highlight">카카오클라우드가 제시한 AI 핵심 트렌드</span> 공개! 
+                        비즈니스 책임자 80%가 이미 생성형 AI 사용 경험이 있다는 충격적인 조사 결과 📊
+                    </p>
+                    <div class="external-link">🔗 카카오클라우드 · 클릭해서 자세히 보기</div>
+                </a>
+            </section>
+            
+            <div class="emoji-divider">⚡ ⚡ ⚡</div>
+            
+            <section class="section">
+                <h2 class="section-title">
+                    <span class="emoji">📈</span>
+                    트렌드 레이더 (1분 읽기)
+                </h2>
+                
+                <div class="trend-box">
+                    <div class="trend-title">🎯 화요일 트렌드 스팟</div>
+                    <p>AI 도구 조합이 핫트렌드! 단일 AI보다는 여러 AI를 연계해서 사용하는 워크플로우가 실무 효율성을 크게 높이고 있어요.</p>
+                    <div class="keywords">
+                        <span class="keyword">#AI조합활용</span>
+                        <span class="keyword">#워크플로우</span>
+                        <span class="keyword">#실무자동화</span>
+                        <span class="keyword">#도구연계</span>
+                    </div>
+                </div>
+                
+                <a href="https://clickup.com/ko/blog/270017/ai-workflow-tools" target="_blank" class="news-item">
+                    <h3 class="news-title">🔄 AI 도구 조합 활용 급증!</h3>
+                    <p class="news-content">
+                        <span class="highlight">단일 AI 대신 여러 AI 연계 사용</span>이 새로운 트렌드! 
+                        업무 효율성이 300% 향상된다는 실무진 후기가 쏟아지고 있어요. 🚀
+                    </p>
+                    <div class="external-link">🔗 ClickUp · 클릭해서 자세히 보기</div>
+                </a>
+            </section>
+            
+            <div class="emoji-divider">🎲 🎲 🎲</div>
+            
+            <section class="section">
+                <h2 class="section-title">
+                    <span class="emoji">💡</span>
+                    오늘의 AI팁 (30초 읽기)
+                </h2>
+                
+                <div class="news-item tip-item" onclick="showWeeklyTips()">
+                    <h3 class="news-title">AI 도구 조합 활용법 (화요일 꿀팁)</h3>
+                    <p class="news-content">
+                        <strong>💡 실무 예시:</strong> "프레젠테이션 기획안을 클로드로 작성 → PPT는 감마로 자동화"
+                    </p>
+                    <div class="tip-link-text">
+                        📅 이번 주 전체 AI팁 보기 (월~일) · 클릭하세요!
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="footer">
+            <p>🤝 AI.Do | 매일 업데이트 | 궁금한 점은 언제든 댓글로!</p>
+            <p style="margin-top: 8px; font-size: 0.8em;">💬 오늘 뉴스 어떠셨나요? 피드백 환영해요!</p>
+            <p style="margin-top: 5px; font-size: 0.75em; opacity: 0.7;">✨ Made by 류주임</p>
+        </footer>
+    </div>
+
+        <div id="weeklyTipsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🗓️ 이번 주 AI팁 완전판 (8/4~8/10)</h2>
+                <span class="close" onclick="hideWeeklyTips()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="tip-day">
+                    <div class="day-header">
+                        <span class="day-emoji">🚀</span>
+                        <h3>월요일 - AI 프롬프트 마스터</h3>
+                    </div>
+                    <div class="tip-content">
+                        <strong>🎯 효과적인 프롬프트 작성법:</strong><br>
+                        • "~역할을 해줘" → 구체적 페르소나 부여<br>
+                        • "단계별로 설명해줘" → 논리적 사고 유도<br>
+                        • "예시와 함께" → 실무 적용 가능한 답변<br>
+                        <strong>💡 실무 예시:</strong> "마케팅 전문가 역할로, 20대 타겟 SNS 콘텐츠 전략을 3단계로 나누어 예시와 함께 설명해줘"
+                    </div>
+                </div>
+                
+                <div class="tip-day active">
+                    <div class="day-header">
+                        <span class="day-emoji">🔄</span>
+                        <h3>화요일 - AI 도구 조합 활용법</h3>
+                    </div>
+                    <div class="tip-content">
+                        <strong>🔄 연계 활용:</strong> 클로드로 기획 → 챗GPT로 실행 → 제미나이로 검증<br>
+                        <strong>📊 데이터 분석:</strong> 엑셀 + 챗GPT 플러그인으로 차트 자동 생성<br>
+                        <strong>🎨 창작 워크플로:</strong> 미드저니(이미지) + 클로드(카피) + 런웨이(영상)<br>
+                        <strong>💡 실무 예시:</strong> "프레젠테이션 기획안을 클로드로 작성 → PPT는 감마로 자동화"
+                    </div>
+                </div>
+                
+                <div class="tip-day">
+                    <div class="day-header">
+                        <span class="day-emoji">⚡</span>
+                        <h3>수요일 - 업무 자동화 꿀팁</h3>
+                    </div>
+                    <div class="tip-content">
+                        <strong>📧 이메일 자동화:</strong> 챗GPT로 템플릿 생성 → 자동 회신 설정<br>
+                        <strong>📅 일정 관리:</strong> 노션 AI + 구글 캘린더 연동으로 스마트 스케줄링<br>
+                        <strong>🔍 정보 수집:</strong> 퍼플렉시티로 시장 리서치 → 노션에 자동 정리<br>
+                        <strong>💡 실무 예시:</strong> "매주 경쟁사 동향을 퍼플렉시티로 조사 → 자동으로 보고서 생성"
+                    </div>
+                </div>
+                
+                <div class="tip-day">
+                    <div class="day-header">
+                        <span class="day-emoji">🎨</span>
+                        <h3>목요일 - 창작 AI 활용법</h3>
+                    </div>
+                    <div class="tip-content">
+                        <strong>🖼️ 이미지 생성:</strong> 미드저니 → 칸바로 편집 → 브랜드 아이덴티티 통일<br>
+                        <strong>🎬 영상 제작:</strong> 런웨이 + 헤이젠으로 AI 아바타 영상 제작<br>
+                        <strong>✍️ 카피 라이팅:</strong> 클로드로 기획 → 자스퍼로 다양한 톤앤매너 변형<br>
+                        <strong>💡 실무 예시:</strong> "브랜드 캠페인을 위한 통합 크리에이티브 제작 파이프라인"
+                    </div>
+                </div>
+                
+                <div class="tip-day">
+                    <div class="day-header">
+                        <span class="day-emoji">📊</span>
+                        <h3>금요일 - 데이터 분석 마스터</h3>
+                    </div>
+                    <div class="tip-content">
+                        <strong>📈 매출 분석:</strong> 엑셀 → 챗GPT 코드 인터프리터로 고급 차트 생성<br>
+                        <strong>🔍 고객 분석:</strong> 클로드로 설문 설계 → 챗GPT로 응답 분석<br>
+                        <strong>📋 보고서 자동화:</strong> 태블로 + AI로 실시간 대시보드 구축<br>
+                        <strong>💡 실무 예시:</strong> "월간 KPI 보고서를 AI가 자동 생성하고 인사이트까지 제공"
+                    </div>
+                </div>
+                
+                <div class="tip-day">
+                    <div class="day-header">
+                        <span class="day-emoji">🛠️</span>
+                        <h3>토요일 - 개발자를 위한 AI</h3>
+                    </div>
+                    <div class="tip-content">
+                        <strong>💻 코드 리뷰:</strong> 깃허브 코파일럿으로 실시간 코드 개선 제안<br>
+                        <strong>🐛 버그 수정:</strong> 챗GPT에 에러 로그 입력 → 해결 방안 즉시 제공<br>
+                        <strong>📚 문서화:</strong> 클로드로 API 문서 자동 생성<br>
+                        <strong>💡 실무 예시:</strong> "레거시 코드를 AI가 분석하여 리팩토링 가이드 제공"
+                    </div>
+                </div>
+                
+                <div class="tip-day">
+                    <div class="day-header">
+                        <span class="day-emoji">🌟</span>
+                        <h3>일요일 - 주간 AI 트렌드 정리</h3>
+                    </div>
+                    <div class="tip-content">
+                        <strong>📰 트렌드 모니터링:</strong> 퍼플렉시티로 주간 AI 뉴스 종합<br>
+                        <strong>🔮 미래 예측:</strong> 클로드로 트렌드 분석 → 다음 주 전략 수립<br>
+                        <strong>📝 학습 정리:</strong> 노션 AI로 한 주간 배운 AI 스킬 정리<br>
+                        <strong>💡 실무 예시:</strong> "주간 AI 동향 보고서를 자동 생성하여 팀원들과 공유"
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="week-navigation">
+                    <button class="nav-btn" onclick="previousWeek()">← 이전 주</button>
+                    <span class="current-week">2025년 8월 1주차</span>
+                    <button class="nav-btn" onclick="nextWeek()">다음 주 →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showWeeklyTips() {
+            document.getElementById('weeklyTipsModal').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
+        }
+        
+        function hideWeeklyTips() {
+            document.getElementById('weeklyTipsModal').style.display = 'none';
+            document.body.style.overflow = 'auto'; // 배경 스크롤 복구
+        }
+        
+        function previousWeek() {
+            // 이전 주 데이터로 업데이트하는 로직
+            alert('이전 주 AI팁을 준비 중입니다! 🔄');
+        }
+        
+        function nextWeek() {
+            // 다음 주 데이터로 업데이트하는 로직
+            alert('다음 주 AI팁을 준비 중입니다! 🚀');
+        }
+        
+        // 모달 외부 클릭 시 닫기
+        window.onclick = function(event) {
+            const modal = document.getElementById('weeklyTipsModal');
+            if (event.target === modal) {
+                hideWeeklyTips();
+            }
+        }
+        
+        // ESC 키로 모달 닫기
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                hideWeeklyTips();
+            }
+        });
+    </script>
+</body>
+</html>
