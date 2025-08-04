@@ -1,475 +1,129 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="theme-color" content="#667eea">
-    <title>AI.Do 일일뉴스(25.8.4.월)</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
-            line-height: 1.6;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            -webkit-text-size-adjust: 100%;
-            touch-action: manipulation;
-        }
-        
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-        }
-        
-        .header {
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            color: white;
-            padding: 25px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .header::before {
-            content: '🤖';
-            font-size: 2em;
-            position: absolute;
-            top: 15px;
-            left: 25px;
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
-        
-        .date {
-            font-size: 0.9em;
-            opacity: 0.9;
-            margin-bottom: 5px;
-        }
-        
-        .title {
-            font-size: 1.8em;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-        
-        .subtitle {
-            font-size: 1em;
-            opacity: 0.8;
-        }
-        
-        .content {
-            padding: 30px;
-        }
-        
-        .section {
-            margin-bottom: 25px;
-        }
-        
-        .section-title {
-            display: flex;
-            align-items: center;
-            font-size: 1.2em;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 15px;
-            border-left: 4px solid #ff6b6b;
-            padding-left: 12px;
-        }
-        
-        .section-title .emoji {
-            margin-right: 8px;
-            font-size: 1.1em;
-        }
-        
-        .news-item {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 18px;
-            margin-bottom: 15px;
-            border-left: 3px solid #4ecdc4;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-        
-        .news-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            background: #f0f8ff;
-            text-decoration: none;
-            color: inherit;
-        }
-        
-        .external-link {
-            font-size: 0.8em;
-            color: #666;
-            margin-top: 8px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        
-        .news-title {
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 8px;
-            font-size: 1em;
-        }
-        
-        .news-content {
-            color: #555;
-            font-size: 0.9em;
-            line-height: 1.5;
-        }
-        
-        .highlight {
-            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: 500;
-        }
-        
-        .trend-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            margin: 20px 0;
-        }
-        
-        .trend-title {
-            font-size: 1.1em;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-        
-        .keywords {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 12px;
-        }
-        
-        .keyword {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8em;
-            backdrop-filter: blur(10px);
-        }
-        
-        .footer {
-            background: #f8f9fa;
-            padding: 20px;
-            text-align: center;
-            color: #666;
-            font-size: 0.85em;
-        }
-        
-        .emoji-divider {
-            text-align: center;
-            font-size: 1.5em;
-            margin: 20px 0;
-        }
-        
-        /* 모바일 최적화 */
-        @media (max-width: 768px) {
-            body { 
-                padding: 10px;
-                font-size: 14px;
-            }
-            
-            .container { 
-                border-radius: 15px;
-                margin: 0 auto;
-            }
-            
-            .header { 
-                padding: 20px 15px;
-                position: relative;
-            }
-            
-            .header::before {
-                font-size: 1.5em;
-                top: 12px;
-                left: 15px;
-            }
-            
-            .title { 
-                font-size: 1.4em;
-                margin-bottom: 8px;
-            }
-            
-            .subtitle {
-                font-size: 0.9em;
-            }
-            
-            .content { 
-                padding: 20px 15px;
-            }
-            
-            .section {
-                margin-bottom: 20px;
-            }
-            
-            .section-title {
-                font-size: 1.1em;
-                margin-bottom: 12px;
-                padding-left: 10px;
-            }
-            
-            .news-item {
-                padding: 15px;
-                margin-bottom: 12px;
-                border-radius: 10px;
-            }
-            
-            .news-item:hover {
-                transform: translateX(3px);
-            }
-            
-            .news-title {
-                font-size: 0.95em;
-                margin-bottom: 6px;
-                line-height: 1.4;
-            }
-            
-            .news-content {
-                font-size: 0.85em;
-                line-height: 1.4;
-            }
-            
-            .external-link {
-                font-size: 0.75em;
-                margin-top: 6px;
-            }
-            
-            .trend-box {
-                padding: 15px;
-                margin: 15px 0;
-            }
-            
-            .trend-title {
-                font-size: 1em;
-                margin-bottom: 8px;
-            }
-            
-            .keywords {
-                gap: 6px;
-                margin-top: 10px;
-            }
-            
-            .keyword {
-                padding: 3px 10px;
-                font-size: 0.75em;
-            }
-            
-            .footer {
-                padding: 15px;
-                font-size: 0.8em;
-            }
-            
-            .emoji-divider {
-                font-size: 1.2em;
-                margin: 15px 0;
-            }
-        }
-        
-        /* 아주 작은 화면 (360px 이하) */
-        @media (max-width: 360px) {
-            body {
-                padding: 5px;
-                font-size: 13px;
-            }
-            
-            .header {
-                padding: 15px 10px;
-            }
-            
-            .header::before {
-                font-size: 1.3em;
-                top: 10px;
-                left: 10px;
-            }
-            
-            .title {
-                font-size: 1.2em;
-            }
-            
-            .content {
-                padding: 15px 10px;
-            }
-            
-            .news-item {
-                padding: 12px;
-            }
-            
-            .news-title {
-                font-size: 0.9em;
-            }
-            
-            .news-content {
-                font-size: 0.8em;
-            }
-            
-            .trend-box {
-                padding: 12px;
-            }
-            
-            .keywords {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .keyword {
-                padding: 2px 8px;
-                font-size: 0.7em;
-            }
-        }
-        
-        /* 터치 디바이스 최적화 */
-        @media (hover: none) and (pointer: coarse) {
-            .news-item {
-                padding: 16px;
-                margin-bottom: 12px;
-            }
-            
-            .news-item:active {
-                transform: scale(0.98);
-                background: #e8f4fd;
-            }
-            
-            .news-item:hover {
-                transform: none;
-            }
-        }
-        
-        /* 가로 모드 최적화 */
-        @media (max-width: 768px) and (orientation: landscape) {
-            .header {
-                padding: 15px;
-            }
-            
-            .title {
-                font-size: 1.3em;
-            }
-            
-            .content {
-                padding: 15px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <header class="header">
-            <div class="date">2025년 8월 4일 (월)</div>
-            <h1 class="title">AI.Do 일일뉴스</h1>
-            <div class="subtitle">3분 완독! 오늘의 AI 소식</div>
-        </header>
-        
-        <main class="content">
-            <section class="section">
-                <h2 class="section-title">
-                    <span class="emoji">🔥</span>
-                    핫이슈 (30초 읽기)
-                </h2>
-                
-                <a href="https://www.newstheai.com/news/articleView.html?idxno=8460" target="_blank" class="news-item">
-                    <h3 class="news-title">🔥 GPT-5, 8월 출시 예정!</h3>
-                    <p class="news-content">
-                        <span class="highlight">오픈AI가 GPT-5를 8월 초 공식 출시</span> 계획이라고 발표! 
-                        구글 제미나이와 xAI 그록에 밀린 성능을 뒤집을 수 있을까요? 🚀
-                    </p>
-                    <div class="external-link">🔗 뉴스더AI · 클릭해서 자세히 보기</div>
-                </a>
-                
-                <a href="https://www.aitimes.kr/news/articleView.html?idxno=35881" target="_blank" class="news-item">
-                    <h3 class="news-title">🇰🇷 NC AI, 한국형 AI 모델 개발 본격화</h3>
-                    <p class="news-content">
-                        <span class="highlight">대한민국 독자 AI 모델</span> 개발을 위한 '그랜드 컨소시엄' 출범! 
-                        LG 엑사원 4.0도 글로벌 11위에 올라서며 한국 AI 기술력 입증 중 🎯
-                    </p>
-                    <div class="external-link">🔗 AI타임스 · 클릭해서 자세히 보기</div>
-                </a>
-            </section>
-            
-            <div class="emoji-divider">⚡ ⚡ ⚡</div>
-            
-            <section class="section">
-                <h2 class="section-title">
-                    <span class="emoji">📈</span>
-                    트렌드 레이더 (1분 읽기)
-                </h2>
-                
-                <div class="trend-box">
-                    <div class="trend-title">🎯 이번 주 핫키워드</div>
-                    <p>멀티모달 AI가 대세! 텍스트만이 아닌 이미지, 음성까지 이해하는 AI들이 속속 등장하고 있어요.</p>
-                    <div class="keywords">
-                        <span class="keyword">#멀티모달</span>
-                        <span class="keyword">#VLM</span>
-                        <span class="keyword">#AI규제</span>
-                        <span class="keyword">#데이터센터</span>
-                    </div>
-                </div>
-                
-                <a href="https://www.etnews.com/20250425000012" target="_blank" class="news-item">
-                    <h3 class="news-title">AI 사용자 폭발적 증가!</h3>
-                    <p class="news-content">
-                        <span class="highlight">챗GPT 월 5억명, 제미나이 3.5억명</span> 사용자 돌파! 
-                        전 세계가 AI와 함께 살아가는 시대가 정말 왔네요. 📊
-                    </p>
-                    <div class="external-link">🔗 전자신문 · 클릭해서 자세히 보기</div>
-                </a>
-            </section>
-            
-            <div class="emoji-divider">🎲 🎲 🎲</div>
-            
-            <section class="section">
+<section class="section">
                 <h2 class="section-title">
                     <span class="emoji">💡</span>
                     오늘의 AI팁 (30초 읽기)
                 </h2>
                 
-                <article class="news-item">
-                    <h3 class="news-title">어떤 AI를 써야 할까?</h3>
+                <div class="news-item" onclick="showWeeklyTips()" style="cursor: pointer;">
+                    <h3 class="news-title">AI 도구 조합 활용법 (화요일 꿀팁) 👆</h3>
                     <p class="news-content">
-                        <strong>📝 글쓰기:</strong> 클로드3 (자연스러운 문체)<br>
-                        <strong>🔍 정보검색:</strong> 제미나이 (구글 연동)<br>
-                        <strong>💻 코딩:</strong> GPT-4 (다양한 언어 지원)<br>
-                        <strong>🎨 창작:</strong> 상황에 따라 다 좋아요!
+                        <strong>🔄 연계 활용:</strong> 클로드로 기획 → 챗GPT로 실행 → 제미나이로 검증<br>
+                        <strong>📊 데이터 분석:</strong> 엑셀 + 챗GPT 플러그인으로 차트 자동 생성<br>
+                        <strong>🎨 창작 워크플로:</strong> 미드저니(이미지) + 클로드(카피) + 런웨이(영상)<br>
+                        <strong>💡 실무 예시:</strong> "프레젠테이션 기획안을 클로드로 작성 → PPT는 감마로 자동화"
                     </p>
-                </article>
+                    <div class="external-link" style="color: #4ecdc4; font-weight: 600;">
+                        📋 클릭하여 이번 주 전체 AI팁 보기 (월~일)
+                    </div>
+                </div>
             </section>
-        </main>
-        
-        <footer class="footer">
-            <p>🤝 AI.Do | 매일 업데이트 | 궁금한 점은 언제든 댓글로!</p>
-            <p style="margin-top: 8px; font-size: 0.8em;">💬 오늘 뉴스 어떠셨나요? 피드백 환영해요!</p>
-            <p style="margin-top: 5px; font-size: 0.75em; opacity: 0.7;">✨ Made by 류주임</p>
-        </footer>
-    </div>
-</body>
-</html>
+            
+            <!-- 주간 AI팁 상세 모달 -->
+            <div id="weeklyTipsModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>🗓️ 이번 주 AI팁 완전판 (8/4~8/10)</h2>
+                        <span class="close" onclick="hideWeeklyTips()">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="tip-day">
+                            <div class="day-header">
+                                <span class="day-emoji">🚀</span>
+                                <h3>월요일 - AI 프롬프트 마스터</h3>
+                            </div>
+                            <div class="tip-content">
+                                <strong>🎯 효과적인 프롬프트 작성법:</strong><br>
+                                • "~역할을 해줘" → 구체적 페르소나 부여<br>
+                                • "단계별로 설명해줘" → 논리적 사고 유도<br>
+                                • "예시와 함께" → 실무 적용 가능한 답변<br>
+                                <strong>💡 실무 예시:</strong> "마케팅 전문가 역할로, 20대 타겟 SNS 콘텐츠 전략을 3단계로 나누어 예시와 함께 설명해줘"
+                            </div>
+                        </div>
+                        
+                        <div class="tip-day active">
+                            <div class="day-header">
+                                <span class="day-emoji">🔄</span>
+                                <h3>화요일 - AI 도구 조합 활용법</h3>
+                            </div>
+                            <div class="tip-content">
+                                <strong>🔄 연계 활용:</strong> 클로드로 기획 → 챗GPT로 실행 → 제미나이로 검증<br>
+                                <strong>📊 데이터 분석:</strong> 엑셀 + 챗GPT 플러그인으로 차트 자동 생성<br>
+                                <strong>🎨 창작 워크플로:</strong> 미드저니(이미지) + 클로드(카피) + 런웨이(영상)<br>
+                                <strong>💡 실무 예시:</strong> "프레젠테이션 기획안을 클로드로 작성 → PPT는 감마로 자동화"
+                            </div>
+                        </div>
+                        
+                        <div class="tip-day">
+                            <div class="day-header">
+                                <span class="day-emoji">⚡</span>
+                                <h3>수요일 - 업무 자동화 꿀팁</h3>
+                            </div>
+                            <div class="tip-content">
+                                <strong>📧 이메일 자동화:</strong> 챗GPT로 템플릿 생성 → 자동 회신 설정<br>
+                                <strong>📅 일정 관리:</strong> 노션 AI + 구글 캘린더 연동으로 스마트 스케줄링<br>
+                                <strong>🔍 정보 수집:</strong> 퍼플렉시티로 시장 리서치 → 노션에 자동 정리<br>
+                                <strong>💡 실무 예시:</strong> "매주 경쟁사 동향을 퍼플렉시티로 조사 → 자동으로 보고서 생성"
+                            </div>
+                        </div>
+                        
+                        <div class="tip-day">
+                            <div class="day-header">
+                                <span class="day-emoji">🎨</span>
+                                <h3>목요일 - 창작 AI 활용법</h3>
+                            </div>
+                            <div class="tip-content">
+                                <strong>🖼️ 이미지 생성:</strong> 미드저니 → 칸바로 편집 → 브랜드 아이덴티티 통일<br>
+                                <strong>🎬 영상 제작:</strong> 런웨이 + 헤이젠으로 AI 아바타 영상 제작<br>
+                                <strong>✍️ 카피 라이팅:</strong> 클로드로 기획 → 자스퍼로 다양한 톤앤매너 변형<br>
+                                <strong>💡 실무 예시:</strong> "브랜드 캠페인을 위한 통합 크리에이티브 제작 파이프라인"
+                            </div>
+                        </div>
+                        
+                        <div class="tip-day">
+                            <div class="day-header">
+                                <span class="day-emoji">📊</span>
+                                <h3>금요일 - 데이터 분석 마스터</h3>
+                            </div>
+                            <div class="tip-content">
+                                <strong>📈 매출 분석:</strong> 엑셀 → 챗GPT 코드 인터프리터로 고급 차트 생성<br>
+                                <strong>🔍 고객 분석:</strong> 클로드로 설문 설계 → 챗GPT로 응답 분석<br>
+                                <strong>📋 보고서 자동화:</strong> 태블로 + AI로 실시간 대시보드 구축<br>
+                                <strong>💡 실무 예시:</strong> "월간 KPI 보고서를 AI가 자동 생성하고 인사이트까지 제공"
+                            </div>
+                        </div>
+                        
+                        <div class="tip-day">
+                            <div class="day-header">
+                                <span class="day-emoji">🛠️</span>
+                                <h3>토요일 - 개발자를 위한 AI</h3>
+                            </div>
+                            <div class="tip-content">
+                                <strong>💻 코드 리뷰:</strong> 깃허브 코파일럿으로 실시간 코드 개선 제안<br>
+                                <strong>🐛 버그 수정:</strong> 챗GPT에 에러 로그 입력 → 해결 방안 즉시 제공<br>
+                                <strong>📚 문서화:</strong> 클로드로 API 문서 자동 생성<br>
+                                <strong>💡 실무 예시:</strong> "레거시 코드를 AI가 분석하여 리팩토링 가이드 제공"
+                            </div>
+                        </div>
+                        
+                        <div class="tip-day">
+                            <div class="day-header">
+                                <span class="day-emoji">🌟</span>
+                                <h3>일요일 - 주간 AI 트렌드 정리</h3>
+                            </div>
+                            <div class="tip-content">
+                                <strong>📰 트렌드 모니터링:</strong> 퍼플렉시티로 주간 AI 뉴스 종합<br>
+                                <strong>🔮 미래 예측:</strong> 클로드로 트렌드 분석 → 다음 주 전략 수립<br>
+                                <strong>📝 학습 정리:</strong> 노션 AI로 한 주간 배운 AI 스킬 정리<br>
+                                <strong>💡 실무 예시:</strong> "주간 AI 동향 보고서를 자동 생성하여 팀원들과 공유"
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="week-navigation">
+                            <button class="nav-btn" onclick="previousWeek()">← 이전 주</button>
+                            <span class="current-week">2025년 8월 1주차</span>
+                            <button class="nav-btn" onclick="nextWeek()">다음 주 →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
