@@ -699,4 +699,33 @@
             setTimeout(() => {
                 const activeCategory = modal.querySelector('.tip-category.active');
                 if (activeCategory) {
-                    const modalBody = modal.querySelector('.modal-body
+                    const modalBody = modal.querySelector('.modal-body');
+                    const offsetTop = activeCategory.offsetTop - 20; // 20px 여백
+                    modalBody.scrollTop = offsetTop;
+                }
+            }, 100);
+        }
+        
+        function hideWeekendTips() {
+            const modal = document.getElementById('weekendTipsModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // 모달 외부 클릭 시 닫기
+        window.onclick = function(event) {
+            const modal = document.getElementById('weekendTipsModal');
+            if (event.target === modal) {
+                hideWeekendTips();
+            }
+        }
+        
+        // ESC 키로 모달 닫기
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                hideWeekendTips();
+            }
+        });
+    </script>
+</body>
+</html>
