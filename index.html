@@ -9,26 +9,26 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
-    <meta property="og:title" content="AI.Do 주말특별 일일뉴스 (25.8.9.토) - 3분 완독! 오늘의 AI 소식">
-    <meta property="og:description" content="🚀 GPT-5 드디어 공개! 박사급 AI 시대 개막 🧠 모든 지표에서 인간 능가한 충격 성능 💡 주말 꿀팁: GPT-5로 업무 혁신하기">
+    <meta property="og:title" content="AI.Do 일일뉴스 (25.8.12.월) - 3분 완독! 오늘의 AI 소식">
+    <meta property="og:description" content="📱 메타, AI 음성 스타트업 웨이브폼스 인수 🏛️ 서울시, 행정 분야 자체 LLM 도입 '챗봇 2.0' 착수 ⚡ 월요일 꿀팁: AI로 한 주 업무 계획 완성하기">
     <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="AI.Do 주말특별 일일뉴스 - 3분 완독! 오늘의 AI 소식">
+    <meta property="og:image:alt" content="AI.Do 일일뉴스 - 3분 완독! 오늘의 AI 소식">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://chrisryugj.github.io/AIDo/">
-    <meta property="twitter:title" content="AI.Do 주말특별 일일뉴스 (25.8.9.토) - 3분 완독! 오늘의 AI 소식">
-    <meta property="twitter:description" content="🚀 GPT-5 드디어 공개! 박사급 AI 시대 개막 🧠 모든 지표에서 인간 능가한 충격 성능 💡 주말 꿀팁: GPT-5로 업무 혁신하기">
+    <meta property="twitter:title" content="AI.Do 일일뉴스 (25.8.12.월) - 3분 완독! 오늘의 AI 소식">
+    <meta property="twitter:description" content="📱 메타, AI 음성 스타트업 웨이브폼스 인수 🏛️ 서울시, 행정 분야 자체 LLM 도입 '챗봇 2.0' 착수 ⚡ 월요일 꿀팁: AI로 한 주 업무 계획 완성하기">
     <meta property="twitter:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.png">
     
     <!-- 네이버/다음 -->
-    <meta name="description" content="🚀 GPT-5 드디어 공개! 박사급 AI 시대 개막 🧠 모든 지표에서 인간 능가한 충격 성능 💡 주말 꿀팁: GPT-5로 업무 혁신하기">
-    <meta name="keywords" content="AI뉴스, 인공지능, GPT-5, 오픈AI, 박사급AI, 주말특별">
+    <meta name="description" content="📱 메타, AI 음성 스타트업 웨이브폼스 인수 🏛️ 서울시, 행정 분야 자체 LLM 도입 '챗봇 2.0' 착수 ⚡ 월요일 꿀팁: AI로 한 주 업무 계획 완성하기">
+    <meta name="keywords" content="AI뉴스, 인공지능, 메타, 웨이브폼스, 서울시, LLM, 챗봇, 생성형AI, 주간계획">
     <meta name="author" content="류주임">
     
-    <title>AI.Do 주말특별 일일뉴스(25.8.9.토)</title>
+    <title>AI.Do 일일뉴스(25.8.12.월)</title>
     <style>
         * {
             margin: 0;
@@ -59,7 +59,7 @@
         }
         
         .header {
-            background: linear-gradient(45deg, #ff9a9e, #fecfef, #fecfef, #fad0c4);
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
             color: white;
             padding: 25px;
             text-align: center;
@@ -67,17 +67,18 @@
         }
         
         .header::before {
-            content: '🚀';
+            content: '🤖';
             font-size: 2em;
             position: absolute;
             top: 15px;
             left: 25px;
-            animation: rocket 2s infinite;
+            animation: bounce 2s infinite;
         }
         
-        @keyframes rocket {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(5deg); }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
         }
         
         .date {
@@ -95,16 +96,6 @@
         .subtitle {
             font-size: 1em;
             opacity: 0.8;
-        }
-        
-        .weekend-badge {
-            background: rgba(255, 255, 255, 0.3);
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.8em;
-            margin-top: 8px;
-            display: inline-block;
-            backdrop-filter: blur(10px);
         }
         
         .content {
@@ -235,7 +226,7 @@
         }
 
         .tip-item::before {
-            content: '🌟';
+            content: '💡';
             position: absolute;
             right: 15px;
             top: 15px;
@@ -319,7 +310,7 @@
             overflow-y: auto;
         }
         
-        .tip-category {
+        .tip-day {
             margin-bottom: 25px;
             border: 2px solid #f0f0f0;
             border-radius: 15px;
@@ -327,29 +318,29 @@
             transition: all 0.3s ease;
         }
         
-        .tip-category.active {
+        .tip-day.active {
             border: 2px solid #4ecdc4;
             background: linear-gradient(135deg, #f0f8ff 0%, #e8f4fd 100%);
             transform: scale(1.02);
         }
         
-        .tip-category:hover {
+        .tip-day:hover {
             border-color: #ff6b6b;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
-        .category-header {
+        .day-header {
             display: flex;
             align-items: center;
             margin-bottom: 12px;
             gap: 10px;
         }
         
-        .category-emoji {
+        .day-emoji {
             font-size: 1.3em;
         }
         
-        .category-header h3 {
+        .day-header h3 {
             margin: 0;
             color: #2c3e50;
             font-size: 1.1em;
@@ -378,6 +369,33 @@
             padding: 20px;
             border-radius: 0 0 20px 20px;
             border-top: 1px solid #eee;
+        }
+        
+        .week-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .current-week {
+            font-weight: 600;
+            color: #333;
         }
         
         /* 모바일 최적화 */
@@ -504,12 +522,12 @@
                 padding: 20px 15px;
             }
             
-            .tip-category {
+            .tip-day {
                 padding: 15px;
                 margin-bottom: 20px;
             }
             
-            .category-header h3 {
+            .day-header h3 {
                 font-size: 1em;
             }
             
@@ -520,16 +538,24 @@
             .modal-footer {
                 padding: 15px;
             }
+            
+            .nav-btn {
+                padding: 8px 15px;
+                font-size: 0.85em;
+            }
+            
+            .current-week {
+                font-size: 0.85em;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header class="header">
-            <div class="date">2025년 8월 9일 (토)</div>
-            <h1 class="title">AI.Do 주말특별 일일뉴스</h1>
+            <div class="date">2025년 8월 12일 (월)</div>
+            <h1 class="title">AI.Do 일일뉴스</h1>
             <div class="subtitle">3분 완독! 오늘의 AI 소식</div>
-            <div class="weekend-badge">🎯 Weekend Special Edition</div>
         </header>
         
         <main class="content">
@@ -539,31 +565,22 @@
                     핫이슈 (30초 읽기)
                 </h2>
                 
-                <a href="https://zdnet.co.kr/view/?no=20250808084540" target="_blank" class="news-item">
-                    <h3 class="news-title">🚀 '생각하는 AI' GPT-5 나왔다…"모든 영역 박사급 수준"</h3>
+                <a href="https://www.aitimes.com/news/articleView.html?idxno=201378" target="_blank" class="news-item">
+                    <h3 class="news-title">📱 메타, AI 음성 스타트업 '웨이브폼스' 인수</h3>
                     <p class="news-content">
-                        <span class="highlight">오픈AI, 전문가 수준 답변 제공하는 차세대 AI 'GPT-5' 공개</span>! 
-                        GPT-4 출시 2년 만의 신규 모델로, AI를 인간과 협업하는 '사고 파트너'로 진화시켜 🧠
+                        <span class="highlight">감정 인식·생성 능력 갖춘 음성 AI 기술 확보</span>! 
+                        초지능팀 강화 위한 두 번째 음성 스타트업 인수로, AI 음성 비서 경쟁 본격화 🎙️
                     </p>
-                    <div class="external-link">🔗 ZDNet Korea · 클릭해서 자세히 보기</div>
+                    <div class="external-link">🔗 AI타임스 · 클릭해서 자세히 보기</div>
                 </a>
                 
-                <a href="https://www.themiilk.com/articles/a6225827c" target="_blank" class="news-item">
-                    <h3 class="news-title">🧠 "모든 지표에서 인간 능가"... 드디어 공개된 GPT-5</h3>
+                <a href="https://news.seoul.go.kr/gov/archives/569818" target="_blank" class="news-item">
+                    <h3 class="news-title">🏛️ 서울시, 행정 분야 자체 LLM 도입 '챗봇 2.0' 착수</h3>
                     <p class="news-content">
-                        <span class="highlight">수학 94.6%, 코딩 74.9% 등 역대 최고 벤치마크 기록</span>! 
-                        환각 현상 45% 감소, 실시간으로 웹 애플리케이션 개발하는 충격적 시연도 선보여 ⚡
+                        <span class="highlight">공무원 반복업무 생성형 AI로 대체, 자체 폐쇄망 LLM 구축</span>! 
+                        시민용 '서울톡'에도 생성형 AI 시범 적용, 글로벌 AI 행정도시 비전 본격화 🤖
                     </p>
-                    <div class="external-link">🔗 더밀크 · 클릭해서 자세히 보기</div>
-                </a>
-                
-                <a href="https://news.hada.io/topic?id=22389" target="_blank" class="news-item">
-                    <h3 class="news-title">💡 GPT-5 공개… 무료 이용자도 접근 가능한 통합 AI</h3>
-                    <p class="news-content">
-                        <span class="highlight">빠른 응답과 깊은 추론을 상황에 맞게 조합하는 통합 시스템</span>! 
-                        실시간 라우터로 최적 모델 자동 선택, 모든 ChatGPT 사용자에게 무료 제공 🎁
-                    </p>
-                    <div class="external-link">🔗 GeekNews · 클릭해서 자세히 보기</div>
+                    <div class="external-link">🔗 서울시 공식발표 · 클릭해서 자세히 보기</div>
                 </a>
             </section>
             
@@ -572,19 +589,28 @@
             <section class="section">
                 <h2 class="section-title">
                     <span class="emoji">📈</span>
-                    글로벌 트렌드 (1분 읽기)
+                    트렌드 레이더 (1분 읽기)
                 </h2>
                 
                 <div class="trend-box">
-                    <div class="trend-title">🌟 주말 트렌드 스팟</div>
-                    <p>GPT-5 출시로 AI가 '도구'에서 '파트너'로 본격 진화! 무료 사용자까지 박사급 AI를 사용할 수 있게 되면서, 2025년 하반기는 진정한 AI 대중화 시대의 시작점이 될 전망입니다.</p>
+                    <div class="trend-title">🎯 월요일 트렌드 스팟</div>
+                    <p>빅테크와 공공부문의 생성형 AI 실무 적용이 가속화! 메타는 음성 AI 생태계 구축에 집중하고, 서울시는 행정업무에 자체 LLM을 도입하며 각 분야에서 생성형 AI의 실무 활용이 본격화되고 있어요.</p>
                     <div class="keywords">
-                        <span class="keyword">#GPT5</span>
-                        <span class="keyword">#박사급AI</span>
-                        <span class="keyword">#AI파트너</span>
-                        <span class="keyword">#무료접근</span>
+                        <span class="keyword">#생성형AI실무화</span>
+                        <span class="keyword">#음성AI</span>
+                        <span class="keyword">#AI행정혁신</span>
+                        <span class="keyword">#자체LLM구축</span>
                     </div>
                 </div>
+                
+                <a href="https://www.aitimes.com/news/articleView.html?idxno=201345" target="_blank" class="news-item">
+                    <h3 class="news-title">💡 뤼튼, GPT-5 유료 서비스 무료 무제한 제공</h3>
+                    <p class="news-content">
+                        <span class="highlight">오픈AI GPT-5를 국내 최초 무료 무제한 제공</span>! 
+                        전용 메뉴 개설로 누구나 사용량 제한 없이 최신 GPT-5 성능 활용 가능 🎁
+                    </p>
+                    <div class="external-link">🔗 AI타임스 · 클릭해서 자세히 보기</div>
+                </a>
             </section>
             
             <div class="emoji-divider">🎲 🎲 🎲</div>
@@ -592,138 +618,190 @@
             <section class="section">
                 <h2 class="section-title">
                     <span class="emoji">💡</span>
-                    주말 AI팁 (30초 읽기)
+                    오늘의 AI팁 (30초 읽기)
                 </h2>
                 
-                <div class="news-item tip-item" onclick="showWeekendTips()">
-                    <h3 class="news-title">GPT-5로 업무 혁신하기 (주말 꿀팁)</h3>
+                <div class="news-item tip-item" onclick="showWeeklyTips()">
+                    <h3 class="news-title">AI로 한 주 업무 계획 완성하기 (월요일 꿀팁)</h3>
                     <p class="news-content">
-                        <strong>🎯 코딩 혁신:</strong> 텍스트만으로 완전한 웹앱 실시간 개발<br>
-                        <strong>📊 분석 업그레이드:</strong> 복잡한 데이터도 박사급 인사이트 도출<br>
-                        <strong>✍️ 글쓰기 진화:</strong> 문학적 깊이와 감성 표현까지 완벽 지원<br>
-                        <strong>💡 실무 예시:</strong> "프랑스어 학습 게임앱을 5분만에 완성하는 GPT-5 시연처럼 누구나 가능!"
+                        <strong>📋 주간 계획:</strong> 클로드로 이번 주 목표 구조화 → 우선순위 매기기<br>
+                        <strong>⏰ 일정 최적화:</strong> 챗GPT로 회의·업무 시간 효율적 배분<br>
+                        <strong>📊 진도 관리:</strong> 노션 AI로 프로젝트 체크리스트 자동 생성<br>
+                        <strong>💡 실무 예시:</strong> "월요일 30분 투자로 한 주 생산성 200% 향상시키기"
                     </p>
                     <div class="tip-link-text">
-                        🌟 GPT-5 완전 활용법 가이드 · 클릭하세요!
+                        📅 이번 주 전체 AI팁 보기 (월~일) · 클릭하세요!
                     </div>
                 </div>
             </section>
         </main>
         
         <footer class="footer">
-            <p>🤝 AI.Do | 주말에도 함께! | 궁금한 점은 언제든 댓글로!</p>
-            <p style="margin-top: 8px; font-size: 0.8em;">💬 GPT-5 특별 뉴스 어떠셨나요? 피드백 환영해요!</p>
+            <p>🤝 AI.Do | 매일 업데이트 | 궁금한 점은 언제든 댓글로!</p>
+            <p style="margin-top: 8px; font-size: 0.8em;">💬 오늘 뉴스 어떠셨나요? 피드백 환영해요!</p>
             <p style="margin-top: 5px; font-size: 0.75em; opacity: 0.7;">✨ Made by 류주임</p>
         </footer>
     </div>
 
-    <!-- 주말 AI팁 모달 -->
-    <div id="weekendTipsModal" class="modal">
+    <!-- 주간 AI팁 모달 -->
+    <div id="weeklyTipsModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>🌟 GPT-5 완전 활용법 가이드</h2>
-                <span class="close" onclick="hideWeekendTips()">&times;</span>
+                <h2>🗓️ 이번 주 AI팁 완전판 (8/12~8/18)</h2>
+                <span class="close" onclick="hideWeeklyTips()">&times;</span>
             </div>
             <div class="modal-body">
-                <div class="tip-category active" id="coding">
-                    <div class="category-header">
-                        <span class="category-emoji">💻</span>
-                        <h3>코딩 & 개발 혁신</h3>
+                <div class="tip-day active" id="monday">
+                    <div class="day-header">
+                        <span class="day-emoji">📋</span>
+                        <h3>월요일 - AI 주간 계획 마스터</h3>
                     </div>
                     <div class="tip-content">
-                        <strong>🚀 실시간 앱 개발:</strong><br>
-                        • "프랑스어 학습 게임 만들어줘" → 완전한 웹앱 즉시 생성<br>
-                        • 복잡한 프론트엔드부터 백엔드 로직까지 통합 구현<br>
-                        • 실시간 디버깅과 기능 수정으로 완벽한 결과물<br>
-                        <strong>💡 실무 활용:</strong> "개발자가 몇 시간 걸릴 작업을 5분만에 완성하는 GPT-5의 마법"
+                        <strong>🎯 주간 목표 설정:</strong><br>
+                        • 클로드로 이번 주 핵심 목표 3가지 명확화<br>
+                        • 챗GPT로 목표별 세부 액션 플랜 수립<br>
+                        • 노션 AI로 추적 가능한 체크리스트 생성<br>
+                        <strong>💡 실무 예시:</strong> "월요일 30분으로 한 주 생산성 200% 끌어올리기"
                     </div>
                 </div>
                 
-                <div class="tip-category" id="analysis">
-                    <div class="category-header">
-                        <span class="category-emoji">📊</span>
-                        <h3>데이터 분석 & 인사이트</h3>
+                <div class="tip-day" id="tuesday">
+                    <div class="day-header">
+                        <span class="day-emoji">📧</span>
+                        <h3>화요일 - AI 커뮤니케이션 업그레이드</h3>
                     </div>
                     <div class="tip-content">
-                        <strong>🧠 박사급 분석력:</strong><br>
-                        • 복잡한 데이터셋도 즉시 패턴 발견<br>
-                        • 다각도 분석으로 숨겨진 인사이트 도출<br>
-                        • 전문가 수준의 해석과 액션 플랜 제시<br>
-                        <strong>💡 실무 활용:</strong> "매출 데이터 → 성장 전략까지 한 번에 완성하는 GPT-5 분석"
+                        <strong>✉️ 이메일 최적화:</strong><br>
+                        • 클로드로 중요 이메일 초안 작성<br>
+                        • 챗GPT로 톤앤매너 다양화 (정중/친근/공식)<br>
+                        • 제미나이로 다국어 번역 및 문화적 뉘앙스 반영<br>
+                        <strong>💡 실무 예시:</strong> "AI로 이메일 응답 시간 50% 단축하며 퀄리티 향상"
                     </div>
                 </div>
                 
-                <div class="tip-category" id="writing">
-                    <div class="category-header">
-                        <span class="category-emoji">✍️</span>
-                        <h3>글쓰기 & 콘텐츠 제작</h3>
+                <div class="tip-day" id="wednesday">
+                    <div class="day-header">
+                        <span class="day-emoji">🔍</span>
+                        <h3>수요일 - AI 리서치 & 분석 전문가</h3>
                     </div>
                     <div class="tip-content">
-                        <strong>📝 문학적 글쓰기:</strong><br>
-                        • 감성과 깊이가 있는 창작 글쓰기<br>
-                        • 구조적 모호성까지 처리하는 고급 표현력<br>
-                        • 블로그부터 소설까지 모든 장르 대응<br>
-                        <strong>💡 실무 활용:</strong> "단순 카피를 넘어 독자의 마음을 움직이는 문학적 글쓰기"
+                        <strong>📊 데이터 분석:</strong><br>
+                        • 퍼플렉시티로 시장 동향 및 경쟁사 분석<br>
+                        • 클로드로 복잡한 데이터 패턴 발견<br>
+                        • 챗GPT로 인사이트 도출 및 보고서 작성<br>
+                        <strong>💡 실무 예시:</strong> "1시간만에 전문가급 시장 분석 보고서 완성"
                     </div>
                 </div>
                 
-                <div class="tip-category" id="health">
-                    <div class="category-header">
-                        <span class="category-emoji">🏥</span>
-                        <h3>건강 & 전문 상담</h3>
+                <div class="tip-day" id="thursday">
+                    <div class="day-header">
+                        <span class="day-emoji">🎨</span>
+                        <h3>목요일 - AI 창작 & 콘텐츠 제작</h3>
                     </div>
                     <div class="tip-content">
-                        <strong>🩺 HealthBench 최고 점수:</strong><br>
-                        • 증상 분석부터 질문 추천까지 체계적 건강 상담<br>
-                        • 상황과 지역에 맞춘 안전하고 정밀한 조언<br>
-                        • 전문의 수준의 건강 파트너 역할 수행<br>
-                        <strong>💡 실무 활용:</strong> "24시간 이용 가능한 개인 건강 어드바이저 GPT-5"
+                        <strong>✨ 크리에이티브 워크플로:</strong><br>
+                        • 미드저니로 비주얼 아이디어 구현<br>
+                        • 클로드로 스토리텔링 및 카피 작성<br>
+                        • 런웨이로 영상 콘텐츠 제작<br>
+                        <strong>💡 실무 예시:</strong> "브랜드 캠페인을 위한 통합 콘텐츠 2시간만에 완성"
+                    </div>
+                </div>
+                
+                <div class="tip-day" id="friday">
+                    <div class="day-header">
+                        <span class="day-emoji">📊</span>
+                        <h3>금요일 - AI 주간 결산 & 성과 분석</h3>
+                    </div>
+                    <div class="tip-content">
+                        <strong>📈 성과 리뷰:</strong><br>
+                        • 노션 AI로 한 주 목표 달성률 자동 계산<br>
+                        • 클로드로 성과 분석 및 개선점 도출<br>
+                        • 챗GPT로 다음 주 전략 수립<br>
+                        <strong>💡 실무 예시:</strong> "주간 회고를 통해 지속적인 업무 효율성 개선"
+                    </div>
+                </div>
+                
+                <div class="tip-day" id="saturday">
+                    <div class="day-header">
+                        <span class="day-emoji">🛠️</span>
+                        <h3>토요일 - AI 도구 탐색 & 스킬업</h3>
+                    </div>
+                    <div class="tip-content">
+                        <strong>🔧 새로운 AI 도구 발견:</strong><br>
+                        • 최신 AI 도구 트렌드 조사 및 테스트<br>
+                        • 유튜브 + 클로드로 AI 활용법 학습<br>
+                        • 실무에 적용 가능한 워크플로 실험<br>
+                        <strong>💡 실무 예시:</strong> "주말 2시간으로 새로운 AI 스킬 마스터하기"
+                    </div>
+                </div>
+                
+                <div class="tip-day" id="sunday">
+                    <div class="day-header">
+                        <span class="day-emoji">🌟</span>
+                        <h3>일요일 - AI와 함께하는 라이프 해킹</h3>
+                    </div>
+                    <div class="tip-content">
+                        <strong>🏠 개인 생활 최적화:</strong><br>
+                        • 클로드로 다음 주 식단 계획 및 레시피 추천<br>
+                        • 챗GPT로 개인 일정 및 취미 활동 계획<br>
+                        • AI로 독서 목록 추천 및 학습 계획 수립<br>
+                        <strong>💡 실무 예시:</strong> "AI로 개인 시간까지 스마트하게 관리하기"
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <p style="text-align: center; color: #666; font-size: 0.9em;">
-                    🌟 GPT-5로 여러분의 업무와 일상이 완전히 달라질 준비 되셨나요?
-                </p>
+                <div class="week-navigation">
+                    <button class="nav-btn" onclick="previousWeek()">← 이전 주</button>
+                    <span class="current-week">2025년 8월 둘째 주</span>
+                    <button class="nav-btn" onclick="nextWeek()">다음 주 →</button>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        function showWeekendTips() {
-            const modal = document.getElementById('weekendTipsModal');
+        function showWeeklyTips() {
+            const modal = document.getElementById('weeklyTipsModal');
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
             
-            // 모달이 표시된 후 코딩(active) 섹션으로 스크롤
+            // 모달이 표시된 후 월요일(active) 섹션으로 스크롤
             setTimeout(() => {
-                const activeCategory = modal.querySelector('.tip-category.active');
-                if (activeCategory) {
+                const activeDay = modal.querySelector('.tip-day.active');
+                if (activeDay) {
                     const modalBody = modal.querySelector('.modal-body');
-                    const offsetTop = activeCategory.offsetTop - 20; // 20px 여백
+                    const offsetTop = activeDay.offsetTop - 20; // 20px 여백
                     modalBody.scrollTop = offsetTop;
                 }
             }, 100);
         }
         
-        function hideWeekendTips() {
-            const modal = document.getElementById('weekendTipsModal');
+        function hideWeeklyTips() {
+            const modal = document.getElementById('weeklyTipsModal');
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
         }
         
+        function previousWeek() {
+            alert('이전 주 AI팁을 준비 중입니다! 🔄');
+        }
+        
+        function nextWeek() {
+            alert('다음 주 AI팁을 준비 중입니다! 🚀');
+        }
+        
         // 모달 외부 클릭 시 닫기
         window.onclick = function(event) {
-            const modal = document.getElementById('weekendTipsModal');
+            const modal = document.getElementById('weeklyTipsModal');
             if (event.target === modal) {
-                hideWeekendTips();
+                hideWeeklyTips();
             }
         }
         
         // ESC 키로 모달 닫기
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
-                hideWeekendTips();
+                hideWeeklyTips();
             }
         });
     </script>
