@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI.Do 1주차 교육자료</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        .cover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 60px 40px;
+            margin: -20px -20px 40px -20px;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .cover h1 {
+            font-size: 2.5em;
+            margin: 0 0 20px 0;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .cover p {
+            font-size: 1.2em;
+            margin: 10px 0;
+            opacity: 0.9;
+        }
+        
+        .content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            color: #667eea;
+            font-size: 1.4em;
+            margin: 30px 0 15px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #667eea;
+            display: flex;
+            align-items: center;
+        }
+        
+        h3 {
+            color: #555;
+            font-size: 1.2em;
+            margin: 20px 0 10px 0;
+        }
+        
+        .info-box {
+            background: #e8f4ff;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            margin: 20px 0;
+        }
+        
+        .info-box strong {
+            color: #667eea;
+        }
+        
+        .example-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            margin: 15px 0;
+        }
+        
+        .good-example {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+        }
+        
+        .bad-example {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .checklist {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .checklist input[type="checkbox"] {
+            margin-right: 8px;
+        }
+        
+        .template-box {
+            background: #e7f3ff;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #b3d9ff;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+        }
+        
+        .warning-box {
+            background: #fff2e6;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #ff6b35;
+            margin: 20px 0;
+        }
+        
+        .quiz-box {
+            background: #f0f8f0;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            margin: 20px 0;
+        }
+        
+        ul, ol {
+            padding-left: 20px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        
+        .process-flow {
+            text-align: center;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .process-flow .arrow {
+            font-size: 1.5em;
+            color: #667eea;
+            margin: 0 10px;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .cover {
+                margin: -10px -10px 20px -10px;
+                padding: 40px 20px;
+            }
+            
+            .cover h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            table {
+                font-size: 0.9em;
+            }
+            
+            th, td {
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 표지 -->
+    <div class="cover">
+        <img src="https://chrisryugj.github.io/AIDo/images/cover_250902.jpg" alt="AI.Do 1주차 교육자료 표지" style="width: 100%; max-width: 600px; height: auto; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
+    </div>
+
+    <!-- 시작 안내 -->
+    <div class="content">
+        <h2><span class="step-number">📋</span>시작하기 전에 (필독)</h2>
+        <div class="info-box">
+            <p><strong>⏰ 소요 시간:</strong> 총 20~30분 (각 실습 5~10분)</p>
+            <p><strong>💻 준비물:</strong> PC 또는 모바일 브라우저, 메모앱</p>
+            <p><strong>🔒 보안수칙:</strong> 실제 개인정보나 기밀정보 입력 금지, 가명·예시 데이터만 사용</p>
+        </div>
+    </div>
+
+    <!-- 1단계: 핵심 용어 -->
+    <div class="content">
+        <h2><span class="step-number">1</span>핵심 용어 이해하기</h2>
+        
+        <h3>🎯 기본 개념</h3>
+        <ul>
+            <li><strong>생성형 AI:</strong> 대량의 데이터를 학습하여 새로운 텍스트나 이미지를 생성하는 고급 자동완성 시스템</li>
+            <li><strong>LLM(대규모 언어모델):</strong> 방대한 텍스트를 학습한 언어 모델 (예: ChatGPT, Claude)</li>
+            <li><strong>프롬프트:</strong> AI에게 주는 명령어. 역할, 맥락, 과업, 형식, 제약, 검증 요소를 포함하면 정확도 향상</li>
+        </ul>
+
+        <h3>🔬 고급 개념</h3>
+        <ul>
+            <li><strong>역할 지시(Role):</strong> "당신은 공공문서 편집자입니다"처럼 AI의 관점을 설정</li>
+            <li><strong>샷 기법:</strong> 예시를 통해 원하는 스타일 학습 (Zero-shot: 예시 없음 / One-shot: 예시 1개 / Few-shot: 예시 여러 개)</li>
+            <li><strong>토큰:</strong> AI가 처리하는 최소 단위. 너무 길면 중요 내용이 누락될 수 있음</li>
+            <li><strong>환각(Hallucination):</strong> AI가 사실과 다른 정보를 그럴듯하게 생성하는 오류</li>
+            <li><strong>컨텍스트 창:</strong> AI가 한 번에 참고할 수 있는 정보량 한계</li>
+        </ul>
+    </div>
+
+    <!-- 2단계: AI 작동 원리 -->
+    <div class="content">
+        <h2><span class="step-number">2</span>AI 작동 원리 (3분 이해)</h2>
+        
+        <div class="process-flow">
+            <strong>입력(프롬프트)</strong> 
+            <span class="arrow">→</span> 
+            <strong>AI 모델(패턴 분석)</strong> 
+            <span class="arrow">→</span> 
+            <strong>출력(응답)</strong> 
+            <span class="arrow">→</span> 
+            <strong>검증·수정</strong> 
+            <span class="arrow">→</span> 
+            <strong>재입력</strong>
+        </div>
+
+        <div class="info-box">
+            <p><strong>핵심 원칙:</strong></p>
+            <ul>
+                <li>좋은 입력이 좋은 출력을 만든다</li>
+                <li>검증과 수정 과정을 거치면 품질이 크게 향상된다</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 3단계: 프롬프트 작성법 -->
+    <div class="content">
+        <h2><span class="step-number">3</span>프롬프트 작성법 (R-C-T-F-C-V 공식)</h2>
+        
+        <h3>📝 6단계 구성 요소</h3>
+        <ul>
+            <li><strong>R(Role):</strong> 전문가 역할 지정</li>
+            <li><strong>C(Context):</strong> 상황, 대상, 목표 설명</li>
+            <li><strong>T(Task):</strong> 구체적인 작업 내용</li>
+            <li><strong>F(Format):</strong> 출력 형식 (표, 불릿, 문단, 글자수 등)</li>
+            <li><strong>C(Constraints):</strong> 제약사항, 톤, 분량 등</li>
+            <li><strong>V(Verification):</strong> "불확실하면 질문하고, 출처와 한계를 명시하세요"</li>
+        </ul>
+
+        <div class="checklist">
+            <h3>✅ 품질 체크리스트</h3>
+            <label><input type="checkbox"> 역할을 명확히 지정했는가?</label><br>
+            <label><input type="checkbox"> 대상과 목표를 설명했는가?</label><br>
+            <label><input type="checkbox"> 출력 형식을 구체화했는가?</label><br>
+            <label><input type="checkbox"> 제약사항을 포함했는가?</label><br>
+            <label><input type="checkbox"> 검증 지시를 추가했는가?</label>
+        </div>
+    </div>
+
+    <!-- 4단계: 실습 1 -->
+    <div class="content">
+        <h2><span class="step-number">4</span>실습 ① 공지문 요약하기</h2>
+        
+        <p><strong>상황:</strong> 주민 대상 근무시간 변경 공지 요약</p>
+
+        <h3>📄 원문 예시</h3>
+        <div class="example-box">
+            9월 1일부터 구청 민원실은 평일 오전 9시~오후 6시 운영합니다. 야간 민원 창구는 오후 5시 30분 이후 이용 가능합니다. 서류 접수 마감 10분 전까지 도착해 주세요. 문의: 민원콜센터 120.
+        </div>
+
+        <div class="bad-example">
+            <h4>❌ 약한 프롬프트</h4>
+            <div class="template-box">요약해줘.</div>
+        </div>
+
+        <div class="good-example">
+            <h4>✅ 개선된 프롬프트</h4>
+            <div class="template-box">당신은 공공문서 편집자입니다. 위 공지를 불릿 3개로 요약하세요. 
+- 시간과 숫자는 정확히 보존
+- 문장당 20단어 이내
+- 마지막에 문의 채널 1줄 추가</div>
+        </div>
+
+        <h3>📋 예상 결과</h3>
+        <div class="example-box">
+            <ul>
+                <li>9/1부터 민원실 평일 운영: 오전 9시~오후 6시</li>
+                <li>야간 민원 창구: 오후 5시 30분 이후 이용 가능</li>
+                <li>서류 접수: 마감 10분 전까지 도착 필수</li>
+            </ul>
+            <p><strong>문의:</strong> 민원콜센터 120</p>
+        </div>
+
+        <div class="info-box">
+            <p><strong>🎯 추가 과제:</strong> 위 요약을 카카오톡 안내 메시지 톤으로 3줄로 변경해보세요.</p>
+        </div>
+    </div>
+
+    <!-- 5단계: 실습 2 -->
+    <div class="content">
+        <h2><span class="step-number">5</span>실습 ② 주민 참여 캠페인 아이디어</h2>
+        
+        <p><strong>주제:</strong> 광진구 재활용 분리배출 참여율 높이기 (2주 캠페인)</p>
+
+        <div class="bad-example">
+            <h4>❌ 약한 프롬프트</h4>
+            <div class="template-box">아이디어 5개 줘.</div>
+        </div>
+
+        <div class="good-example">
+            <h4>✅ 개선된 프롬프트</h4>
+            <div class="template-box">당신은 광진구청 홍보 담당자입니다. 
+2주 내 실행 가능하고 소액 예산으로 진행할 수 있는 현실적인 캠페인 아이디어 5개를 표로 제안하세요.
+- 표 구성: 아이디어명/기대효과(1문장)/필요자원(간단)
+- 아파트 단지와 동주민센터 중심으로 구성</div>
+        </div>
+
+        <h3>📊 예상 결과</h3>
+        <table>
+            <tr>
+                <th>아이디어</th>
+                <th>기대효과</th>
+                <th>필요자원</th>
+            </tr>
+            <tr>
+                <td>분리배출 스탬프 카드</td>
+                <td>참여 습관 형성, 소액 경품 제공으로 동기 부여</td>
+                <td>스탬프 카드, 소형 경품</td>
+            </tr>
+            <tr>
+                <td>동주민센터 분리배출 체험데이</td>
+                <td>주민 참여와 분리배출 인식 제고</td>
+                <td>테이블, 안내 배너, 자원봉사자</td>
+            </tr>
+            <tr>
+                <td>아파트 단톡방 공지 템플릿</td>
+                <td>동일 메시지 반복 노출로 인식 개선</td>
+                <td>템플릿 이미지, 관리사무소 협조</td>
+            </tr>
+            <tr>
+                <td>어린이 포스터 공모전</td>
+                <td>가족 단위 참여 유도 및 교육 효과</td>
+                <td>공모 안내문, 시상품</td>
+            </tr>
+            <tr>
+                <td>올바른 분리배출 퀴즈</td>
+                <td>재미와 학습을 결합한 참여 유도</td>
+                <td>온라인 설문폼, 소형 경품</td>
+            </tr>
+        </table>
+
+        <div class="info-box">
+            <p><strong>🎯 추가 과제:</strong> 위 표에서 실행 1순위를 선택하고, 세부 일정·담당자·예산을 불릿 4~5개로 작성하세요.</p>
+        </div>
+    </div>
+
+    <!-- 6단계: 실습 3 -->
+    <div class="content">
+        <h2><span class="step-number">6</span>실습 ③ 주민 안내 메시지 작성</h2>
+        
+        <p><strong>상황:</strong> 무더위 쉼터 운영 안내 (어르신 대상)</p>
+
+        <div class="bad-example">
+            <h4>❌ 약한 프롬프트</h4>
+            <div class="template-box">문자 공지 작성해줘.</div>
+        </div>
+
+        <div class="good-example">
+            <h4>✅ 개선된 프롬프트</h4>
+            <div class="template-box">당신은 공무원 홍보 담당자입니다. 
+어르신께 보내는 존댓말 문자 공지 초안을 작성하세요.
+- 제목 1줄 + 본문 3줄 구성
+- 날짜/장소/시간은 빈칸[ ]으로 표시
+- 문장은 간결하고 정중하게 작성</div>
+        </div>
+
+        <h3>📱 예상 결과</h3>
+        <div class="example-box">
+            <p><strong>제목:</strong> [무더위 쉼터 운영 안내]</p>
+            <p><strong>본문:</strong><br>
+            안녕하세요, 광진구청입니다. [날짜]부터 [장소]에서 무더위 쉼터를 운영합니다. 이용 시간은 [시간]이며, 자세한 위치와 준비물은 홈페이지를 참고해 주세요. 안전하고 건강한 여름 보내세요.</p>
+        </div>
+
+        <div class="info-box">
+            <p><strong>🎯 추가 과제:</strong> 같은 내용을 A4 안내문용 불릿포인트 5개로 변환하세요.</p>
+        </div>
+    </div>
+
+    <!-- 7단계: 흔한 실수 -->
+    <div class="content">
+        <h2><span class="step-number">7</span>흔한 실수와 개선 방법</h2>
+        
+        <table>
+            <tr>
+                <th>문제점</th>
+                <th>잘못된 예시</th>
+                <th>올바른 개선</th>
+            </tr>
+            <tr>
+                <td>모호한 지시</td>
+                <td>"요약해줘"</td>
+                <td>"전문 편집자 역할로 불릿 3개, 문장당 20단어 이내로 요약"</td>
+            </tr>
+            <tr>
+                <td>새 정보 창작 요구</td>
+                <td>"예상되는 문제점 추가해서"</td>
+                <td>"원문 정보만 사용, 추정 금지, 불확실하면 질문하세요"</td>
+            </tr>
+            <tr>
+                <td>장문 입력</td>
+                <td>전체 보고서 붙여넣기</td>
+                <td>핵심 내용만 발췌, 필요시 단계별 입력</td>
+            </tr>
+            <tr>
+                <td>톤 불일치</td>
+                <td>"공지문 작성해줘"</td>
+                <td>"어르신/청소년/사업자 대상 톤으로 작성"</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- 8단계: 템플릿 -->
+    <div class="content">
+        <h2><span class="step-number">8</span>바로 쓰는 템플릿 6종</h2>
+        
+        <h3>① 요약 템플릿</h3>
+        <div class="template-box">당신은 공공문서 편집자입니다. 아래 텍스트를 불릿 3개로 요약하세요. 
+숫자와 날짜는 정확히 유지하고, 문장당 20단어 이내로 작성하세요. 
+불명확한 부분이 있으면 질문 1개를 추가하세요.</div>
+
+        <h3>② 아이디어 표 템플릿</h3>
+        <div class="template-box">당신은 홍보 담당자입니다. 2주 내 실행 가능한 현실적 아이디어 5개를 
+표(아이디어/효과/필요자원) 형태로 제안하세요.</div>
+
+        <h3>③ 이메일/문자 템플릿</h3>
+        <div class="template-box">당신은 홍보 담당자입니다. 제목 1줄 + 본문 3줄로 구성하고, 
+존댓말을 사용하며, 가변 정보는 [ ]로 표시하세요.</div>
+
+        <h3>④ 체크리스트 생성 템플릿</h3>
+        <div class="template-box">당신은 업무 담당자입니다. 아래 계획을 확인용 체크리스트 8개로 변환하세요. 
+중복을 제거하고 모호한 표현은 사용하지 마세요.</div>
+
+        <h3>⑤ 회의록 요약 템플릿</h3>
+        <div class="template-box">회의 기록을 4열 표(결정사항/할 일/담당자/기한)로 정리하세요. 
+추정하지 말고 명시된 내용만 사용하세요.</div>
+
+        <h3>⑥ 반례 검토 템플릿</h3>
+        <div class="template-box">아래 안내문에서 오해 소지가 있는 부분 3가지와 개선 문장을 제안하세요. 
+각각 간단한 근거도 함께 제시하세요.</div>
+    </div>
+
+    <!-- 9단계: 윤리·안전 -->
+    <div class="content">
+        <h2><span class="step-number">9</span>윤리·안전 수칙 (필수)</h2>
+        
+        <div class="warning-box">
+            <h3>🛡️ 5대 원칙</h3>
+            <ol>
+                <li><strong>개인정보 보호:</strong> 주민번호, 연락처, 계약 세부사항 입력 금지. 반드시 가명·예시 사용</li>
+                <li><strong>저작권 준수:</strong> 타인의 문구나 이미지 사용 시 출처와 라이선스 확인</li>
+                <li><strong>사실 검증:</strong> "모르면 모른다고 답하고, 출처를 제시하라" 지시 필수</li>
+                <li><strong>민감 주제 주의:</strong> 정치, 차별, 비난 내용 생성 금지</li>
+                <li><strong>최종 책임:</strong> AI 결과는 반드시 사람이 검토·수정·맥락 확인</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- 10단계: 퀴즈 -->
+    <div class="content">
+        <h2><span class="step-number">10</span>학습 점검 퀴즈</h2>
+        
+        <div class="quiz-box">
+            <ol>
+                <li><strong>좋은 프롬프트의 핵심 요소 2가지는?</strong><br>
+                    → 역할 지정과 출력 형식 명시</li>
+                
+                <li><strong>환각(잘못된 정보 생성)을 줄이는 지시 방법은?</strong><br>
+                    → 출처 요구, 불확실할 때 질문하도록 지시</li>
+                
+                <li><strong>주민 안내문에서 가장 먼저 결정할 요소는?</strong><br>
+                    → 대상, 목적, 톤앤매너</li>
+                
+                <li><strong>아이디어 과제의 주요 제약 조건 2가지는?</strong><br>
+                    → 2주 내 실행 가능, 소액 예산</li>
+                
+                <li><strong>토큰 개념이 중요한 이유는?</strong><br>
+                    → 길이 제한이 있어 핵심 내용 위주로 작성해야 함</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- 문의 안내 -->
+    <div class="content">
+        <h2>📞 문의 및 지원</h2>
+        <div class="info-box">
+            <p>추가 질문이나 도움이 필요하시면 동호회 카카오톡방 또는 밴드에 남겨주세요.</p>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px; color: #666; font-style: italic;">
+            이 자료는 공무원의 AI 활용 역량 향상을 위해 제작되었습니다.<br>
+            지속적인 실습을 통해 업무 효율성을 높여보세요.
+        </div>
+    </div>
+</body>
+</html>
