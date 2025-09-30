@@ -9,26 +9,11 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
-    <meta property="og:title" content="AI.Do 오늘 뭐 이슈(Issue) (25.09.25.목) - 3분 브리핑: NotebookLM+ChatGPT 팁 · 지자체 사례 · AI 핫이슈">
-    <meta property="og:description" content="세종시 AI 행정 도입, AI 기반 조경 설계, AI 활용 쇼핑 변화 등 생성형 AI의 다양한 활용 사례와 최신 동향을 보여주는 뉴스입니다.">
+    <meta property="og:title" content="AI.Do 오늘 뭐 이슈(Issue) (25.09.30.화) - 3분 브리핑: NotebookLM 활용팁 · AI 혁신사례">
+    <meta property="og:description" content="NotebookLM 문서정리 활용법, 마이크로소프트 AI 에이전트, ETRI 휴머노이드 브레인 등 생성형 AI의 다양한 활용 사례와 최신 동향을 보여주는 뉴스입니다.">
     <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="AI.Do 오늘 뭐 이슈(Issue) - 3분 브리핑: NotebookLM+ChatGPT 팁 · 지자체 사례 · AI 핫이슈">
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://chrisryugj.github.io/AIDo/">
-    <meta property="twitter:title" content="AI.Do 오늘 뭐 이슈(Issue) (25.09.25.목) - 3분 브리핑: NotebookLM+ChatGPT 팁 · 지자체 사례 · AI 핫이슈">
-    <meta property="twitter:description" content="세종시 AI 행정 도입, AI 기반 조경 설계, AI 활용 쇼핑 변화 등 생성형 AI의 다양한 활용 사례와 최신 동향을 보여주는 뉴스입니다.">
-    <meta property="twitter:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.png">
-
-    <!-- 네이버/다음 -->
-    <meta name="description" content="세종시 AI 행정 도입, AI 기반 조경 설계, AI 활용 쇼핑 변화 등 생성형 AI의 다양한 활용 사례와 최신 동향을 보여주는 뉴스입니다.">
-    <meta name="keywords" content="AI뉴스, 인공지능, 생성형 AI, ChatGPT, Gemini, Claude, AI 활용, 행정, 건설, 쇼핑, 데이터 연결, AI 교육">
-    <meta name="author" content="류주임">
-
-    <title>AI.Do 오늘 뭐 이슈(Issue) (25.09.25.목)</title>
+    <title>AI.Do 오늘 뭐 이슈(Issue) (25.09.30.화)</title>
     <style>
         * {
             margin: 0;
@@ -217,7 +202,6 @@
             margin: 20px 0;
         }
 
-        /* AI팁 특별 스타일 */
         .tip-item {
             background: linear-gradient(135deg, #fff8e1 0%, #f3e5f5 100%);
             border-left: 3px solid #ff6b6b;
@@ -260,7 +244,6 @@
             font-weight: 600;
         }
         
-        /* 실전팁 모달 스타일 */
         .tip-modal {
             display: none;
             position: fixed;
@@ -288,7 +271,7 @@
         
         .tip-modal-header {
             background: linear-gradient(45deg, #2c3e50, #34495e, #2980b9);
-            color: #0f172a;
+            color: #ffffff;
             padding: 25px;
             border-radius: 20px 20px 0 0;
             display: flex;
@@ -309,6 +292,7 @@
             line-height: 1;
             opacity: 0.8;
             transition: opacity 0.2s;
+            color: #ffffff;
         }
         
         .tip-close:hover {
@@ -360,105 +344,7 @@
             color: #d53f8c;
             margin-bottom: 10px;
         }
-        }
         
-        .close:hover {
-            opacity: 1;
-        }
-        
-        .modal-body {
-            padding: 30px;
-            max-height: 50vh;
-            overflow-y: auto;
-        }
-        
-        .tip-day {
-            margin-bottom: 25px;
-            border: 2px solid #f0f0f0;
-            border-radius: 15px;
-            padding: 20px;
-            transition: all 0.3s ease;
-        }
-        
-        .tip-day.active {
-            border: 2px solid #4ecdc4;
-            background: linear-gradient(135deg, #f0f8ff 0%, #e8f4fd 100%);
-            transform: scale(1.02);
-        }
-        
-        .tip-day:hover {
-            border-color: #ff6b6b;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .day-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 12px;
-            gap: 10px;
-        }
-        
-        .day-emoji {
-            font-size: 1.3em;
-        }
-        
-        .day-header h3 {
-            margin: 0;
-            color: #2c3e50;
-            font-size: 1.1em;
-            font-weight: 600;
-        }
-        
-        .tip-content {
-            color: #555;
-            line-height: 1.6;
-            font-size: 0.9em;
-        }
-        
-        .tip-content strong {
-            color: #333;
-            display: block;
-            margin-top: 10px;
-            margin-bottom: 5px;
-        }
-        
-        .tip-content strong:first-child {
-            margin-top: 0;
-        }
-        
-        .modal-footer {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 0 0 20px 20px;
-            border-top: 1px solid #eee;
-        }
-        
-        .week-navigation {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .nav-btn {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: #0f172a;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-        }
-        
-        .current-week {
-            font-weight: 600;
-            color: #333;
-        }
         @media (max-width: 768px) {
             body { 
                 padding: 10px;
@@ -560,7 +446,6 @@
                 margin: 15px 0;
             }
 
-            /* 모바일 실전팁 모달 최적화 */
             .tip-modal-content {
                 width: 95%;
                 margin: 5% auto;
@@ -602,7 +487,7 @@
 <body>
     <div class="container">
         <header class="header">
-            <div class="date">2025년 09월 25일 (목)</div>
+            <div class="date">2025년 09월 30일 (화)</div>
             <h1 class="title">AI.Do 오늘 뭐 이슈(Issue)</h1>
             <div class="subtitle">3분투자 오늘의 핫이슈, 공공사례, 실전팁 챙기기!</div>
         </header>
@@ -611,38 +496,35 @@
             <section class="section">
                 <h2 class="section-title">
                     <span class="emoji">💡</span>
-                    NotebookLM + ChatGPT 실전팁 (1분 읽기)
+                    NotebookLM 실전팁 (1분 읽기)
                 </h2>
 
                 <div class="news-item tip-item" onclick="showTipModal()">
-                    <h3 class="news-title">🧠 Prompt Engineering: 행사 보도자료 30분 완성</h3>
-                    <p class="news-content">프롬프트 틀만 잡으면 행사 보도자료를 바로 완성할 수 있습니다.</p>
+                    <h3 class="news-title">📚 NotebookLM: 흩어진 문서 한방에 정리하기</h3>
+                    <p class="news-content">수천 개의 파일에 흩어진 정보를 NotebookLM으로 정리하고, AI에게 즉각 질문하여 답을 얻는 방법을 알아보세요.</p>
                     <div class="tip-category">
-                        <span class="keyword">업무효율화</span>
+                        <span class="keyword">문서관리</span>
                     </div>
                     <div class="tip-link-text">
-                        📖 NotebookLM + ChatGPT 활용 가이드 열어보기 · 클릭!
+                        📖 NotebookLM 활용 가이드 열어보기 · 클릭!
                     </div>
                 </div>
             </section>
 
-            <div class="emoji-divider">🏙️ 🏙️ 🏙️</div>
+            <div class="emoji-divider">🏢 🏢 🏢</div>
 
             <section class="section">
                 <h2 class="section-title">
-                    <span class="emoji">🏙️</span>
-                    지자체 활용사례 (1분 읽기)
+                    <span class="emoji">🏢</span>
+                    기업 AI 활용사례 (1분 읽기)
                 </h2>
 
-                
-                <a href="http://www.globalepic.co.kr/view.php?ud=20250924230524967947f28d89cf_29" target="_blank" class="news-item">
-                    <h3 class="news-title">🏛️ 세종시, AI 기반 행정 효율화: 공무원 대상 딥리서치 전문교육 실시</h3>
+                <div class="news-item">
+                    <h3 class="news-title">🚀 마이크로소프트, 국내 기업 AI 에이전트 도입 성공사례 공개</h3>
                     <p class="news-content">
-                        세종특별자치시는 공무원들을 대상으로 생성형 AI 활용 교육을 실시하여 핵심 현안 해결에 AI를 적극 활용하고 있습니다.  챗지피티(ChatGPT), 제미나이(Gemini) 등 최신 AI 도구를 활용하여 외부 연구용역 수준의 정책 연구를 수행하는 것을 목표로 합니다.  <span class='highlight'>행정 효율화</span>를 위한 AI 도입의 대표적인 사례입니다.
+                        마이크로소프트가 국내 프론티어 기업들의 에이전틱 AI 도입 성공 사례를 공개했습니다. 기업 시스템 전반에 AI를 통합하여 일하는 방식을 혁신하고 비즈니스 성과를 가속화한 실제 사례들이 소개되었습니다. <span class='highlight'>업무 자동화</span>와 <span class='highlight'>디지털 혁신</span>을 통해 생산성을 대폭 향상시킨 구체적인 방법론을 확인할 수 있습니다.
                     </p>
-                    <div class="external-link">🔗 globalepic.co.kr · 클릭해서 자세히 보기</div>
-                </a>
-            
+                </div>
             </section>
 
             <div class="emoji-divider">🔥 🔥 🔥</div>
@@ -653,45 +535,37 @@
                     AI 핫이슈 (1분 읽기)
                 </h2>
 
-                
-                <a href="https://www.apnews.kr/news/articleView.html?idxno=3040447" target="_blank" class="news-item">
-                    <h3 class="news-title">🔥 생성형 AI 활용 확대: ChatGPT, Gemini, Claude 등 최신 AI 도구 활용 현황</h3>
+                <div class="news-item">
+                    <h3 class="news-title">🤖 ETRI, '차세대 AI 휴머노이드 브레인' 개발 본격화</h3>
                     <p class="news-content">
-                        다양한 분야에서 생성형 AI의 활용이 가속화되고 있습니다.  대우건설은 Claude와 ChatGPT를 활용한 조경 설계를 진행 중이며, 소비자들은 ChatGPT, 마이크로소프트 코파일럿, 구글 제미니를 통해 쇼핑 경험을 개선하고 있습니다.  CData는 다양한 생성형 AI 환경과 호환 가능한 AI용 데이터 연결 플랫폼 MCP를 공개하며 생성형 AI 생태계 확장에 기여하고 있습니다. <span class='highlight'>ChatGPT, Gemini, Claude</span>
+                        한국전자통신연구원(ETRI)이 차세대 AI 휴머노이드 로봇을 위한 멀티모달 교감형 AI 기술 확보에 나섰습니다. 시각, 청각, 촉각 등 다양한 감각을 통합 처리하는 <span class='highlight'>휴머노이드 브레인</span> 개발로 인간과 자연스럽게 교감하는 로봇 시대를 앞당길 전망입니다. 국내 AI 로봇 기술의 새로운 전환점이 될 것으로 기대됩니다.
                     </p>
-                    <div class="external-link">🔗 apnews.kr · 클릭해서 자세히 보기</div>
-                </a>
-            
+                </div>
             </section>
 
             <div class="emoji-divider">📊 📊 📊</div>
-</div>
             
             <section class="section">
                 <div class="trend-box">
-                    <div class="trend-title">🎯 목요일 AI 트렌드 분석</div>
-                    <p>생성형 AI는 공공 행정부터 건설, 쇼핑에 이르기까지 다양한 분야에서 활용되고 있으며,  데이터 연결 및 활용 기술의 발전과 함께 그 영향력은 더욱 커질 것으로 예상됩니다.  특히,  AI 도구 활용 교육의 중요성이 강조되고 있습니다.</p>
+                    <div class="trend-title">🎯 화요일 AI 트렌드 분석</div>
+                    <p>생성형 AI는 단순 대화를 넘어 기업의 핵심 업무를 자동화하는 에이전트로 진화하고 있습니다. NotebookLM과 같은 AI 도구로 문서 관리가 혁신되고, 휴머노이드 로봇이 현실로 다가오며, AI가 일상과 업무 전반을 변화시키고 있습니다.</p>
                     <div class="keywords">
-                        <span class="keyword">#생성형 AI</span>
-<span class="keyword">#ChatGPT</span>
-<span class="keyword">#Gemini</span>
-<span class="keyword">#Claude</span>
-<span class="keyword">#AI 활용</span>
-<span class="keyword">#행정 효율화</span>
-<span class="keyword">#조경 설계</span>
-<span class="keyword">#쇼핑</span>
-<span class="keyword">#데이터 연결</span>
-
+                        <span class="keyword">#NotebookLM</span>
+                        <span class="keyword">#AI에이전트</span>
+                        <span class="keyword">#휴머노이드</span>
+                        <span class="keyword">#멀티모달AI</span>
+                        <span class="keyword">#업무자동화</span>
+                        <span class="keyword">#문서관리</span>
+                        <span class="keyword">#디지털혁신</span>
                     </div>
                 </div>
             </section>
         </main>
         
         <footer class="footer">
-            <p>🤝 AI.Do | 매일 업데이트 | 궁금한 점은 언제든 댓글로!</p>
+            <p>🤖 AI.Do | 매일 업데이트 | 궁금한 점은 언제든 댓글로!</p>
             <p style="margin-top: 8px; font-size: 0.8em;">💬 오늘 뉴스 어떠셨나요? 피드백 환영해요!</p>
             
-            <!-- 방문자 카운터 -->
             <div style="margin-top: 15px; text-align: center;">
                 <a href="https://myhits.vercel.app"><img src="https://myhits.vercel.app/api/hit/https%3A%2F%2Fchrisryugj.github.io%2FAIDo?color=purple&label=Views&size=medium" alt="Views" /></a>
             </div>
@@ -700,7 +574,6 @@
         </footer>
     </div>
 
-    <!-- 실전팁 상세 모달 -->
     <div id="tipModal" class="tip-modal">
         <div class="tip-modal-content">
             <div class="tip-modal-header">
@@ -708,41 +581,63 @@
                 <span class="tip-close" onclick="hideTipModal()">&times;</span>
             </div>
             <div class="tip-modal-body">
-                
                 <div class="detailed-tip-content">
-                    <h3>🧠 목요일 Prompt Engineering: 행사 보도자료 30분 완성</h3>
-                    <p>주중 행사 후 보도자료를 빨리 배포하려면 프롬프트를 템플릿화해야 합니다.</p>
+                    <h3>📚 화요일 NotebookLM: 흩어진 문서 한방에 정리하기</h3>
+                    <p>회사의 수천 개 문서에 흩어진 정보를 NotebookLM으로 통합 관리하고, AI에게 즉시 질문하여 정확한 답을 얻는 방법을 소개합니다.</p>
+                    
                     <div class="tip-section">
-                        <h4>1단계 · 핵심 정보 표준 입력</h4>
-                        <p>행사명, 일시, 참석자, 주요 발표를 표 형식으로 정리해 제공합니다.</p>
+                        <h4>1단계 · 문서 소스 업로드</h4>
+                        <p>NotebookLM에 관련 문서들을 한곳에 모아 업로드합니다. PDF, Google 문서, 웹페이지 등 다양한 형식을 지원합니다.</p>
                         <div class="prompt-box">
-                            &quot;아래 정보를 참고해 보도자료 리드 문단을 작성해줘. | 행사명: ○○ 정책 간담회 | 일시: 6월 13일 14:00 | 장소: 시청 대강당 | 참석: 시장, 청년 80명 | 주요 발표: 청년 주거 지원 확대.&quot;
+업로드 가능 형식:
+- PDF 문서 (최대 50개)
+- Google Docs
+- 웹페이지 URL
+- 텍스트 파일
+- Google Slides (최대 500MB)
                         </div>
                     </div>
 
                     <div class="tip-section">
-                        <h4>2단계 · 말투·강조 키워드 지정</h4>
-                        <p>기관의 말투와 강조할 정책 키워드를 명시합니다.</p>
+                        <h4>2단계 · 소스별 메모와 태그 정리</h4>
+                        <p>업로드한 각 문서에 메모를 추가하고 태그를 붙여 나중에 쉽게 찾을 수 있도록 정리합니다.</p>
                         <div class="prompt-box">
-                            &quot;격식 있는 공공기관 말투를 적용하고, '공공임대 확대', '청년 주거 안정' 키워드를 자연스럽게 포함해 인용구 2개를 작성해줘.&quot;
+예시:
+문서명: "2024 마케팅 전략.pdf"
+메모: "Q4 캠페인 예산 및 KPI 포함"
+태그: #마케팅 #2024 #예산
                         </div>
                     </div>
 
                     <div class="tip-section">
-                        <h4>3단계 · 누락 항목 자동 점검</h4>
-                        <p>법적 고지, 담당자 연락처 등 필수 항목이 포함됐는지 확인을 요청합니다.</p>
+                        <h4>3단계 · AI에게 정확한 질문하기</h4>
+                        <p>업로드한 문서를 기반으로 AI에게 구체적인 질문을 하면 관련 내용을 인용하며 답변합니다.</p>
                         <div class="prompt-box">
-                            &quot;문서에 들어가야 할 필수 항목(문의처, 향후 일정, 사진 제공 여부)이 모두 있는지 검토해줘. 부족하면 마지막에 체크리스트로 알려줘.&quot;
+좋은 질문 예시:
+"2024년 Q4 마케팅 예산 중 디지털 광고에 할당된 금액은?"
+"지난 3개월간 주요 경쟁사 분석 내용을 요약해줘"
+"제품 A의 기술 사양 중 보안 관련 내용만 정리해줘"
+                        </div>
+                    </div>
+
+                    <div class="tip-section">
+                        <h4>4단계 · 협업 활용하기</h4>
+                        <p>팀원들과 노트북을 공유하여 함께 문서를 관리하고 AI에게 질문할 수 있습니다.</p>
+                        <div class="prompt-box">
+협업 팁:
+- 공유 버튼으로 팀원 초대
+- 각자 노트와 질문 내역 확인 가능
+- 중요한 답변은 노트로 저장하여 공유
                         </div>
                     </div>
 
                     <div class="real-case">
-                        <h4>실전 예시 | 보도자료 검토 40% 단축</h4>
-                        <p>○○도청 홍보팀은 이 프롬프트를 적용해 행사 직후 초안을 배포하고, 검토 시간을 40% 단축했습니다.</p>
-                        <p>중요 키워드를 미리 지정해 언론 보도가 원하는 메시지를 정확히 담을 수 있었습니다.</p>
+                        <h4>실전 예시 | 문서 검색 시간 70% 단축</h4>
+                        <p>○○ 컨설팅 회사는 NotebookLM에 200개 이상의 프로젝트 문서를 업로드하여 통합 관리합니다.</p>
+                        <p>과거 30분 걸리던 자료 검색이 5분으로 단축되었고, AI가 여러 문서를 교차 참조하여 더 정확한 인사이트를 제공합니다.</p>
+                        <p>팀원들이 언제든 AI에게 질문하여 즉시 필요한 정보를 찾을 수 있어 업무 생산성이 크게 향상되었습니다.</p>
                     </div>
                 </div>
-                
             </div>
         </div>
     </div>
@@ -760,16 +655,13 @@
             document.body.style.overflow = 'auto';
         }
         
-        // 모달 외부 클릭 시 닫기
         window.onclick = function(event) {
             const tipModal = document.getElementById('tipModal');
-            
             if (event.target === tipModal) {
                 hideTipModal();
             }
         }
         
-        // ESC 키로 모달 닫기
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 hideTipModal();
