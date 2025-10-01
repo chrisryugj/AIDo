@@ -483,8 +483,41 @@
                 padding: 15px;
             }
         }
+    
+        .holiday-banner{ text-align:center; margin: 10px 0 22px; }
+        .holiday-banner img{ width:100%; height:auto; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,.08); }
+        .holiday-caption{ margin-top:10px; font-weight:700; font-size:1.05em; color:#0f172a; }
+        @media (max-width:768px){
+            .holiday-caption{ font-size:1em; }
+        }
     </style>
-</head>
+<style>
+/* Override: bigger holiday caption for better visibility */
+.holiday-caption{ font-size:1.6em !important; line-height:1.4 !important; }
+@media (max-width:768px){
+  .holiday-caption{ font-size:1.3em !important; }
+}
+</style><style>
+/* Override: colorful gradient + shadow for holiday caption */
+.holiday-caption{
+  font-size: 1.7em !important;
+  line-height: 1.35 !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.02em !important;
+  /* Fallback solid color */
+  color: #ef4444;
+  /* Gradient text fill (modern browsers) */
+  background: linear-gradient(135deg, #f59e0b 0%, #f97316 30%, #f43f5e 65%, #a855f7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* Readability shadows */
+  text-shadow: 0 2px 12px rgba(0,0,0,.25), 0 1px 0 rgba(255,255,255,.35);
+}
+@media (max-width:768px){
+  .holiday-caption{ font-size: 1.4em !important; }
+}
+</style></head>
 <body>
 <div class="container">
 <header class="header">
@@ -493,7 +526,7 @@
 <div class="subtitle">3분투자 오늘의 핫이슈, 공공사례, 실전팁 챙기기!</div>
 </header>
 <main class="content">
-<section class="section">
+<div class="holiday-banner"><img alt="추석 인사 이미지" loading="lazy" src="https://chrisryugj.github.io/AIDo/images/happy2.jpg"/><div class="holiday-caption">즐거운 한가위 보내세요</div></div><section class="section">
 <h2 class="section-title"><span class="emoji">💡</span> NotebookLM 실전활용팁 (1분 읽기)</h2>
 <div class="news-item tip-item" onclick="showTipModal()">
 <h3 class="news-title">📚 NotebookLM으로 긴 문서 핵심만 뽑아 1쪽 브리핑 만들기</h3>
