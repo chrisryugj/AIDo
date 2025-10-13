@@ -7,11 +7,12 @@
 <meta name="theme-color" content="#38bdf8">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
-<meta property="og:title" content="AI.Do 오늘 뭐 이슈(Issue) (25.10.14.화) - 3분 브리핑: GPT 실전활용팁 · 강서구 AI 도시 · OpenAI-브로드컴">
-<meta property="og:description" content="공공기관 GPT 실전활용팁, 강서구 ‘AI 강서’ 혁신과제, OpenAI-브로드컴 맞춤형 AI 반도체 동맹 등 오늘의 한국어 뉴스.">
+<meta property="og:title" content="AI.Do 오늘 뭐 이슈(Issue) (25.10.14.화) - 3분 브리핑: NotebookLM 쉬운 시작 · 강서구 AI 도시 · OpenAI-브로드컴">
+<meta property="og:description" content="초심자도 가능한 NotebookLM 1쪽 브리핑 만들기(단계별 가이드·예시 프롬프트), 강서구 AI 혁신 과제, OpenAI-브로드컴 동맹.">
 <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.png">
 <title>AI.Do 오늘 뭐 이슈(Issue) (25.10.14.화)</title>
 <style>
+/* (원본 서식 유지) */
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans-serif;line-height:1.6;background:linear-gradient(135deg,#ecfeff 0%,#fefce8 100%);min-height:100vh;padding:20px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%;touch-action:manipulation}
 .container{max-width:600px;margin:0 auto;background:rgba(255,255,255,.95);border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,.1);overflow:hidden;backdrop-filter:blur(10px)}
@@ -56,36 +57,7 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto 
 .prompt-box{background:#2d3748;color:#e2e8f0;padding:15px;border-radius:8px;font-family:'Courier New',monospace;margin:10px 0;border-left:4px solid #4ecdc4;font-size:.9em;line-height:1.6}
 .real-case{background:linear-gradient(135deg,#fff8e1 0%,#f3e5f5 100%);padding:20px;border-radius:12px;border-left:4px solid #ff6b6b}
 .real-case h4{color:#d53f8c;margin-bottom:10px}
-@media (max-width:768px){
- body{padding:10px;font-size:14px}
- .container{border-radius:15px;margin:0 auto}
- .header{padding:20px 15px;position:relative}
- .header::before{font-size:1.5em;top:12px;left:15px}
- .title{font-size:1.4em;margin-bottom:8px}
- .subtitle{font-size:.9em}
- .content{padding:20px 15px}
- .section{margin-bottom:20px}
- .section-title{font-size:1.3em;margin-bottom:12px;padding-left:10px}
- .news-item{padding:15px;margin-bottom:12px;border-radius:10px}
- .news-item:hover{transform:translateX(3px)}
- .news-title{font-size:.95em;margin-bottom:6px;line-height:1.4}
- .news-content{font-size:.85em;line-height:1.4}
- .external-link{font-size:.75em;margin-top:6px}
- .trend-box{padding:15px;margin:15px 0}
- .trend-title{font-size:1em;margin-bottom:8px}
- .keywords{gap:6px;margin-top:10px}
- .keyword{padding:3px 10px;font-size:.75em}
- .footer{padding:15px;font-size:.8em}
- .emoji-divider{font-size:1.2em;margin:15px 0}
- .tip-modal-content{width:95%;margin:5% auto;max-height:85vh}
- .tip-modal-header{padding:20px 15px}
- .tip-modal-header h2{font-size:1.2em}
- .tip-close{font-size:1.5em}
- .tip-modal-body{padding:20px 15px}
- .tip-section{padding:15px;margin-bottom:20px}
- .prompt-box{padding:12px;font-size:.85em}
- .real-case{padding:15px}
-}
+@media (max-width:768px){body{padding:10px;font-size:14px}.container{border-radius:15px;margin:0 auto}.header{padding:20px 15px;position:relative}.header::before{font-size:1.5em;top:12px;left:15px}.title{font-size:1.4em;margin-bottom:8px}.subtitle{font-size:.9em}.content{padding:20px 15px}.section{margin-bottom:20px}.section-title{font-size:1.3em;margin-bottom:12px;padding-left:10px}.news-item{padding:15px;margin-bottom:12px;border-radius:10px}.news-item:hover{transform:translateX(3px)}.news-title{font-size:.95em;margin-bottom:6px;line-height:1.4}.news-content{font-size:.85em;line-height:1.4}.external-link{font-size:.75em;margin-top:6px}.trend-box{padding:15px;margin:15px 0}.trend-title{font-size:1em;margin-bottom:8px}.keywords{gap:6px;margin-top:10px}.keyword{padding:3px 10px;font-size:.75em}.footer{padding:15px;font-size:.8em}.emoji-divider{font-size:1.2em;margin:15px 0}.tip-modal-content{width:95%;margin:5% auto;max-height:85vh}.tip-modal-header{padding:20px 15px}.tip-modal-header h2{font-size:1.2em}.tip-close{font-size:1.5em}.tip-modal-body{padding:20px 15px}.tip-section{padding:15px;margin-bottom:20px}.prompt-box{padding:12px;font-size:.85em}.real-case{padding:15px}}
 </style>
 </head>
 <body>
@@ -99,12 +71,12 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto 
 <main class="content">
 <!-- 💡 Tip -->
 <section class="section">
-<h2 class="section-title"><span class="emoji">💡</span> GPT 실전활용팁 (1분 읽기)</h2>
+<h2 class="section-title"><span class="emoji">💡</span> NotebookLM 실전활용팁 (입문자를 위한 쉬운 가이드)</h2>
 <div class="news-item tip-item" onclick="showTipModal()">
-<h3 class="news-title">🎯 공공기관 GPT 체크리스트: 맞춤지시·템플릿·자가검수</h3>
-<p class="news-content">부서 맥락·공문서 규정을 맞춤지시로 고정하고, 템플릿과 자가검수 프롬프트로 초안 품질과 속도를 동시에 끌어올리세요.</p>
-<div class="tip-category"><span class="keyword">행정효율화</span></div>
-<div class="tip-link-text">📖 GPT 실전 가이드 열어보기 · 클릭!</div>
+<h3 class="news-title">📚 처음 써보는 NotebookLM: 1쪽 브리핑을 ‘복붙’만으로 만드는 법</h3>
+<p class="news-content">파일을 올리고 아래 프롬프트를 복사해 붙여넣기만 하면 됩니다. <span class="highlight">요약 → 핵심 수치 → Q&amp;A</span> 순서로 깔끔한 1쪽 브리핑이 나옵니다.</p>
+<div class="tip-category"><span class="keyword">왕초보가이드</span></div>
+<div class="tip-link-text">📖 단계별 사용법과 예시 프롬프트 보기 · 클릭!</div>
 </div>
 </section>
 
@@ -138,12 +110,12 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto 
 <section class="section">
 <div class="trend-box">
 <div class="trend-title">🎯 화요일 AI 트렌드 분석</div>
-<p>지자체는 안전·복지 등 현장 서비스에 AI를 접목하고, 산업계는 AI 반도체·컴퓨팅 동맹으로 인프라를 확장 중입니다. 현장에선 GPT ‘맞춤지시-템플릿-검수’ 3단계를 고정하세요.</p>
+<p>지자체는 치안·안전·복지 등 현장 서비스에 AI를 접목하고, 산업계는 AI 반도체·컴퓨팅 동맹으로 인프라를 확장 중입니다. 실무에선 NotebookLM으로 ‘1쪽 브리핑’ 체계를 굳혀보세요.</p>
 <div class="keywords">
-<span class="keyword">#GPT실전활용</span>
+<span class="keyword">#NotebookLM</span>
+<span class="keyword">#문서요약</span>
 <span class="keyword">#AI강서</span>
 <span class="keyword">#실종자탐색</span>
-<span class="keyword">#산불감시</span>
 <span class="keyword">#AI반도체</span>
 <span class="keyword">#OpenAI</span>
 <span class="keyword">#Broadcom</span>
@@ -162,7 +134,7 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto 
 </footer>
 </div>
 
-<!-- Tip Modal -->
+<!-- Tip Modal (입문자용 확장) -->
 <div id="tipModal" class="tip-modal">
 <div class="tip-modal-content">
 <div class="tip-modal-header">
@@ -171,26 +143,41 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto 
 </div>
 <div class="tip-modal-body">
 <div class="detailed-tip-content">
-<h3>🏛️ 공공기관 GPT 실전활용 체크리스트</h3>
-<p>맞춤지시·템플릿·자가검수 3단계로 문서 업무를 표준화하세요.</p>
+<h3>📚 NotebookLM 쉬운 시작: 1쪽 브리핑 만들기</h3>
+<p>처음 쓰는 분도 따라만 하세요. 파일(보고서, 회의록)을 올리고, 아래 문장을 복사해 붙여넣으면 1쪽 브리핑이 완성됩니다.</p>
+
 <div class="tip-section">
-<h4>1단계 · 맞춤지시(컨텍스트)</h4>
-<p>부서·업무·규정(공문서 형식, 쉬운문장, 비식별)을 한 번에 고정합니다.</p>
-<div class="prompt-box">“나는 ○○시청 ○○과 주무관… '제목-취지-현황-조치-향후계획' 서식을 적용.”</div>
+<h4>1단계 · 자료 올리기(파일 2~3개면 충분)</h4>
+<p>PDF·Word·링크를 ‘노트’로 묶습니다. 파일명은 ‘부서_주제_일자’처럼 정리하면 나중에 찾기 쉬워요.</p>
+<div class="prompt-box">복붙 프롬프트 ①
+“이 자료들의 핵심 결론 5가지를 한 줄씩 써줘. 각 결론 옆에 근거 페이지/문단도 표시해.”</div>
 </div>
+
 <div class="tip-section">
-<h4>2단계 · 템플릿 생성</h4>
-<p>민원: 공감→현황→근거·법령→절차·기한 / 보고서: 취지→추진내용→성과→계획</p>
-<div class="prompt-box">“위 템플릿으로 초안을 표 포함해 작성. 출처·기한·담당부서 표시.”</div>
+<h4>2단계 · 1쪽 브리핑 자동 생성(서식 고정)</h4>
+<p>아래 서식을 그대로 요청하세요. 초안이 길면 ‘더 짧게’라고 다시 말하면 됩니다.</p>
+<div class="prompt-box">복붙 프롬프트 ②
+“다음 서식으로 1쪽 브리핑을 만들어줘.
+ - 요약: 5줄
+ - 핵심 수치: 3개(수치·출처 페이지)
+ - 쟁점/리스크: 3개
+ - 후속조치: 3개(담당·기한 포함)”</div>
 </div>
+
 <div class="tip-section">
-<h4>3단계 · 자가검수</h4>
-<p>법령 정확성·비식별·오탈자·2줄문장·축약어 해설을 자동 점검합니다.</p>
-<div class="prompt-box">“체크리스트로 재검토하고 누락을 수정.”</div>
+<h4>3단계 · 쉬운 검증(Q&amp;A와 출처 확인)</h4>
+<p>숫자·정책 용어는 반드시 출처로 확인합니다. 이해 안 되는 문장은 ‘쉽게’라고 추가 지시하세요.</p>
+<div class="prompt-box">복붙 프롬프트 ③
+“위 브리핑의 각 항목에 대응하는 원문 인용을 한 문장씩 붙여줘. 페이지/문단 표시.”</div>
 </div>
+
 <div class="real-case">
-<h4>실전 사례 | 보고서 초안 60% 단축</h4>
-<p>△△구청은 GPT 고정지시·서식·검수체크 도입으로 작성 시간을 평균 2시간→45분으로 줄였습니다.</p>
+<h4>실전 팁 | 왕초보가 자주 묻는 질문(FAQ)</h4>
+<p>Q. 파일이 많으면 느려요 → 핵심 2~3개만 올리고 시작하세요.
+Q. 용어가 어려워요 → “초등학생도 이해하도록 풀어줘”라고 덧붙이세요.
+Q. 표가 필요해요 → “표 1개로 요약해줘(항목: 항목/값/출처)”라고 요청하세요.</p>
+</div>
+
 </div>
 </div>
 </div>
