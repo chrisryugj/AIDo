@@ -1,645 +1,206 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="theme-color" content="#38bdf8">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
-    <meta property="og:title" content="AI.Do 오늘 뭐 이슈(Issue) (25.10.13.월) - 3분 브리핑: GPT 실전활용 · 1인가구 AI돌봄 · 데이터센터 냉각">
-    <meta property="og:description" content="공공기관 GPT 실전활용 체크리스트, 나주시 1인가구 AI 돌봄, LG 데이터센터 냉각 솔루션 등 오늘의 한국어 뉴스를 담았습니다.">
-    <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.png">
-
-    <title>AI.Do 오늘 뭐 이슈(Issue) (25.10.13.월)</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
-            line-height: 1.6;
-            background: linear-gradient(135deg, #ecfeff 0%, #fefce8 100%);
-            min-height: 100vh;
-            padding: 20px;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            -webkit-text-size-adjust: 100%;
-            touch-action: manipulation;
-        }
-        
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #e0f2fe 0%, #fce7f3 45%, #fef3c7 100%);
-            color: #0f172a;
-            padding: 25px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .header::before {
-            content: '🤖';
-            font-size: 2em;
-            position: absolute;
-            top: 15px;
-            left: 25px;
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
-        
-        .date {
-            font-size: 0.9em;
-            opacity: 0.9;
-            margin-bottom: 5px;
-        }
-        
-        .title {
-            font-size: 1.8em;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-        
-        .subtitle {
-            font-size: 1em;
-            opacity: 0.8;
-        }
-        
-        .content {
-            padding: 30px;
-        }
-        
-        .section {
-            margin-bottom: 25px;
-        }
-        
-        .section-title {
-            display: flex;
-            align-items: center;
-            font-size: 1.2em;
-            font-weight: 600;
-            color: #0f172a;
-            margin-bottom: 15px;
-            border-left: 4px solid #38bdf8;
-            padding-left: 12px;
-        }
-        
-        .section-title .emoji {
-            margin-right: 8px;
-            font-size: 1.1em;
-        }
-        
-        .news-item {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 18px;
-            margin-bottom: 15px;
-            border-left: 3px solid #4ecdc4;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-        
-        .news-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            background: #f0f8ff;
-            text-decoration: none;
-            color: inherit;
-        }
-        
-        .external-link {
-            font-size: 0.8em;
-            color: #666;
-            margin-top: 8px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        
-        .news-title {
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 8px;
-            font-size: 1em;
-        }
-        
-        .news-content {
-            color: #555;
-            font-size: 0.9em;
-            line-height: 1.5;
-        }
-        
-        .highlight {
-            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: 500;
-        }
-        
-        .trend-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #ffffff;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            margin: 20px 0;
-        }
-        
-        .trend-title {
-            font-size: 1.1em;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-        
-        .keywords {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 12px;
-        }
-        
-        .keyword {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8em;
-            backdrop-filter: blur(10px);
-        }
-        
-        .footer {
-            background: #f8f9fa;
-            padding: 20px;
-            text-align: center;
-            color: #666;
-            font-size: 0.85em;
-        }
-        
-        .emoji-divider {
-            text-align: center;
-            font-size: 1.5em;
-            margin: 20px 0;
-        }
-
-        .tip-item {
-            background: linear-gradient(135deg, #fff8e1 0%, #f3e5f5 100%);
-            border-left: 3px solid #ff6b6b;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tip-item::before {
-            content: '💡';
-            position: absolute;
-            right: 15px;
-            top: 15px;
-            font-size: 1.5em;
-            opacity: 0.3;
-        }
-
-        .tip-item:hover {
-            background: linear-gradient(135deg, #fff3c4 0%, #e8cdf1 100%);
-            transform: translateX(8px);
-        }
-
-        .tip-category {
-            margin-top: 10px;
-            text-align: center;
-        }
-        
-        .tip-category .keyword {
-            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
-            color: #0f172a;
-            font-weight: 600;
-        }
-
-        .tip-link-text {
-            font-size: 0.8em;
-            color: #ff6b6b;
-            margin-top: 8px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-weight: 600;
-        }
-        
-        .tip-modal {
-            display: none;
-            position: fixed;
-            z-index: 99999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
-        }
-        
-        .tip-modal-content {
-            background: white;
-            margin: 2% auto;
-            padding: 0;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 900px;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
-        
-        .tip-modal-header {
-            background: linear-gradient(45deg, #2c3e50, #34495e, #2980b9);
-            color: #ffffff;
-            padding: 25px;
-            border-radius: 20px 20px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .tip-modal-header h2 {
-            margin: 0;
-            font-size: 1.4em;
-            font-weight: 700;
-        }
-        
-        .tip-close {
-            font-size: 2em;
-            font-weight: bold;
-            cursor: pointer;
-            line-height: 1;
-            opacity: 0.8;
-            transition: opacity 0.2s;
-            color: #ffffff;
-        }
-        
-        .tip-close:hover {
-            opacity: 1;
-        }
-        
-        .tip-modal-body {
-            padding: 30px;
-        }
-        
-        .detailed-tip-content h3 {
-            color: #2d3748;
-            margin-bottom: 20px;
-            font-size: 1.3em;
-        }
-        
-        .tip-section {
-            margin-bottom: 25px;
-            padding: 20px;
-            background: #f7fafc;
-            border-radius: 12px;
-            border-left: 4px solid #667eea;
-        }
-        
-        .tip-section h4 {
-            color: #4a5568;
-            margin-bottom: 10px;
-            font-size: 1.1em;
-        }
-        
-        .prompt-box {
-            background: #2d3748;
-            color: #e2e8f0;
-            padding: 15px;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            margin: 10px 0;
-            border-left: 4px solid #4ecdc4;
-            font-size: 0.9em;
-            line-height: 1.6;
-        }
-        
-        .real-case {
-            background: linear-gradient(135deg, #fff8e1 0%, #f3e5f5 100%);
-            padding: 20px;
-            border-radius: 12px;
-            border-left: 4px solid #ff6b6b;
-        }
-        
-        .real-case h4 {
-            color: #d53f8c;
-            margin-bottom: 10px;
-        }
-        
-        @media (max-width: 768px) {
-            body { 
-                padding: 10px;
-                font-size: 14px;
-            }
-            
-            .container { 
-                border-radius: 15px;
-                margin: 0 auto;
-            }
-            
-            .header { 
-                padding: 20px 15px;
-                position: relative;
-            }
-            
-            .header::before {
-                font-size: 1.5em;
-                top: 12px;
-                left: 15px;
-            }
-            
-            .title { 
-                font-size: 1.4em;
-                margin-bottom: 8px;
-            }
-            
-            .subtitle {
-                font-size: 0.9em;
-            }
-            
-            .content { 
-                padding: 20px 15px;
-            }
-            
-            .section {
-                margin-bottom: 20px;
-            }
-            
-            .section-title {
-                font-size: 1.3em;
-                margin-bottom: 12px;
-                padding-left: 10px;
-            }
-            
-            .news-item {
-                padding: 15px;
-                margin-bottom: 12px;
-                border-radius: 10px;
-            }
-            
-            .news-item:hover {
-                transform: translateX(3px);
-            }
-            
-            .news-title {
-                font-size: 0.95em;
-                margin-bottom: 6px;
-                line-height: 1.4;
-            }
-            
-            .news-content {
-                font-size: 0.85em;
-                line-height: 1.4;
-            }
-            
-            .external-link {
-                font-size: 0.75em;
-                margin-top: 6px;
-            }
-            
-            .trend-box {
-                padding: 15px;
-                margin: 15px 0;
-            }
-            
-            .trend-title {
-                font-size: 1em;
-                margin-bottom: 8px;
-            }
-            
-            .keywords {
-                gap: 6px;
-                margin-top: 10px;
-            }
-            
-            .keyword {
-                padding: 3px 10px;
-                font-size: 0.75em;
-            }
-            
-            .footer {
-                padding: 15px;
-                font-size: 0.8em;
-            }
-            
-            .emoji-divider {
-                font-size: 1.2em;
-                margin: 15px 0;
-            }
-
-            .tip-modal-content {
-                width: 95%;
-                margin: 5% auto;
-                max-height: 85vh;
-            }
-            
-            .tip-modal-header {
-                padding: 20px 15px;
-            }
-            
-            .tip-modal-header h2 {
-                font-size: 1.2em;
-            }
-            
-            .tip-close {
-                font-size: 1.5em;
-            }
-            
-            .tip-modal-body {
-                padding: 20px 15px;
-            }
-            
-            .tip-section {
-                padding: 15px;
-                margin-bottom: 20px;
-            }
-            
-            .prompt-box {
-                padding: 12px;
-                font-size: 0.85em;
-            }
-            
-            .real-case {
-                padding: 15px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#38bdf8">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
+<meta property="og:title" content="AI.Do 오늘 뭐 이슈(Issue) (25.10.14.화) - 3분 브리핑: GPT 실전활용팁 · 강서구 AI 도시 · OpenAI-브로드컴">
+<meta property="og:description" content="공공기관 GPT 실전활용팁, 강서구 ‘AI 강서’ 혁신과제, OpenAI-브로드컴 맞춤형 AI 반도체 동맹 등 오늘의 한국어 뉴스.">
+<meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.png">
+<title>AI.Do 오늘 뭐 이슈(Issue) (25.10.14.화)</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans-serif;line-height:1.6;background:linear-gradient(135deg,#ecfeff 0%,#fefce8 100%);min-height:100vh;padding:20px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%;touch-action:manipulation}
+.container{max-width:600px;margin:0 auto;background:rgba(255,255,255,.95);border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,.1);overflow:hidden;backdrop-filter:blur(10px)}
+.header{background:linear-gradient(135deg,#e0f2fe 0%,#fce7f3 45%,#fef3c7 100%);color:#0f172a;padding:25px;text-align:center;position:relative}
+.header::before{content:'🤖';font-size:2em;position:absolute;top:15px;left:25px;animation:bounce 2s infinite}
+@keyframes bounce{0%,20%,50%,80%,100%{transform:translateY(0)}40%{transform:translateY(-10px)}60%{transform:translateY(-5px)}}
+.date{font-size:.9em;opacity:.9;margin-bottom:5px}
+.title{font-size:1.8em;font-weight:700;margin-bottom:5px}
+.subtitle{font-size:1em;opacity:.8}
+.content{padding:30px}
+.section{margin-bottom:25px}
+.section-title{display:flex;align-items:center;font-size:1.2em;font-weight:600;color:#0f172a;margin-bottom:15px;border-left:4px solid #38bdf8;padding-left:12px}
+.section-title .emoji{margin-right:8px;font-size:1.1em}
+.news-item{background:#f8f9fa;border-radius:12px;padding:18px;margin-bottom:15px;border-left:3px solid #4ecdc4;transition:all .3s ease;cursor:pointer;text-decoration:none;color:inherit;display:block}
+.news-item:hover{transform:translateX(5px);box-shadow:0 5px 15px rgba(0,0,0,.1);background:#f0f8ff;text-decoration:none;color:inherit}
+.external-link{font-size:.8em;color:#666;margin-top:8px;display:flex;align-items:center;gap:4px}
+.news-title{font-weight:600;color:#2c3e50;margin-bottom:8px;font-size:1em}
+.news-content{color:#555;font-size:.9em;line-height:1.5}
+.highlight{background:linear-gradient(120deg,#a8edea 0%,#fed6e3 100%);padding:2px 6px;border-radius:4px;font-weight:500}
+.trend-box{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:20px;border-radius:12px;text-align:center;margin:20px 0}
+.trend-title{font-size:1.1em;font-weight:600;margin-bottom:10px}
+.keywords{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:12px}
+.keyword{background:rgba(255,255,255,.2);padding:4px 12px;border-radius:20px;font-size:.8em;backdrop-filter:blur(10px)}
+.footer{background:#f8f9fa;padding:20px;text-align:center;color:#666;font-size:.85em}
+.emoji-divider{text-align:center;font-size:1.5em;margin:20px 0}
+.tip-item{background:linear-gradient(135deg,#fff8e1 0%,#f3e5f5 100%);border-left:3px solid #ff6b6b;position:relative;overflow:hidden}
+.tip-item::before{content:'💡';position:absolute;right:15px;top:15px;font-size:1.5em;opacity:.3}
+.tip-item:hover{background:linear-gradient(135deg,#fff3c4 0%,#e8cdf1 100%);transform:translateX(8px)}
+.tip-category{margin-top:10px;text-align:center}
+.tip-category .keyword{background:linear-gradient(135deg,#ff6b6b,#4ecdc4);color:#0f172a;font-weight:600}
+.tip-link-text{font-size:.8em;color:#ff6b6b;margin-top:8px;display:flex;align-items:center;gap:4px;font-weight:600}
+.tip-modal{display:none;position:fixed;z-index:99999;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
+.tip-modal-content{background:#fff;margin:2% auto;padding:0;border-radius:20px;width:90%;max-width:900px;max-height:90vh;overflow-y:auto;box-shadow:0 25px 50px rgba(0,0,0,.3);position:relative}
+.tip-modal-header{background:linear-gradient(45deg,#2c3e50,#34495e,#2980b9);color:#fff;padding:25px;border-radius:20px 20px 0 0;display:flex;justify-content:space-between;align-items:center}
+.tip-modal-header h2{margin:0;font-size:1.4em;font-weight:700}
+.tip-close{font-size:2em;font-weight:bold;cursor:pointer;line-height:1;opacity:.8;transition:opacity .2s;color:#fff}
+.tip-close:hover{opacity:1}
+.tip-modal-body{padding:30px}
+.detailed-tip-content h3{color:#2d3748;margin-bottom:20px;font-size:1.3em}
+.tip-section{margin-bottom:25px;padding:20px;background:#f7fafc;border-radius:12px;border-left:4px solid #667eea}
+.tip-section h4{color:#4a5568;margin-bottom:10px;font-size:1.1em}
+.prompt-box{background:#2d3748;color:#e2e8f0;padding:15px;border-radius:8px;font-family:'Courier New',monospace;margin:10px 0;border-left:4px solid #4ecdc4;font-size:.9em;line-height:1.6}
+.real-case{background:linear-gradient(135deg,#fff8e1 0%,#f3e5f5 100%);padding:20px;border-radius:12px;border-left:4px solid #ff6b6b}
+.real-case h4{color:#d53f8c;margin-bottom:10px}
+@media (max-width:768px){
+ body{padding:10px;font-size:14px}
+ .container{border-radius:15px;margin:0 auto}
+ .header{padding:20px 15px;position:relative}
+ .header::before{font-size:1.5em;top:12px;left:15px}
+ .title{font-size:1.4em;margin-bottom:8px}
+ .subtitle{font-size:.9em}
+ .content{padding:20px 15px}
+ .section{margin-bottom:20px}
+ .section-title{font-size:1.3em;margin-bottom:12px;padding-left:10px}
+ .news-item{padding:15px;margin-bottom:12px;border-radius:10px}
+ .news-item:hover{transform:translateX(3px)}
+ .news-title{font-size:.95em;margin-bottom:6px;line-height:1.4}
+ .news-content{font-size:.85em;line-height:1.4}
+ .external-link{font-size:.75em;margin-top:6px}
+ .trend-box{padding:15px;margin:15px 0}
+ .trend-title{font-size:1em;margin-bottom:8px}
+ .keywords{gap:6px;margin-top:10px}
+ .keyword{padding:3px 10px;font-size:.75em}
+ .footer{padding:15px;font-size:.8em}
+ .emoji-divider{font-size:1.2em;margin:15px 0}
+ .tip-modal-content{width:95%;margin:5% auto;max-height:85vh}
+ .tip-modal-header{padding:20px 15px}
+ .tip-modal-header h2{font-size:1.2em}
+ .tip-close{font-size:1.5em}
+ .tip-modal-body{padding:20px 15px}
+ .tip-section{padding:15px;margin-bottom:20px}
+ .prompt-box{padding:12px;font-size:.85em}
+ .real-case{padding:15px}
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <div class="date">2025년 10월 13일 (월)</div>
-            <h1 class="title">AI.Do 오늘 뭐 이슈(Issue)</h1>
-            <div class="subtitle">3분투자 오늘의 핫이슈, 공공사례, 실전팁 챙기기!</div>
-        </header>
+<div class="container">
+<header class="header">
+<div class="date">2025년 10월 14일 (화)</div>
+<h1 class="title">AI.Do 오늘 뭐 이슈(Issue)</h1>
+<div class="subtitle">3분투자 오늘의 핫이슈, 공공사례, 실전팁 챙기기!</div>
+</header>
 
-        <main class="content">
-            <section class="section">
-                <h2 class="section-title">
-                    <span class="emoji">💡</span>
-                    GPT 실전활용팁 (1분 읽기)
-                </h2>
+<main class="content">
+<!-- 💡 Tip -->
+<section class="section">
+<h2 class="section-title"><span class="emoji">💡</span> GPT 실전활용팁 (1분 읽기)</h2>
+<div class="news-item tip-item" onclick="showTipModal()">
+<h3 class="news-title">🎯 공공기관 GPT 체크리스트: 맞춤지시·템플릿·자가검수</h3>
+<p class="news-content">부서 맥락·공문서 규정을 맞춤지시로 고정하고, 템플릿과 자가검수 프롬프트로 초안 품질과 속도를 동시에 끌어올리세요.</p>
+<div class="tip-category"><span class="keyword">행정효율화</span></div>
+<div class="tip-link-text">📖 GPT 실전 가이드 열어보기 · 클릭!</div>
+</div>
+</section>
 
-                <div class="news-item tip-item" onclick="showTipModal()">
-                    <h3 class="news-title">🎯 공공기관 GPT 체크리스트: 맞춤지시·템플릿·자가검수</h3>
-                    <p class="news-content">부서 맥락·공문서 규정·민원 유형을 맞춤지시로 고정하고, 템플릿+자가검수 프롬프트로 초안 품질과 속도를 동시에 올리세요.</p>
-                    <div class="tip-category">
-                        <span class="keyword">행정효율화</span>
-                    </div>
-                    <div class="tip-link-text">
-                        📖 GPT 실전 가이드 열어보기 · 클릭!
-                    </div>
-                </div>
-            </section>
+<div class="emoji-divider">🏛️ 🏛️ 🏛️</div>
 
-            <div class="emoji-divider">🏛️ 🏛️ 🏛️</div>
+<!-- 🏛️ Local -->
+<section class="section">
+<h2 class="section-title"><span class="emoji">🏛️</span> 지자체 AI 활용사례 (1분 읽기)</h2>
+<a href="https://www.seoul.co.kr/news/publicnews/seoul_local/news_seoul/2025/10/14/20251014026002" target="_blank" class="news-item">
+<h3 class="news-title">🏙️ 강서구, ‘AI 강서’ 22개 혁신과제 확정…실종자 1분 탐색·산불 감시</h3>
+<p class="news-content">서울 강서구가 <span class='highlight'>AI 특화도시</span> 구현을 위해 22개 혁신과제를 발표했습니다. 실종자 고속 탐색, 산불 감시 등 실사용 중심 행정 서비스가 단계적으로 적용됩니다.</p>
+<div class="external-link">🔗 seoul.co.kr · 클릭해서 자세히 보기</div>
+</a>
+</section>
 
-            <section class="section">
-                <h2 class="section-title">
-                    <span class="emoji">🏛️</span>
-                    지자체 AI 활용사례 (1분 읽기)
-                </h2>
+<div class="emoji-divider">🔥 🔥 🔥</div>
 
-                <a href="https://www.etnews.com/20251012000021" target="_blank" class="news-item">
-                    <h3 class="news-title">🤝 나주시, AI로 1인가구 돌봄…한전·SK행복커넥트와 맞손</h3>
-                    <p class="news-content">
-                        전남 나주시가 1인가구의 사회적 고립과 고독사 예방을 위해 <span class='highlight'>AI 안부 든든서비스</span>를 도입합니다. 한전·SK행복커넥트와 협력해 생활 패턴 이상을 감지하고 즉시 알림·연계를 제공합니다.
-                    </p>
-                    <div class="external-link">🔗 etnews.com · 클릭해서 자세히 보기</div>
-                </a>
-            </section>
+<!-- 🔥 Hot -->
+<section class="section">
+<h2 class="section-title"><span class="emoji">🔥</span> AI 핫이슈 (1분 읽기)</h2>
+<a href="https://www.etnews.com/20251014000006" target="_blank" class="news-item">
+<h3 class="news-title">⚙️ 오픈AI-브로드컴, 맞춤형 AI 반도체·컴퓨팅 동맹 발표</h3>
+<p class="news-content">오픈AI와 브로드컴이 10GW급 차세대 <span class='highlight'>AI 전용 반도체·클러스터</span> 개발 협력을 발표했습니다. 대규모 데이터센터 수요에 대응해 가속기·네트워킹까지 공동 설계를 확대합니다.</p>
+<div class="external-link">🔗 etnews.com · 클릭해서 자세히 보기</div>
+</a>
+</section>
 
-            <div class="emoji-divider">🔥 🔥 🔥</div>
+<div class="emoji-divider">📊 📊 📊</div>
 
-            <section class="section">
-                <h2 class="section-title">
-                    <span class="emoji">🔥</span>
-                    AI 핫이슈 (1분 읽기)
-                </h2>
+<!-- 📊 Trend -->
+<section class="section">
+<div class="trend-box">
+<div class="trend-title">🎯 화요일 AI 트렌드 분석</div>
+<p>지자체는 안전·복지 등 현장 서비스에 AI를 접목하고, 산업계는 AI 반도체·컴퓨팅 동맹으로 인프라를 확장 중입니다. 현장에선 GPT ‘맞춤지시-템플릿-검수’ 3단계를 고정하세요.</p>
+<div class="keywords">
+<span class="keyword">#GPT실전활용</span>
+<span class="keyword">#AI강서</span>
+<span class="keyword">#실종자탐색</span>
+<span class="keyword">#산불감시</span>
+<span class="keyword">#AI반도체</span>
+<span class="keyword">#OpenAI</span>
+<span class="keyword">#Broadcom</span>
+</div>
+</div>
+</section>
+</main>
 
-                <a href="https://www.donga.com/news/Economy/article/all/20251012/132535857/2" target="_blank" class="news-item">
-                    <h3 class="news-title">❄️ LG, 네옴 AI 데이터센터 ‘냉각 솔루션’ 수출 가속</h3>
-                    <p class="news-content">
-                        LG전자가 사우디 네옴 ‘옥사곤’에 <span class='highlight'>AI 데이터센터 냉각 솔루션</span> 공급을 추진합니다. 액체 냉각 ‘CDU’ 등 차세대 기술로 에너지 효율과 안정성을 높이며 <span class='highlight'>AI 인프라</span> 확산이 가속화되고 있습니다.
-                    </p>
-                    <div class="external-link">🔗 donga.com · 클릭해서 자세히 보기</div>
-                </a>
-            </section>
+<footer class="footer">
+<p>🤖 AI.Do | 매일 업데이트 | 궁금한 점은 언제든 댓글로!</p>
+<p style="margin-top:8px;font-size:.8em;">💬 오늘 뉴스 어떠셨나요? 피드백 환영해요!</p>
+<div style="margin-top:15px;text-align:center;">
+<a href="https://myhits.vercel.app"><img src="https://myhits.vercel.app/api/hit/https%3A%2F%2Fchrisryugj.github.io%2FAIDo?color=purple&label=Views&size=medium" alt="Views"></a>
+</div>
+<p style="margin-top:8px;font-size:.75em;opacity:.7;">✨ Made by 류주임</p>
+</footer>
+</div>
 
-            <div class="emoji-divider">📊 📊 📊</div>
-            
-            <section class="section">
-                <div class="trend-box">
-                    <div class="trend-title">🎯 월요일 AI 트렌드 분석</div>
-                    <p>지자체는 취약계층 돌봄에 AI를 연결하고, 기업은 데이터센터 냉각 같은 후방 인프라에서 성과를 내는 중입니다. 현장에선 GPT 맞춤지시·템플릿·검수로 문서 표준화를 추진하세요.</p>
-                    <div class="keywords">
-                        <span class="keyword">#GPT실전활용</span>
-                        <span class="keyword">#1인가구돌봄</span>
-                        <span class="keyword">#나주시</span>
-                        <span class="keyword">#데이터센터</span>
-                        <span class="keyword">#액체냉각</span>
-                        <span class="keyword">#AI인프라</span>
-                    </div>
-                </div>
-            </section>
-        </main>
-        
-        <footer class="footer">
-            <p>🤖 AI.Do | 매일 업데이트 | 궁금한 점은 언제든 댓글로!</p>
-            <p style="margin-top: 8px; font-size: 0.8em;">💬 오늘 뉴스 어떠셨나요? 피드백 환영해요!</p>
-            
-            <div style="margin-top: 15px; text-align: center;">
-                <a href="https://myhits.vercel.app"><img src="https://myhits.vercel.app/api/hit/https%3A%2F%2Fchrisryugj.github.io%2FAIDo?color=purple&label=Views&size=medium" alt="Views" /></a>
-            </div>
-            
-            <p style="margin-top: 8px; font-size: 0.75em; opacity: 0.7;">✨ Made by 류주임</p>
-        </footer>
-    </div>
+<!-- Tip Modal -->
+<div id="tipModal" class="tip-modal">
+<div class="tip-modal-content">
+<div class="tip-modal-header">
+<h2>🎯 오늘의 실전팁 완전 가이드</h2>
+<span class="tip-close" onclick="hideTipModal()">&times;</span>
+</div>
+<div class="tip-modal-body">
+<div class="detailed-tip-content">
+<h3>🏛️ 공공기관 GPT 실전활용 체크리스트</h3>
+<p>맞춤지시·템플릿·자가검수 3단계로 문서 업무를 표준화하세요.</p>
+<div class="tip-section">
+<h4>1단계 · 맞춤지시(컨텍스트)</h4>
+<p>부서·업무·규정(공문서 형식, 쉬운문장, 비식별)을 한 번에 고정합니다.</p>
+<div class="prompt-box">“나는 ○○시청 ○○과 주무관… '제목-취지-현황-조치-향후계획' 서식을 적용.”</div>
+</div>
+<div class="tip-section">
+<h4>2단계 · 템플릿 생성</h4>
+<p>민원: 공감→현황→근거·법령→절차·기한 / 보고서: 취지→추진내용→성과→계획</p>
+<div class="prompt-box">“위 템플릿으로 초안을 표 포함해 작성. 출처·기한·담당부서 표시.”</div>
+</div>
+<div class="tip-section">
+<h4>3단계 · 자가검수</h4>
+<p>법령 정확성·비식별·오탈자·2줄문장·축약어 해설을 자동 점검합니다.</p>
+<div class="prompt-box">“체크리스트로 재검토하고 누락을 수정.”</div>
+</div>
+<div class="real-case">
+<h4>실전 사례 | 보고서 초안 60% 단축</h4>
+<p>△△구청은 GPT 고정지시·서식·검수체크 도입으로 작성 시간을 평균 2시간→45분으로 줄였습니다.</p>
+</div>
+</div>
+</div>
+</div>
 
-    <div id="tipModal" class="tip-modal">
-        <div class="tip-modal-content">
-            <div class="tip-modal-header">
-                <h2>🎯 오늘의 실전팁 완전 가이드</h2>
-                <span class="tip-close" onclick="hideTipModal()">&times;</span>
-            </div>
-            <div class="tip-modal-body">
-                <div class="detailed-tip-content">
-                    <h3>🏛️ 공공기관 GPT 실전활용 체크리스트</h3>
-                    <p>맞춤지시·템플릿·자가검수 3단계로 문서 업무를 표준화하세요. 민원 답변·보고서 초안 품질이 일정해지고 작성 시간이 줄어듭니다.</p>
-                    
-                    <div class="tip-section">
-                        <h4>1단계 · 맞춤지시(컨텍스트)</h4>
-                        <p>부서명·주요 업무·준수 규정(공문서 형식, 쉬운문장, 개인정보 비식별)을 한 번에 고정합니다.</p>
-                        <div class="prompt-box">“나는 ○○시청 ○○과 주무관. 모든 초안은 '제목-취지-현황-조치-향후계획' 서식과 '-습니다'체. 법령은 '○○법 제○조'로 표기.”</div>
-                    </div>
-
-                    <div class="tip-section">
-                        <h4>2단계 · 템플릿 생성</h4>
-                        <p>민원 답변: 공감→현황→근거·법령→절차·기한 / 보고서: 취지→추진내용→성과→계획.</p>
-                        <div class="prompt-box">“민원 답변 초안: 위 템플릿으로 표 구성 포함해 작성. 필수 체크: 근거 출처, 기한, 담당부서.”</div>
-                    </div>
-
-                    <div class="tip-section">
-                        <h4>3단계 · 자가검수</h4>
-                        <p>법령 표기, 개인정보, 오탈자, 2줄 이내 문장, 축약어 해설을 자동 점검합니다.</p>
-                        <div class="prompt-box">“위 초안을 [법령 정확성][비식별][오탈자][2줄 문장][축약어 해설] 체크리스트로 재검토·수정.”</div>
-                    </div>
-
-                    <div class="real-case">
-                        <h4>실전 사례 | 보고서 초안 60% 단축</h4>
-                        <p>△△구청은 GPT에 부서 맥락·서식 규정·검수 체크리스트를 고정해, 월간 보고서 초안 작성 시간을 평균 2시간→45분으로 단축했습니다.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function showTipModal() {
-            const modal = document.getElementById('tipModal');
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function hideTipModal() {
-            const modal = document.getElementById('tipModal');
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-        
-        window.onclick = function(event) {
-            const tipModal = document.getElementById('tipModal');
-            if (event.target === tipModal) {
-                hideTipModal();
-            }
-        }
-        
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                hideTipModal();
-            }
-        });
-    </script>
+<script>
+function showTipModal(){const m=document.getElementById('tipModal');m.style.display='block';document.body.style.overflow='hidden'}
+function hideTipModal(){const m=document.getElementById('tipModal');m.style.display='none';document.body.style.overflow='auto'}
+window.onclick=function(e){const m=document.getElementById('tipModal');if(e.target===m){hideTipModal()}}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){hideTipModal()}});
+</script>
 </body>
 </html>
