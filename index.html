@@ -4,19 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 <meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#38bdf8">
+<meta name="theme-color" content="#ff8c42">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
-<meta property="og:title" content="AI.Do 오늘 뭐 이슈(Issue) (25.10.14.화) - 3분 브리핑: NotebookLM 쉬운 시작 · 강서구 AI 도시 · OpenAI-브로드컴">
-<meta property="og:description" content="초심자도 가능한 NotebookLM 1쪽 브리핑 만들기(단계별 가이드·예시 프롬프트), 강서구 AI 혁신 과제, OpenAI-브로드컴 동맹.">
+<meta property="og:title" content="AI.Do 오늘 뭐 이슈(Issue) (25.10.15.수) - 3분 브리핑: 노트북LM 법규 Q&A 시스템 · 울산 AI 수도 · MS 코파일럿 조사">
+<meta property="og:description" content="광진구청 주무관용: 노트북LM으로 자치법규 Q&A 시스템 만드는 법(템플릿·복붙 프롬프트 포함), 울산 ‘AI 수도’ 비전, 공정위 MS 코파일럿 조사.">
 <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.png">
-<title>AI.Do 오늘 뭐 이슈(Issue) (25.10.14.화)</title>
+<title>AI.Do 오늘 뭐 이슈(Issue) (25.10.15.수)</title>
 <style>
-/* (원본 서식 유지) */
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans-serif;line-height:1.6;background:linear-gradient(135deg,#ecfeff 0%,#fefce8 100%);min-height:100vh;padding:20px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%;touch-action:manipulation}
+body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans-serif;line-height:1.6;background:linear-gradient(135deg,#fff5e6 0%,#ffe4cc 50%,#ffd9b3 100%);min-height:100vh;padding:20px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%;touch-action:manipulation}
 .container{max-width:600px;margin:0 auto;background:rgba(255,255,255,.95);border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,.1);overflow:hidden;backdrop-filter:blur(10px)}
-.header{background:linear-gradient(135deg,#e0f2fe 0%,#fce7f3 45%,#fef3c7 100%);color:#0f172a;padding:25px;text-align:center;position:relative}
+.header{background:linear-gradient(135deg,#ffecd2 0%,#fcb69f 45%,#ff9a76 100%);color:#2d1810;padding:25px;text-align:center;position:relative}
 .header::before{content:'🤖';font-size:2em;position:absolute;top:15px;left:25px;animation:bounce 2s infinite}
 @keyframes bounce{0%,20%,50%,80%,100%{transform:translateY(0)}40%{transform:translateY(-10px)}60%{transform:translateY(-5px)}}
 .date{font-size:.9em;opacity:.9;margin-bottom:5px}
@@ -24,163 +23,167 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto 
 .subtitle{font-size:1em;opacity:.8}
 .content{padding:30px}
 .section{margin-bottom:25px}
-.section-title{display:flex;align-items:center;font-size:1.2em;font-weight:600;color:#0f172a;margin-bottom:15px;border-left:4px solid #38bdf8;padding-left:12px}
+.section-title{display:flex;align-items:center;font-size:1.2em;font-weight:600;color:#2d1810;margin-bottom:15px;border-left:4px solid #ff8c42;padding-left:12px}
 .section-title .emoji{margin-right:8px;font-size:1.1em}
-.news-item{background:#f8f9fa;border-radius:12px;padding:18px;margin-bottom:15px;border-left:3px solid #4ecdc4;transition:all .3s ease;cursor:pointer;text-decoration:none;color:inherit;display:block}
-.news-item:hover{transform:translateX(5px);box-shadow:0 5px 15px rgba(0,0,0,.1);background:#f0f8ff;text-decoration:none;color:inherit}
+.news-item{background:#fff9f0;border-radius:12px;padding:18px;margin-bottom:15px;border-left:3px solid #ff8c42;transition:all .3s ease;cursor:pointer;text-decoration:none;color:inherit;display:block}
+.news-item:hover{transform:translateX(5px);box-shadow:0 5px 15px rgba(255,140,66,0.2);background:#fff5e6;text-decoration:none;color:inherit}
 .external-link{font-size:.8em;color:#666;margin-top:8px;display:flex;align-items:center;gap:4px}
 .news-title{font-weight:600;color:#2c3e50;margin-bottom:8px;font-size:1em}
 .news-content{color:#555;font-size:.9em;line-height:1.5}
-.highlight{background:linear-gradient(120deg,#a8edea 0%,#fed6e3 100%);padding:2px 6px;border-radius:4px;font-weight:500}
-.trend-box{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:20px;border-radius:12px;text-align:center;margin:20px 0}
+.highlight{background:linear-gradient(120deg,#ffe4b5 0%,#ffd89b 100%);padding:2px 6px;border-radius:4px;font-weight:500}
+.trend-box{background:linear-gradient(135deg,#d35400 0%,#e67e22 100%);color:#fff;padding:20px;border-radius:12px;text-align:center;margin:20px 0}
 .trend-title{font-size:1.1em;font-weight:600;margin-bottom:10px}
 .keywords{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:12px}
 .keyword{background:rgba(255,255,255,.2);padding:4px 12px;border-radius:20px;font-size:.8em;backdrop-filter:blur(10px)}
 .footer{background:#f8f9fa;padding:20px;text-align:center;color:#666;font-size:.85em}
 .emoji-divider{text-align:center;font-size:1.5em;margin:20px 0}
-.tip-item{background:linear-gradient(135deg,#fff8e1 0%,#f3e5f5 100%);border-left:3px solid #ff6b6b;position:relative;overflow:hidden}
-.tip-item::before{content:'💡';position:absolute;right:15px;top:15px;font-size:1.5em;opacity:.3}
-.tip-item:hover{background:linear-gradient(135deg,#fff3c4 0%,#e8cdf1 100%);transform:translateX(8px)}
+.tip-item{background:linear-gradient(135deg,#fff8dc 0%,#ffe4b5 100%);border-left:4px solid #ff8c42;position:relative;overflow:hidden;box-shadow:0 4px 15px rgba(255,140,66,0.3);animation:pulse-border 2s ease-in-out infinite}
+.tip-item::before{content:'💡';position:absolute;left:30px;bottom:23px;font-size:2.2em;opacity:.3;animation:float 3s ease-in-out infinite}
+.tip-item::after{content:'👆 클릭하세요!';position:absolute;bottom:28px;right:30px;background:linear-gradient(135deg,#ff8c42,#ff6b6b);color:white;padding:5px 12px;border-radius:25px;font-size:.75em;font-weight:700;animation:bounce-badge 1.5s ease-in-out infinite;box-shadow:0 4px 12px rgba(255,107,107,0.5);z-index:10}
+@keyframes pulse-border{0%,100%{border-left-color:#ff8c42;box-shadow:0 4px 15px rgba(255,140,66,0.3)}50%{border-left-color:#ff6b6b;box-shadow:0 6px 20px rgba(255,107,107,0.5)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes bounce-badge{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.tip-item:hover{background:linear-gradient(135deg,#fff0c8 0%,#ffd89b 100%);transform:translateX(8px) scale(1.02);cursor:pointer;box-shadow:0 8px 25px rgba(255,140,66,0.5)}
 .tip-category{margin-top:10px;text-align:center}
-.tip-category .keyword{background:linear-gradient(135deg,#ff6b6b,#4ecdc4);color:#0f172a;font-weight:600}
-.tip-link-text{font-size:.8em;color:#ff6b6b;margin-top:8px;display:flex;align-items:center;gap:4px;font-weight:600}
+.tip-category .keyword{background:linear-gradient(135deg,#ff8c42,#ff6b6b);color:white;font-weight:700;box-shadow:0 2px 8px rgba(255,107,107,0.3)}
+.tip-link-text{font-size:.85em;color:#ff6b6b;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:6px;font-weight:700;animation:pulse-text 2s ease-in-out infinite}
+@keyframes pulse-text{0%,100%{opacity:1}50%{opacity:.7}}
 .tip-modal{display:none;position:fixed;z-index:99999;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
 .tip-modal-content{background:#fff;margin:2% auto;padding:0;border-radius:20px;width:90%;max-width:900px;max-height:90vh;overflow-y:auto;box-shadow:0 25px 50px rgba(0,0,0,.3);position:relative}
-.tip-modal-header{background:linear-gradient(45deg,#2c3e50,#34495e,#2980b9);color:#fff;padding:25px;border-radius:20px 20px 0 0;display:flex;justify-content:space-between;align-items:center}
+.tip-modal-header{background:linear-gradient(135deg,#d35400,#e67e22,#f39c12);color:#fff;padding:25px;border-radius:20px 20px 0 0;display:flex;justify-content:space-between;align-items:center}
 .tip-modal-header h2{margin:0;font-size:1.4em;font-weight:700}
 .tip-close{font-size:2em;font-weight:bold;cursor:pointer;line-height:1;opacity:.8;transition:opacity .2s;color:#fff}
 .tip-close:hover{opacity:1}
 .tip-modal-body{padding:30px}
 .detailed-tip-content h3{color:#2d3748;margin-bottom:20px;font-size:1.3em}
-.tip-section{margin-bottom:25px;padding:20px;background:#f7fafc;border-radius:12px;border-left:4px solid #667eea}
+.tip-section{margin-bottom:25px;padding:20px;background:#fffaf0;border-radius:12px;border-left:4px solid #ff8c42}
 .tip-section h4{color:#4a5568;margin-bottom:10px;font-size:1.1em}
-.prompt-box{background:#2d3748;color:#e2e8f0;padding:15px;border-radius:8px;font-family:'Courier New',monospace;margin:10px 0;border-left:4px solid #4ecdc4;font-size:.9em;line-height:1.6}
-.real-case{background:linear-gradient(135deg,#fff8e1 0%,#f3e5f5 100%);padding:20px;border-radius:12px;border-left:4px solid #ff6b6b}
+.prompt-box{background:#2d3748;color:#e2e8f0;padding:15px;border-radius:8px;font-family:'Courier New',monospace;margin:10px 0;border-left:4px solid #ff8c42;font-size:.9em;line-height:1.6}
+.real-case{background:linear-gradient(135deg,#fff8dc 0%,#ffe4b5 100%);padding:20px;border-radius:12px;border-left:4px solid #ff6b6b}
 .real-case h4{color:#d53f8c;margin-bottom:10px}
-@media (max-width:768px){body{padding:10px;font-size:14px}.container{border-radius:15px;margin:0 auto}.header{padding:20px 15px;position:relative}.header::before{font-size:1.5em;top:12px;left:15px}.title{font-size:1.4em;margin-bottom:8px}.subtitle{font-size:.9em}.content{padding:20px 15px}.section{margin-bottom:20px}.section-title{font-size:1.3em;margin-bottom:12px;padding-left:10px}.news-item{padding:15px;margin-bottom:12px;border-radius:10px}.news-item:hover{transform:translateX(3px)}.news-title{font-size:.95em;margin-bottom:6px;line-height:1.4}.news-content{font-size:.85em;line-height:1.4}.external-link{font-size:.75em;margin-top:6px}.trend-box{padding:15px;margin:15px 0}.trend-title{font-size:1em;margin-bottom:8px}.keywords{gap:6px;margin-top:10px}.keyword{padding:3px 10px;font-size:.75em}.footer{padding:15px;font-size:.8em}.emoji-divider{font-size:1.2em;margin:15px 0}.tip-modal-content{width:95%;margin:5% auto;max-height:85vh}.tip-modal-header{padding:20px 15px}.tip-modal-header h2{font-size:1.2em}.tip-close{font-size:1.5em}.tip-modal-body{padding:20px 15px}.tip-section{padding:15px;margin-bottom:20px}.prompt-box{padding:12px;font-size:.85em}.real-case{padding:15px}}
+@media (max-width:768px){body{padding:10px;font-size:14px}.container{border-radius:15px;margin:0 auto}.header{padding:20px 15px;position:relative}.header::before{font-size:1.5em;top:12px;left:15px}.title{font-size:1.4em;margin-bottom:8px}.subtitle{font-size:.9em}.content{padding:20px 15px}.section{margin-bottom:20px}.section-title{font-size:1.3em;margin-bottom:12px;padding-left:10px}.news-item{padding:15px;margin-bottom:12px;border-radius:10px}.news-item:hover{transform:translateX(3px)}.news-title{font-size:.95em;margin-bottom:6px;line-height:1.4}.news-content{font-size:.85em;line-height:1.4}.external-link{font-size:.75em;margin-top:6px}.trend-box{padding:15px;margin:15px 0}.trend-title{font-size:.95em;margin-bottom:8px}.keywords{gap:6px;margin-top:10px}.keyword{padding:3px 10px;font-size:.75em}.footer{padding:15px;font-size:.8em}.emoji-divider{font-size:1.2em;margin:15px 0}.tip-item::after{font-size:.68em;padding:4px 10px;right:18px;bottom:24px}.tip-item::before{font-size:1.9em;left:18px;bottom:18px}.tip-modal-content{width:95%;margin:5% auto;max-height:85vh}.tip-modal-header{padding:20px 15px}.tip-modal-header h2{font-size:1.2em}.tip-close{font-size:1.5em}.tip-modal-body{padding:20px 15px}.tip-section{padding:15px;margin-bottom:20px}.prompt-box{padding:12px;font-size:.85em}.real-case{padding:15px}}
 </style>
 </head>
 <body>
 <div class="container">
 <header class="header">
-<div class="date">2025년 10월 14일 (화)</div>
-<h1 class="title">AI.Do 오늘 뭐 이슈(Issue)</h1>
-<div class="subtitle">3분투자 오늘의 핫이슈, 공공사례, 실전팁 챙기기!</div>
+  <div class="date">2025년 10월 15일 (수)</div>
+  <h1 class="title">AI.Do 오늘 뭐 이슈(Issue)</h1>
+  <div class="subtitle">3분투자 오늘의 핫이슈, 공공사례, 실전팁 챙기기!</div>
 </header>
 
 <main class="content">
-<!-- 💡 Tip -->
-<section class="section">
-<h2 class="section-title"><span class="emoji">💡</span> NotebookLM 실전활용팁 (입문자를 위한 쉬운 가이드)</h2>
-<div class="news-item tip-item" onclick="showTipModal()">
-<h3 class="news-title">📚 처음 써보는 NotebookLM: 1쪽 브리핑을 ‘복붙’만으로 만드는 법</h3>
-<p class="news-content">파일을 올리고 아래 프롬프트를 복사해 붙여넣기만 하면 됩니다. <span class="highlight">요약 → 핵심 수치 → Q&amp;A</span> 순서로 깔끔한 1쪽 브리핑이 나옵니다.</p>
-<div class="tip-category"><span class="keyword">왕초보가이드</span></div>
-<div class="tip-link-text">📖 단계별 사용법과 예시 프롬프트 보기 · 클릭!</div>
-</div>
-</section>
+  <!-- 💡 Tip -->
+  <section class="section">
+    <h2 class="section-title"><span class="emoji">💡</span> 노트북LM 실전활용팁 (자치법규 Q&amp;A 시스템, 광진구청 맞춤)</h2>
+    <div class="news-item tip-item" onclick="showTipModal()">
+      <h3 class="news-title">🏛️ 자치법규 Q&amp;A 업무도구 만들기: 조문 인용까지 자동</h3>
+      <p class="news-content">조례·규칙·지침·매뉴얼을 한 노트에 묶고, 질문하면 <span class="highlight">결론·근거 조문/페이지·예외·적용 예시</span>로 답하도록 템플릿을 고정합니다. 신규 담당자도 동일 품질로 답변!</p>
+      <div class="tip-category"><span class="keyword">법규QnA</span></div>
+      <div class="tip-link-text">📖 단계별 사용법과 복붙 프롬프트 보기 · 클릭!</div>
+    </div>
+  </section>
 
-<div class="emoji-divider">🏛️ 🏛️ 🏛️</div>
+  <div class="emoji-divider">🏛️ 🏛️ 🏛️</div>
 
-<!-- 🏛️ Local -->
-<section class="section">
-<h2 class="section-title"><span class="emoji">🏛️</span> 지자체 AI 활용사례 (1분 읽기)</h2>
-<a href="https://www.seoul.co.kr/news/publicnews/seoul_local/news_seoul/2025/10/14/20251014026002" target="_blank" class="news-item">
-<h3 class="news-title">🏙️ 강서구, ‘AI 강서’ 22개 혁신과제 확정…실종자 1분 탐색·산불 감시</h3>
-<p class="news-content">서울 강서구가 <span class='highlight'>AI 특화도시</span> 구현을 위해 22개 혁신과제를 발표했습니다. 실종자 고속 탐색, 산불 감시 등 실사용 중심 행정 서비스가 단계적으로 적용됩니다.</p>
-<div class="external-link">🔗 seoul.co.kr · 클릭해서 자세히 보기</div>
-</a>
-</section>
+  <!-- 🏛️ Local -->
+  <section class="section">
+    <h2 class="section-title"><span class="emoji">🏛️</span> 지자체 AI 활용사례 (1분 읽기)</h2>
+    <a href="https://www.seoul.co.kr/news/publicnews/local_govern/news_local/2025/10/15/20251015024002" target="_blank" class="news-item">
+      <h3 class="news-title">🏙️ 울산, 'AI 수도' 비전…SK 초대형 AI 데이터센터 2027년부터 단계 가동</h3>
+      <p class="news-content">울산시가 ‘AI 수도’ 비전을 내걸고, 비수도권 최대 규모로 알려진 <span class="highlight">SK AI 데이터센터</span>가 2027년 말부터 단계 가동될 예정이라고 밝혔습니다.</p>
+      <div class="external-link">🔗 seoul.co.kr · 클릭해서 자세히 보기</div>
+    </a>
+  </section>
 
-<div class="emoji-divider">🔥 🔥 🔥</div>
+  <div class="emoji-divider">🔥 🔥 🔥</div>
 
-<!-- 🔥 Hot -->
-<section class="section">
-<h2 class="section-title"><span class="emoji">🔥</span> AI 핫이슈 (1분 읽기)</h2>
-<a href="https://www.etnews.com/20251014000006" target="_blank" class="news-item">
-<h3 class="news-title">⚙️ 오픈AI-브로드컴, 맞춤형 AI 반도체·컴퓨팅 동맹 발표</h3>
-<p class="news-content">오픈AI와 브로드컴이 10GW급 차세대 <span class='highlight'>AI 전용 반도체·클러스터</span> 개발 협력을 발표했습니다. 대규모 데이터센터 수요에 대응해 가속기·네트워킹까지 공동 설계를 확대합니다.</p>
-<div class="external-link">🔗 etnews.com · 클릭해서 자세히 보기</div>
-</a>
-</section>
+  <!-- 🔥 Hot -->
+  <section class="section">
+    <h2 class="section-title"><span class="emoji">🔥</span> AI 핫이슈 (1분 읽기)</h2>
+    <a href="https://www.donga.com/news/Economy/article/all/20251015/132561840/2" target="_blank" class="news-item">
+      <h3 class="news-title">⚖️ 공정위, MS ‘코파일럿’ 끼워팔기 의혹 현장조사</h3>
+      <p class="news-content">공정위가 MS의 윈도·오피스에 <span class="highlight">AI 코파일럿</span>을 끼워 팔았는지 점검 중입니다. 법 위반 여부를 검토한다고 밝혔습니다.</p>
+      <div class="external-link">🔗 donga.com · 클릭해서 자세히 보기</div>
+    </a>
+  </section>
 
-<div class="emoji-divider">📊 📊 📊</div>
+  <div class="emoji-divider">📊 📊 📊</div>
 
-<!-- 📊 Trend -->
-<section class="section">
-<div class="trend-box">
-<div class="trend-title">🎯 화요일 AI 트렌드 분석</div>
-<p>지자체는 치안·안전·복지 등 현장 서비스에 AI를 접목하고, 산업계는 AI 반도체·컴퓨팅 동맹으로 인프라를 확장 중입니다. 실무에선 NotebookLM으로 ‘1쪽 브리핑’ 체계를 굳혀보세요.</p>
-<div class="keywords">
-<span class="keyword">#NotebookLM</span>
-<span class="keyword">#문서요약</span>
-<span class="keyword">#AI강서</span>
-<span class="keyword">#실종자탐색</span>
-<span class="keyword">#AI반도체</span>
-<span class="keyword">#OpenAI</span>
-<span class="keyword">#Broadcom</span>
-</div>
-</div>
-</section>
+  <!-- 📊 Trend -->
+  <section class="section">
+    <div class="trend-box">
+      <div class="trend-title">🎯 수요일 AI 트렌드 분석</div>
+      <p>지자체는 데이터센터·산업 연계로 AI 도시 비전을 강화하고, 중앙은 플랫폼 규제 이슈가 부상 중입니다. 실무는 ‘법규 Q&amp;A 노트’로 근거 인용을 표준화하세요.</p>
+      <div class="keywords">
+        <span class="keyword">#노트북LM</span>
+        <span class="keyword">#법규QnA</span>
+        <span class="keyword">#조문인용</span>
+        <span class="keyword">#울산</span>
+        <span class="keyword">#AI데이터센터</span>
+        <span class="keyword">#MS코파일럿</span>
+        <span class="keyword">#공정위</span>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer class="footer">
-<p>🤖 AI.Do | 매일 업데이트 | 궁금한 점은 언제든 댓글로!</p>
-<p style="margin-top:8px;font-size:.8em;">💬 오늘 뉴스 어떠셨나요? 피드백 환영해요!</p>
-<div style="margin-top:15px;text-align:center;">
-<a href="https://myhits.vercel.app"><img src="https://myhits.vercel.app/api/hit/https%3A%2F%2Fchrisryugj.github.io%2FAIDo?color=purple&label=Views&size=medium" alt="Views"></a>
-</div>
-<p style="margin-top:8px;font-size:.75em;opacity:.7;">✨ Made by 류주임</p>
+  <p>🤖 AI.Do | 매일 업데이트 | 궁금한 점은 언제든 댓글로!</p>
+  <p style="margin-top:8px;font-size:.8em;">💬 오늘 뉴스 어떠셨나요? 피드백 환영해요!</p>
+  <div style="margin-top:15px;text-align:center;">
+    <a href="https://myhits.vercel.app"><img src="https://myhits.vercel.app/api/hit/https%3A%2F%2Fchrisryugj.github.io%2FAIDo?color=purple&label=Views&size=medium" alt="Views"></a>
+  </div>
+  <p style="margin-top:8px;font-size:.75em;opacity:.7;">✨ Made by 류주임</p>
 </footer>
 </div>
 
-<!-- Tip Modal (입문자용 확장) -->
+<!-- Tip Modal: 자치법규 Q&A 시스템 (광진구청 맞춤) -->
 <div id="tipModal" class="tip-modal">
-<div class="tip-modal-content">
-<div class="tip-modal-header">
-<h2>🎯 오늘의 실전팁 완전 가이드</h2>
-<span class="tip-close" onclick="hideTipModal()">&times;</span>
-</div>
-<div class="tip-modal-body">
-<div class="detailed-tip-content">
-<h3>📚 NotebookLM 쉬운 시작: 1쪽 브리핑 만들기</h3>
-<p>처음 쓰는 분도 따라만 하세요. 파일(보고서, 회의록)을 올리고, 아래 문장을 복사해 붙여넣으면 1쪽 브리핑이 완성됩니다.</p>
+  <div class="tip-modal-content">
+    <div class="tip-modal-header">
+      <h2>🎯 오늘의 실전팁 완전 가이드</h2>
+      <span class="tip-close" onclick="hideTipModal()">&times;</span>
+    </div>
+    <div class="tip-modal-body">
+      <div class="detailed-tip-content">
+        <h3>🏛️ 노트북LM로 ‘자치법규 Q&amp;A 업무도구’ 만들기</h3>
+        <p>조례·규칙·지침·업무매뉴얼을 한 노트로 묶고, 질문마다 근거 조문/페이지를 자동 표기하는 템플릿을 고정합니다.</p>
 
-<div class="tip-section">
-<h4>1단계 · 자료 올리기(파일 2~3개면 충분)</h4>
-<p>PDF·Word·링크를 ‘노트’로 묶습니다. 파일명은 ‘부서_주제_일자’처럼 정리하면 나중에 찾기 쉬워요.</p>
-<div class="prompt-box">복붙 프롬프트 ①
-“이 자료들의 핵심 결론 5가지를 한 줄씩 써줘. 각 결론 옆에 근거 페이지/문단도 표시해.”</div>
-</div>
+        <div class="tip-section">
+          <h4>1단계 · 노트 생성 &amp; 자료 업로드(핵심 3종부터)</h4>
+          <p>노트 이름 예: <strong>광진구청_도시관리과_법규QnA_25-10-15</strong> / 최신 조례 1개 + 지침 1개 + 매뉴얼 1개부터 시작.</p>
+          <div class="prompt-box">[색인 점검]
+이 노트 문서를 한 줄씩 요약하고, '제목 | 연도 | 주요 조문(3) | 페이지'로 목록화. 이후 답변엔 [문서명 조문/페이지]를 함께 표기.</div>
+        </div>
 
-<div class="tip-section">
-<h4>2단계 · 1쪽 브리핑 자동 생성(서식 고정)</h4>
-<p>아래 서식을 그대로 요청하세요. 초안이 길면 ‘더 짧게’라고 다시 말하면 됩니다.</p>
-<div class="prompt-box">복붙 프롬프트 ②
-“다음 서식으로 1쪽 브리핑을 만들어줘.
- - 요약: 5줄
- - 핵심 수치: 3개(수치·출처 페이지)
- - 쟁점/리스크: 3개
- - 후속조치: 3개(담당·기한 포함)”</div>
-</div>
+        <div class="tip-section">
+          <h4>2단계 · 답변 템플릿 고정(형식 통일)</h4>
+          <p>모든 답변은 결론→근거 조문 인용→예외→적용 예시→검증 체크 순으로 출력.</p>
+          <div class="prompt-box">[답변 템플릿 고정]
+1) 결론(한 줄)
+2) 근거 조문 2~3개: [문서명 조문번호/페이지] + 20~40자 인용
+3) 예외/주의 1~2개
+4) 적용 예시 1개(현장 중심)
+5) 검증 체크 3개</div>
+        </div>
 
-<div class="tip-section">
-<h4>3단계 · 쉬운 검증(Q&amp;A와 출처 확인)</h4>
-<p>숫자·정책 용어는 반드시 출처로 확인합니다. 이해 안 되는 문장은 ‘쉽게’라고 추가 지시하세요.</p>
-<div class="prompt-box">복붙 프롬프트 ③
-“위 브리핑의 각 항목에 대응하는 원문 인용을 한 문장씩 붙여줘. 페이지/문단 표시.”</div>
-</div>
+        <div class="tip-section">
+          <h4>3단계 · 첫 질문 예시(현장 시나리오)</h4>
+          <p>업무 질문을 템플릿으로 테스트해 정확성과 형식을 동시에 점검합니다.</p>
+          <div class="prompt-box">[업무 시나리오]
+질문: 도로점용 허가 연장 시 제출서류와 기한은?
+요청: 위 템플릿으로 답하고, 근거 조문/페이지를 정확히 표시.</div>
+        </div>
 
-<div class="real-case">
-<h4>실전 팁 | 왕초보가 자주 묻는 질문(FAQ)</h4>
-<p>Q. 파일이 많으면 느려요 → 핵심 2~3개만 올리고 시작하세요.
-Q. 용어가 어려워요 → “초등학생도 이해하도록 풀어줘”라고 덧붙이세요.
-Q. 표가 필요해요 → “표 1개로 요약해줘(항목: 항목/값/출처)”라고 요청하세요.</p>
-</div>
+        <div class="real-case">
+          <h4>실전 팁 | 운영·품질 체크</h4>
+          <p>월 1회 최신 문서로 교체 · 개인정보는 업로드 전 마스킹 · 모든 답변에 [문서명 조문/페이지] 강제 표기 · 2줄 문장 유지.</p>
+        </div>
 
-</div>
-</div>
-</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
