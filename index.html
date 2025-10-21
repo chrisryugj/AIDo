@@ -7,20 +7,31 @@
 <meta name="theme-color" content="#ff8c42">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
-<meta property="og:title" content="AI.Do 오늘 뭐 이슈(Issue) (25.10.21.화) - 3분 브리핑: LLM 환각(할루시네이션) 이해와 해결법 · 서울시 AI 안부서비스 · 교통안전 AI 국감">
-<meta property="og:description" content="입문자도 이해되는 LLM 환각(할루시네이션) — 정의·이유·실무형 해결법(복붙 프롬프트 포함). 서울시 AI 안부서비스, 교통안전 AI 국감 이슈.">
+<meta property="og:title" content="AI.Do 오늘 뭐 이슈(Issue) (25.10.22.수) - 3분 브리핑: 신규업무 인수인계(전임자 없어도 돼!) · 대구 FIX 2025 개막 · 버티컬 AI 확산">
+<meta property="og:description" content="모임 복습: 업무관리시스템 문서목록→NotebookLM로 인수인계 자동화. 대구 ‘미래혁신기술박람회(FIX 2025)’ 개막, 버티컬 AI 확산 트렌드.">
 <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.png">
-<title>AI.Do 오늘 뭐 이슈(Issue) (25.10.21.화)</title>
+<title>AI.Do 오늘 뭐 이슈(Issue) (25.10.22.수)</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans-serif;line-height:1.6;background:linear-gradient(135deg,#fff5e6 0%,#ffe4cc 50%,#ffd9b3 100%);min-height:100vh;padding:20px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%;touch-action:manipulation}
-.container{max-width:600px;margin:0 auto;background:rgba(255,255,255,.95);border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,.1);overflow:hidden;backdrop-filter:blur(10px)}
+.container{max-width:600px;margin:0 auto;background:rgba(255,255,255,.95);border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,.1);overflow:hidden;backdrop-filter:blur(10px);position:relative}
+
+/* Header */
 .header{background:linear-gradient(135deg,#ffecd2 0%,#fcb69f 45%,#ff9a76 100%);color:#2d1810;padding:25px;text-align:center;position:relative}
-.header::before{content:'🤖';font-size:2em;position:absolute;top:15px;left:25px;animation:bounce 2s infinite}
+.header::before{content:'🤖';font-size:2em;position:absolute;top:15px;left:25px;animation:bounce 2s infinite;pointer-events:none}
 @keyframes bounce{0%,20%,50%,80%,100%{transform:translateY(0)}40%{transform:translateY(-10px)}60%{transform:translateY(-5px)}}
 .date{font-size:.9em;opacity:.9;margin-bottom:5px}
 .title{font-size:1.8em;font-weight:700;margin-bottom:5px}
 .subtitle{font-size:1em;opacity:.8}
+
+/* Save button (우측 상단) */
+.save-btn{position:absolute;top:12px;right:12px;background:#2d2d2d;color:#fff;border:none;border-radius:999px;padding:10px 14px;font-size:.85em;font-weight:700;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.2);display:inline-flex;align-items:center;gap:8px;transition:transform .15s ease,opacity .2s,box-shadow .2s;z-index:5000}
+.save-btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(0,0,0,.25)}
+.save-btn:active{transform:translateY(0)}
+.save-btn:focus-visible{outline:2px solid #ff8c42;outline-offset:2px}
+.save-btn .icon{font-size:1.1em}
+
+/* Content */
 .content{padding:30px}
 .section{margin-bottom:25px}
 .section-title{display:flex;align-items:center;font-size:1.2em;font-weight:600;color:#2d1810;margin-bottom:15px;border-left:4px solid #ff8c42;padding-left:12px}
@@ -31,23 +42,31 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto 
 .news-title{font-weight:600;color:#2c3e50;margin-bottom:8px;font-size:1em}
 .news-content{color:#555;font-size:.9em;line-height:1.5}
 .highlight{background:linear-gradient(120deg,#ffe4b5 0%,#ffd89b 100%);padding:2px 6px;border-radius:4px;font-weight:500}
+
+/* Trend */
 .trend-box{background:linear-gradient(135deg,#d35400 0%,#e67e22 100%);color:#fff;padding:20px;border-radius:12px;text-align:center;margin:20px 0}
 .trend-title{font-size:1.1em;font-weight:600;margin-bottom:10px}
 .keywords{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:12px}
 .keyword{background:rgba(255,255,255,.2);padding:4px 12px;border-radius:20px;font-size:.8em;backdrop-filter:blur(10px)}
+
+/* Footer */
 .footer{background:#f8f9fa;padding:20px;text-align:center;color:#666;font-size:.85em}
 .emoji-divider{text-align:center;font-size:1.5em;margin:20px 0}
+
+/* Tip */
 .tip-item{background:linear-gradient(135deg,#fff8dc 0%,#ffe4b5 100%);border-left:4px solid #ff8c42;position:relative;overflow:hidden;box-shadow:0 4px 15px rgba(255,140,66,0.3);animation:pulse-border 2s ease-in-out infinite}
-.tip-item::before{content:'💡';position:absolute;left:30px;bottom:23px;font-size:2.2em;opacity:.3;animation:float 3s ease-in-out infinite}
-.tip-item::after{content:'👆 클릭하세요!';position:absolute;bottom:28px;right:30px;background:linear-gradient(135deg,#ff8c42,#ff6b6b);color:white;padding:5px 12px;border-radius:25px;font-size:.75em;font-weight:700;animation:bounce-badge 1.5s ease-in-out infinite;box-shadow:0 4px 12px rgba(255,107,107,0.5);z-index:10}
+.tip-item::before{content:'💡';position:absolute;left:30px;bottom:23px;font-size:2.2em;opacity:.3;animation:float 3s ease-in-out infinite;pointer-events:none}
+.tip-item::after{content:'👆 클릭하세요!';position:absolute;bottom:28px;right:30px;background:linear-gradient(135deg,#ff8c42,#ff6b6b);color:white;padding:5px 12px;border-radius:25px;font-size:.75em;font-weight:700;animation:bounce-badge 1.5s ease-in-out infinite;box-shadow:0 4px 12px rgba(255,107,107,0.5);z-index:10;pointer-events:none}
 @keyframes pulse-border{0%,100%{border-left-color:#ff8c42;box-shadow:0 4px 15px rgba(255,140,66,0.3)}50%{border-left-color:#ff6b6b;box-shadow:0 6px 20px rgba(255,107,107,0.5)}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 @keyframes bounce-badge{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
-.tip-item:hover{background:linear-gradient(135deg,#fff0c8 0%,#ffd89b 100%);transform:translateX(8px) scale(1.02);cursor:pointer;box-shadow:0 8px 25px rgba(255,140,66,0.5)}
+.tip-item:hover{transform:translateX(8px) scale(1.02);cursor:pointer;box-shadow:0 8px 25px rgba(255,140,66,0.5)}
 .tip-category{margin-top:10px;text-align:center}
 .tip-category .keyword{background:linear-gradient(135deg,#ff8c42,#ff6b6b);color:white;font-weight:700;box-shadow:0 2px 8px rgba(255,107,107,0.3)}
 .tip-link-text{font-size:.85em;color:#ff6b6b;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:6px;font-weight:700;animation:pulse-text 2s ease-in-out infinite}
 @keyframes pulse-text{0%,100%{opacity:1}50%{opacity:.7}}
+
+/* Modal */
 .tip-modal{display:none;position:fixed;z-index:99999;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
 .tip-modal-content{background:#fff;margin:2% auto;padding:0;border-radius:20px;width:90%;max-width:900px;max-height:90vh;overflow-y:auto;box-shadow:0 25px 50px rgba(0,0,0,.3);position:relative}
 .tip-modal-header{background:linear-gradient(135deg,#d35400,#e67e22,#f39c12);color:#fff;padding:25px;border-radius:20px 20px 0 0;display:flex;justify-content:space-between;align-items:center}
@@ -61,82 +80,119 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto 
 .prompt-box{background:#2d3748;color:#e2e8f0;padding:15px;border-radius:8px;font-family:'Courier New',monospace;margin:10px 0;border-left:4px solid #ff8c42;font-size:.9em;line-height:1.6}
 .real-case{background:linear-gradient(135deg,#fff8dc 0%,#ffe4b5 100%);padding:20px;border-radius:12px;border-left:4px solid #ff6b6b}
 .real-case h4{color:#d53f8c;margin-bottom:10px}
-@media (max-width:768px){body{padding:10px;font-size:14px}.container{border-radius:15px;margin:0 auto}.header{padding:20px 15px;position:relative}.header::before{font-size:1.5em;top:12px;left:15px}.title{font-size:1.4em;margin-bottom:8px}.subtitle{font-size:.9em}.content{padding:20px 15px}.section{margin-bottom:20px}.section-title{font-size:1.3em;margin-bottom:12px;padding-left:10px}.news-item{padding:15px;margin-bottom:12px;border-radius:10px}.news-item:hover{transform:translateX(3px)}.news-title{font-size:.95em;margin-bottom:6px;line-height:1.4}.news-content{font-size:.85em;line-height:1.4}.external-link{font-size:.75em;margin-top:6px}.trend-box{padding:15px;margin:15px 0}.trend-title{font-size:.95em;margin-bottom:8px}.keywords{gap:6px;margin-top:10px}.keyword{padding:3px 10px;font-size:.75em}.footer{padding:15px;font-size:.8em}.emoji-divider{font-size:1.2em;margin:15px 0}.tip-item::after{font-size:.68em;padding:4px 10px;right:18px;bottom:24px}.tip-item::before{font-size:1.9em;left:18px;bottom:18px}.tip-modal-content{width:95%;margin:5% auto;max-height:85vh}.tip-modal-header{padding:20px 15px}.tip-modal-header h2{font-size:1.2em}.tip-close{font-size:1.5em}.tip-modal-body{padding:20px 15px}.tip-section{padding:15px;margin-bottom:20px}.prompt-box{padding:12px;font-size:.85em}.real-case{padding:15px}}
+
+/* Mobile */
+@media (max-width:768px){
+  body{padding:10px;font-size:14px}
+  .container{border-radius:15px;margin:0 auto}
+  .header{padding:20px 15px;position:relative}
+  .header::before{font-size:1.5em;top:12px;left:15px}
+  .title{font-size:1.4em;margin-bottom:8px}
+  .subtitle{font-size:.9em}
+  .save-btn{top:10px;right:10px;padding:9px 12px;font-size:.8em}
+  .content{padding:20px 15px}
+  .section{margin-bottom:20px}
+  .section-title{font-size:1.3em;margin-bottom:12px;padding-left:10px}
+  .news-item{padding:15px;margin-bottom:12px;border-radius:10px}
+  .news-item:hover{transform:translateX(3px)}
+  .news-title{font-size:.95em;margin-bottom:6px;line-height:1.4}
+  .news-content{font-size:.85em;line-height:1.4}
+  .external-link{font-size:.75em;margin-top:6px}
+  .trend-box{padding:15px;margin:15px 0}
+  .trend-title{font-size:.95em;margin-bottom:8px}
+  .keywords{gap:6px;margin-top:10px}
+  .keyword{padding:3px 10px;font-size:.75em}
+  .footer{padding:15px;font-size:.8em}
+  .emoji-divider{font-size:1.2em;margin:15px 0}
+  .tip-item::after{font-size:.68em;padding:4px 10px;right:18px;bottom:24px}
+  .tip-item::before{font-size:1.9em;left:18px;bottom:18px}
+  .tip-modal-content{width:95%;margin:5% auto;max-height:85vh}
+  .tip-modal-header{padding:20px 15px}
+  .tip-modal-header h2{font-size:1.2em}
+  .tip-close{font-size:1.5em}
+  .tip-modal-body{padding:20px 15px}
+  .tip-section{padding:15px;margin-bottom:20px}
+  .prompt-box{padding:12px;font-size:.85em}
+  .real-case{padding:15px}
+}
 </style>
 </head>
 <body>
 <div class="container">
-<header class="header">
-  <div class="date">2025년 10월 21일 (화)</div>
-  <h1 class="title">AI.Do 오늘 뭐 이슈(Issue)</h1>
-  <div class="subtitle">3분투자 오늘의 핫이슈, 공공사례, 실전팁 챙기기!</div>
-</header>
+  <header class="header">
+    <button class="save-btn" id="saveBtn" onclick="saveAsHTML()" aria-label="뉴스 저장하기" title="HTML로 저장">
+      <span class="icon">⬇️</span> 뉴스 저장하기
+    </button>
+    <div class="date">2025년 10월 22일 (수)</div>
+    <h1 class="title">AI.Do 오늘 뭐 이슈(Issue)</h1>
+    <div class="subtitle">3분투자 오늘의 핫이슈, 공공사례, 실전팁 챙기기!</div>
+  </header>
 
-<main class="content">
-  <!-- 💡 Tip -->
-  <section class="section">
-    <h2 class="section-title"><span class="emoji">💡</span> LLM 공통: 환각(할루시네이션) — 정의 · 이유 · 해결방법</h2>
-    <div class="news-item tip-item" onclick="showTipModal()">
-      <h3 class="news-title">🧠 그럴듯하지만 틀린 답, 왜 생기고 어떻게 막을까?</h3>
-      <p class="news-content">LLM 환각은 <span class="highlight">근거 없이 추측한 정보</span>를 답으로 내는 현상입니다. 아래 가이드를 적용하면 실무에서 환각을 체계적으로 줄일 수 있어요.</p>
-      <div class="tip-category"><span class="keyword">정의</span><span class="keyword">원인</span><span class="keyword">해결</span></div>
-      <div class="tip-link-text">📖 ‘정의→이유→해결’ 자세히 보기(복붙 프롬프트 포함) · 클릭!</div>
-    </div>
-  </section>
-
-  <div class="emoji-divider">🏛️ 🏛️ 🏛️</div>
-
-  <!-- 🏛️ Local -->
-  <section class="section">
-    <h2 class="section-title"><span class="emoji">🏛️</span> 지자체 AI 활용사례 (1분 읽기)</h2>
-    <a href="https://www.fnnews.com/news/202510201140441809" target="_blank" class="news-item">
-      <h3 class="news-title">📞 서울시 ‘AI 안부확인’ 양방향으로 업그레이드…필요시 시민이 먼저 전화</h3>
-      <p class="news-content">대상자에게 AI가 전화하던 기존 방식에서, 시민이 <span class="highlight">AI에 직접 연락·요청</span>할 수 있도록 개선. 고립·돌봄 이슈 대응력을 높입니다.</p>
-      <div class="external-link">🔗 fnnews.com · 클릭해서 자세히 보기</div>
-    </a>
-  </section>
-
-  <div class="emoji-divider">🔥 🔥 🔥</div>
-
-  <!-- 🔥 Hot -->
-  <section class="section">
-    <h2 class="section-title"><span class="emoji">🔥</span> AI 핫이슈 (1분 읽기)</h2>
-    <a href="https://www.etnews.com/20251016000255" target="_blank" class="news-item">
-      <h3 class="news-title">🚦 국감 포인트: 도로공사·TS, AI 기반 ‘사전 예방형’ 교통안전 강화</h3>
-      <p class="news-content">AI <span class="highlight">법규 위반 자동신고</span>, 자율주행 시범구간 확대 등 디지털 안전체계 방향이 제시됐습니다. 지방 도로·CCTV 연계 활용도 주목.</p>
-      <div class="external-link">🔗 etnews.com · 클릭해서 자세히 보기</div>
-    </a>
-  </section>
-
-  <div class="emoji-divider">📊 📊 📊</div>
-
-  <!-- 📊 Trend -->
-  <section class="section">
-    <div class="trend-box">
-      <div class="trend-title">🎯 화요일 AI 트렌드 분석</div>
-      <p>지방행정은 <strong>돌봄·안전</strong> 등 현장 서비스 접점에 AI를 확대하고, 중앙은 <strong>사전 예방형</strong> 안전 체계로 전환 중. 실무자는 오늘부터 <strong>출처 강제·검증 프롬프트</strong>를 워크플로우에 고정하세요.</p>
-      <div class="keywords">
-        <span class="keyword">#LLM</span>
-        <span class="keyword">#AI환각</span>
-        <span class="keyword">#출처강제</span>
-        <span class="keyword">#검증템플릿</span>
-        <span class="keyword">#지자체AI</span>
+  <main class="content">
+    <!-- 💡 Tip (어제 모임 복습: 인수인계) -->
+    <section class="section">
+      <h2 class="section-title"><span class="emoji">💡</span> 신규업무 인수인계 쉽게하자(전임자 없어도 돼!) — 모임 복습</h2>
+      <div class="news-item tip-item" onclick="showTipModal()">
+        <h3 class="news-title">📦 문서목록 1개로 ‘업무 맥락’ 복구 → NotebookLM로 인수인계 자동화</h3>
+        <p class="news-content">업무관리시스템 ‘생산문서’ 목록만 있어도 됩니다. <span class="highlight">목록→질문 템플릿</span> 순서로, 신규 담당자의 첫 주 업무를 뽑아내세요.</p>
+        <div class="tip-category"><span class="keyword">인수인계</span><span class="keyword">문서목록</span><span class="keyword">NotebookLM</span></div>
+        <div class="tip-link-text">📖 단계별 사용법 & 복붙 프롬프트 보기 · 클릭!</div>
       </div>
-    </div>
-  </section>
-</main>
+    </section>
 
-<footer class="footer">
-  <p>🤖 AI.Do | 매일 업데이트 | 궁금한 점은 언제든 댓글로!</p>
-  <p style="margin-top:8px;font-size:.8em;">💬 오늘 뉴스 어떠셨나요? 피드백 환영해요!</p>
-  <div style="margin-top:15px;text-align:center;">
-    <img src="https://hitscounter.dev/api/hit?url=https%3A%2F%2Fchrisryugj.github.io%2FAIDo%2F&label=AI-Do&icon=book-half&color=%23cc9a06&message=&style=flat&tz=UTC">
-  </div>
-  <p style="margin-top:8px;font-size:.75em;opacity:.7;">✨ Made by 류주임</p>
-</footer>
+    <div class="emoji-divider">🏛️ 🏛️ 🏛️</div>
+
+    <!-- 🏛️ Local (새 소식) -->
+    <section class="section">
+      <h2 class="section-title"><span class="emoji">🏛️</span> 지자체 AI 활용사례 (1분 읽기)</h2>
+      <a href="https://it.donga.com/107726/" target="_blank" class="news-item">
+        <h3 class="news-title">🏙️ 대구 ‘미래혁신기술박람회(FIX 2025)’ 오늘 개막…지역 AX·AI 전환 드라이브</h3>
+        <p class="news-content">10월 22~25일 대구에서 열리는 <span class="highlight">FIX 2025</span>가 지역 주도의 AI·자율주행·로봇 혁신을 본격화합니다. 정부의 지역거점 <span class="highlight">AI 전환(AX)</span> 전략과 연계한 산업 생태계 확장이 포인트.</p>
+        <div class="external-link">🔗 it.donga.com · 클릭해서 자세히 보기</div>
+      </a>
+    </section>
+
+    <div class="emoji-divider">🔥 🔥 🔥</div>
+
+    <!-- 🔥 Hot (새 소식) -->
+    <section class="section">
+      <h2 class="section-title"><span class="emoji">🔥</span> AI 핫이슈 (1분 읽기)</h2>
+      <a href="https://biz.chosun.com/it-science/ict/2025/10/22/JAJJL6RBBBABXIEI7O2FL25CPE/" target="_blank" class="news-item">
+        <h3 class="news-title">📈 빅테크 독식 속 ‘버티컬 AI’ 확산…의료·법률·학술 특화로 승부</h3>
+        <p class="news-content">오늘 보도에 따르면 기업들이 범용 대신 <span class="highlight">특화(Vertical) AI</span>로 이동 중입니다. 공공은 민원·복지·치안 등 도메인 맞춤형 적용으로 효율을 노려볼 타이밍.</p>
+        <div class="external-link">🔗 biz.chosun.com · 클릭해서 자세히 보기</div>
+      </a>
+    </section>
+
+    <div class="emoji-divider">📊 📊 📊</div>
+
+    <!-- 📊 Trend -->
+    <section class="section">
+      <div class="trend-box">
+        <div class="trend-title">🎯 수요일 AI 트렌드 분석</div>
+        <p>지방은 <strong>지역 축제/박람회</strong>를 기점으로 AI 전환(AX)을 가속하고, 산업은 <strong>버티컬 AI</strong>로 현실 효용을 강화하는 흐름. 인수인계 자동화와 같이 <strong>업무 단위</strong> 성과부터 쌓는 전략이 효과적입니다.</p>
+        <div class="keywords">
+          <span class="keyword">#FIX2025</span>
+          <span class="keyword">#지역AX</span>
+          <span class="keyword">#버티컬AI</span>
+          <span class="keyword">#지자체혁신</span>
+          <span class="keyword">#NotebookLM</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>🤖 AI.Do | 매일 업데이트 | 궁금한 점은 언제든 댓글로!</p>
+    <p style="margin-top:8px;font-size:.8em;">💬 오늘 뉴스 어떠셨나요? 피드백 환영해요!</p>
+    <div style="margin-top:15px;text-align:center;">
+      <a href="https://myhits.vercel.app"><img src="https://myhits.vercel.app/api/hit/https%3A%2F%2Fchrisryugj.github.io%2FAIDo?color=purple&label=Views&size=medium" alt="Views"></a>
+    </div>
+    <p style="margin-top:8px;font-size:.75em;opacity:.7;">✨ Made by 류주임</p>
+  </footer>
 </div>
 
-<!-- Tip Modal (LLM 환각: 정의·이유·해결방법) -->
+<!-- Tip Modal (인수인계 복습 가이드) -->
 <div id="tipModal" class="tip-modal">
   <div class="tip-modal-content">
     <div class="tip-modal-header">
@@ -145,65 +201,84 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto 
     </div>
     <div class="tip-modal-body">
       <div class="detailed-tip-content">
-        <h3>🧠 LLM 환각(할루시네이션) — 한눈에 이해하기</h3>
-        <p><strong>정의:</strong> LLM이 실제로 존재하지 않거나 근거가 부족한 내용을 그럴듯하게 생성하는 현상.<br>
-           <strong>영향:</strong> 공공문서 오류, 잘못된 지표·조문 인용, 민원 대응 품질 저하.</p>
+        <h3>📦 신규업무 인수인계 — 전임자 없어도 ‘문서목록+NotebookLM’이면 충분</h3>
+        <p>어제 모임에서 다룬 내용을 한 번에 복습합니다. 아래 순서를 그대로 따라 해보세요.</p>
 
         <div class="tip-section">
-          <h4>1) 왜 생기나? (대표 원인 5가지)</h4>
-          <p>① <strong>확률적 생성</strong> 특성 — 가장 그럴듯한 다음 단어를 예측할 뿐, 사실 검증은 별도 단계임<br>
-             ② <strong>부족한/편향된 소스</strong> — 근거가 빈약하거나 오래됨<br>
-             ③ <strong>모호한 요청</strong> — 출처·형식·제한조건을 지정하지 않음<br>
-             ④ <strong>지식 최신성 결함</strong> — 최신 정책/통계를 인지 못함<br>
-             ⑤ <strong>RAG 미사용</strong> — 외부 문서/DB를 조회하지 않고 모델 기억에만 의존</p>
+          <h4>1단계 · 자료준비(업무관리시스템)</h4>
+          <p>문서함 → <strong>상세검색</strong> 설정:
+            <br>• <strong>날짜</strong>: 최소 1년 이상
+            <br>• <strong>기안자</strong>: 전임자 이름
+            <br>• <strong>문서종류</strong>: <em>생산문서</em> 체크
+            <br>검색결과 → <strong>엑셀로 ‘기안문서목록’</strong> 내보내기</p>
         </div>
 
         <div class="tip-section">
-          <h4>2) 어떻게 막나? (실무형 해결 7가지)</h4>
-          <p>① <strong>출처 강제</strong>: 답변마다 기관·문서·연도·페이지/표번호·20~40자 인용을 요구<br>
-             ② <strong>최신성 필터</strong>: 검색·자료 수집 시 연도 범위(YYYY..YYYY) 지정<br>
-             ③ <strong>교차검증</strong>: 정부/국제기구/학술 등 2곳 이상 일치 확인<br>
-             ④ <strong>RAG 연결</strong>: NotebookLM/검색으로 외부 근거를 붙여 답하도록 설계<br>
-             ⑤ <strong>정확어구 검색</strong>: "..." 인용, -제외어, filetype:pdf/hwp/docx로 잡음 제거<br>
-             ⑥ <strong>구조화 출력</strong>: 결론·근거·불확실성·추가자료 항목을 고정 템플릿으로 요구<br>
-             ⑦ <strong>거부 규칙</strong>: 근거<em> 2개 미만</em>이면 “확인 불가”로 답하고 추가 자료 요청</p>
-          <div class="prompt-box">[복붙: 환각 방지 템플릿]
-질문: {업무 상황/요청}
-출력 형식:
-1) 결론(한 줄)
-2) 근거 2~3개: [기관, 문서명, 연도, p./표] + 20~40자 원문 인용
-3) 최신성(연도) & 불확실성(있으면 명시)
-4) 수치 검증: 원문 표/그림 번호
-5) 추가로 필요한 자료
-규칙: 근거가 2개 미만이면 "확인 불가"로 답하고 필요한 자료를 먼저 목록화.</div>
+          <h4>2단계 · 엑셀 전처리(복붙 준비)</h4>
+          <p>엑셀에서 <strong>날짜</strong>, <strong>제목</strong> 열만 선택 → 복사(Ctrl/Cmd+C)</p>
+          <div class="prompt-box">Tip) 제목에 [사업명][정산][보고] 같은 키워드가 섞여 있으면, NotebookLM이 흐름 파악을 더 잘합니다.</div>
         </div>
 
         <div class="tip-section">
-          <h4>3) 실전 예시 — “침수대책 최신 지표와 국제 비교”</h4>
-          <p>검색식: <code>site:.go.kr "침수" 대책 filetype:pdf 2023..2025</code> + <code>site:oecd.org "flood risk" filetype:pdf 2022..2025</code><br>
-             → 두 기관 이상 근거 확보 → 템플릿 적용 → 인용/표번호 확인 → 상충 시 최신판/상위 규정 우선.</p>
+          <h4>3단계 · NotebookLM에 소스로 추가</h4>
+          <p>새 노트 생성 → 복사한 목록을 <strong>텍스트 파일(또는 구글문서)</strong>로 붙여 저장 후 업로드.</p>
+          <div class="prompt-box">[노트 설명(복붙)]
+이 노트는 ‘업무관리시스템 생산문서 목록(날짜·제목)’을 기반으로 신규 담당자 인수인계를 자동화합니다. 모든 요약에는 근거로 문서 제목과 날짜를 함께 표기해 주세요.</div>
         </div>
 
         <div class="tip-section">
-          <h4>4) 체크리스트 — 제출 전 30초 점검</h4>
-          <p>□ 모든 문장에 <strong>출처/페이지</strong> 있는가 □ 수치엔 <strong>표/그림 번호</strong>가 붙었는가 □ 최신 연도 확인했는가 □ 모호하면 “확인 불가” 처리했는가</p>
+          <h4>4단계 · 필요한 질문 던지기(예시 그대로 복붙)</h4>
+          <div class="prompt-box">① 이 업무를 처음 맡아서 뭘 해야 할지 전혀 감이 안 와. <strong>어떤 업무를 해야 하는지 시기별</strong>로 요약 정리해줘.
+② 이 목록을 기반으로 <strong>신규 담당자가 첫 주에 반드시 알아야 할 업무 3가지</strong>를 정리해줘.
+③ 이 문서목록을 기준으로, <strong>최근 3개월간 주요 사업이나 예산 집행 관련 업무</strong>를 5줄로 요약해줘.
+④ 올려준 자료들을 바탕으로 이 업무에 적용할 수 있는 <strong>FAQ 20개</strong> 만들어줘.</div>
+          <p style="margin-top:6px">필요하면 “표로 보여줘(항목: 날짜/제목/요지/다음액션)”라고 추가하세요.</p>
+        </div>
+
+        <div class="tip-section">
+          <h4>5단계 · 결과 다듬기(업무표준안으로 저장)</h4>
+          <p>산출물: <em>시기별 업무 로드맵</em>, <em>첫 주 체크리스트</em>, <em>최근 3개월 브리핑</em>, <em>FAQ 20</em>.  
+             부서 드라이브에 “업무_인수인계_표준안(YYYYMMDD)”로 저장해 두면 다음 인수인계에 재활용 가능합니다.</p>
         </div>
 
         <div class="real-case">
           <h4>한 줄 요약</h4>
-          <p><strong>출처 강제 + 교차검증 + 거부 규칙</strong>만 붙여도 실무 환각 리스크의 대부분을 줄일 수 있습니다.</p>
+          <p><strong>생산문서 목록</strong>만 있어도 업무 흐름과 핵심 과제를 재구성할 수 있습니다. “목록→질문템플릿→체크리스트” 순서를 표준으로 만드세요.</p>
         </div>
-
       </div>
     </div>
   </div>
 </div>
 
 <script>
+/* Tip Modal */
 function showTipModal(){const m=document.getElementById('tipModal');m.style.display='block';document.body.style.overflow='hidden'}
 function hideTipModal(){const m=document.getElementById('tipModal');m.style.display='none';document.body.style.overflow='auto'}
 window.onclick=function(e){const m=document.getElementById('tipModal');if(e.target===m){hideTipModal()}}
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){hideTipModal()}});
+
+/* Save as HTML (AI-Do_오늘뭐이슈(issue)_YYMMDD.html) */
+function saveAsHTML(){
+  const now = new Date();
+  const kst = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Seoul' }));
+  const yy = String(kst.getFullYear()).slice(2);
+  const mm = String(kst.getMonth()+1).padStart(2,'0');
+  const dd = String(kst.getDate()).padStart(2,'0');
+  const yymmdd = yy + mm + dd;
+  const filename = `AI-Do_오늘뭐이슈(issue)_${yymmdd}.html`;
+
+  const doctype = new XMLSerializer().serializeToString(document.doctype);
+  const html = document.documentElement.outerHTML;
+  const full = `${doctype}\n${html}`;
+
+  const blob = new Blob([full], {type: 'text/html;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();}, 0);
+}
 </script>
 </body>
 </html>
