@@ -7,10 +7,10 @@
 <meta name="theme-color" content="#ff8c42">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
-<meta property="og:title" content="AI.Do 오늘 뭐 이슈(Issue) (25.10.22.수) - 3분 브리핑: 신규업무 인수인계(전임자 없어도 돼!) · 대구 FIX 2025 개막 · 버티컬 AI 확산">
-<meta property="og:description" content="모임 복습: 업무관리시스템 문서목록→NotebookLM로 인수인계 자동화. 대구 ‘미래혁신기술박람회(FIX 2025)’ 개막, 버티컬 AI 확산 트렌드.">
+<meta property="og:title" content="AI.Do 오늘 뭐 이슈(Issue) (25.10.23.목) - 3분 브리핑: GPT 민원답변 RAG · 디지털 지역혁신 포럼 · 생성형AI 보안 컨퍼런스">
+<meta property="og:description" content="공무원 실무: GPT로 ‘민원 표준답변’ RAG 1시간 구축(단계/프롬프트). KR디지털지역혁신 포럼(10/23), 생성형 AI 보안·비대면본인확인 컨퍼런스 소식.">
 <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.png">
-<title>AI.Do 오늘 뭐 이슈(Issue) (25.10.22.수)</title>
+<title>AI.Do 오늘 뭐 이슈(Issue) (25.10.23.목)</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans-serif;line-height:1.6;background:linear-gradient(135deg,#fff5e6 0%,#ffe4cc 50%,#ffd9b3 100%);min-height:100vh;padding:20px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%;touch-action:manipulation}
@@ -24,7 +24,7 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto 
 .title{font-size:1.8em;font-weight:700;margin-bottom:5px}
 .subtitle{font-size:1em;opacity:.8}
 
-/* Save button (우측 상단) */
+/* Save button */
 .save-btn{position:absolute;top:12px;right:12px;background:#2d2d2d;color:#fff;border:none;border-radius:999px;padding:10px 14px;font-size:.85em;font-weight:700;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.2);display:inline-flex;align-items:center;gap:8px;transition:transform .15s ease,opacity .2s,box-shadow .2s;z-index:5000}
 .save-btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(0,0,0,.25)}
 .save-btn:active{transform:translateY(0)}
@@ -53,7 +53,7 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto 
 .footer{background:#f8f9fa;padding:20px;text-align:center;color:#666;font-size:.85em}
 .emoji-divider{text-align:center;font-size:1.5em;margin:20px 0}
 
-/* Tip */
+/* Tip card */
 .tip-item{background:linear-gradient(135deg,#fff8dc 0%,#ffe4b5 100%);border-left:4px solid #ff8c42;position:relative;overflow:hidden;box-shadow:0 4px 15px rgba(255,140,66,0.3);animation:pulse-border 2s ease-in-out infinite}
 .tip-item::before{content:'💡';position:absolute;left:30px;bottom:23px;font-size:2.2em;opacity:.3;animation:float 3s ease-in-out infinite;pointer-events:none}
 .tip-item::after{content:'👆 클릭하세요!';position:absolute;bottom:28px;right:30px;background:linear-gradient(135deg,#ff8c42,#ff6b6b);color:white;padding:5px 12px;border-radius:25px;font-size:.75em;font-weight:700;animation:bounce-badge 1.5s ease-in-out infinite;box-shadow:0 4px 12px rgba(255,107,107,0.5);z-index:10;pointer-events:none}
@@ -123,44 +123,44 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto 
     <button class="save-btn" id="saveBtn" onclick="saveAsHTML()" aria-label="뉴스 저장하기" title="HTML로 저장">
       <span class="icon">⬇️</span> 뉴스 저장하기
     </button>
-    <div class="date">2025년 10월 22일 (수)</div>
+    <div class="date">2025년 10월 23일 (목)</div>
     <h1 class="title">AI.Do 오늘 뭐 이슈(Issue)</h1>
     <div class="subtitle">3분투자 오늘의 핫이슈, 공공사례, 실전팁 챙기기!</div>
   </header>
 
   <main class="content">
-    <!-- 💡 Tip (어제 모임 복습: 인수인계) -->
+    <!-- 💡 Tip -->
     <section class="section">
-      <h2 class="section-title"><span class="emoji">💡</span> 신규업무 인수인계 쉽게하자(전임자 없어도 돼!) — 모임 복습</h2>
+      <h2 class="section-title"><span class="emoji">💡</span> 공무원용 GPT 실전팁 — 1시간 만에 ‘민원 표준답변 RAG’ 만들기</h2>
       <div class="news-item tip-item" onclick="showTipModal()">
-        <h3 class="news-title">📦 문서목록 1개로 ‘업무 맥락’ 복구 → NotebookLM로 인수인계 자동화</h3>
-        <p class="news-content">업무관리시스템 ‘생산문서’ 목록만 있어도 됩니다. <span class="highlight">목록→질문 템플릿</span> 순서로, 신규 담당자의 첫 주 업무를 뽑아내세요.</p>
-        <div class="tip-category"><span class="keyword">인수인계</span><span class="keyword">문서목록</span><span class="keyword">NotebookLM</span></div>
-        <div class="tip-link-text">📖 단계별 사용법 & 복붙 프롬프트 보기 · 클릭!</div>
+        <h3 class="news-title">🧾 규정·선례 기반으로 ‘항상 근거가 붙는’ 답변 자동화</h3>
+        <p class="news-content">부서 <span class="highlight">민원 표준답변</span>을 GPT로 가속화합니다. <span class="highlight">근거 문장+출처</span>가 자동 표기되도록 소스와 프롬프트를 미리 고정하세요.</p>
+        <div class="tip-category"><span class="keyword">RAG</span><span class="keyword">민원답변</span><span class="keyword">공공GPT</span></div>
+        <div class="tip-link-text">📖 단계별 구축법 & 복붙 프롬프트 보기 · 클릭!</div>
       </div>
     </section>
 
     <div class="emoji-divider">🏛️ 🏛️ 🏛️</div>
 
-    <!-- 🏛️ Local (새 소식) -->
+    <!-- 🏛️ Local -->
     <section class="section">
       <h2 class="section-title"><span class="emoji">🏛️</span> 지자체 AI 활용사례 (1분 읽기)</h2>
-      <a href="https://it.donga.com/107726/" target="_blank" class="news-item">
-        <h3 class="news-title">🏙️ 대구 ‘미래혁신기술박람회(FIX 2025)’ 오늘 개막…지역 AX·AI 전환 드라이브</h3>
-        <p class="news-content">10월 22~25일 대구에서 열리는 <span class="highlight">FIX 2025</span>가 지역 주도의 AI·자율주행·로봇 혁신을 본격화합니다. 정부의 지역거점 <span class="highlight">AI 전환(AX)</span> 전략과 연계한 산업 생태계 확장이 포인트.</p>
-        <div class="external-link">🔗 it.donga.com · 클릭해서 자세히 보기</div>
+      <a href="https://news.nate.com/view/20251021n25062" target="_blank" class="news-item">
+        <h3 class="news-title">🌐 ‘디지털 지역혁신 글로벌 포럼’ 오늘(10/23) 개최</h3>
+        <p class="news-content">한국지역정보개발원 주관 포럼이 서울에서 열립니다. 지자체 <span class="highlight">데이터·AI 활용</span> 전략과 해외 동향을 공유합니다.</p>
+        <div class="external-link">🔗 nate.com · 클릭해서 자세히 보기</div>
       </a>
     </section>
 
     <div class="emoji-divider">🔥 🔥 🔥</div>
 
-    <!-- 🔥 Hot (새 소식) -->
+    <!-- 🔥 Hot -->
     <section class="section">
       <h2 class="section-title"><span class="emoji">🔥</span> AI 핫이슈 (1분 읽기)</h2>
-      <a href="https://biz.chosun.com/it-science/ict/2025/10/22/JAJJL6RBBBABXIEI7O2FL25CPE/" target="_blank" class="news-item">
-        <h3 class="news-title">📈 빅테크 독식 속 ‘버티컬 AI’ 확산…의료·법률·학술 특화로 승부</h3>
-        <p class="news-content">오늘 보도에 따르면 기업들이 범용 대신 <span class="highlight">특화(Vertical) AI</span>로 이동 중입니다. 공공은 민원·복지·치안 등 도메인 맞춤형 적용으로 효율을 노려볼 타이밍.</p>
-        <div class="external-link">🔗 biz.chosun.com · 클릭해서 자세히 보기</div>
+      <a href="https://www.comtrue.com/comtrue/news_89/" target="_blank" class="news-item">
+        <h3 class="news-title">🔐 오늘(10/23) ‘생성형 AI 보안 & 비대면 본인확인’ 컨퍼런스</h3>
+        <p class="news-content">금융·통신·공공 대상 <span class="highlight">프롬프트 유출 방지·신분증 위조 탐지</span> 등 최신 보안 이슈가 다뤄집니다. 현장 실무 노하우도 공개.</p>
+        <div class="external-link">🔗 comtrue.com · 클릭해서 자세히 보기</div>
       </a>
     </section>
 
@@ -169,14 +169,14 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto 
     <!-- 📊 Trend -->
     <section class="section">
       <div class="trend-box">
-        <div class="trend-title">🎯 수요일 AI 트렌드 분석</div>
-        <p>지방은 <strong>지역 축제/박람회</strong>를 기점으로 AI 전환(AX)을 가속하고, 산업은 <strong>버티컬 AI</strong>로 현실 효용을 강화하는 흐름. 인수인계 자동화와 같이 <strong>업무 단위</strong> 성과부터 쌓는 전략이 효과적입니다.</p>
+        <div class="trend-title">🎯 목요일 AI 트렌드 분석</div>
+        <p>오늘은 <strong>지자체 데이터·AI 전략</strong> 논의와 함께 <strong>생성형 AI 보안</strong> 실무 이슈가 맞물립니다. 현장은 <em>근거 기반 자동화</em>(민원 RAG)와 <em>보안 가드레일</em>을 동시에 챙기는 흐름.</p>
         <div class="keywords">
-          <span class="keyword">#FIX2025</span>
-          <span class="keyword">#지역AX</span>
-          <span class="keyword">#버티컬AI</span>
-          <span class="keyword">#지자체혁신</span>
-          <span class="keyword">#NotebookLM</span>
+          <span class="keyword">#RAG</span>
+          <span class="keyword">#민원표준답변</span>
+          <span class="keyword">#디지털지역혁신</span>
+          <span class="keyword">#생성형AI보안</span>
+          <span class="keyword">#공공GPT</span>
         </div>
       </div>
     </section>
@@ -187,12 +187,13 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto 
     <p style="margin-top:8px;font-size:.8em;">💬 오늘 뉴스 어떠셨나요? 피드백 환영해요!</p>
     <div style="margin-top:15px;text-align:center;">
       <img src="https://hitscounter.dev/api/hit?url=https%3A%2F%2Fchrisryugj.github.io%2FAIDo%2F&label=AI-Do&icon=book-half&color=%23cc9a06&message=&style=flat&tz=Asia%2FSeoul">
+카운터 이걸로 교체
     </div>
     <p style="margin-top:8px;font-size:.75em;opacity:.7;">✨ Made by 류주임</p>
   </footer>
 </div>
 
-<!-- Tip Modal (인수인계 복습 가이드) -->
+<!-- Tip Modal (GPT 민원답변 RAG 가이드) -->
 <div id="tipModal" class="tip-modal">
   <div class="tip-modal-content">
     <div class="tip-modal-header">
@@ -201,49 +202,49 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto 
     </div>
     <div class="tip-modal-body">
       <div class="detailed-tip-content">
-        <h3>📦 신규업무 인수인계 — 전임자 없어도 ‘문서목록+NotebookLM’이면 충분</h3>
-        <p>어제 모임에서 다룬 내용을 한 번에 복습합니다. 아래 순서를 그대로 따라 해보세요.</p>
+        <h3>🧾 GPT로 ‘민원 표준답변 RAG’ 구축 — 1시간 실전 플로우</h3>
+        <p>핵심은 <strong>공신력 소스(법령·해설·선례)</strong>만 묶고, 답변마다 <em>원문 인용+출처</em>를 강제하는 것입니다.</p>
 
         <div class="tip-section">
-          <h4>1단계 · 자료준비(업무관리시스템)</h4>
-          <p>문서함 → <strong>상세검색</strong> 설정:
-            <br>• <strong>날짜</strong>: 최소 1년 이상
-            <br>• <strong>기안자</strong>: 전임자 이름
-            <br>• <strong>문서종류</strong>: <em>생산문서</em> 체크
-            <br>검색결과 → <strong>엑셀로 ‘기안문서목록’</strong> 내보내기</p>
+          <h4>1단계 · 소스 수집(20분)</h4>
+          <p>• <strong>법령/행정규칙</strong>: 국가법령정보센터(최신판)<br>
+             • <strong>지침/해설</strong>: 부처·지자체 해설서, 유권해석 FAQ<br>
+             • <strong>선례</strong>: 유사 민원 답변 모음(개인정보 제거)<br>
+             • 파일명 규칙: <code>기관_문서명_연도_버전</code></p>
+          <div class="prompt-box">[검색식 예시 복붙]
+site:.go.kr "민원" "유권해석" filetype:pdf 2022..2025
+site:law.go.kr "용어" "정의" filetype:pdf</div>
         </div>
 
         <div class="tip-section">
-          <h4>2단계 · 엑셀 전처리(복붙 준비)</h4>
-          <p>엑셀에서 <strong>날짜</strong>, <strong>제목</strong> 열만 선택 → 복사(Ctrl/Cmd+C)</p>
-          <div class="prompt-box">Tip) 제목에 [사업명][정산][보고] 같은 키워드가 섞여 있으면, NotebookLM이 흐름 파악을 더 잘합니다.</div>
+          <h4>2단계 · RAG 노트 구성(15분)</h4>
+          <p>소스를 업로드하고 ‘노트 설명’에 <strong>출처 표기 규칙</strong>을 고정합니다.</p>
+          <div class="prompt-box">[노트 설명 복붙]
+이 노트의 모든 답변에는 근거를 다음 형식으로 표기: [기관, 문서명, 연도, p./조문]. 20~40자 원문 인용을 포함.</div>
         </div>
 
         <div class="tip-section">
-          <h4>3단계 · NotebookLM에 소스로 추가</h4>
-          <p>새 노트 생성 → 복사한 목록을 <strong>텍스트 파일(또는 구글문서)</strong>로 붙여 저장 후 업로드.</p>
-          <div class="prompt-box">[노트 설명(복붙)]
-이 노트는 ‘업무관리시스템 생산문서 목록(날짜·제목)’을 기반으로 신규 담당자 인수인계를 자동화합니다. 모든 요약에는 근거로 문서 제목과 날짜를 함께 표기해 주세요.</div>
+          <h4>3단계 · 표준답변 템플릿(15분)</h4>
+          <p>초안 길이를 제한하고 예외·주의를 반드시 포함시킵니다.</p>
+          <div class="prompt-box">[답변 서식 복붙]
+1) 결론(2~3문장)  
+2) 근거 2~3개: [기관, 문서명, 연도, p./조문] + 20~40자 인용  
+3) 예외/유의사항 2개  
+4) 다음 조치(담당/기한)</div>
         </div>
 
         <div class="tip-section">
-          <h4>4단계 · 필요한 질문 던지기(예시 그대로 복붙)</h4>
-          <div class="prompt-box">① 이 업무를 처음 맡아서 뭘 해야 할지 전혀 감이 안 와. <strong>어떤 업무를 해야 하는지 시기별</strong>로 요약 정리해줘.
-② 이 목록을 기반으로 <strong>신규 담당자가 첫 주에 반드시 알아야 할 업무 3가지</strong>를 정리해줘.
-③ 이 문서목록을 기준으로, <strong>최근 3개월간 주요 사업이나 예산 집행 관련 업무</strong>를 5줄로 요약해줘.
-④ 올려준 자료들을 바탕으로 이 업무에 적용할 수 있는 <strong>FAQ 20개</strong> 만들어줘.</div>
-          <p style="margin-top:6px">필요하면 “표로 보여줘(항목: 날짜/제목/요지/다음액션)”라고 추가하세요.</p>
-        </div>
-
-        <div class="tip-section">
-          <h4>5단계 · 결과 다듬기(업무표준안으로 저장)</h4>
-          <p>산출물: <em>시기별 업무 로드맵</em>, <em>첫 주 체크리스트</em>, <em>최근 3개월 브리핑</em>, <em>FAQ 20</em>.  
-             부서 드라이브에 “업무_인수인계_표준안(YYYYMMDD)”로 저장해 두면 다음 인수인계에 재활용 가능합니다.</p>
+          <h4>4단계 · 검증 프롬프트(10분)</h4>
+          <p>숫자·정책은 교차검증으로 환각을 차단합니다.</p>
+          <div class="prompt-box">[검증용 복붙]
+- 각 근거 인용 옆에 원문 링크/페이지 표기 맞나?  
+- 동일 주제의 부처 지침과 조문이 모순되는 곳은?  
+- 2024~2025 개정 사항과 달라진 점만 bullet로.</div>
         </div>
 
         <div class="real-case">
-          <h4>한 줄 요약</h4>
-          <p><strong>생산문서 목록</strong>만 있어도 업무 흐름과 핵심 과제를 재구성할 수 있습니다. “목록→질문템플릿→체크리스트” 순서를 표준으로 만드세요.</p>
+          <h4>실무 팁</h4>
+          <p>① 내부 선례는 개인정보 제거 후 사용 ② 저작권 민감 문서는 ‘요지’만 인용 ③ 답변 최종본엔 <em>담당자 확인</em> 라인 남기기.</p>
         </div>
       </div>
     </div>
