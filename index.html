@@ -7,10 +7,10 @@
 <meta name="theme-color" content="#ff8c42">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
-<meta property="og:title" content="AI.Do 오늘 뭐 이슈(Issue) (25.10.23.목) - 3분 브리핑: GPT 민원답변 RAG · 디지털 지역혁신 포럼 · 생성형AI 보안 컨퍼런스">
-<meta property="og:description" content="공무원 실무: GPT로 ‘민원 표준답변’ RAG 1시간 구축(단계/프롬프트). KR디지털지역혁신 포럼(10/23), 생성형 AI 보안·비대면본인확인 컨퍼런스 소식.">
+<meta property="og:title" content="AI.Do 오늘 뭐 이슈(Issue) (25.10.24.금) - 3분 브리핑: 행감 시즌, AI로 정시퇴근하기 Day 1">
+<meta property="og:description" content="특별 팁: 행감 요구자료 즉시 대응 — 과거자료 찾기·의도파악·답변초안·엑셀정리·일괄작성·법령인용·그래프·핵심추출. 오늘 바로 쓰는 프롬프트 포함.">
 <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.png">
-<title>AI.Do 오늘 뭐 이슈(Issue) (25.10.23.목)</title>
+<title>AI.Do 오늘 뭐 이슈(Issue) (25.10.24.금)</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans-serif;line-height:1.6;background:linear-gradient(135deg,#fff5e6 0%,#ffe4cc 50%,#ffd9b3 100%);min-height:100vh;padding:20px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%;touch-action:manipulation}
@@ -53,7 +53,7 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto 
 .footer{background:#f8f9fa;padding:20px;text-align:center;color:#666;font-size:.85em}
 .emoji-divider{text-align:center;font-size:1.5em;margin:20px 0}
 
-/* Tip card */
+/* Tip */
 .tip-item{background:linear-gradient(135deg,#fff8dc 0%,#ffe4b5 100%);border-left:4px solid #ff8c42;position:relative;overflow:hidden;box-shadow:0 4px 15px rgba(255,140,66,0.3);animation:pulse-border 2s ease-in-out infinite}
 .tip-item::before{content:'💡';position:absolute;left:30px;bottom:23px;font-size:2.2em;opacity:.3;animation:float 3s ease-in-out infinite;pointer-events:none}
 .tip-item::after{content:'👆 클릭하세요!';position:absolute;bottom:28px;right:30px;background:linear-gradient(135deg,#ff8c42,#ff6b6b);color:white;padding:5px 12px;border-radius:25px;font-size:.75em;font-weight:700;animation:bounce-badge 1.5s ease-in-out infinite;box-shadow:0 4px 12px rgba(255,107,107,0.5);z-index:10;pointer-events:none}
@@ -123,60 +123,65 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto 
     <button class="save-btn" id="saveBtn" onclick="saveAsHTML()" aria-label="뉴스 저장하기" title="HTML로 저장">
       <span class="icon">⬇️</span> 뉴스 저장하기
     </button>
-    <div class="date">2025년 10월 23일 (목)</div>
+    <div class="date">2025년 10월 24일 (금)</div>
     <h1 class="title">AI.Do 오늘 뭐 이슈(Issue)</h1>
     <div class="subtitle">3분투자 오늘의 핫이슈, 공공사례, 실전팁 챙기기!</div>
   </header>
 
   <main class="content">
-    <!-- 💡 Tip -->
+    <!-- 💡 Tip (행감 시즌 Day 1) -->
     <section class="section">
-      <h2 class="section-title"><span class="emoji">💡</span> 공무원용 GPT 실전팁 — 1시간 만에 ‘민원 표준답변 RAG’ 만들기</h2>
+      <h2 class="section-title"><span class="emoji">💡</span> 🔥 행감 시즌, AI로 정시퇴근하기 — Day 1 (즉시 적용 실전 팁)</h2>
       <div class="news-item tip-item" onclick="showTipModal()">
-        <h3 class="news-title">🧾 규정·선례 기반으로 ‘항상 근거가 붙는’ 답변 자동화</h3>
-        <p class="news-content">부서 <span class="highlight">민원 표준답변</span>을 GPT로 가속화합니다. <span class="highlight">근거 문장+출처</span>가 자동 표기되도록 소스와 프롬프트를 미리 고정하세요.</p>
-        <div class="tip-category"><span class="keyword">RAG</span><span class="keyword">민원답변</span><span class="keyword">공공GPT</span></div>
-        <div class="tip-link-text">📖 단계별 구축법 & 복붙 프롬프트 보기 · 클릭!</div>
+        <h3 class="news-title">📌 오늘의 상황: “3개년 예산집행 표 만드는데 1시간?” — 10분 컷으로 바꾸자</h3>
+        <p class="news-content">“추상 이론” 말고 <span class="highlight">지금 책상 위 요구자료</span>에 바로 쓰는 팁만 모았습니다. 프롬프트는 <em>복붙</em>해서 쓰세요.</p>
+        <div class="tip-category"><span class="keyword">행감대응</span><span class="keyword">즉시적용</span><span class="keyword">프롬프트</span></div>
+        <div class="tip-link-text">📖 8가지 실전 시나리오 & 복붙 프롬프트 보기 · 클릭!</div>
       </div>
     </section>
 
     <div class="emoji-divider">🏛️ 🏛️ 🏛️</div>
 
-    <!-- 🏛️ Local -->
+    <!-- 🏛️ Local (이전과 동일 유지) -->
     <section class="section">
       <h2 class="section-title"><span class="emoji">🏛️</span> 지자체 AI 활용사례 (1분 읽기)</h2>
-      <a href="https://news.nate.com/view/20251021n25062" target="_blank" class="news-item">
-        <h3 class="news-title">🌐 ‘디지털 지역혁신 글로벌 포럼’ 오늘(10/23) 개최</h3>
-        <p class="news-content">한국지역정보개발원 주관 포럼이 서울에서 열립니다. 지자체 <span class="highlight">데이터·AI 활용</span> 전략과 해외 동향을 공유합니다.</p>
-        <div class="external-link">🔗 nate.com · 클릭해서 자세히 보기</div>
+      <a href="https://www.incheon.go.kr/IC010205/view?repSeq=DOM_0000000013288717" target="_blank" class="news-item">
+        <h3 class="news-title">🏙️ 인천 ‘혁신주간’ 오늘(10/24) 마감…직원 대상 ‘AI 혁신포스터’ 경진</h3>
+        <p class="news-content">10월 13~24일 진행된 혁신주간에서 <span class="highlight">AI 기반 포스터 제작</span>을 통해 공직자 <span class="highlight">AI 실무 역량</span> 확산을 도모했습니다. 자료는 공공누리로 공유됩니다.</p>
+        <div class="external-link">🔗 incheon.go.kr · 클릭해서 자세히 보기</div>
       </a>
     </section>
 
     <div class="emoji-divider">🔥 🔥 🔥</div>
 
-    <!-- 🔥 Hot -->
+    <!-- 🔥 Hot (이전과 동일 유지) -->
     <section class="section">
       <h2 class="section-title"><span class="emoji">🔥</span> AI 핫이슈 (1분 읽기)</h2>
-      <a href="https://www.comtrue.com/comtrue/news_89/" target="_blank" class="news-item">
-        <h3 class="news-title">🔐 오늘(10/23) ‘생성형 AI 보안 & 비대면 본인확인’ 컨퍼런스</h3>
-        <p class="news-content">금융·통신·공공 대상 <span class="highlight">프롬프트 유출 방지·신분증 위조 탐지</span> 등 최신 보안 이슈가 다뤄집니다. 현장 실무 노하우도 공개.</p>
-        <div class="external-link">🔗 comtrue.com · 클릭해서 자세히 보기</div>
+      <a href="https://byline.network/2025/10/23-518/" target="_blank" class="news-item">
+        <h3 class="news-title">🔐 시큐아이, ‘AI 위협 자동 대응’ 플랫폼 공개…방화벽 성능 16배↑</h3>
+        <p class="news-content">10월 23~24일 보도: <span class="highlight">AI 기반 자동 대응</span>·플랫폼 전환을 선언. 공공망 보안에서도 <em>생성형 AI 보안</em>과 연계한 정책·운영 가이드가 과제로 떠오릅니다.</p>
+        <div class="external-link">🔗 byline.network · 클릭해서 자세히 보기</div>
+      </a>
+      <a href="https://www.etnews.com/20251023000366" target="_blank" class="news-item">
+        <h3 class="news-title">🛡️ 개인정보위·CPO협의회 정책포럼: ‘AI 심화 시대 사전예방’ 전환</h3>
+        <p class="news-content">개인정보위는 포럼에서 <span class="highlight">AI 시대 위험관리</span>·사전예방 중심 정책을 예고. 기업·공공의 <em>개인정보보호 체계 강화</em>가 요청됩니다.</p>
+        <div class="external-link">🔗 etnews.com · 클릭해서 자세히 보기</div>
       </a>
     </section>
 
     <div class="emoji-divider">📊 📊 📊</div>
 
-    <!-- 📊 Trend -->
+    <!-- 📊 Trend (이전과 동일 유지) -->
     <section class="section">
       <div class="trend-box">
-        <div class="trend-title">🎯 목요일 AI 트렌드 분석</div>
-        <p>오늘은 <strong>지자체 데이터·AI 전략</strong> 논의와 함께 <strong>생성형 AI 보안</strong> 실무 이슈가 맞물립니다. 현장은 <em>근거 기반 자동화</em>(민원 RAG)와 <em>보안 가드레일</em>을 동시에 챙기는 흐름.</p>
+        <div class="trend-title">🎯 금요일 AI 트렌드 분석</div>
+        <p>현장은 <strong>직원 실습형 교육</strong>(인천)과 <strong>AI 보안·개인정보</strong> 이슈가 맞물립니다. 실무 성과는 <em>즉시 재사용 가능한 지시서/프롬프트</em>를 표준화할 때 가장 빨리 납니다.</p>
         <div class="keywords">
-          <span class="keyword">#RAG</span>
-          <span class="keyword">#민원표준답변</span>
-          <span class="keyword">#디지털지역혁신</span>
-          <span class="keyword">#생성형AI보안</span>
-          <span class="keyword">#공공GPT</span>
+          <span class="keyword">#행감대응</span>
+          <span class="keyword">#즉시적용</span>
+          <span class="keyword">#재사용프롬프트</span>
+          <span class="keyword">#AI보안</span>
+          <span class="keyword">#개인정보보호</span>
         </div>
       </div>
     </section>
@@ -186,65 +191,88 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto 
     <p>🤖 AI.Do | 매일 업데이트 | 궁금한 점은 언제든 댓글로!</p>
     <p style="margin-top:8px;font-size:.8em;">💬 오늘 뉴스 어떠셨나요? 피드백 환영해요!</p>
     <div style="margin-top:15px;text-align:center;">
-      <img src="https://hitscounter.dev/api/hit?url=https%3A%2F%2Fchrisryugj.github.io%2FAIDo%2F&label=AI-Do&icon=book-half&color=%23cc9a06&message=&style=flat&tz=Asia%2FSeoul">
+      <img src="https://hitscounter.dev/api/hit?url=https%3A%2F%2Fchrisryugj.github.io%2FAIDo%2F&label=AI-Do&icon=book-half&color=%23cc9a06&message=&style=flat&tz=Asia%2FSeoul" alt="AI-Do View Counter">
     </div>
     <p style="margin-top:8px;font-size:.75em;opacity:.7;">✨ Made by 류주임</p>
   </footer>
 </div>
 
-<!-- Tip Modal (GPT 민원답변 RAG 가이드) -->
+<!-- Tip Modal (행감 즉시대응 8가지 가이드) -->
 <div id="tipModal" class="tip-modal">
   <div class="tip-modal-content">
     <div class="tip-modal-header">
-      <h2>🎯 오늘의 실전팁 완전 가이드</h2>
+      <h2>🎯 오늘의 실전팁 — 행감 시즌, AI로 정시퇴근하기 Day 1</h2>
       <span class="tip-close" onclick="hideTipModal()">&times;</span>
     </div>
     <div class="tip-modal-body">
       <div class="detailed-tip-content">
-        <h3>🧾 GPT로 ‘민원 표준답변 RAG’ 구축 — 1시간 실전 플로우</h3>
-        <p>핵심은 <strong>공신력 소스(법령·해설·선례)</strong>만 묶고, 답변마다 <em>원문 인용+출처</em>를 강제하는 것입니다.</p>
+        <h3>📦 “지금 책상 위 요구자료”에 바로 쓰는 8가지 시나리오</h3>
+        <p>모든 프롬프트는 <strong>복붙</strong>해서 시작하고, 필요하면 <em>기관명/사업명/연도</em>만 바꾸세요.</p>
 
         <div class="tip-section">
-          <h4>1단계 · 소스 수집(20분)</h4>
-          <p>• <strong>법령/행정규칙</strong>: 국가법령정보센터(최신판)<br>
-             • <strong>지침/해설</strong>: 부처·지자체 해설서, 유권해석 FAQ<br>
-             • <strong>선례</strong>: 유사 민원 답변 모음(개인정보 제거)<br>
-             • 파일명 규칙: <code>기관_문서명_연도_버전</code></p>
-          <div class="prompt-box">[검색식 예시 복붙]
-site:.go.kr "민원" "유권해석" filetype:pdf 2022..2025
-site:law.go.kr "용어" "정의" filetype:pdf</div>
+          <h4>1️⃣ 과거 자료 빠르게 찾기 & 요약 (3개년 예산집행)</h4>
+          <div class="prompt-box">PDF를 업로드하고 복사:
+"첨부 보고서들에서 2022~2024년 ‘○○사업’의 예산 집행액만 표로 정리해줘.
+열: 연도/예산배정/집행액/집행률(%), 출처 페이지 표시."</div>
+          <p>⏰ 30분 → <strong>3분</strong></p>
         </div>
 
         <div class="tip-section">
-          <h4>2단계 · RAG 노트 구성(15분)</h4>
-          <p>소스를 업로드하고 ‘노트 설명’에 <strong>출처 표기 규칙</strong>을 고정합니다.</p>
-          <div class="prompt-box">[노트 설명 복붙]
-이 노트의 모든 답변에는 근거를 다음 형식으로 표기: [기관, 문서명, 연도, p./조문]. 20~40자 원문 인용을 포함.</div>
+          <h4>2️⃣ 요구자료 ‘의도’ 파악 & 대응 전략</h4>
+          <div class="prompt-box">"구의원이 ‘최근 민원 처리 현황’을 요구했어. 확인 의도가 뭘까?
+오해 소지 없는 지표/기간/대상 정의와 함께 준비해야 할 자료 목록을 bullet로 정리해줘."</div>
+          <p>✅ 엉뚱한 자료 재작업 방지</p>
         </div>
 
         <div class="tip-section">
-          <h4>3단계 · 표준답변 템플릿(15분)</h4>
-          <p>초안 길이를 제한하고 예외·주의를 반드시 포함시킵니다.</p>
-          <div class="prompt-box">[답변 서식 복붙]
-1) 결론(2~3문장)  
-2) 근거 2~3개: [기관, 문서명, 연도, p./조문] + 20~40자 인용  
-3) 예외/유의사항 2개  
-4) 다음 조치(담당/기한)</div>
+          <h4>3️⃣ 답변서 초안 10초 만들기 (사유 설명)</h4>
+          <div class="prompt-box">"‘○○사업 지연’ 사유를 구의원에게 설명해야 해.
+주요 원인은 [인허가 지연, 예산 부족]. 공식적·설득력 있게 3문단으로 작성."</div>
+          <p>⏰ 빈 화면 고민 20분 → <strong>초안 검토 5분</strong></p>
         </div>
 
         <div class="tip-section">
-          <h4>4단계 · 검증 프롬프트(10분)</h4>
-          <p>숫자·정책은 교차검증으로 환각을 차단합니다.</p>
-          <div class="prompt-box">[검증용 복붙]
-- 각 근거 인용 옆에 원문 링크/페이지 표기 맞나?  
-- 동일 주제의 부처 지침과 조문이 모순되는 곳은?  
-- 2024~2025 개정 사항과 달라진 점만 bullet로.</div>
+          <h4>4️⃣ 복잡한 Excel/CSV 순식간 정리</h4>
+          <div class="prompt-box">"이 CSV를 연도별·사업별로 그룹화해서 합계를 구하고,
+상위 5개 사업만 표로 보여줘. 표 아래엔 간단 인사이트 3줄."</div>
+          <p>💡 SUMIF/VLOOKUP 없이 바로 결과 확인</p>
+        </div>
+
+        <div class="tip-section">
+          <h4>5️⃣ 유사 자료 ‘일괄’ 작성 자동화 (10개 사업 동일 양식)</h4>
+          <div class="prompt-box">"아래 양식에 맞춰 [사업명, 예산, 진행률, 특이사항]으로
+10개 사업의 추진현황을 표로 작성해줘. 누락은 ‘-’로 표기."</div>
+          <p>⏰ 반복 2시간 → <strong>20분</strong></p>
+        </div>
+
+        <div class="tip-section">
+          <h4>6️⃣ 조례·규정 빠르게 찾고 인용</h4>
+          <div class="prompt-box">"‘○○ 지원사업’의 법적 근거를
+지방자치법과 우리 시 조례에서 찾아 20~40자 인용과 함께 [기관/문서/연도/조문]으로 표기."</div>
+          <p>🔎 근거-인용을 <em>답변 본문</em>에 바로 삽입</p>
+        </div>
+
+        <div class="tip-section">
+          <h4>7️⃣ 그래프·차트 자동 생성</h4>
+          <div class="prompt-box">"이 표 데이터를 막대그래프로 만들어줘.
+가로축=연도, 세로축=집행액. 3줄 요약 인사이트 포함."</div>
+          <p>🖼️ 보고서/슬라이드 바로 붙여넣기</p>
+        </div>
+
+        <div class="tip-section">
+          <h4>8️⃣ 회의록/보고서에서 핵심만 추출</h4>
+          <div class="prompt-box">"50페이지 회의록에서 ‘○○사업’ 관련 논의만 모아
+결정사항/쟁점/후속조치(담당·기한)로 10줄 요약해줘."</div>
+          <p>📎 길이 제한 + 액션아이템 고정</p>
         </div>
 
         <div class="real-case">
-          <h4>실무 팁</h4>
-          <p>① 내부 선례는 개인정보 제거 후 사용 ② 저작권 민감 문서는 ‘요지’만 인용 ③ 답변 최종본엔 <em>담당자 확인</em> 라인 남기기.</p>
+          <h4>🎯 오늘 퇴근 전 한 번만 써보세요!</h4>
+          <p>• ⏰ 목표: <strong>요구자료 1건 10분 내 처리</strong><br>
+             • ✅ 실제 적용 사례 포맷: <em>○○팀 △△ 주무관</em> — “3개년 표 1시간 → 9분”<br>
+             • 내일 예고: <em>Day 2 — ‘반복 질의’ 표준화로 재사용률 100%</em></p>
         </div>
+
       </div>
     </div>
   </div>
