@@ -2,7 +2,8 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=5.0, maximum-scale=5.0, user-scalable=yes">
+<!-- ✅ 확대 고정 & 안전영역 대응 -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
 <meta name="theme-color" content="#ff8c42">
 <meta property="og:type" content="website">
@@ -13,7 +14,19 @@
 <title>AI.Do 오늘 뭐 이슈(Issue) (25.10.24.금)</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans-serif;line-height:1.6;background:linear-gradient(135deg,#fff5e6 0%,#ffe4cc 50%,#ffd9b3 100%);min-height:100vh;padding:20px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%;touch-action:manipulation}
+html,body{height:100%}
+body{
+  font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans-serif;
+  line-height:1.6;
+  background:linear-gradient(135deg,#fff5e6 0%,#ffe4cc 50%,#ffd9b3 100%);
+  min-height:100vh;
+  padding:20px;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+  touch-action:manipulation;
+}
 .container{max-width:600px;margin:0 auto;background:rgba(255,255,255,.95);border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,.1);overflow:hidden;backdrop-filter:blur(10px);position:relative}
 
 /* Header */
@@ -66,22 +79,39 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto 
 .tip-link-text{font-size:.85em;color:#ff6b6b;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:6px;font-weight:700;animation:pulse-text 2s ease-in-out infinite}
 @keyframes pulse-text{0%,100%{opacity:1}50%{opacity:.7}}
 
-/* Modal */
-.tip-modal{display:none;position:fixed;z-index:99999;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
-.tip-modal-content{background:#fff;margin:2% auto;padding:0;border-radius:20px;width:90%;max-width:900px;max-height:90vh;overflow-y:auto;box-shadow:0 25px 50px rgba(0,0,0,.3);position:relative}
-.tip-modal-header{background:linear-gradient(135deg,#d35400,#e67e22,#f39c12);color:#fff;padding:25px;border-radius:20px 20px 0 0;display:flex;justify-content:space-between;align-items:center}
-.tip-modal-header h2{margin:0;font-size:1.4em;font-weight:700}
-.tip-close{font-size:2em;font-weight:bold;cursor:pointer;line-height:1;opacity:.8;transition:opacity .2s;color:#fff}
+/* Modal overlay & content: ✅ 잘림 방지, 단일 스크롤 */
+.tip-modal{
+  display:none;position:fixed;inset:0;z-index:99999;
+  width:100%;height:100dvh; /* iOS 주소창 대응 */
+  background-color:rgba(0,0,0,.8);backdrop-filter:blur(5px);
+  overflow:auto; /* overlay 자체 스크롤 */
+  -webkit-overflow-scrolling:touch;
+}
+@supports not (height:100dvh){
+  .tip-modal{height:100vh;}
+}
+.tip-modal-content{
+  background:#fff;margin:12px auto;padding:0;border-radius:20px;
+  width:min(920px,94vw);
+  max-height:calc(100dvh - 24px); /* 상하 여백만큼 뺌 */
+  box-shadow:0 25px 50px rgba(0,0,0,.3);position:relative;
+}
+@supports not (height:100dvh){
+  .tip-modal-content{max-height:calc(100vh - 24px);}
+}
+.tip-modal-header{background:linear-gradient(135deg,#d35400,#e67e22,#f39c12);color:#fff;padding:20px;border-radius:20px 20px 0 0;display:flex;justify-content:space-between;align-items:center}
+.tip-modal-header h2{margin:0;font-size:1.2em;font-weight:700}
+.tip-close{font-size:1.8em;font-weight:bold;cursor:pointer;line-height:1;opacity:.85;transition:opacity .2s;color:#fff}
 .tip-close:hover{opacity:1}
-.tip-modal-body{padding:30px}
-.detailed-tip-content h3{color:#2d3748;margin-bottom:20px;font-size:1.3em}
-.tip-section{margin-bottom:25px;padding:20px;background:#fffaf0;border-radius:12px;border-left:4px solid #ff8c42}
-.tip-section h4{color:#4a5568;margin-bottom:10px;font-size:1.1em}
-.prompt-box{background:#2d3748;color:#e2e8f0;padding:15px;border-radius:8px;font-family:'Courier New',monospace;margin:10px 0;border-left:4px solid #ff8c42;font-size:.9em;line-height:1.6}
-.real-case{background:linear-gradient(135deg,#fff8dc 0%,#ffe4b5 100%);padding:20px;border-radius:12px;border-left:4px solid #ff6b6b}
-.real-case h4{color:#d53f8c;margin-bottom:10px}
+.tip-modal-body{padding:20px}
+.detailed-tip-content h3{color:#2d3748;margin-bottom:16px;font-size:1.15em}
+.tip-section{margin-bottom:18px;padding:16px;background:#fffaf0;border-radius:12px;border-left:4px solid #ff8c42}
+.tip-section h4{color:#4a5568;margin-bottom:8px;font-size:1.05em}
+.prompt-box{background:#2d3748;color:#e2e8f0;padding:12px;border-radius:8px;font-family:'Courier New',monospace;margin:8px 0;border-left:4px solid #ff8c42;font-size:.9em;line-height:1.6}
+.real-case{background:linear-gradient(135deg,#fff8dc 0%,#ffe4b5 100%);padding:16px;border-radius:12px;border-left:4px solid #ff6b6b}
+.real-case h4{color:#d53f8c;margin-bottom:8px}
 
-/* Mobile */
+/* Mobile fine-tuning */
 @media (max-width:768px){
   body{padding:10px;font-size:14px}
   .container{border-radius:15px;margin:0 auto}
@@ -92,11 +122,11 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto 
   .save-btn{top:10px;right:10px;padding:9px 12px;font-size:.8em}
   .content{padding:20px 15px}
   .section{margin-bottom:20px}
-  .section-title{font-size:1.3em;margin-bottom:12px;padding-left:10px}
+  .section-title{font-size:1.2em;margin-bottom:12px;padding-left:10px}
   .news-item{padding:15px;margin-bottom:12px;border-radius:10px}
   .news-item:hover{transform:translateX(3px)}
   .news-title{font-size:.95em;margin-bottom:6px;line-height:1.4}
-  .news-content{font-size:.85em;line-height:1.4}
+  .news-content{font-size:.9em;line-height:1.5}
   .external-link{font-size:.75em;margin-top:6px}
   .trend-box{padding:15px;margin:15px 0}
   .trend-title{font-size:.95em;margin-bottom:8px}
@@ -106,14 +136,6 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto 
   .emoji-divider{font-size:1.2em;margin:15px 0}
   .tip-item::after{font-size:.68em;padding:4px 10px;right:18px;bottom:24px}
   .tip-item::before{font-size:1.9em;left:18px;bottom:18px}
-  .tip-modal-content{width:95%;margin:5% auto;max-height:85vh}
-  .tip-modal-header{padding:20px 15px}
-  .tip-modal-header h2{font-size:1.2em}
-  .tip-close{font-size:1.5em}
-  .tip-modal-body{padding:20px 15px}
-  .tip-section{padding:15px;margin-bottom:20px}
-  .prompt-box{padding:12px;font-size:.85em}
-  .real-case{padding:15px}
 }
 </style>
 </head>
@@ -129,7 +151,7 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto 
   </header>
 
   <main class="content">
-    <!-- 💡 Tip (행감 시즌 Day 1) -->
+    <!-- 💡 Tip -->
     <section class="section">
       <h2 class="section-title"><span class="emoji">💡</span> 🔥 행감 시즌, AI로 정시퇴근하기 — Day 1 (즉시 적용 실전 팁)</h2>
       <div class="news-item tip-item" onclick="showTipModal()">
@@ -154,10 +176,9 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto 
 
     <div class="emoji-divider">🔥 🔥 🔥</div>
 
-    <!-- 🔥 Hot (쉬운 이슈 2개) -->
+    <!-- 🔥 Hot -->
     <section class="section">
       <h2 class="section-title"><span class="emoji">🔥</span> AI 핫이슈 (1분 읽기)</h2>
-
       <a href="https://news.nate.com/view/20251024n02840" target="_blank" class="news-item">
         <h3 class="news-title">🚚 국토부, ‘물류 AI 대전환 혁신랩’ 출범 — 택배·창고부터 똑똑하게</h3>
         <p class="news-content">정부가 물류 현장에 <span class="highlight">AI 최적화</span>를 본격 확대합니다. 상하차·경로·수요예측을 AI가 돕는 모델로, 중소 물류업체도 쉽게 시험·도입하도록 지원합니다.</p>
@@ -199,7 +220,7 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto 
   </footer>
 </div>
 
-<!-- Tip Modal (행감 즉시대응 8가지 가이드) -->
+<!-- Tip Modal -->
 <div id="tipModal" class="tip-modal">
   <div class="tip-modal-content">
     <div class="tip-modal-header">
@@ -268,7 +289,6 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto 
           <p>📎 길이 제한 + 액션아이템 고정</p>
         </div>
 
-        <!-- 교체된 쉬운 설명 블록 -->
         <div class="real-case">
           <h4>🎯 오늘 퇴근 전 10분 플랜</h4>
           <p>
@@ -291,7 +311,7 @@ body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto 
 /* Tip Modal */
 function showTipModal(){const m=document.getElementById('tipModal');m.style.display='block';document.body.style.overflow='hidden'}
 function hideTipModal(){const m=document.getElementById('tipModal');m.style.display='none';document.body.style.overflow='auto'}
-window.onclick=function(e){const m=document.getElementById('tipModal');if(e.target===m){hideTipModal()}}
+window.addEventListener('click',function(e){const m=document.getElementById('tipModal');if(e.target===m){hideTipModal()}})
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){hideTipModal()}});
 
 /* Save as HTML (AI-Do_오늘뭐이슈(issue)_YYMMDD.html) */
@@ -316,6 +336,9 @@ function saveAsHTML(){
   a.click();
   setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();}, 0);
 }
+
+/* ⚙️ iOS 회전 시 스케일 재보정 (혹시 모를 확대 이슈 추가 방지) */
+window.addEventListener('orientationchange',()=>{setTimeout(()=>{const m=document.querySelector('meta[name="viewport"]'); if(m) m.setAttribute('content','width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover');}, 150);});
 </script>
 </body>
 </html>
