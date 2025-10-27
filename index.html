@@ -2,16 +2,19 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<!-- 확대 과도 방지 & 안전영역 대응 -->
+<!-- 모바일 확대 이슈 방지 -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
 <meta name="theme-color" content="#ff8c42">
+
+<!-- OG -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
-<meta property="og:title" content="AI.Do 오늘 뭐 이슈(Issue) (25.10.27.월) - 3분 브리핑: Day 2 반복질의 표준화 · 한전 고독사 방지 AI · 국가 AI센터 참여">
-<meta property="og:description" content="반복 요구자료를 10분 컷으로 — Day 2 ‘반복 질의 템플릿’ 표준화(복붙 프롬프트 포함). 지자체·공공사례: 한전 고독사 방지 AI, 핫이슈: 국가 AI센터 참여·스마트제조 3.0.">
+<meta property="og:title" content="AI.Do 오늘 뭐 이슈(Issue) (25.10.28.화) - 3분 브리핑: Day3 근거·출처 자동표기 · 서울 자율주행 마을버스 · 공공/산업 AI 동향">
+<meta property="og:description" content="행감 시즌 Day3: 근거·출처 자동표기 프롬프트(복붙), 지자체 사례: 서울 자율주행 마을버스, 핫이슈: 국가 AI·보안·제조 동향.">
 <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.png">
-<title>AI.Do 오늘 뭐 이슈(Issue) (25.10.27.월)</title>
+<title>AI.Do 오늘 뭐 이슈(Issue) (25.10.28.화)</title>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%}
@@ -79,11 +82,11 @@ body{
 .tip-link-text{font-size:.85em;color:#ff6b6b;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:6px;font-weight:700;animation:pulse-text 2s ease-in-out infinite}
 @keyframes pulse-text{0%,100%{opacity:1}50%{opacity:.7}}
 
-/* ==== Modal (원본 서식 기반: 오버플로우 방지) ==== */
+/* Modal (오버플로우 안전) */
 .tip-modal{
   display:none; position:fixed; inset:0; z-index:99999;
   width:100%; height:100dvh; background-color:rgba(0,0,0,.8); backdrop-filter:blur(5px);
-  overflow:hidden; /* 오버레이는 스크롤 금지 → 본문만 스크롤 */
+  overflow:hidden;
 }
 @supports not (height:100dvh){ .tip-modal{height:100vh} }
 .tip-modal-content{
@@ -143,7 +146,7 @@ body{
     <button class="save-btn" id="saveBtn" onclick="saveAsHTML()" aria-label="뉴스 저장하기" title="HTML로 저장">
       <span class="icon">⬇️</span> 뉴스 저장하기
     </button>
-    <div class="date">2025년 10월 27일 (월)</div>
+    <div class="date">2025년 10월 28일 (화)</div>
     <h1 class="title">AI.Do 오늘 뭐 이슈(Issue)</h1>
     <div class="subtitle">3분투자 오늘의 핫이슈, 공공사례, 실전팁 챙기기!</div>
   </header>
@@ -151,12 +154,12 @@ body{
   <main class="content">
     <!-- 💡 Tip -->
     <section class="section">
-      <h2 class="section-title"><span class="emoji">💡</span> Day 2 — “반복 질의” 표준화로 재사용률 100% 만들기</h2>
+      <h2 class="section-title"><span class="emoji">💡</span> Day 3 — “근거·출처 자동표기”로 재작업 0% 만들기</h2>
       <div class="news-item tip-item" onclick="showTipModal()">
-        <h3 class="news-title">📌 오늘의 목표: 자주 받는 요구자료, 템플릿 한 번 만들어 계속 쓰기</h3>
-        <p class="news-content">“매번 처음부터”가 아닌 <span class="highlight">표준 질문+응답 구조</span>를 고정해 10분 컷 처리. 복붙 프롬프트로 바로 시작하세요.</p>
-        <div class="tip-category"><span class="keyword">반복질의</span><span class="keyword">템플릿화</span><span class="keyword">생산성</span></div>
-        <div class="tip-link-text">📖 템플릿 구성·예시 프롬프트·검증 체크리스트 · 클릭!</div>
+        <h3 class="news-title">🧾 오늘의 목표: 표·요약에 [기관/연도/p.]가 자동 붙는 출력</h3>
+        <p class="news-content">행감 시즌, 요구자료는 <span class="highlight">근거가 생명</span>입니다. 아래 프롬프트를 <em>노트 설명</em>에 고정하면, 매 출력마다 출처가 자동으로 달립니다.</p>
+        <div class="tip-category"><span class="keyword">출처자동표기</span><span class="keyword">검증가능</span><span class="keyword">행감대비</span></div>
+        <div class="tip-link-text">📖 복붙 프롬프트·검증 루틴 · 클릭!</div>
       </div>
     </section>
 
@@ -165,10 +168,10 @@ body{
     <!-- 🏛️ Local / 공공사례 -->
     <section class="section">
       <h2 class="section-title"><span class="emoji">🏛️</span> 지자체·공공 활용사례 (1분)</h2>
-      <a href="https://news.nate.com/view/20251027n01857" target="_blank" class="news-item">
-        <h3 class="news-title">🏥 한전, AI로 ‘고독사 징후’ 조기 감지 — 전력·통신·수도 데이터 결합</h3>
-        <p class="news-content">한전이 ‘1인 가구 안부살핌’ 사례를 발표. 사용패턴 이상을 <span class="highlight">AI가 탐지</span>해 지자체·복지기관이 신속 대응하도록 연계합니다.</p>
-        <div class="external-link">🔗 nate.com · 클릭해서 자세히 보기</div>
+      <a href="https://www.newscj.com/news/articleView.html?idxno=3332600" target="_blank" class="news-item">
+        <h3 class="news-title">🚌 서울 ‘자율주행 마을버스’ — AI 주행, 사람 안전관리</h3>
+        <p class="news-content">운전자가 <span class="highlight">안전관리</span>를 맡고, 주행은 AI가 수행하는 마을버스가 시범 운영 중. 도심 교통의 <span class="highlight">미래형 서비스</span>가 현실화됩니다.</p>
+        <div class="external-link">🔗 newscj.com · 클릭해서 자세히 보기</div>
       </a>
     </section>
 
@@ -178,16 +181,16 @@ body{
     <section class="section">
       <h2 class="section-title"><span class="emoji">🔥</span> AI 핫이슈 (1분)</h2>
 
-      <a href="https://news.nate.com/view/20251027n02623" target="_blank" class="news-item">
-        <h3 class="news-title">🏗️ 국가 AI컴퓨팅센터 사업에 삼성전자 참여</h3>
-        <p class="news-content">2조 규모 <span class="highlight">국가 AI센터</span> 사업 참여 소식. 민관 협력형 인프라 확대로 <span class="highlight">공공·산업 현장</span>의 모델 학습 환경 개선 기대.</p>
-        <div class="external-link">🔗 nate.com · 클릭해서 자세히 보기</div>
+      <a href="https://v.daum.net/v/20251028060713041" target="_blank" class="news-item">
+        <h3 class="news-title">🎓 EBS 다큐 ‘K-AI 교육’ 방영 — 미·중 AI 교육 경쟁과 한국 과제</h3>
+        <p class="news-content">오늘 밤 EBS에서 <span class="highlight">AI 교육 경쟁</span>을 집중 조명. 국내 전문가 3인이 <span class="highlight">한국의 과제</span>와 방향을 제시합니다.</p>
+        <div class="external-link">🔗 daum 뉴스 · 클릭해서 자세히 보기</div>
       </a>
 
-      <a href="https://wowtale.net/2025/10/26/249092/" target="_blank" class="news-item">
-        <h3 class="news-title">🏭 중기부 ‘AI 기반 스마트제조혁신 3.0’ — 중소 제조 AI 도입률 10% 목표</h3>
-        <p class="news-content">1.2만개 사 대상 보급, 산업재해율 <span class="highlight">20% 감소</span> 목표, 제조AI 24 플랫폼 추진 등 <span class="highlight">현장 중심</span> 지원책 발표.</p>
-        <div class="external-link">🔗 wowtale.net · 클릭해서 자세히 보기</div>
+      <a href="https://www.dailysecu.com/news/articleView.html?idxno=201719" target="_blank" class="news-item">
+        <h3 class="news-title">🛡️ ‘AIS 2025’ 오늘 개최 — 인공지능 보안 한자리</h3>
+        <p class="news-content">공공·금융·기업 보안담당자 600+ 참여 예정. <span class="highlight">AI 보안</span>의 현재와 미래, 실무 교육까지 한 번에.</p>
+        <div class="external-link">🔗 dailysecu.com · 클릭해서 자세히 보기</div>
       </a>
     </section>
 
@@ -196,14 +199,14 @@ body{
     <!-- 📊 Trend -->
     <section class="section">
       <div class="trend-box">
-        <div class="trend-title">🎯 월요일 AI 트렌드 한눈에</div>
-        <p><strong>공공</strong>은 돌봄·복지 등 생활밀착형 AI로 확장(한전), <strong>인프라</strong>는 국가 AI센터 참여로 가속, <strong>산업</strong>은 중소제조 AI 전환에 드라이브. 팀 단위에선 <em>반복질의 템플릿</em>으로 ‘요구자료 10분 컷’부터 체감하세요.</p>
+        <div class="trend-title">🎯 화요일 AI 트렌드 한눈에</div>
+        <p><strong>도시교통</strong>은 자율주행 시범 확산, <strong>교육/보안</strong>은 대형 이벤트로 관심 집중. 부서 실무는 <em>출처 자동표기</em> 템플릿으로 재작업을 없애며 <strong>행감 대응력</strong>을 끌어올리세요.</p>
         <div class="keywords">
-          <span class="keyword">#반복질의템플릿</span>
-          <span class="keyword">#돌봄AI</span>
-          <span class="keyword">#국가AI센터</span>
-          <span class="keyword">#스마트제조혁신</span>
-          <span class="keyword">#현장적용</span>
+          <span class="keyword">#출처자동표기</span>
+          <span class="keyword">#자율주행버스</span>
+          <span class="keyword">#AI교육</span>
+          <span class="keyword">#AI보안</span>
+          <span class="keyword">#행감대응</span>
         </div>
       </div>
     </section>
@@ -219,60 +222,57 @@ body{
   </footer>
 </div>
 
-<!-- Tip Modal: Day 2 ‘반복 질의’ 표준화 -->
+<!-- Tip Modal: Day3 근거·출처 자동표기 -->
 <div id="tipModal" class="tip-modal" role="dialog" aria-modal="true" aria-hidden="true">
   <div class="tip-modal-content">
     <div class="tip-modal-header">
-      <h2>🎯 Day 2 — 반복 질의 표준화: “한 번 만들고 계속 쓰는” 템플릿</h2>
+      <h2>🎯 Day 3 — 근거·출처 자동표기: “언제나 p./표가 붙는 출력”</h2>
       <span class="tip-close" onclick="hideTipModal()" aria-label="닫기">&times;</span>
     </div>
     <div class="tip-modal-body">
       <div class="detailed-tip-content">
-        <h3>🧩 핵심 아이디어</h3>
-        <p>자주 받는 요구자료(예: 3개년 집행현황, 최근 민원통계, 추진현황)마다 <strong>질문·출력형식·검증규칙</strong>을 고정합니다. 이후엔 <em>주제/기간</em>만 바꿔 재사용!</p>
+        <h3>왜 필요한가?</h3>
+        <p>행감·보고에서 “근거 페이지/표 번호” 누락으로 재작업이 잦습니다. 노트 설명에 <em>규칙</em>을 고정하면, 표·요약·Q&A 어디든 출처가 자동 표기됩니다.</p>
 
         <div class="tip-section">
-          <h4>1) 템플릿 뼈대(복붙)</h4>
-          <div class="prompt-box">[반복질의 템플릿]
-목표: {주제}를 {기간} 기준으로 표/요약 생성
-형식:
-- 표: 항목 | 값 | 출처(기관/연도/p.)
-- 요약: 3줄(결론·근거·시사점)
+          <h4>1) 노트 설명(상단)에 ‘영구 규칙’ 붙여넣기</h4>
+          <div class="prompt-box">[영구 규칙 — 복붙]
+답변 형식(고정):
+1) 결론(한 줄) 
+2) 근거 2~3개: [기관, 문서명, 연도, p./표] + 20~40자 인용
+3) 최신성: 동일 지표의 최신 연도 표기
+4) 주의/예외 1~2개
 규칙:
-- 수치 옆에 원문 페이지/표 번호 필수
-- 누락은 '-' 표시, 추정 금지
+- 모든 수치·주장은 원문 20~40자 인용과 p./표 번호 필수
+- 누락은 "-"로 표시, 추정 금지
 검증:
-- 정부/공공/국제 2곳 교차확인, 최신연도 표기</div>
-          <p>👉 새 업무엔 <code>{주제}</code>·<code>{기간}</code>만 바꾸세요.</p>
+- 정부/공공/국제 2곳 교차확인(가능할 때)</div>
         </div>
 
         <div class="tip-section">
-          <h4>2) 자주 쓰는 3종 세트</h4>
-          <div class="prompt-box">① 집행현황(3개년)
-"2023~2025년 ‘○○사업’ 예산배정·집행·집행률 표로. 각 셀 옆에 출처 p. 표시."
-
-② 민원통계(최근 6개월)
-"최근 6개월 ‘○○민원’ 월별 건수·처리기한 중앙값·미처리율. 이상치 이유 3줄."
-
-③ 추진현황(분기)
-"분기별 ‘○○사업’ 착수-집행-성과 지표 3개와 리스크 3개를 표 1개로."</div>
+          <h4>2) 자주 쓰는 출력 프롬프트(복붙)</h4>
+          <div class="prompt-box">[표 + 요약 동시 생성]
+"아래 주제에 대해 표 1개와 3줄 요약으로. 표는 항목|값|출처(기관/연도/p.)
+주제: {사업명} {기간} 집행현황/성과/리스크 3개씩."</div>
+          <p>👉 <code>{사업명}</code>, <code>{기간}</code>만 바꿔 재사용.</p>
         </div>
 
         <div class="tip-section">
-          <h4>3) 팀 공유용 ‘짧은 프롬프트’</h4>
-          <div class="prompt-box">"아래 템플릿을 이 대화의 기본 규칙으로 고정해. 이후 내 질문엔 같은 형식으로만 답해."</div>
-          <p>💾 노트 설명란에 템플릿을 붙여 <em>영구 고정</em>하세요.</p>
+          <h4>3) 검증 루틴(숫자·정책)</h4>
+          <div class="prompt-box">[검증 질의]
+"위 표의 각 수치 옆에 원문 1문장 인용과 p./표 번호를 붙여 다시 출력.
+최신 연도인지 확인하고, 최신이 아니면 최신 지표와 차이를 1줄로."</div>
         </div>
 
         <div class="tip-section">
           <h4>4) 실패 방지 체크리스트</h4>
-          <p>□ 형식이 매번 바뀌지 않는가  □ 출처 p./표 표시했는가  □ 최신연도로 교체했는가  □ 누락에 ‘-’ 처리했는가</p>
+          <p>□ p./표 빠짐 없음 □ 최신 연도 교차확인 □ ‘-’로 누락 표기 □ 표/요약 형식 유지</p>
         </div>
 
         <div class="real-case">
-          <h4>🚀 오늘 퇴근 전 10분 플랜</h4>
-          <p>1) 템플릿 복붙 → 2) 주제/기간만 교체 → 3) 결과 표 저장(엑셀) + 원문 p. 1건 대조</p>
-          <p style="margin-top:6px">🔜 내일( Day 3 ): <strong>‘부서 표준 보고서’ 자동 조립</strong>로 바로 제출 가능한 형태 만들기</p>
+          <h4>🚀 오늘 10분 플랜</h4>
+          <p>1) 노트 설명에 ‘영구 규칙’ 붙여넣기 → 2) 자주 쓰는 프롬프트로 표+요약 생성 → 3) 무작위 1건 원문 p. 대조</p>
+          <p style="margin-top:6px">🔜 내일 예고 Day 4: <strong>‘부서 표준 보고서’ 자동 조립</strong>(표·요약·그래프 한 번에)</p>
         </div>
 
       </div>
