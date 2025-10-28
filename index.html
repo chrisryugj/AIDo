@@ -10,8 +10,8 @@
 <!-- OG -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
-<meta property="og:title" content="AI.Do 오늘 뭐 이슈(Issue) (25.10.29.수) - 3분 브리핑: Day4 부서 표준 보고서 자동 조립 · 서울 AI 안전 포럼 · 공공/산업 AI 동향">
-<meta property="og:description" content="행감 시즌 Day4: 부서 표준 보고서 자동 조립(복붙 템플릿 포함). 지자체·공공: 서울 AI 안전 포럼, 핫이슈: 중기부 딥테크·공공데이터 AI 과제·국세청 AI 세정지원.">
+<meta property="og:title" content="AI.Do 오늘 뭐 이슈(Issue) (25.10.29.수) - 3분 브리핑: 행감 시즌 — 10분 컷 요구자료 만들기(NotebookLM 텍스트 기반 팁)">
+<meta property="og:description" content="NotebookLM은 텍스트만! 표(텍스트)·요약·근거 인용·수치추출 프롬프트로 행감 요구자료를 10분 컷으로. 실전 체크리스트 포함.">
 <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.png">
 <title>AI.Do 오늘 뭐 이슈(Issue) (25.10.29.수)</title>
 
@@ -154,18 +154,18 @@ body{
   <main class="content">
     <!-- 💡 Tip -->
     <section class="section">
-      <h2 class="section-title"><span class="emoji">💡</span> Day 4 — “부서 표준 보고서 자동 조립” (표·요약·그래프 한 번에)</h2>
+      <h2 class="section-title"><span class="emoji">💡</span> 행감 시즌 — “NotebookLM 텍스트만으로 10분 컷 요구자료”</h2>
       <div class="news-item tip-item" onclick="showTipModal()">
-        <h3 class="news-title">🧩 오늘의 목표: 동일 서식 보고서를 ‘주제/기간’만 바꿔 10분 완성</h3>
-        <p class="news-content">노트 설명에 <span class="highlight">출력 서식</span>을 고정하고, 표·요약·그래프를 한 번에 생성합니다. 팀 공유용 프롬프트까지 포함!</p>
-        <div class="tip-category"><span class="keyword">보고서자동조립</span><span class="keyword">재사용</span><span class="keyword">행감대비</span></div>
-        <div class="tip-link-text">📖 복붙 템플릿 · 그래프 지시어 · 검증 체크리스트 · 클릭!</div>
+        <h3 class="news-title">🧾 그래프는 No! 텍스트 표·요약·근거 인용만으로 제출물 완성</h3>
+        <p class="news-content">NotebookLM은 <span class="highlight">텍스트 출력 전용</span>입니다. 표는 <code>|</code> 구분 텍스트로 만들고, 엑셀에 붙여넣어 바로 제출 형식으로 바꾸세요.</p>
+        <div class="tip-category"><span class="keyword">수치추출</span><span class="keyword">텍스트표</span><span class="keyword">근거인용</span></div>
+        <div class="tip-link-text">📖 바로 쓰는 프롬프트·검증·엑셀연동 요령 · 클릭!</div>
       </div>
     </section>
 
     <div class="emoji-divider">🏛️ 🏛️ 🏛️</div>
 
-    <!-- 🏛️ Local / 공공사례 -->
+    <!-- 🏛️ Local / 공공사례 (그대로 유지) -->
     <section class="section">
       <h2 class="section-title"><span class="emoji">🏛️</span> 지자체·공공 활용사례 (1분)</h2>
       <a href="https://www.newswire.co.kr/newsRead.php?no=1021428" target="_blank" class="news-item">
@@ -177,22 +177,19 @@ body{
 
     <div class="emoji-divider">🔥 🔥 🔥</div>
 
-    <!-- 🔥 Hot -->
+    <!-- 🔥 Hot (그대로 유지) -->
     <section class="section">
       <h2 class="section-title"><span class="emoji">🔥</span> AI 핫이슈 (1분)</h2>
-
       <a href="https://biz.chosun.com/industry/business-venture/2025/10/28/BLD6YNX7JJF6VDIKA7OGUSGO6E/" target="_blank" class="news-item">
         <h3 class="news-title">🚀 중기부, ‘글로벌 초격차 스타트업’ 지원 행사 (10/28~29)</h3>
         <p class="news-content">서울 광진구 워커힐에서 <span class="highlight">딥테크·AI 스타트업</span> 글로벌 진출을 돕는 대형 행사가 진행 중. 정책·투자·네트워킹을 한 자리에서 제공합니다.</p>
         <div class="external-link">🔗 조선비즈 · 자세히 보기</div>
       </a>
-
       <a href="https://www.etnews.com/20251027000286" target="_blank" class="news-item">
         <h3 class="news-title">📂 공공데이터 X AI 챌린지 — 공공 현장데이터로 생활문제 해결</h3>
         <p class="news-content">중기부가 <span class="highlight">공공기관 현장 데이터</span>를 개방, AI로 <span class="highlight">중소기업·소상공인</span> 지원 솔루션을 모집합니다. (접수 11/6~26)</p>
         <div class="external-link">🔗 etnews.com · 자세히 보기</div>
       </a>
-
       <a href="https://www.korea.kr/multi/visualNewsView.do?newsId=148953219" target="_blank" class="news-item">
         <h3 class="news-title">🧾 국세청, AI 중소기업 세정지원 카드뉴스 공개</h3>
         <p class="news-content"><span class="highlight">정기 세무조사 제외·유예</span>, R&amp;D 세액공제 사전심사 등 AI 중소기업 대상 <span class="highlight">세정지원 방안</span> 안내.</p>
@@ -206,13 +203,13 @@ body{
     <section class="section">
       <div class="trend-box">
         <div class="trend-title">🎯 수요일 AI 트렌드 한눈에</div>
-        <p><strong>공공</strong>은 AI 안전·거버넌스 논의가 본격화, <strong>산업</strong>은 딥테크 스타트업 지원 확대, <strong>데이터</strong>는 공공현장 개방·실증으로 연결 중. 부서 실무는 <em>표준 보고서 자동 조립</em>으로 제출 속도를 끌어올리세요.</p>
+        <p><strong>공공</strong>은 AI 안전·거버넌스 논의가 본격화, <strong>산업</strong>은 딥테크 스타트업 지원 확대, <strong>데이터</strong>는 공공현장 개방·실증으로 연결 중. 실무는 <em>텍스트 표+근거 인용</em>으로 빠르게 제출!</p>
         <div class="keywords">
-          <span class="keyword">#보고서자동조립</span>
-          <span class="keyword">#AISafety</span>
-          <span class="keyword">#딥테크</span>
-          <span class="keyword">#공공데이터</span>
+          <span class="keyword">#NotebookLM</span>
+          <span class="keyword">#텍스트표</span>
+          <span class="keyword">#근거인용</span>
           <span class="keyword">#행감대응</span>
+          <span class="keyword">#수치추출</span>
         </div>
       </div>
     </section>
@@ -228,55 +225,63 @@ body{
   </footer>
 </div>
 
-<!-- Tip Modal: Day4 보고서 자동 조립 -->
+<!-- Tip Modal: 텍스트 기반 실전 루틴 -->
 <div id="tipModal" class="tip-modal" role="dialog" aria-modal="true" aria-hidden="true">
   <div class="tip-modal-content">
     <div class="tip-modal-header">
-      <h2>🎯 Day 4 — 부서 표준 보고서 자동 조립(표·요약·그래프 한 번에)</h2>
+      <h2>🎯 텍스트만으로 10분 컷 — 표(텍스트)·요약·근거 인용</h2>
       <span class="tip-close" onclick="hideTipModal()" aria-label="닫기">&times;</span>
     </div>
     <div class="tip-modal-body">
       <div class="detailed-tip-content">
-        <h3>핵심 아이디어</h3>
-        <p>노트 설명에 <strong>출력 서식</strong>과 <strong>검증 규칙</strong>을 고정합니다. 이후에는 <em>주제/기간·데이터 파일</em>만 갈아끼우면 동일 서식의 보고서를 즉시 재생산할 수 있습니다.</p>
+
+        <h3>✅ 이렇게 쓰면 됩니다 (NotebookLM은 <em>텍스트 출력만</em>)</h3>
+        <p>표는 <strong>세로막대 대신</strong> <code>항목 | 값 | 출처</code>처럼 <strong>파이프(|)</strong> 구분 텍스트로 만들고, <em>엑셀에 그대로 붙여넣기</em> 하면 표로 정리됩니다.</p>
 
         <div class="tip-section">
-          <h4>1) 노트 설명(상단)에 ‘영구 서식’ 고정</h4>
-          <div class="prompt-box">[영구 서식 — 복붙]
-출력 구성(고정):
-A. 표 1개 — 항목 | 값 | 출처(기관/연도/p.)
-B. 3줄 요약 — 결론·근거·시사점
-C. 그래프 1개 — {지표명}(막대형)
-검증 규칙:
-- 모든 수치 옆 [기관/연도/p.] 표기
-- 최신 연도 여부 표기, 누락은 '-' 처리
-- 정부/공공/국제 2곳 교차확인(가능 시)</div>
+          <h4>1) 빠른 준비 (2분)</h4>
+          <p>문서함에서 필요한 PDF/한글/보고서를 모아 한 노트에 업로드. 파일명은 <code>기관_문서명_연도</code>로 통일.</p>
+          <div class="prompt-box">[노트 설명 — 고정 규칙(복붙)]
+출력 형식 고정:
+- 표(텍스트): 항목 | 값 | 출처(기관/연도/p.)
+- 3줄 요약: 결론·근거·시사점
+규칙:
+- 모든 수치/주장 옆에 20~40자 원문 인용 + [p./표] 표기
+- 최신 연도 여부 명시, 불명확하면 "-" 처리</div>
         </div>
 
         <div class="tip-section">
-          <h4>2) 입력만 바꾸는 실행 프롬프트</h4>
-          <div class="prompt-box">[실행 — 표·요약·그래프 동시]
-주제: {사업/정책명}
-기간: {YYYY~YYYY}
-데이터: 업로드된 표/지표 사용
-요청: 위 ‘영구 서식’에 맞춰 A~C를 한 번에 출력</div>
-          <p>👉 <code>{사업/정책명}</code>, <code>{기간}</code>만 교체해서 재사용.</p>
+          <h4>2) 수치만 뽑아 표(텍스트)로 (3분)</h4>
+          <div class="prompt-box">[수치 추출 → 표 텍스트]
+"2022~2024년 {사업명} 집행액과 집행률만 표(텍스트)로 출력.
+형식: 항목 | 값 | 출처(기관/연도/p.)
+- 항목: 연도별 집행액, 집행률
+- 값: 숫자만(단위 함께)
+- 각 행 끝에 [기관/연도/p.] 표기"</div>
+          <p>👉 표 텍스트를 복사해 엑셀에 붙여넣으면 열로 분리됩니다(데이터-텍스트 나누기 또는 구분 기호 ‘|’).</p>
         </div>
 
         <div class="tip-section">
-          <h4>3) 그래프 생성 지시어(옵션)</h4>
-          <div class="prompt-box">"데이터에서 {지표명} 기준으로 월/분기 합계를 막대그래프로 생성. 축 라벨과 단위 표기."</div>
+          <h4>3) 3줄 요약 + 근거 인용 (2분)</h4>
+          <div class="prompt-box">[요약 + 근거 인용]
+"위 표를 근거로 3줄 요약(결론·근거·시사점)을 출력.
+각 줄 끝에 원문 1문장 인용과 [p./표]를 붙여줘."</div>
         </div>
 
         <div class="tip-section">
-          <h4>4) 실패 방지 체크리스트</h4>
-          <p>□ 표·요약·그래프 모두 생성되었나 □ p./표 번호 누락 없음 □ 최신 연도 반영 □ 서식(A~C) 순서 유지</p>
+          <h4>4) 검증 체크리스트 (1분)</h4>
+          <p>□ 표 모든 행에 [기관/연도/p.] 있는가? □ 최신 연도 반영? □ 숫자는 원문과 일치? □ 불명확 값은 ‘-’ 표기?</p>
+        </div>
+
+        <div class="tip-section">
+          <h4>5) 엑셀로 마무리 (2분)</h4>
+          <p>엑셀에서 <em>데이터 → 텍스트 나누기</em>로 구분기호 <code>|</code> 선택 → 표 서식 적용 → 제출.</p>
         </div>
 
         <div class="real-case">
           <h4>🚀 오늘 10분 플랜</h4>
-          <p>1) ‘영구 서식’ 붙여넣기 → 2) 최근 3개월 자료로 실행 → 3) 표 1행 무작위 대조(원문 p.)</p>
-          <p style="margin-top:6px">🔜 내일 예고 Day 5: <strong>“부서 공통 FAQ 50” 자동 생성 & 업데이트 루틴</strong></p>
+          <p>① 파일 2~3개 업로드 → ② “수치 추출→표(텍스트)” 프롬프트 → ③ “3줄 요약+근거” 프롬프트 → ④ 엑셀 붙여넣기.</p>
+          <p style="margin-top:6px">🔎 팁: 스캔 PDF는 먼저 기관 뷰어/스캐너에서 <strong>텍스트 추출(OCR)</strong>한 뒤 올리면 정확도가 올라갑니다.</p>
         </div>
 
       </div>
