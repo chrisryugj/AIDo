@@ -1,341 +1,385 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<!-- 모바일 확대 이슈 방지 -->
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#ff8c42">
+  <meta charset="UTF-8">
+  <!-- 모바일 확대 이슈 방지 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#ff8c42">
 
-<!-- OG -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
-<meta property="og:title" content="AI.Do 오늘 뭐 이슈(Issue) (25.10.29.수) - 3분 브리핑: 행감 시즌 — 10분 컷 요구자료 만들기(NotebookLM 텍스트 기반 팁)">
-<meta property="og:description" content="NotebookLM은 텍스트만! 표(텍스트)·요약·근거 인용·수치추출 프롬프트로 행감 요구자료를 10분 컷으로. 실전 체크리스트 포함.">
-<meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.png">
-<title>AI.Do 오늘 뭐 이슈(Issue) (25.10.29.수)</title>
+  <!-- OG -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
+  <meta property="og:title" content="AI.Do 오늘 뭐 이슈(Issue) (25.10.30.목) - 3분 브리핑: 행감 시즌 — 10분 컷 요구자료(텍스트 기반)">
+  <meta property="og:description" content="NotebookLM은 텍스트만! 표(텍스트)·요약·근거 인용 프롬프트로 행감 요구자료 10분 컷. 공공사례·핫이슈, 오늘의 명언 포함.">
+  <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.png">
+  <title>AI.Do 오늘 뭐 이슈(Issue) (25.10.30.목)</title>
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%}
-body{
-  font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans-serif;
-  line-height:1.6;
-  background:linear-gradient(135deg,#fff5e6 0%,#ffe4cc 50%,#ffd9b3 100%);
-  min-height:100vh;
-  padding:20px;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  -webkit-text-size-adjust:100%;
-  text-size-adjust:100%;
-  touch-action:manipulation;
-}
-.container{max-width:600px;margin:0 auto;background:rgba(255,255,255,.95);border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,.1);overflow:hidden;backdrop-filter:blur(10px);position:relative}
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans-serif;
+      line-height:1.6;
+      background:linear-gradient(135deg,#fff5e6 0%,#ffe4cc 50%,#ffd9b3 100%);
+      min-height:100vh;
+      padding:20px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      -webkit-text-size-adjust:100%;
+      text-size-adjust:100%;
+      touch-action:manipulation;
+    }
+    .container{
+      max-width:600px;margin:0 auto;background:rgba(255,255,255,.95);
+      border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,.1);
+      overflow:hidden;backdrop-filter:blur(10px);position:relative
+    }
 
-/* Header */
-.header{background:linear-gradient(135deg,#ffecd2 0%,#fcb69f 45%,#ff9a76 100%);color:#2d1810;padding:25px;text-align:center;position:relative}
-.header::before{content:'🤖';font-size:2em;position:absolute;top:15px;left:25px;animation:bounce 2s infinite;pointer-events:none}
-@keyframes bounce{0%,20%,50%,80%,100%{transform:translateY(0)}40%{transform:translateY(-10px)}60%{transform:translateY(-5px)}}
-.date{font-size:.9em;opacity:.9;margin-bottom:5px}
-.title{font-size:1.8em;font-weight:700;margin-bottom:5px}
-.subtitle{font-size:1em;opacity:.8}
+    /* Header */
+    .header{
+      background:linear-gradient(135deg,#ffecd2 0%,#fcb69f 45%,#ff9a76 100%);
+      color:#2d1810;padding:25px;text-align:center;position:relative
+    }
+    .header::before{
+      content:'🤖';font-size:2em;position:absolute;top:15px;left:25px;
+      animation:bounce 2s infinite;pointer-events:none
+    }
+    @keyframes bounce{0%,20%,50%,80%,100%{transform:translateY(0)}40%{transform:translateY(-10px)}60%{transform:translateY(-5px)}}
+    .date{font-size:.9em;opacity:.9;margin-bottom:5px}
+    .title{font-size:1.8em;font-weight:700;margin-bottom:5px}
+    .subtitle{font-size:1em;opacity:.8}
 
-/* Save button */
-.save-btn{position:absolute;top:12px;right:12px;background:#2d2d2d;color:#fff;border:none;border-radius:999px;padding:10px 14px;font-size:.85em;font-weight:700;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.2);display:inline-flex;align-items:center;gap:8px;transition:transform .15s ease,opacity .2s,box-shadow .2s;z-index:5000}
-.save-btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(0,0,0,.25)}
-.save-btn:active{transform:translateY(0)}
-.save-btn:focus-visible{outline:2px solid #ff8c42;outline-offset:2px}
-.save-btn .icon{font-size:1.1em}
+    /* Save button */
+    .save-btn{
+      position:absolute;top:12px;right:12px;background:#2d2d2d;color:#fff;border:none;
+      border-radius:999px;padding:10px 14px;font-size:.85em;font-weight:700;cursor:pointer;
+      box-shadow:0 6px 16px rgba(0,0,0,.2);display:inline-flex;align-items:center;gap:8px;
+      transition:transform .15s ease,opacity .2s,box-shadow .2s;z-index:5000
+    }
+    .save-btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(0,0,0,.25)}
+    .save-btn:active{transform:translateY(0)}
+    .save-btn:focus-visible{outline:2px solid #ff8c42;outline-offset:2px}
+    .save-btn .icon{font-size:1.1em}
 
-/* Content */
-.content{padding:30px}
-.section{margin-bottom:25px}
-.section-title{display:flex;align-items:center;font-size:1.2em;font-weight:600;color:#2d1810;margin-bottom:15px;border-left:4px solid #ff8c42;padding-left:12px}
-.section-title .emoji{margin-right:8px;font-size:1.1em}
-.news-item{background:#fff9f0;border-radius:12px;padding:18px;margin-bottom:15px;border-left:3px solid #ff8c42;transition:all .3s ease;cursor:pointer;text-decoration:none;color:inherit;display:block}
-.news-item:hover{transform:translateX(5px);box-shadow:0 5px 15px rgba(255,140,66,0.2);background:#fff5e6;text-decoration:none;color:inherit}
-.external-link{font-size:.8em;color:#666;margin-top:8px;display:flex;align-items:center;gap:4px}
-.news-title{font-weight:600;color:#2c3e50;margin-bottom:8px;font-size:1em}
-.news-content{color:#555;font-size:.9em;line-height:1.5}
-.highlight{background:linear-gradient(120deg,#ffe4b5 0%,#ffd89b 100%);padding:2px 6px;border-radius:4px;font-weight:500}
+    /* Content */
+    .content{padding:30px}
+    .section{margin-bottom:25px}
+    .section-title{
+      display:flex;align-items:center;font-size:1.2em;font-weight:600;color:#2d1810;
+      margin-bottom:15px;border-left:4px solid #ff8c42;padding-left:12px
+    }
+    .section-title .emoji{margin-right:8px;font-size:1.1em}
+    .news-item{
+      background:#fff9f0;border-radius:12px;padding:18px;margin-bottom:15px;border-left:3px solid #ff8c42;
+      transition:all .3s ease;cursor:pointer;text-decoration:none;color:inherit;display:block
+    }
+    .news-item:hover{transform:translateX(5px);box-shadow:0 5px 15px rgba(255,140,66,0.2);background:#fff5e6;text-decoration:none;color:inherit}
+    .external-link{font-size:.8em;color:#666;margin-top:8px;display:flex;align-items:center;gap:4px}
+    .news-title{font-weight:600;color:#2c3e50;margin-bottom:8px;font-size:1em}
+    .news-content{color:#555;font-size:.9em;line-height:1.5}
+    .highlight{background:linear-gradient(120deg,#ffe4b5 0%,#ffd89b 100%);padding:2px 6px;border-radius:4px;font-weight:500}
 
-/* Trend */
-.trend-box{background:linear-gradient(135deg,#d35400 0%,#e67e22 100%);color:#fff;padding:20px;border-radius:12px;text-align:center;margin:20px 0}
-.trend-title{font-size:1.1em;font-weight:600;margin-bottom:10px}
-.keywords{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:12px}
-.keyword{background:rgba(255,255,255,.2);padding:4px 12px;border-radius:20px;font-size:.8em;backdrop-filter:blur(10px)}
+    /* Quote */
+    .quote-card{background:#fff;border-radius:14px;padding:16px 18px;border-left:4px solid #ff8c42;box-shadow:0 4px 10px rgba(0,0,0,.06)}
+    .quote-text{font-size:1.0em;color:#2d3748;margin-bottom:8px}
+    .quote-author{font-size:.9em;color:#6b7280;text-align:right}
 
-/* Footer */
-.footer{background:#f8f9fa;padding:20px;text-align:center;color:#666;font-size:.85em}
-.emoji-divider{text-align:center;font-size:1.5em;margin:20px 0}
+    /* Trend */
+    .trend-box{background:linear-gradient(135deg,#d35400 0%,#e67e22 100%);color:#fff;padding:20px;border-radius:12px;text-align:center;margin:20px 0}
+    .trend-title{font-size:1.1em;font-weight:600;margin-bottom:10px}
+    .keywords{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:12px}
+    .keyword{background:rgba(255,255,255,.2);padding:4px 12px;border-radius:20px;font-size:.8em;backdrop-filter:blur(10px)}
 
-/* Tip card */
-.tip-item{background:linear-gradient(135deg,#fff8dc 0%,#ffe4b5 100%);border-left:4px solid #ff8c42;position:relative;overflow:hidden;box-shadow:0 4px 15px rgba(255,140,66,0.3);animation:pulse-border 2s ease-in-out infinite}
-.tip-item::before{content:'💡';position:absolute;left:30px;bottom:23px;font-size:2.2em;opacity:.3;animation:float 3s ease-in-out infinite;pointer-events:none}
-.tip-item::after{content:'👆 클릭하세요!';position:absolute;bottom:28px;right:30px;background:linear-gradient(135deg,#ff8c42,#ff6b6b);color:white;padding:5px 12px;border-radius:25px;font-size:.75em;font-weight:700;animation:bounce-badge 1.5s ease-in-out infinite;box-shadow:0 4px 12px rgba(255,107,107,0.5);z-index:10;pointer-events:none}
-@keyframes pulse-border{0%,100%{border-left-color:#ff8c42;box-shadow:0 4px 15px rgba(255,140,66,0.3)}50%{border-left-color:#ff6b6b;box-shadow:0 6px 20px rgba(255,107,107,0.5)}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes bounce-badge{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
-.tip-item:hover{transform:translateX(8px) scale(1.02);cursor:pointer;box-shadow:0 8px 25px rgba(255,140,66,0.5)}
-.tip-category{margin-top:10px;text-align:center}
-.tip-category .keyword{background:linear-gradient(135deg,#ff8c42,#ff6b6b);color:white;font-weight:700;box-shadow:0 2px 8px rgba(255,107,107,0.3)}
-.tip-link-text{font-size:.85em;color:#ff6b6b;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:6px;font-weight:700;animation:pulse-text 2s ease-in-out infinite}
-@keyframes pulse-text{0%,100%{opacity:1}50%{opacity:.7}}
+    /* Footer */
+    .footer{background:#f8f9fa;padding:20px;text-align:center;color:#666;font-size:.85em}
+    .emoji-divider{text-align:center;font-size:1.5em;margin:20px 0}
 
-/* Modal (오버플로우 안전) */
-.tip-modal{
-  display:none; position:fixed; inset:0; z-index:99999;
-  width:100%; height:100dvh; background-color:rgba(0,0,0,.8); backdrop-filter:blur(5px);
-  overflow:hidden;
-}
-@supports not (height:100dvh){ .tip-modal{height:100vh} }
-.tip-modal-content{
-  background:#fff; margin:min(4vh,24px) auto; width:min(900px,92vw);
-  border-radius:20px; box-shadow:0 25px 50px rgba(0,0,0,.3); position:relative;
-  display:flex; flex-direction:column; max-height:calc(100dvh - min(8vh,48px)); overflow:hidden;
-  -webkit-overflow-scrolling:touch;
-}
-.tip-modal-header{background:linear-gradient(135deg,#d35400,#e67e22,#f39c12);color:#fff;padding:22px 20px;border-radius:20px 20px 0 0;display:flex;justify-content:space-between;align-items:center}
-.tip-modal-header h2{margin:0;font-size:1.2em;font-weight:700}
-.tip-close{font-size:1.8em;font-weight:bold;cursor:pointer;line-height:1;opacity:.9;transition:opacity .2s;color:#fff}
-.tip-close:hover{opacity:1}
-.tip-modal-body{padding:22px 20px 24px;flex:1 1 auto;overflow:auto;-webkit-overflow-scrolling:touch}
-.detailed-tip-content *{min-width:0}
-.detailed-tip-content h3{color:#2d3748;margin-bottom:16px;font-size:1.15em}
-.tip-section{margin-bottom:18px;padding:16px;background:#fffaf0;border-radius:12px;border-left:4px solid #ff8c42}
-.tip-section h4{color:#4a5568;margin-bottom:8px;font-size:1.05em}
-.prompt-box{background:#2d3748;color:#e2e8f0;padding:12px;border-radius:8px;font-family:'Courier New',monospace;margin:8px 0;border-left:4px solid #ff8c42;font-size:.9em;line-height:1.6;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere}
-.real-case{background:linear-gradient(135deg,#fff8dc 0%,#ffe4b5 100%);padding:16px;border-radius:12px;border-left:4px solid #ff6b6b}
-.real-case h4{color:#d53f8c;margin-bottom:8px}
-.tip-modal-body img,.tip-modal-body table{max-width:100%;height:auto}
-.tip-modal-body table{border-collapse:collapse}
-.tip-modal-body td,.tip-modal-body th{padding:6px 8px;border:1px solid #eee}
+    /* Tip card */
+    .tip-item{
+      background:linear-gradient(135deg,#fff8dc 0%,#ffe4b5 100%);
+      border-left:4px solid #ff8c42;position:relative;overflow:hidden;
+      box-shadow:0 4px 15px rgba(255,140,66,0.3);animation:pulse-border 2s ease-in-out infinite
+    }
+    .tip-item::before{content:'💡';position:absolute;left:30px;bottom:23px;font-size:2.2em;opacity:.3;animation:float 3s ease-in-out infinite;pointer-events:none}
+    .tip-item::after{
+      content:'👆 클릭하세요!';position:absolute;bottom:28px;right:30px;background:linear-gradient(135deg,#ff8c42,#ff6b6b);
+      color:#fff;padding:5px 12px;border-radius:25px;font-size:.75em;font-weight:700;
+      animation:bounce-badge 1.5s ease-in-out infinite;box-shadow:0 4px 12px rgba(255,107,107,0.5);z-index:10;pointer-events:none
+    }
+    @keyframes pulse-border{0%,100%{border-left-color:#ff8c42;box-shadow:0 4px 15px rgba(255,140,66,0.3)}50%{border-left-color:#ff6b6b;box-shadow:0 6px 20px rgba(255,107,107,0.5)}}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+    @keyframes bounce-badge{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+    .tip-item:hover{transform:translateX(8px) scale(1.02);cursor:pointer;box-shadow:0 8px 25px rgba(255,140,66,0.5)}
+    .tip-category{margin-top:10px;text-align:center}
+    .tip-category .keyword{background:linear-gradient(135deg,#ff8c42,#ff6b6b);color:#fff;font-weight:700;box-shadow:0 2px 8px rgba(255,107,107,0.3)}
+    .tip-link-text{font-size:.85em;color:#ff6b6b;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:6px;font-weight:700;animation:pulse-text 2s ease-in-out infinite}
+    @keyframes pulse-text{0%,100%{opacity:1}50%{opacity:.7}}
 
-/* Mobile */
-@media (max-width:768px){
-  body{padding:10px;font-size:14px}
-  .container{border-radius:15px;margin:0 auto}
-  .header{padding:20px 15px;position:relative}
-  .header::before{font-size:1.5em;top:12px;left:15px}
-  .title{font-size:1.4em;margin-bottom:8px}
-  .subtitle{font-size:.9em}
-  .save-btn{top:10px;right:10px;padding:9px 12px;font-size:.8em}
-  .content{padding:20px 15px}
-  .section{margin-bottom:20px}
-  .section-title{font-size:1.2em;margin-bottom:12px;padding-left:10px}
-  .news-item{padding:15px;margin-bottom:12px;border-radius:10px}
-  .news-item:hover{transform:translateX(3px)}
-  .news-title{font-size:.95em;margin-bottom:6px;line-height:1.4}
-  .news-content{font-size:.9em;line-height:1.5}
-  .external-link{font-size:.75em;margin-top:6px}
-  .trend-box{padding:15px;margin:15px 0}
-  .trend-title{font-size:.95em;margin-bottom:8px}
-  .keywords{gap:6px;margin-top:10px}
-  .keyword{padding:3px 10px;font-size:.75em}
-  .footer{padding:15px;font-size:.8em}
-  .emoji-divider{font-size:1.2em;margin:15px 0}
-  .tip-item::after{font-size:.68em;padding:4px 10px;right:18px;bottom:24px}
-  .tip-item::before{font-size:1.9em;left:18px;bottom:18px}
-  .tip-modal-content{width:94vw}
-}
-</style>
+    /* Modal (오버플로우 안전) */
+    .tip-modal{
+      display:none;position:fixed;inset:0;z-index:99999;width:100%;height:100dvh;
+      background-color:rgba(0,0,0,.8);backdrop-filter:blur(5px);overflow:hidden
+    }
+    @supports not (height:100dvh){.tip-modal{height:100vh}}
+    .tip-modal-content{
+      background:#fff;margin:min(4vh,24px) auto;width:min(900px,92vw);
+      border-radius:20px;box-shadow:0 25px 50px rgba(0,0,0,.3);position:relative;
+      display:flex;flex-direction:column;max-height:calc(100dvh - min(8vh,48px));overflow:hidden;
+      -webkit-overflow-scrolling:touch
+    }
+    .tip-modal-header{
+      background:linear-gradient(135deg,#d35400,#e67e22,#f39c12);color:#fff;padding:22px 20px;
+      border-radius:20px 20px 0 0;display:flex;justify-content:space-between;align-items:center
+    }
+    .tip-modal-header h2{margin:0;font-size:1.2em;font-weight:700}
+    .tip-close{font-size:1.8em;font-weight:bold;cursor:pointer;line-height:1;opacity:.9;transition:opacity .2s;color:#fff}
+    .tip-close:hover{opacity:1}
+    .tip-modal-body{padding:22px 20px 24px;flex:1 1 auto;overflow:auto;-webkit-overflow-scrolling:touch}
+    .detailed-tip-content *{min-width:0}
+    .detailed-tip-content h3{color:#2d3748;margin-bottom:16px;font-size:1.15em}
+    .tip-section{margin-bottom:18px;padding:16px;background:#fffaf0;border-radius:12px;border-left:4px solid #ff8c42}
+    .tip-section h4{color:#4a5568;margin-bottom:8px;font-size:1.05em}
+    .prompt-box{
+      background:#2d3748;color:#e2e8f0;padding:12px;border-radius:8px;font-family:'Courier New',monospace;
+      margin:8px 0;border-left:4px solid #ff8c42;font-size:.9em;line-height:1.6;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere
+    }
+    .real-case{background:linear-gradient(135deg,#fff8dc 0%,#ffe4b5 100%);padding:16px;border-radius:12px;border-left:4px solid #ff6b6b}
+    .real-case h4{color:#d53f8c;margin-bottom:8px}
+    .tip-modal-body img,.tip-modal-body table{max-width:100%;height:auto}
+    .tip-modal-body table{border-collapse:collapse}
+    .tip-modal-body td,.tip-modal-body th{padding:6px 8px;border:1px solid #eee}
+
+    /* Mobile */
+    @media (max-width:768px){
+      body{padding:10px;font-size:14px}
+      .container{border-radius:15px;margin:0 auto}
+      .header{padding:20px 15px;position:relative}
+      .header::before{font-size:1.5em;top:12px;left:15px}
+      .title{font-size:1.4em;margin-bottom:8px}
+      .subtitle{font-size:.9em}
+      .save-btn{top:10px;right:10px;padding:9px 12px;font-size:.8em}
+      .content{padding:20px 15px}
+      .section{margin-bottom:20px}
+      .section-title{font-size:1.2em;margin-bottom:12px;padding-left:10px}
+      .news-item{padding:15px;margin-bottom:12px;border-radius:10px}
+      .news-item:hover{transform:translateX(3px)}
+      .news-title{font-size:.95em;margin-bottom:6px;line-height:1.4}
+      .news-content{font-size:.9em;line-height:1.5}
+      .external-link{font-size:.75em;margin-top:6px}
+      .trend-box{padding:15px;margin:15px 0}
+      .trend-title{font-size:.95em;margin-bottom:8px}
+      .keywords{gap:6px;margin-top:10px}
+      .keyword{padding:3px 10px;font-size:.75em}
+      .footer{padding:15px;font-size:.8em}
+      .emoji-divider{font-size:1.2em;margin:15px 0}
+      .tip-item::after{font-size:.68em;padding:4px 10px;right:18px;bottom:24px}
+      .tip-item::before{font-size:1.9em;left:18px;bottom:18px}
+      .tip-modal-content{width:94vw}
+    }
+  </style>
 </head>
 <body>
-<div class="container">
-  <header class="header">
-    <button class="save-btn" id="saveBtn" onclick="saveAsHTML()" aria-label="뉴스 저장하기" title="HTML로 저장">
-      <span class="icon">⬇️</span> 뉴스 저장하기
-    </button>
-    <div class="date">2025년 10월 29일 (수)</div>
-    <h1 class="title">AI.Do 오늘 뭐 이슈(Issue)</h1>
-    <div class="subtitle">3분투자 오늘의 핫이슈, 공공사례, 실전팁 챙기기!</div>
-  </header>
+  <div class="container">
+    <header class="header">
+      <button class="save-btn" id="saveBtn" onclick="saveAsHTML()" aria-label="뉴스 저장하기" title="HTML로 저장">
+        <span class="icon">⬇️</span> 뉴스 저장하기
+      </button>
+      <div class="date">2025년 10월 30일 (목)</div>
+      <h1 class="title">AI.Do 오늘 뭐 이슈(Issue)</h1>
+      <div class="subtitle">3분투자 오늘의 핫이슈, 공공사례, 실전팁 챙기기!</div>
+    </header>
 
-  <main class="content">
-    <!-- 💡 Tip -->
-    <section class="section">
-      <h2 class="section-title"><span class="emoji">💡</span> 행감 시즌 — “NotebookLM 텍스트만으로 10분 컷 요구자료”</h2>
-      <div class="news-item tip-item" onclick="showTipModal()">
-        <h3 class="news-title">🧾 그래프는 No! 텍스트 표·요약·근거 인용만으로 제출물 완성</h3>
-        <p class="news-content">NotebookLM은 <span class="highlight">텍스트 출력 전용</span>입니다. 표는 <code>|</code> 구분 텍스트로 만들고, 엑셀에 붙여넣어 바로 제출 형식으로 바꾸세요.</p>
-        <div class="tip-category"><span class="keyword">수치추출</span><span class="keyword">텍스트표</span><span class="keyword">근거인용</span></div>
-        <div class="tip-link-text">📖 바로 쓰는 프롬프트·검증·엑셀연동 요령 · 클릭!</div>
-      </div>
-    </section>
+    <main class="content">
 
-    <div class="emoji-divider">🏛️ 🏛️ 🏛️</div>
-
-    <!-- 🏛️ Local / 공공사례 (그대로 유지) -->
-    <section class="section">
-      <h2 class="section-title"><span class="emoji">🏛️</span> 지자체·공공 활용사례 (1분)</h2>
-      <a href="https://www.newswire.co.kr/newsRead.php?no=1021428" target="_blank" class="news-item">
-        <h3 class="news-title">🛟 서울 ‘AI 안전 포럼’(10/28~29) — AI 안전·평가·레드팀 글로벌 논의</h3>
-        <p class="news-content">과기정통부·ETRI 주관 <span class="highlight">인공지능 안전 서울 포럼</span>이 열립니다. 거버넌스·평가·레드팀 기법 등 <span class="highlight">공공 안전</span> 이슈를 집중 토론. 일정: 10월 28~29일.</p>
-        <div class="external-link">🔗 newswire.co.kr · 자세히 보기</div>
-      </a>
-    </section>
-
-    <div class="emoji-divider">🔥 🔥 🔥</div>
-
-    <!-- 🔥 Hot (그대로 유지) -->
-    <section class="section">
-      <h2 class="section-title"><span class="emoji">🔥</span> AI 핫이슈 (1분)</h2>
-      <a href="https://biz.chosun.com/industry/business-venture/2025/10/28/BLD6YNX7JJF6VDIKA7OGUSGO6E/" target="_blank" class="news-item">
-        <h3 class="news-title">🚀 중기부, ‘글로벌 초격차 스타트업’ 지원 행사 (10/28~29)</h3>
-        <p class="news-content">서울 광진구 워커힐에서 <span class="highlight">딥테크·AI 스타트업</span> 글로벌 진출을 돕는 대형 행사가 진행 중. 정책·투자·네트워킹을 한 자리에서 제공합니다.</p>
-        <div class="external-link">🔗 조선비즈 · 자세히 보기</div>
-      </a>
-      <a href="https://www.etnews.com/20251027000286" target="_blank" class="news-item">
-        <h3 class="news-title">📂 공공데이터 X AI 챌린지 — 공공 현장데이터로 생활문제 해결</h3>
-        <p class="news-content">중기부가 <span class="highlight">공공기관 현장 데이터</span>를 개방, AI로 <span class="highlight">중소기업·소상공인</span> 지원 솔루션을 모집합니다. (접수 11/6~26)</p>
-        <div class="external-link">🔗 etnews.com · 자세히 보기</div>
-      </a>
-      <a href="https://www.korea.kr/multi/visualNewsView.do?newsId=148953219" target="_blank" class="news-item">
-        <h3 class="news-title">🧾 국세청, AI 중소기업 세정지원 카드뉴스 공개</h3>
-        <p class="news-content"><span class="highlight">정기 세무조사 제외·유예</span>, R&amp;D 세액공제 사전심사 등 AI 중소기업 대상 <span class="highlight">세정지원 방안</span> 안내.</p>
-        <div class="external-link">🔗 대한민국 정책브리핑 · 자세히 보기</div>
-      </a>
-    </section>
-
-    <div class="emoji-divider">📊 📊 📊</div>
-
-    <!-- 📊 Trend -->
-    <section class="section">
-      <div class="trend-box">
-        <div class="trend-title">🎯 수요일 AI 트렌드 한눈에</div>
-        <p><strong>공공</strong>은 AI 안전·거버넌스 논의가 본격화, <strong>산업</strong>은 딥테크 스타트업 지원 확대, <strong>데이터</strong>는 공공현장 개방·실증으로 연결 중. 실무는 <em>텍스트 표+근거 인용</em>으로 빠르게 제출!</p>
-        <div class="keywords">
-          <span class="keyword">#NotebookLM</span>
-          <span class="keyword">#텍스트표</span>
-          <span class="keyword">#근거인용</span>
-          <span class="keyword">#행감대응</span>
-          <span class="keyword">#수치추출</span>
+      <!-- 🧠 오늘의 명언 -->
+      <section class="section">
+        <h2 class="section-title"><span class="emoji">🧠</span> 오늘의 한 문장</h2>
+        <div class="quote-card">
+          <div class="quote-text">“계획 그 자체보다 중요한 것은 ‘계획하는 과정’이다.”</div>
+          <div class="quote-author">— 드와이트 D. 아이젠하워</div>
         </div>
+      </section>
+
+      <!-- 💡 Tip -->
+      <section class="section">
+        <h2 class="section-title"><span class="emoji">💡</span> 행감 시즌 — “NotebookLM 텍스트만으로 10분 컷 요구자료”</h2>
+        <div class="news-item tip-item" onclick="showTipModal()">
+          <h3 class="news-title">🧾 그래프는 No! 텍스트 표·요약·근거 인용만으로 제출물 완성</h3>
+          <p class="news-content">NotebookLM은 <span class="highlight">텍스트 출력 전용</span>입니다. 표는 <code>|</code> 구분 텍스트로 만들고, 엑셀에 붙여넣어 바로 제출 형식으로 바꾸세요.</p>
+          <div class="tip-category"><span class="keyword">수치추출</span><span class="keyword">텍스트표</span><span class="keyword">근거인용</span></div>
+          <div class="tip-link-text">📖 바로 쓰는 프롬프트·검증·엑셀연동 요령 · 클릭!</div>
+        </div>
+      </section>
+
+      <div class="emoji-divider">🏛️ 🏛️ 🏛️</div>
+
+      <!-- 🏛️ 지자체 사례 (1개) -->
+      <section class="section">
+        <h2 class="section-title"><span class="emoji">🏛️</span> 지자체 AI 활용사례 (1분 읽기)</h2>
+        <a href="https://www.incheon.go.kr/IC010205/view?repSeq=DOM_0000000013358844" target="_blank" class="news-item">
+          <h3 class="news-title">🏙️ 인천시, LG CNS와 ‘AI·로봇 기반 미래도시’ 추진</h3>
+          <p class="news-content">인천시가 민간과 협력해 <span class="highlight">AI 완전가로, 로봇 생활지원, 데이터 기반 모빌리티·환경관리</span> 등을 기본계획에 반영해 원도심·노후계획도시로 확산합니다.</p>
+          <div class="external-link">🔗 incheon.go.kr · 클릭해서 자세히 보기</div>
+        </a>
+      </section>
+
+      <div class="emoji-divider">🔥 🔥 🔥</div>
+
+      <!-- 🔥 핫이슈 (1개) -->
+      <section class="section">
+        <h2 class="section-title"><span class="emoji">🔥</span> AI 핫이슈 (1분 읽기)</h2>
+        <a href="https://www.newswire.co.kr/newsRead.php?no=1021575" target="_blank" class="news-item">
+          <h3 class="news-title">🛡️ ‘AI 안전 서울 포럼’ 개막 — 평가·레드티밍 등 글로벌 논의</h3>
+          <p class="news-content">과기정통부·ETRI 주관 <span class="highlight">인공지능 안전 포럼</span>이 10/28~29 개최되어 거버넌스·평가·레드팀 이슈를 집중 논의했습니다. 공공의 <span class="highlight">안전 검증 역량</span> 강화에 주목.</p>
+          <div class="external-link">🔗 newswire.co.kr · 클릭해서 자세히 보기</div>
+        </a>
+      </section>
+
+      <div class="emoji-divider">📊 📊 📊</div>
+
+      <!-- 📊 Trend -->
+      <section class="section">
+        <div class="trend-box">
+          <div class="trend-title">🎯 목요일 AI 트렌드 한눈에</div>
+          <p><strong>지자체</strong>는 민관 협력으로 AI 도시 인프라 확장, <strong>중앙</strong>은 AI 안전·평가 논의 본격화. 실무는 <em>텍스트 표+근거 인용</em>으로 빠르게 제출!</p>
+          <div class="keywords">
+            <span class="keyword">#NotebookLM</span>
+            <span class="keyword">#텍스트표</span>
+            <span class="keyword">#근거인용</span>
+            <span class="keyword">#AI도시</span>
+            <span class="keyword">#AI안전</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>🤖 AI.Do | 매일 업데이트 | 궁금한 점은 언제든 댓글로!</p>
+      <p style="margin-top:8px;font-size:.8em;">💬 오늘 뉴스 어떠셨나요? 피드백 환영해요!</p>
+      <div style="margin-top:15px;text-align:center;">
+        <img src="https://hitscounter.dev/api/hit?url=https%3A%2F%2Fchrisryugj.github.io%2FAIDo%2F&label=AI-Do&icon=book-half&color=%23cc9a06&message=&style=flat&tz=Asia%2FSeoul" alt="AI-Do View Counter">
       </div>
-    </section>
-  </main>
+      <p style="margin-top:8px;font-size:.75em;opacity:.7;">✨ Made by 류주임</p>
+    </footer>
+  </div>
 
-  <footer class="footer">
-    <p>🤖 AI.Do | 매일 업데이트 | 궁금한 점은 언제든 댓글로!</p>
-    <p style="margin-top:8px;font-size:.8em;">💬 오늘 뉴스 어떠셨나요? 피드백 환영해요!</p>
-    <div style="margin-top:15px;text-align:center;">
-      <img src="https://hitscounter.dev/api/hit?url=https%3A%2F%2Fchrisryugj.github.io%2FAIDo%2F&label=AI-Do&icon=book-half&color=%23cc9a06&message=&style=flat&tz=Asia%2FSeoul" alt="AI-Do View Counter">
-    </div>
-    <p style="margin-top:8px;font-size:.75em;opacity:.7;">✨ Made by 류주임</p>
-  </footer>
-</div>
+  <!-- Tip Modal -->
+  <div id="tipModal" class="tip-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="tip-modal-content">
+      <div class="tip-modal-header">
+        <h2>🎯 텍스트만으로 10분 컷 — 표(텍스트)·요약·근거 인용</h2>
+        <span class="tip-close" onclick="hideTipModal()" aria-label="닫기">&times;</span>
+      </div>
+      <div class="tip-modal-body">
+        <div class="detailed-tip-content">
 
-<!-- Tip Modal: 텍스트 기반 실전 루틴 -->
-<div id="tipModal" class="tip-modal" role="dialog" aria-modal="true" aria-hidden="true">
-  <div class="tip-modal-content">
-    <div class="tip-modal-header">
-      <h2>🎯 텍스트만으로 10분 컷 — 표(텍스트)·요약·근거 인용</h2>
-      <span class="tip-close" onclick="hideTipModal()" aria-label="닫기">&times;</span>
-    </div>
-    <div class="tip-modal-body">
-      <div class="detailed-tip-content">
+          <h3>✅ 이렇게 쓰면 됩니다 (NotebookLM은 <em>텍스트 출력만</em>)</h3>
+          <p>표는 <strong>세로막대 대신</strong> <code>항목 | 값 | 출처</code>처럼 <strong>파이프(|)</strong> 구분 텍스트로 만들고, <em>엑셀에 그대로 붙여넣기</em> 하면 표로 정리됩니다.</p>
 
-        <h3>✅ 이렇게 쓰면 됩니다 (NotebookLM은 <em>텍스트 출력만</em>)</h3>
-        <p>표는 <strong>세로막대 대신</strong> <code>항목 | 값 | 출처</code>처럼 <strong>파이프(|)</strong> 구분 텍스트로 만들고, <em>엑셀에 그대로 붙여넣기</em> 하면 표로 정리됩니다.</p>
-
-        <div class="tip-section">
-          <h4>1) 빠른 준비 (2분)</h4>
-          <p>문서함에서 필요한 PDF/한글/보고서를 모아 한 노트에 업로드. 파일명은 <code>기관_문서명_연도</code>로 통일.</p>
-          <div class="prompt-box">[노트 설명 — 고정 규칙(복붙)]
+          <div class="tip-section">
+            <h4>1) 빠른 준비 (2분)</h4>
+            <p>문서함에서 필요한 PDF/한글/보고서를 모아 한 노트에 업로드. 파일명은 <code>기관_문서명_연도</code>로 통일.</p>
+            <div class="prompt-box">[노트 설명 — 고정 규칙(복붙)]
 출력 형식 고정:
 - 표(텍스트): 항목 | 값 | 출처(기관/연도/p.)
 - 3줄 요약: 결론·근거·시사점
 규칙:
 - 모든 수치/주장 옆에 20~40자 원문 인용 + [p./표] 표기
 - 최신 연도 여부 명시, 불명확하면 "-" 처리</div>
-        </div>
+          </div>
 
-        <div class="tip-section">
-          <h4>2) 수치만 뽑아 표(텍스트)로 (3분)</h4>
-          <div class="prompt-box">[수치 추출 → 표 텍스트]
+          <div class="tip-section">
+            <h4>2) 수치만 뽑아 표(텍스트)로 (3분)</h4>
+            <div class="prompt-box">[수치 추출 → 표 텍스트]
 "2022~2024년 {사업명} 집행액과 집행률만 표(텍스트)로 출력.
 형식: 항목 | 값 | 출처(기관/연도/p.)
 - 항목: 연도별 집행액, 집행률
 - 값: 숫자만(단위 함께)
 - 각 행 끝에 [기관/연도/p.] 표기"</div>
-          <p>👉 표 텍스트를 복사해 엑셀에 붙여넣으면 열로 분리됩니다(데이터-텍스트 나누기 또는 구분 기호 ‘|’).</p>
-        </div>
+            <p>👉 표 텍스트를 복사해 엑셀에 붙여넣으면 열로 분리됩니다(데이터-텍스트 나누기 또는 구분 기호 ‘|’).</p>
+          </div>
 
-        <div class="tip-section">
-          <h4>3) 3줄 요약 + 근거 인용 (2분)</h4>
-          <div class="prompt-box">[요약 + 근거 인용]
+          <div class="tip-section">
+            <h4>3) 3줄 요약 + 근거 인용 (2분)</h4>
+            <div class="prompt-box">[요약 + 근거 인용]
 "위 표를 근거로 3줄 요약(결론·근거·시사점)을 출력.
 각 줄 끝에 원문 1문장 인용과 [p./표]를 붙여줘."</div>
-        </div>
+          </div>
 
-        <div class="tip-section">
-          <h4>4) 검증 체크리스트 (1분)</h4>
-          <p>□ 표 모든 행에 [기관/연도/p.] 있는가? □ 최신 연도 반영? □ 숫자는 원문과 일치? □ 불명확 값은 ‘-’ 표기?</p>
-        </div>
+          <div class="tip-section">
+            <h4>4) 검증 체크리스트 (1분)</h4>
+            <p>□ 표 모든 행에 [기관/연도/p.] 있는가? □ 최신 연도 반영? □ 숫자는 원문과 일치? □ 불명확 값은 ‘-’ 표기?</p>
+          </div>
 
-        <div class="tip-section">
-          <h4>5) 엑셀로 마무리 (2분)</h4>
-          <p>엑셀에서 <em>데이터 → 텍스트 나누기</em>로 구분기호 <code>|</code> 선택 → 표 서식 적용 → 제출.</p>
-        </div>
+          <div class="tip-section">
+            <h4>5) 엑셀로 마무리 (2분)</h4>
+            <p>엑셀에서 <em>데이터 → 텍스트 나누기</em>로 구분기호 <code>|</code> 선택 → 표 서식 적용 → 제출.</p>
+          </div>
 
-        <div class="real-case">
-          <h4>🚀 오늘 10분 플랜</h4>
-          <p>① 파일 2~3개 업로드 → ② “수치 추출→표(텍스트)” 프롬프트 → ③ “3줄 요약+근거” 프롬프트 → ④ 엑셀 붙여넣기.</p>
-          <p style="margin-top:6px">🔎 팁: 스캔 PDF는 먼저 기관 뷰어/스캐너에서 <strong>텍스트 추출(OCR)</strong>한 뒤 올리면 정확도가 올라갑니다.</p>
-        </div>
+          <div class="real-case">
+            <h4>🚀 오늘 10분 플랜</h4>
+            <p>① 파일 2~3개 업로드 → ② “수치 추출→표(텍스트)” 프롬프트 → ③ “3줄 요약+근거” 프롬프트 → ④ 엑셀 붙여넣기.</p>
+            <p style="margin-top:6px">🔎 팁: 스캔 PDF는 먼저 기관 뷰어/스캐너에서 <strong>텍스트 추출(OCR)</strong>한 뒤 올리면 정확도가 올라갑니다.</p>
+          </div>
 
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<script>
-/* Tip Modal */
-function showTipModal(){
-  const m=document.getElementById('tipModal');
-  m.style.display='block';
-  m.setAttribute('aria-hidden','false');
-  document.body.style.overflow='hidden';
-}
-function hideTipModal(){
-  const m=document.getElementById('tipModal');
-  m.style.display='none';
-  m.setAttribute('aria-hidden','true');
-  document.body.style.overflow='auto';
-}
-window.addEventListener('click',function(e){
-  const m=document.getElementById('tipModal');
-  if(e.target===m){ hideTipModal(); }
-});
-document.addEventListener('keydown',function(e){
-  if(e.key==='Escape'){ hideTipModal(); }
-});
+  <script>
+    /* Tip Modal */
+    function showTipModal(){
+      const m=document.getElementById('tipModal');
+      m.style.display='block';
+      m.setAttribute('aria-hidden','false');
+      document.body.style.overflow='hidden';
+    }
+    function hideTipModal(){
+      const m=document.getElementById('tipModal');
+      m.style.display='none';
+      m.setAttribute('aria-hidden','true');
+      document.body.style.overflow='auto';
+    }
+    window.addEventListener('click',function(e){
+      const m=document.getElementById('tipModal');
+      if(e.target===m){ hideTipModal(); }
+    });
+    document.addEventListener('keydown',function(e){
+      if(e.key==='Escape'){ hideTipModal(); }
+    });
 
-/* Save as HTML (AI-Do_오늘뭐이슈(issue)_YYMMDD.html) */
-function saveAsHTML(){
-  const now = new Date();
-  const kst = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Seoul' }));
-  const yy = String(kst.getFullYear()).slice(2);
-  const mm = String(kst.getMonth()+1).padStart(2,'0');
-  const dd = String(kst.getDate()).padStart(2,'0');
-  const yymmdd = yy + mm + dd;
-  const filename = `AI-Do_오늘뭐이슈(issue)_${yymmdd}.html`;
+    /* Save as HTML: AI-Do_오늘뭐이슈(issue)_YYMMDD.html */
+    function saveAsHTML(){
+      const now = new Date();
+      const kst = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Seoul' }));
+      const yy = String(kst.getFullYear()).slice(2);
+      const mm = String(kst.getMonth()+1).padStart(2,'0');
+      const dd = String(kst.getDate()).padStart(2,'0');
+      const yymmdd = yy + mm + dd;
+      const filename = `AI-Do_오늘뭐이슈(issue)_${yymmdd}.html`;
 
-  const doctype = new XMLSerializer().serializeToString(document.doctype);
-  const html = document.documentElement.outerHTML;
-  const full = `${doctype}\n${html}`;
+      const doctype = new XMLSerializer().serializeToString(document.doctype);
+      const html = document.documentElement.outerHTML;
+      const full = `${doctype}\n${html}`;
 
-  const blob = new Blob([full], {type: 'text/html;charset=utf-8'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();}, 0);
-}
+      const blob = new Blob([full], {type: 'text/html;charset=utf-8'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();}, 0);
+    }
 
-/* iOS 회전 시 확대 이슈 예방 */
-window.addEventListener('orientationchange',()=>{setTimeout(()=>{const m=document.querySelector('meta[name="viewport"]'); if(m) m.setAttribute('content','width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover');}, 150);});
-</script>
+    /* iOS 회전 시 확대 이슈 예방 */
+    window.addEventListener('orientationchange',()=>{
+      setTimeout(()=>{
+        const m=document.querySelector('meta[name="viewport"]');
+        if(m) m.setAttribute('content','width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover');
+      }, 150);
+    });
+  </script>
 </body>
 </html>
