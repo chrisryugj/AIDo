@@ -603,6 +603,38 @@
             font-weight: 700;
         }
 
+        .filter-btn {
+            background: white;
+            border: 2px solid #e0e0e0;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1em;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .filter-btn:hover {
+            background: #f8f9fa;
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        .case-card {
+            display: none;
+        }
+
+        .case-card.show {
+            display: block;
+        }
+
         @media (max-width: 768px) {
             body {
                 padding: 10px;
@@ -689,8 +721,17 @@
 
             <h2 id="cases" class="section-title">📊 유형별 처리절차</h2>
 
+            <!-- 카테고리 필터 버튼 -->
+            <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; justify-content: center;">
+                <button class="filter-btn active" onclick="filterCases('all')">전체보기</button>
+                <button class="filter-btn" onclick="filterCases('family')">가구 구성 변동</button>
+                <button class="filter-btn" onclick="filterCases('insurance')">건강보험료 조정</button>
+                <button class="filter-btn" onclick="filterCases('overseas')">해외체류</button>
+                <button class="filter-btn" onclick="filterCases('life')">출생/사망</button>
+            </div>
+
             <!-- Case 1 -->
-            <div class="case-card">
+            <div class="case-card" data-category="family">
                 <div class="case-header">
                     <div class="case-number">1</div>
                     <div>
@@ -769,7 +810,7 @@
             </div>
 
             <!-- Case 2 -->
-            <div class="case-card">
+            <div class="case-card" data-category="family">
                 <div class="case-header">
                     <div class="case-number">2</div>
                     <div>
@@ -837,7 +878,7 @@
             </div>
 
             <!-- Case 3 -->
-            <div class="case-card">
+            <div class="case-card" data-category="overseas">
                 <div class="case-header">
                     <div class="case-number">3</div>
                     <div>
@@ -894,7 +935,7 @@
             </div>
 
             <!-- Case 4 -->
-            <div class="case-card">
+            <div class="case-card" data-category="overseas">
                 <div class="case-header">
                     <div class="case-number">4</div>
                     <div>
@@ -954,7 +995,7 @@
             </div>
 
             <!-- Case 5 -->
-            <div class="case-card">
+            <div class="case-card" data-category="insurance">
                 <div class="case-header">
                     <div class="case-number">5</div>
                     <div>
@@ -1041,7 +1082,7 @@
             </div>
 
             <!-- Case 6 -->
-            <div class="case-card">
+            <div class="case-card" data-category="family">
                 <div class="case-header">
                     <div class="case-number">6</div>
                     <div>
@@ -1107,7 +1148,7 @@
             </div>
 
             <!-- Case 7 -->
-            <div class="case-card">
+            <div class="case-card" data-category="family">
                 <div class="case-header">
                     <div class="case-number">7</div>
                     <div>
@@ -1167,7 +1208,7 @@
             </div>
 
             <!-- Case 8 -->
-            <div class="case-card">
+            <div class="case-card" data-category="life">
                 <div class="case-header">
                     <div class="case-number">8</div>
                     <div>
@@ -1241,7 +1282,7 @@
             </div>
 
             <!-- Case 9 -->
-            <div class="case-card">
+            <div class="case-card" data-category="life">
                 <div class="case-header">
                     <div class="case-number">9</div>
                     <div>
@@ -1893,6 +1934,7 @@
     </div>
 
     <script>
+        // FAQ 토글 함수
         function toggleFAQ(element) {
             const faqItem = element.parentElement;
             const isOpen = faqItem.classList.contains('open');
@@ -1907,6 +1949,36 @@
                 faqItem.classList.add('open');
             }
         }
+
+        // 케이스 필터 함수
+        function filterCases(category) {
+            const cases = document.querySelectorAll('.case-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            // 버튼 활성화 상태 변경
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // 케이스 표시/숨김
+            if (category === 'all') {
+                cases.forEach(card => card.classList.add('show'));
+            } else {
+                cases.forEach(card => {
+                    if (card.dataset.category === category) {
+                        card.classList.add('show');
+                    } else {
+                        card.classList.remove('show');
+                    }
+                });
+            }
+        }
+
+        // 페이지 로드 시 모든 케이스 표시
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.case-card').forEach(card => {
+                card.classList.add('show');
+            });
+        });
     </script>
 </body>
 </html>
