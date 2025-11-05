@@ -1,0 +1,1912 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>민생회복 소비쿠폰 2차 이의신청 처리절차 안내</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        header h1 {
+            font-size: 2.2em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .main-nav {
+            width: 100%;
+            background: white;
+            border-bottom: 3px solid #f0f0f0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .nav-button {
+            flex: 1;
+            max-width: 240px;
+            background: white;
+            border: none;
+            padding: 20px 30px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s;
+            position: relative;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-button:hover {
+            background: #f8f9fa;
+            color: #667eea;
+        }
+
+        .info-banner {
+            width: 100%;
+            max-width: 100%;
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 25px 40px;
+            margin: 30px 0;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        .info-banner h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .info-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .info-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .content {
+            width: 100%;
+            max-width: 100%;
+            padding: 40px;
+            overflow-x: hidden;
+            box-sizing: border-box;
+        }
+
+        .case-card {
+            width: 100%;
+            max-width: 100%;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+            box-sizing: border-box;
+        }
+
+        .case-card:hover {
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+
+        .case-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .case-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .case-title {
+            font-size: 1.5em;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .case-type-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-left: 15px;
+            font-weight: 600;
+        }
+
+        .badge-auto {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .badge-forward {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .process-flow {
+            width: 100%;
+            max-width: 100%;
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-sizing: border-box;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .flow-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .flow-step:not(:last-child)::after {
+            content: '↓';
+            position: absolute;
+            left: 20px;
+            bottom: -20px;
+            font-size: 1.5em;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .step-icon {
+            background: #667eea;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+            font-weight: bold;
+        }
+
+        .step-content {
+            flex: 1;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+        }
+
+        .step-content strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .notice-box {
+            width: 100%;
+            max-width: 100%;
+            background: #fff9e6;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        .notice-box h4 {
+            color: #f57c00;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .notice-box ul {
+            margin-left: 20px;
+        }
+
+        .notice-box li {
+            margin-bottom: 8px;
+        }
+
+        .special-box {
+            width: 100%;
+            max-width: 100%;
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        .special-box h4 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .summary-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .summary-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .summary-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .summary-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .check-icon {
+            color: #4caf50;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .warning-banner {
+            width: 100%;
+            max-width: 100%;
+            background: #ffebee;
+            border: 2px solid #ef5350;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            box-sizing: border-box;
+        }
+
+        .warning-banner h3 {
+            color: #c62828;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .warning-banner ol {
+            margin-left: 20px;
+        }
+
+        .warning-banner li {
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        footer {
+            width: 100%;
+            background: #263238;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+            box-sizing: border-box;
+        }
+
+        .actor-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-right: 5px;
+            white-space: nowrap;
+        }
+
+        .actor-applicant {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #90caf9;
+        }
+
+        .actor-emd {
+            background: #f3e5f5;
+            color: #6a1b9a;
+            border: 1px solid #ce93d8;
+        }
+
+        .actor-district {
+            background: #fff3e0;
+            color: #e65100;
+            border: 1px solid #ffb74d;
+        }
+
+        .actor-nhis {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #81c784;
+        }
+
+        .step-icon.icon-applicant {
+            background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%);
+        }
+
+        .step-icon.icon-emd {
+            background: linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%);
+        }
+
+        .step-icon.icon-district {
+            background: linear-gradient(135deg, #e65100 0%, #f57c00 100%);
+        }
+
+        .step-icon.icon-nhis {
+            background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%);
+        }
+
+        .step-icon.icon-result {
+            background: linear-gradient(135deg, #c62828 0%, #e53935 100%);
+        }
+
+        .actor-highlight {
+            border-left: 4px solid;
+            padding-left: 12px;
+            margin: 8px 0;
+        }
+
+        .actor-highlight.highlight-applicant {
+            border-color: #1565c0;
+            background: #e3f2fd22;
+        }
+
+        .actor-highlight.highlight-emd {
+            border-color: #6a1b9a;
+            background: #f3e5f522;
+        }
+
+        .actor-highlight.highlight-district {
+            border-color: #e65100;
+            background: #fff3e022;
+        }
+
+        .actor-highlight.highlight-nhis {
+            border-color: #2e7d32;
+            background: #e8f5e922;
+        }
+
+        .faq-container {
+            margin: 0 auto;
+            width: 100%;
+            max-width: 100%;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .faq-item {
+            width: 100%;
+            max-width: 100%;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-sizing: border-box;
+        }
+
+        .faq-item:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);
+        }
+
+        .faq-question {
+            padding: 20px 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: white;
+            transition: all 0.3s;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .faq-question:hover {
+            background: #f8f9fa;
+        }
+
+        .faq-icon {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            flex-shrink: 0;
+        }
+
+        .faq-text {
+            flex: 1;
+            font-weight: 600;
+            color: #333;
+            font-size: 1.05em;
+        }
+
+        .faq-arrow {
+            color: #667eea;
+            font-weight: bold;
+            transition: transform 0.3s;
+            font-size: 1.2em;
+        }
+
+        .faq-item.open .faq-arrow {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: #f8f9fa;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 1500px;
+            transition: max-height 0.5s ease-in;
+        }
+
+        .faq-answer-content {
+            padding: 25px;
+            line-height: 2;
+            color: #333;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            width: 100%;
+            box-sizing: border-box;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .faq-icon-answer {
+            background: #4caf50;
+            color: white;
+            min-width: 35px;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            flex-shrink: 0;
+        }
+
+        .faq-answer-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .faq-answer-content strong,
+        .faq-answer-text strong {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .answer-section {
+            margin-bottom: 10px;
+        }
+
+        .answer-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            margin-top: 60px;
+            margin-bottom: 30px;
+            color: #667eea;
+            font-size: 2em;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            header h1 {
+                font-size: 1.6em;
+            }
+
+            .nav-button {
+                padding: 15px 15px;
+                font-size: 0.9em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .case-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .case-number {
+                margin-bottom: 15px;
+            }
+
+            .case-card {
+                padding: 20px;
+            }
+
+            .summary-table {
+                font-size: 0.9em;
+            }
+
+            .summary-table th,
+            .summary-table td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📋 민생회복 소비쿠폰 2차 이의신청 처리절차 안내</h1>
+            <p>구청 자치행정과 → 읍면동 주민센터 업무 매뉴얼</p>
+        </header>
+
+        <nav class="main-nav">
+            <div class="nav-container">
+                <a class="nav-button" href="#basic-info">📌 기본정보</a>
+                <a class="nav-button" href="#cases">📊 처리절차</a>
+                <a class="nav-button" href="#summary">📋 요약표</a>
+                <a class="nav-button" href="#faq">❓ FAQ</a>
+            </div>
+        </nav>
+
+        <div class="content">
+            <div id="basic-info" class="info-banner">
+                <h3>📌 이의신청 기본 정보</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>접수기간</strong>
+                        2025.9.22.(월) ~ 10.31.(금)<br>
+                        <small>* 첫 주 요일제 적용</small>
+                    </div>
+                    <div class="info-item">
+                        <strong>처리기한</strong>
+                        2025.11.7.(금)까지 완료
+                    </div>
+                    <div class="info-item">
+                        <strong>접수처</strong>
+                        읍면동 주민센터(오프라인)<br>
+                        국민신문고(온라인)
+                    </div>
+                    <div class="info-item">
+                        <strong>심사주체</strong>
+                        시·군·구 (가구 구성)<br>
+                        건보공단 (건강보험료)
+                    </div>
+                </div>
+            </div>
+
+            <h2 id="cases" class="section-title">📊 유형별 처리절차</h2>
+
+            <!-- Case 1 -->
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-number">1</div>
+                    <div>
+                        <div class="case-title">자녀 부양관계 조정 (양육권 변경)</div>
+                        <span class="case-type-badge badge-forward">건보공단 이관</span>
+                    </div>
+                </div>
+
+                <div class="process-flow">
+                    <div class="flow-step">
+                        <div class="step-icon icon-applicant">👤</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-applicant">신청인</span></strong>
+                            <div class="actor-highlight highlight-applicant">
+                            실부양자(A) 방문 → '가구조정 이의신청' → '자녀 부양관계 조정' 선택
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-emd">🏢</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-emd">읍면동</span> 관련가구 입력 (필수)</strong>
+                            <div class="actor-highlight highlight-emd">
+                            '관련가구(세대주)' 란에 기존 세대주(B) 정보 입력<br>
+                            → 시스템 자동 Lock 설정 (중복지급 방지)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-district">🏛️</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-district">시·군·구</span> 가구 구성 심사</strong>
+                            <div class="actor-highlight highlight-district">
+                            가구원 변동사항 확인
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-nhis">🏥</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-nhis">건보공단</span> 보험료 재산정</strong>
+                            <div class="actor-highlight highlight-nhis">
+                            조정된 가구의 건강보험료 재산정 → 시·군·구 통보
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-district">🏛️</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-district">시·군·구</span> 최종 지급기준 확인</strong>
+                            <div class="actor-highlight highlight-district">
+                            ① 건보료 합산액 ② 재산세 과세표준 합산액 ③ 금융소득 합산액 확인
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-result">✓</div>
+                        <div class="step-content">
+                            <strong>인용 시: 재신청 안내</strong>
+                            <div class="actor-highlight highlight-applicant">
+                            • <span class="actor-badge actor-applicant">신청인(A)</span>: 재신청 절차로 소비쿠폰 지급<br>
+                            • <span class="actor-badge actor-applicant">관련가구(B)</span>: 주민센터 오프라인 방문으로만 신청 가능
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notice-box">
+                    <h4>⚠️ 중요 유의사항</h4>
+                    <ul>
+                        <li><strong>관련가구 세대주 정보 필수 입력</strong> - 미입력 시 중복지급 발생</li>
+                        <li>관련가구는 Lock 설정으로 <strong>카드사 온라인 신청 불가</strong></li>
+                        <li>주민센터 방문을 통해서만 신청 가능</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Case 2 -->
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-number">2</div>
+                    <div>
+                        <div class="case-title">이혼 후 대상자 신규 선정 (복합 사례)</div>
+                        <span class="case-type-badge badge-forward">건보공단 이관</span>
+                    </div>
+                </div>
+
+                <div class="process-flow">
+                    <div class="flow-step">
+                        <div class="step-icon icon-applicant">👤</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-applicant">신청인</span></strong>
+                            <div class="actor-highlight highlight-applicant">
+                            고소득자(B)와 이혼한 신청인(A) 방문<br>
+                            → '건강보험료 조정 이의신청' → '자녀 부양관계 조정' 선택
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-district">🏛️</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-district">시·군·구</span> 가구 구성 심사</strong>
+                            <div class="actor-highlight highlight-district">
+                            이혼으로 인한 가구 분리 확인
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-nhis">🏥</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-nhis">건보공단</span> 각 가구 보험료 재산정</strong>
+                            <div class="actor-highlight highlight-nhis">
+                            이혼 후 각 가구원 보험료 재산정 → 시·군·구 통보
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-district">🏛️</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-district">시·군·구</span> 최종 지급기준 확인</strong>
+                            <div class="actor-highlight highlight-district">
+                            ① 건보료 합산액 ② 재산세 과세표준 합산액 ③ 금융소득 합산액 확인
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-result">✓</div>
+                        <div class="step-content">
+                            <strong>인용 시: 재신청 안내</strong>
+                            <div class="actor-highlight highlight-applicant">
+                            <span class="actor-badge actor-applicant">신청인(A)</span> 및 미성년 자녀: 재신청으로 소비쿠폰 지급
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notice-box">
+                    <h4>⚠️ 유의사항</h4>
+                    <ul>
+                        <li>이혼으로 인해 기존 미지급 대상이었던 경우 적용</li>
+                        <li>미성년 자녀도 함께 신청인(A)에게 지급 가능</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Case 3 -->
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-number">3</div>
+                    <div>
+                        <div class="case-title">해외체류 후 입국 - 피부양자/의료급여</div>
+                        <span class="case-type-badge badge-auto">자체 종결 가능</span>
+                    </div>
+                </div>
+
+                <div class="process-flow">
+                    <div class="flow-step">
+                        <div class="step-icon icon-applicant">👤</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-applicant">신청인</span></strong>
+                            <div class="actor-highlight highlight-applicant">
+                            입국자(직장 피부양자/의료급여 수급권자) 방문<br>
+                            → '가구조정 이의신청' → '해외체류 후 입국' 선택
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-emd">🏢</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-emd">읍면동</span> 보험료 확인</strong>
+                            <div class="actor-highlight highlight-emd">
+                            새올시스템에서 보험료 0원 확인
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-emd">🏢</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-emd">읍면동</span> / <span class="actor-badge actor-district">시·군·구</span> 자체 종결</strong>
+                            <div class="actor-highlight highlight-emd">
+                            인용 처리 완료
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-result">✓</div>
+                        <div class="step-content">
+                            <strong>인용 시: 재신청 안내</strong>
+                            <div class="actor-highlight highlight-applicant">
+                            <span class="actor-badge actor-applicant">신청인</span>: 재신청 절차로 소비쿠폰 지급
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="special-box">
+                    <h4>✅ 1차 이의신청 특례</h4>
+                    1차 이의신청 시 <strong>8.29.(금)까지</strong> '해외체류 후 귀국'으로 인용된 경우<br>
+                    → 별도 2차 이의신청 불필요 (DB 자동 반영, 재신청 불요)
+                </div>
+            </div>
+
+            <!-- Case 4 -->
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-number">4</div>
+                    <div>
+                        <div class="case-title">해외체류 후 입국 - 직장/지역 가입자</div>
+                        <span class="case-type-badge badge-forward">건보공단 이관</span>
+                    </div>
+                </div>
+
+                <div class="process-flow">
+                    <div class="flow-step">
+                        <div class="step-icon icon-applicant">👤</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-applicant">신청인</span></strong>
+                            <div class="actor-highlight highlight-applicant">
+                            입국자(직장가입자 본인/지역가입자) 방문<br>
+                            → '가구조정 이의신청' → '해외체류 후 입국' 선택
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-district">🏛️</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-district">시·군·구</span> 가구 구성 심사</strong>
+                            <div class="actor-highlight highlight-district">
+                            입국자 포함 가구 확인
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-nhis">🏥</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-nhis">건보공단</span> 보험료 재산정</strong>
+                            <div class="actor-highlight highlight-nhis">
+                            입국자 포함 가구의 건강보험료 재산정 → 시·군·구 통보
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-district">🏛️</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-district">시·군·구</span> 최종 지급기준 확인</strong>
+                            <div class="actor-highlight highlight-district">
+                            ① 건보료 합산액 ② 재산세 과세표준 합산액 ③ 금융소득 합산액 확인
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-result">✓</div>
+                        <div class="step-content">
+                            <strong>인용 시: 재신청 안내</strong>
+                            <div class="actor-highlight highlight-applicant">
+                            <span class="actor-badge actor-applicant">신청인</span>: 재신청 절차로 소비쿠폰 지급
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case 5 -->
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-number">5</div>
+                    <div>
+                        <div class="case-title">소득 감소로 인한 건강보험료 조정</div>
+                        <span class="case-type-badge badge-forward">건보공단 이관 필수</span>
+                    </div>
+                </div>
+
+                <div class="process-flow">
+                    <div class="flow-step">
+                        <div class="step-icon icon-applicant">👤</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-applicant">신청인</span></strong>
+                            <div class="actor-highlight highlight-applicant">
+                            신청인(실직/휴폐업/보수월액 감소/재산 매각 등) 방문<br>
+                            → '건강보험료 조정 이의신청' 접수
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-emd">🏢</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-emd">읍면동</span> 접수 및 안내</strong>
+                            <div class="actor-highlight highlight-emd">
+                            <strong style="color: #d32f2f;">→ 건보공단에 별도 건강보험료 조정 신청 필수 안내</strong><br>
+                            <small>* 직장가입자 보수월액 감소는 사업장 사용자가 공단에 신고</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-emd">🏢</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-emd">읍면동</span> 시스템 등록</strong>
+                            <div class="actor-highlight highlight-emd">
+                            새올시스템 등록 → 시·군·구 전달
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-district">🏛️</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-district">시·군·구</span> 건보공단 이관</strong>
+                            <div class="actor-highlight highlight-district">
+                            관련 자료 건보공단 송부
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-nhis">🏥</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-nhis">건보공단</span> 보험료 재산정</strong>
+                            <div class="actor-highlight highlight-nhis">
+                            소득/재산 변동 반영 후 보험료 재산정 → 시·군·구 통보
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-district">🏛️</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-district">시·군·구</span> 최종 지급기준 확인</strong>
+                            <div class="actor-highlight highlight-district">
+                            ① 건보료 합산액 ② 재산세 과세표준 합산액 ③ 금융소득 합산액 확인
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-result">✓</div>
+                        <div class="step-content">
+                            <strong>인용 시: 재신청 안내</strong>
+                            <div class="actor-highlight highlight-applicant">
+                            <span class="actor-badge actor-applicant">신청인</span>: 온라인(카드사) 또는 오프라인(주민센터/은행)에서 일반 신청과 동일하게 재신청
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notice-box">
+                    <h4>⚠️ 필수 안내사항</h4>
+                    <ul>
+                        <li><strong>건보공단 별도 신청 필수</strong> - 지자체 이의신청만으로는 보험료 조정 불가</li>
+                        <li>가구 구성 변동 없이 건보료만 조정된 경우 일반 신청 방식으로 재신청 가능</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Case 6 -->
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-number">6</div>
+                    <div>
+                        <div class="case-title">혼인/합가 - 직장+직장 또는 직장+지역</div>
+                        <span class="case-type-badge badge-auto">자체 종결 가능</span>
+                    </div>
+                </div>
+
+                <div class="process-flow">
+                    <div class="flow-step">
+                        <div class="step-icon icon-applicant">👤</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-applicant">신청인</span></strong>
+                            <div class="actor-highlight highlight-applicant">
+                            신청인(직장+직장 또는 직장+지역 합가) 방문<br>
+                            → '가구조정 이의신청' → '혼인/합가' 선택
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-emd">🏢</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-emd">읍면동</span> 보험료 확인</strong>
+                            <div class="actor-highlight highlight-emd">
+                            각 개별 보험료 확인 및 합산
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-emd">🏢</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-emd">읍면동</span> / <span class="actor-badge actor-district">시·군·구</span> 지급기준 확인</strong>
+                            <div class="actor-highlight highlight-emd">
+                            ① 건보료 합산액 ② 재산세 과세표준 합산액 ③ 금융소득 합산액 확인
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-emd">🏢</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-emd">읍면동</span> / <span class="actor-badge actor-district">시·군·구</span> 자체 종결</strong>
+                            <div class="actor-highlight highlight-emd">
+                            인용 처리 완료
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-result">✓</div>
+                        <div class="step-content">
+                            <strong>인용 시: 재신청 안내</strong>
+                            <div class="actor-highlight highlight-applicant">
+                            <span class="actor-badge actor-applicant">신청인</span>: 재신청 절차로 소비쿠폰 지급
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="special-box">
+                    <h4>✅ 다소득원 특례 적용 가능</h4>
+                    다소득원 기준 충족 시 (직장가입자 2인 이상 또는 연 300만원 이상 소득 지역가입자 2인 이상)<br>
+                    → <strong>+1인 기준 적용</strong>
+                </div>
+            </div>
+
+            <!-- Case 7 -->
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-number">7</div>
+                    <div>
+                        <div class="case-title">혼인/합가 - 지역+지역</div>
+                        <span class="case-type-badge badge-forward">건보공단 이관</span>
+                    </div>
+                </div>
+
+                <div class="process-flow">
+                    <div class="flow-step">
+                        <div class="step-icon icon-applicant">👤</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-applicant">신청인</span></strong>
+                            <div class="actor-highlight highlight-applicant">
+                            신청인(지역+지역 합가) 방문<br>
+                            → '가구조정 이의신청' → '혼인/합가' 선택
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-district">🏛️</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-district">시·군·구</span> 가구 구성 심사</strong>
+                            <div class="actor-highlight highlight-district">
+                            지역가입자 2명 합가 확인
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-nhis">🏥</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-nhis">건보공단</span> 보험료 재산정</strong>
+                            <div class="actor-highlight highlight-nhis">
+                            합산 보험료 재산정 → 시·군·구 통보
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-district">🏛️</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-district">시·군·구</span> 최종 지급기준 확인</strong>
+                            <div class="actor-highlight highlight-district">
+                            ① 건보료 합산액 ② 재산세 과세표준 합산액 ③ 금융소득 합산액 확인
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-result">✓</div>
+                        <div class="step-content">
+                            <strong>인용 시: 재신청 안내</strong>
+                            <div class="actor-highlight highlight-applicant">
+                            <span class="actor-badge actor-applicant">신청인</span>: 재신청 절차로 소비쿠폰 지급
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case 8 -->
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-number">8</div>
+                    <div>
+                        <div class="case-title">출생으로 인한 가구원 증가</div>
+                        <span class="case-type-badge badge-forward">건보공단 이관</span>
+                    </div>
+                </div>
+
+                <div class="process-flow">
+                    <div class="flow-step">
+                        <div class="step-icon icon-applicant">👤</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-applicant">신청인</span></strong>
+                            <div class="actor-highlight highlight-applicant">
+                            신청인(기준일 이후 출생으로 지급자격 변동) 방문<br>
+                            → '가구조정 이의신청' → '출생' 선택
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-district">🏛️</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-district">시·군·구</span> 가구 구성 심사</strong>
+                            <div class="actor-highlight highlight-district">
+                            출생으로 인한 가구원 증가 확인
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-nhis">🏥</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-nhis">건보공단</span> 보험료 재산정</strong>
+                            <div class="actor-highlight highlight-nhis">
+                            출생아 포함 가구의 보험료 재산정 → 시·군·구 통보
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-district">🏛️</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-district">시·군·구</span> 최종 지급기준 확인</strong>
+                            <div class="actor-highlight highlight-district">
+                            ① 건보료 합산액 ② 재산세 과세표준 합산액 ③ 금융소득 합산액 확인
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-result">✓</div>
+                        <div class="step-content">
+                            <strong>인용 시: 재신청 안내</strong>
+                            <div class="actor-highlight highlight-applicant">
+                            <span class="actor-badge actor-applicant">신청인</span>: 재신청 절차로 소비쿠폰 지급
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="special-box">
+                    <h4>✅ 1차 이의신청 특례</h4>
+                    1차 이의신청 시 <strong>9.5.(금)까지</strong> '출생'으로 인용된 경우<br>
+                    → 별도 2차 이의신청 불필요 (DB 자동 반영, 재신청 불요)
+                </div>
+
+                <div class="notice-box">
+                    <h4>⚠️ 적용 사례</h4>
+                    <ul>
+                        <li>기존 2인 가구가 출생으로 3인 가구가 되어 대상에 포함되는 경우</li>
+                        <li>출생으로 인해 지급 자격이 변동되는 경우에만 이의신청 필요</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Case 9 -->
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-number">9</div>
+                    <div>
+                        <div class="case-title">사망으로 인한 가구원 감소</div>
+                        <span class="case-type-badge badge-forward">건보공단 이관</span>
+                    </div>
+                </div>
+
+                <div class="process-flow">
+                    <div class="flow-step">
+                        <div class="step-icon icon-applicant">👤</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-applicant">신청인</span></strong>
+                            <div class="actor-highlight highlight-applicant">
+                            신청인(가구원 사망으로 가구 구성 변동) 방문<br>
+                            <strong style="color: #d32f2f;">→ 신청 전 사망자는 지급 대상 제외 안내</strong><br>
+                            → '가구조정 이의신청' → '사망' 선택
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-district">🏛️</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-district">시·군·구</span> 가구 구성 심사</strong>
+                            <div class="actor-highlight highlight-district">
+                            사망자 제외 후 가구 확인
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-nhis">🏥</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-nhis">건보공단</span> 보험료 재산정</strong>
+                            <div class="actor-highlight highlight-nhis">
+                            사망자 제외 후 보험료 재구성 → 시·군·구 통보
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-district">🏛️</div>
+                        <div class="step-content">
+                            <strong><span class="actor-badge actor-district">시·군·구</span> 최종 지급기준 확인</strong>
+                            <div class="actor-highlight highlight-district">
+                            ① 건보료 합산액 ② 재산세 과세표준 합산액 ③ 금융소득 합산액 확인
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon icon-result">✓</div>
+                        <div class="step-content">
+                            <strong>인용 시: 재신청 안내</strong>
+                            <div class="actor-highlight highlight-applicant">
+                            <span class="actor-badge actor-applicant">생존 가구원</span>: 재신청 절차로 소비쿠폰 지급
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notice-box">
+                    <h4>⚠️ 유의사항</h4>
+                    <ul>
+                        <li>신청 전 사망한 경우 사망자는 지급 대상에서 제외</li>
+                        <li>가입자(직장/지역)가 사망한 경우 보험료 재구성 필요</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 요약표 -->
+            <h2 id="summary" class="section-title">📋 건보공단 이관 여부 요약표</h2>
+            
+            <table class="summary-table">
+                <thead>
+                    <tr>
+                        <th style="width: 50%;">이의신청 유형</th>
+                        <th style="width: 25%; text-align: center;">건보공단 이관</th>
+                        <th style="width: 25%; text-align: center;">자체 종결 가능</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>자녀 부양관계 조정</td>
+                        <td class="check-icon">✅ 필요</td>
+                        <td style="text-align: center;">-</td>
+                    </tr>
+                    <tr>
+                        <td>이혼 후 신규 선정</td>
+                        <td class="check-icon">✅ 필요</td>
+                        <td style="text-align: center;">-</td>
+                    </tr>
+                    <tr>
+                        <td>해외체류 후 입국 (피부양자/의료급여)</td>
+                        <td style="text-align: center;">-</td>
+                        <td class="check-icon">✅ 가능</td>
+                    </tr>
+                    <tr>
+                        <td>해외체류 후 입국 (직장/지역가입자)</td>
+                        <td class="check-icon">✅ 필요</td>
+                        <td style="text-align: center;">-</td>
+                    </tr>
+                    <tr>
+                        <td>소득 감소 (건보료 조정)</td>
+                        <td class="check-icon">✅ 필수</td>
+                        <td style="text-align: center;">-</td>
+                    </tr>
+                    <tr>
+                        <td>혼인/합가 (직장+직장, 직장+지역)</td>
+                        <td style="text-align: center;">-</td>
+                        <td class="check-icon">✅ 가능</td>
+                    </tr>
+                    <tr>
+                        <td>혼인/합가 (지역+지역)</td>
+                        <td class="check-icon">✅ 필요</td>
+                        <td style="text-align: center;">-</td>
+                    </tr>
+                    <tr>
+                        <td>출생 (지급자격 변동 시)</td>
+                        <td class="check-icon">✅ 필요</td>
+                        <td style="text-align: center;">-</td>
+                    </tr>
+                    <tr>
+                        <td>사망 (가입자 사망 시)</td>
+                        <td class="check-icon">✅ 필요</td>
+                        <td style="text-align: center;">-</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 공통 확인사항 -->
+            <div class="warning-banner">
+                <h3>🚨 전 유형 공통 최종 확인사항 (필수)</h3>
+                <p style="margin-bottom: 15px; font-weight: 600;">시·군·구 담당자는 이의신청 인용 시 반드시 아래 3가지 합산액을 확인하여 최종 지급기준 충족 여부를 재결정해야 합니다.</p>
+                <ol>
+                    <li>✅ <strong>건강보험료 합산액</strong> 확인</li>
+                    <li>✅ <strong>재산세 과세표준 합산액</strong> 확인</li>
+                    <li>✅ <strong>금융소득 합산액</strong> 확인</li>
+                </ol>
+            </div>
+
+            <!-- FAQ 섹션 -->
+            <h2 id="faq" class="section-title">❓ 자주 묻는 질문 모음 (FAQ)</h2>
+
+            <div class="faq-container">
+                <!-- 기본정보 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">이의신청 접수 기간과 처리 마감 기한은 언제인가요?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                접수 기간은 <strong>2025년 9월 22일(월)부터 10월 31일(금) 18:00까지</strong>입니다.<br>
+                                이의신청 처리는 <strong>11월 7일(금)까지</strong> 완료되어야 합니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">이의신청은 어디서, 어떤 방식으로 접수하나요?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                <div class="answer-section">• <strong>온라인:</strong> 국민신문고를 통해 접수</div>
+                                <div class="answer-section">• <strong>오프라인:</strong> 읍면동 주민센터 방문 접수</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">이의신청에도 요일제가 적용되나요?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                네, 접수 기간 <strong>첫 주(9.22.~9.26.)</strong>에는 요일제가 적용됩니다.<br>
+                                출생년도 끝자리 기준으로 월~금요일에 제한되며, <strong>토요일과 일요일에는 온라인 신청은 모두 가능</strong>하지만 오프라인 신청은 불가합니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">이의신청의 심사는 누가 담당하나요?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                <div class="answer-section">• <strong>가구 구성 관련 사항</strong> (혼인, 이혼, 출생 등): 시·군·구 처리 부서에서 심사·조정</div>
+                                <div class="answer-section">• <strong>소득·건강보험료 관련 사항:</strong> 시·군·구에서 건강보험공단으로 이관하여 재산정 후 통보</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">이의신청이 인용되면 바로 지급되나요?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                아닙니다. 인용 결정 후 대상자는 소비쿠폰을 받기 위해 <strong>신청·지급 절차에 따라 재신청</strong>해야 합니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">이의신청 인용 후 재신청 시, 온라인/오프라인 중 어떤 방식으로 해야 하나요?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                <div class="answer-section" style="margin-bottom: 15px;">
+                                    <strong style="color: #4caf50;">✓ 온라인/오프라인 모두 가능한 경우:</strong><br>
+                                    가구 구성 변동 없이 건강보험료만 조정된 경우
+                                </div>
+                                <div class="answer-section">
+                                    <strong style="color: #f57c00;">✓ 오프라인(주민센터)만 가능한 경우:</strong><br>
+                                    • 민생회복 소비쿠폰 가구의 구성이 변동된 경우<br>
+                                    • 신청 기한(~10.31.) 마감 후 인용된 경우
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">기준일 이후 이사한 경우, 이의신청은 어디에 해야 하나요?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                기준일('25.6.18.) 이후 이사하여 주민등록 이전까지 마친 경우, <strong>이사한 주소지 관할 지자체에 이의신청</strong>이 가능합니다.<br>
+                                이의신청 인용 시, 이사한 지자체에서 지급 및 사용하게 됩니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 가구 변동 FAQ -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">기준일 이후 혼인 또는 이혼했는데, 어떻게 반영하나요?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                <div class="answer-section" style="margin-bottom: 15px;">
+                                    <strong>혼인:</strong> 신고일 기준으로 동일 가구로 조정 가능하며, 조정된 가구가 다소득원 기준을 충족하면 <strong>다소득원 가구 특례 적용</strong>이 가능합니다.
+                                </div>
+                                <div class="answer-section">
+                                    <strong>이혼:</strong> 신고일 또는 판결 선고일 기준으로 별도 가구로 분리 가능합니다. 다만, 이혼 후에도 배우자 일방이 건강보험 피부양자 자격을 유지하거나 동일 세대 지역가입자인 경우 조정이 불가할 수 있습니다.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">이혼 후 자녀를 제가 실부양하는데, 쿠폰은 전 배우자에게 배정되었어요.</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                자녀 부양 관계 조정 사유로 이의신청이 가능합니다.<br>
+                                <strong>실제 부양 상황</strong>에 따라 건강보험 피부양자 관계를 조정한 후 이의신청 처리가 필요하며, <strong>사실상 이혼 상태</strong>(소송 중, 장기간 별거 등)인 경우도 동일하게 조정 가능합니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">이의신청 시 미성년 자녀 쿠폰을 둘러싼 세대주 간의 중복 지급은 어떻게 방지하나요?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                이의신청 접수와 동시에 해당 미성년자 지급분이 포함된 <strong>'관련 가구 세대주'의 지급분 전체에 락(Lock)이 걸립니다</strong>.<br>
+                                이 세대주는 카드사 온라인 신청이 불가하며, 주민센터 오프라인 방문을 통해서만 본인의 지급분을 신청할 수 있습니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">기준일 이후 해외에서 귀국했습니다. 이의신청이 필요한가요?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                이의신청 마감일(10.31.) 이내 귀국한 경우, 출입국 사실 증명서 등 증빙을 통해 이의신청이 가능합니다.<br><br>
+                                <div class="answer-section">• 귀국자가 <strong>직장 피부양자, 의료급여 수급권자</strong> 등 보험료가 0원인 사람 → 지자체 자체 종결 가능</div>
+                                <div class="answer-section">• 귀국자가 <strong>직장가입자 본인 또는 지역가입자</strong> → 건보공단 이관 필요</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">기준일 이후 출생/사망한 가구원이 있다면?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                <div class="answer-section" style="margin-bottom: 15px;">
+                                    <strong>출생:</strong> 가구원에 추가됩니다. 다만, 출생으로 인해 가구원 수가 증가하여 해당 가구가 기존 미대상에서 지급 대상으로 <strong>지급 자격이 변동되는 경우</strong>에는 이의신청이 필요합니다.
+                                </div>
+                                <div class="answer-section">
+                                    <strong>사망:</strong> 가구원에서 제외됩니다. 사망자 발생으로 가구의 건보료가 조정된 경우, 조정된 추정 보험료가 반영됩니다.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">재외국민이나 외국인이 지급 대상에서 누락되었어요.</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                지급 요건(주민등록표 등재, 국민과 동일한 건보 가입/피부양 등)을 충족하지 못했지만 이의신청 기간 내 요건을 충족하여 요청한 경우 지급 대상에 포함될 수 있습니다.<br><br>
+                                <strong>영주권자(F-5), 결혼이민자(F-6), 난민인정자(F-2-4)</strong>는 주민등록 등재와 무관하게 건보 자격만 충족해도 포함됩니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">주소지가 다른 맞벌이 부부가 합가 신청을 할 수 있나요?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                부부가 주소지가 다르고 각각 건강보험 가입자인 경우, 이의신청을 통해 <strong>하나의 가구로 조정 가능</strong>합니다.<br>
+                                두 가구가 합가되어 다소득원 기준을 충족하게 되면 <strong>특례(+1인 기준) 적용</strong>도 가능합니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">주민등록표상 '동거인'으로 되어있어 별도 가구로 분리되었는데, 조정 가능한가요?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                세대주 및 세대원과 '민법상 가족' 관계에 있지 않은 경우 '동거인'으로 등재되나, <strong>실제로는 세대원이었어야 했던 경우</strong>에는 이의신청을 통해 동일 가구로 조정 가능합니다.<br>
+                                동거인 조정은 건보공단 이관이 필요할 수도 있습니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 건보료·자산 FAQ -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">실직이나 휴·폐업 등으로 소득이 줄어 건보료가 조정될 경우 지급 대상이 되나요?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                네, '25년 6월 부과 건보료에 반영되는 소득·재산이 감소한 경우, 이의신청을 통해 건보공단에서 6월 추정 보험료를 재산정하여 반영 가능합니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">건강보험료 조정 이의신청은 어떻게 해야 하나요?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                <strong>신청인은 지자체에 이의신청서를 제출</strong>함과 동시에, <strong>본인이 직접 건강보험공단에 보험료 조정 신청</strong>을 해야 합니다. (순서는 변경 가능)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">직장가입자의 보수월액 감소로 인한 건보료 조정은 어떻게 하나요?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                <strong>직장가입자 본인이 직접 신고할 수 없으며</strong>, '사업장 사용자'가 건보공단(지사)에 '국민건강보험 직장가입자 보수월액 변경신청서'를 제출해야 합니다.<br>
+                                이후 직장가입자(개인)가 지자체에 이의신청서를 제출해야 합니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">지역가입자의 재산 매각으로 인한 건보료 조정은 어떻게 하나요?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                재산 매각일이 <strong>'25년 6월 1일 이전</strong>이나 신고 지연 등으로 6월 고지 시 포함되지 않은 경우, 본인이 건보공단 홈페이지/앱 또는 지사에 재산 변동 신고를 통해 조정 가능합니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">다소득원 가구 특례가 적용되지 않은 경우 이의신청이 가능한가요?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                네, 지급대상자 명부에는 외벌이 가구로 구성되었으나 <strong>다소득원 가구 기준을 충족</strong>(예: 직장가입자 2인 이상, 또는 소득 300만원 이상 지역가입자 2인 이상 등)하는 경우, 이의신청을 통해 <strong>가구원수 +1명 기준을 적용</strong>받을 수 있습니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">재산세 과세표준(컷오프 기준)에 오류가 있는 것 같습니다.</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                재산세 과세표준(12억 원 초과 제외) 관련 오류 정정은 이의신청이 가능합니다.<br>
+                                신청인은 <strong>위택스 홈페이지</strong>에서 본인의 '24년 재산세 과세표준을 조회하여 확인할 수 있으며, 지자체는 표준지방세정보시스템을 통해 심사합니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">금융소득(컷오프 기준)에 오류가 있는 것 같습니다.</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                금융소득(2천만 원 초과 제외) 관련 오류 정정은 이의신청이 가능합니다.<br>
+                                <strong>소득금액증명</strong> 또는 <strong>'나의 금융소득 내역'</strong>을 발급받아 지자체에 제출하여 심사를 요청해야 합니다.<br>
+                                (금융소득 내역이 잘못 산정된 경우, 금융기관에서 '수정된 이자·배당소득 지급 명세서'를 발급받아 제출해야 합니다)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 특이사례 FAQ -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">1차 때 인용되었는데, 2차에 다시 이의신청해야 하나요?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                이의신청 종류와 처리 시점에 따라 다릅니다.<br><br>
+                                <strong style="color: #4caf50;">다음 사유로 해당 시점까지 인용된 경우는 재신청 불필요:</strong><br>
+                                1. <strong>해외 체류 후 귀국:</strong> 8월 29일(금)까지 인용<br>
+                                2. <strong>출생 및 세대내 세대주 변경:</strong> 9월 5일(금)까지 인용<br><br>
+                                → 2차 지급 대상자 명부(DB)에 반영되어 별도 재신청이 불필요합니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">1차 때 인용되었지만 2차에 다시 신청해야 하는 경우는?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                다음의 경우 이의신청이 필요합니다:<br><br>
+                                • 위 시점을 넘겨 인용된 경우<br>
+                                • 1차 이의신청 시 기재된 정보가 부정확하여 DB에 미반영된 경우<br>
+                                • <strong>출생으로 인한 가구원 증가로 지급 자격이 변동된 경우</strong><br><br>
+                                또한, 1차 인용되었더라도 <strong>2차의 소득 하위 90% 기준(건보료 및 컷오프)을 충족해야만 지급 대상</strong>이 됩니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">폭력/학대 피해자라서 주소지 외 보호시설에 있는데, 어떻게 신청하나요?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                가정폭력 등 피해자로서 보호시설에 입소 중인 경우, 주민등록과 다른 <strong>실제 거주지(시설 소재지)에서 이의신청 및 지급 신청이 가능</strong>합니다.<br>
+                                미성년자인 경우에도 직접 신청이 가능하며, 관련 업무 처리 시 <strong>피해자의 인적사항(주소지, 연락처 등)이 타인에게 공개되지 않도록</strong> 각별히 유의해야 합니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">군 장병인데 지급 대상에서 누락되어 이의신청을 하고 싶습니다.</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                군 장병은 일반적인 이의신청 외에도 다음의 특례가 있습니다:<br><br>
+                                • <strong>대리 신청 시 위임장 등 구비서류를 사진으로 제시하는 요건 완화</strong><br>
+                                • <strong>복무지 관할 지자체로 선불카드 관외 신청</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">카드로 지급받았는데, 신용불량 등의 이유로 사용이 어렵습니다. 잔액도 이의신청으로 처리되나요?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                신용불량, 기한 만료, 세대주 사망 등으로 카드를 더 이상 사용할 수 없게 된 경우, <strong>'민생회복 소비쿠폰 잔액 전환 신청서'</strong>를 6월 18일 기준 주소지 읍면동 주민센터에 제출하여 잔액을 <strong>선불카드나 상품권으로 전환</strong>할 수 있습니다.<br>
+                                (이 경우, 증빙서류 발급이 어렵다면 증빙서류 없이도 신청 허용됨)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span class="faq-icon">Q</span>
+                        <span class="faq-text">잘못 지급받아 환수 통지(반환명령)를 받았습니다. 이에 대한 불복 절차가 있나요?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <span class="faq-icon-answer">A</span>
+                            <div class="faq-answer-text">
+                                환수대상자는 환수결정 통지를 받은 날로부터 <strong>20일 이내에 서면으로 이의신청</strong>이 가능합니다.<br>
+                                시군구는 환수 통지 시 이의신청 절차 안내 및 서식을 동봉해야 합니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>구청 자치행정과 민생회복 소비쿠폰 담당</strong></p>
+            <p style="margin-top: 10px; opacity: 0.8;">이의신청 관련 문의사항은 담당부서로 연락주시기 바랍니다.</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            const isOpen = faqItem.classList.contains('open');
+            
+            // 다른 모든 FAQ 항목 닫기
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('open');
+            });
+            
+            // 현재 항목 토글
+            if (!isOpen) {
+                faqItem.classList.add('open');
+            }
+        }
+    </script>
+</body>
+</html>
