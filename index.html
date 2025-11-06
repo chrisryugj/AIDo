@@ -9,7 +9,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
     <meta property="og:title" content="AI출근길 (25.11.06.목) - 공공 AI 실전팁">
-    <meta property="og:description" content="방대한 공공 문서 요약에 시간을 낭비하지 마세요. AI가 핵심 내용을 빠르게 파악하고 간결하게 정리하여 업무 효율을 극대화합니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
+    <meta property="og:description" content="방대한 분량의 정책 문서, 보고서, 법규 등을 신속하게 요약하고 핵심 내용을 파악합니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
     <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.jpg">
 
     <style>
@@ -487,43 +487,43 @@
 
         // 💬 오늘의 한마디 (매일 교체)
         const todayQuote = {
-            text: "우리가 직면한 중대한 문제들은 그 문제들을 만들 때 가졌던 사고방식으로는 해결할 수 없다.",
-            author: "알베르트 아인슈타인"
+            text: "성공은 최종적인 것이 아니며, 실패는 치명적인 것이 아니다. 중요한 것은 계속하려는 용기이다.",
+            author: "윈스턴 처칠"
         };
 
         // 💡 오늘의 실전 팁 (매일 새 주제)
         const todayTip = {
-            title: "장문 보고서 요약, AI로 5분 만에 핵심 파악!",
-            summary: "방대한 공공 문서 요약에 시간을 낭비하지 마세요. AI가 핵심 내용을 빠르게 파악하고 간결하게 정리하여 업무 효율을 극대화합니다.",
-            situation: "새로운 정책 보고서, 법률 초안, 또는 민원 분석 자료 등 수십 페이지에 달하는 문서를 짧은 시간 내에 이해하고 팀원들에게 공유해야 할 때가 많습니다. 수동으로 요약하기에는 시간이 부족하고 핵심을 놓칠 위험이 있습니다.",
-            solution: "AI 기반 도구에 문서를 입력하고 요약 프롬프트를 사용하면, 핵심 내용, 주요 논점, 결론 등을 몇 분 안에 추출하여 업무 효율을 극대화할 수 있습니다. AI는 복잡한 내용을 구조화하고 주요 정보를 식별하는 데 탁월합니다.",
-            prompt: `다음 정책 보고서 [보고서 내용 전체 붙여넣기]를 500자 내외로 요약하고, 주요 정책 목표, 예상되는 파급효과, 그리고 담당 공무원이 즉시 주목해야 할 핵심 사항 3가지를 명확히 제시해 주세요. 보고서의 전문성과 객관적인 어조를 유지하면서 간결하게 작성해 주십시오.`,
-            result: `이 보고서는 [정책명]의 도입 배경과 목표를 설명하며, [주요 내용 1], [주요 내용 2], [주요 내용 3] 등을 핵심으로 다룹니다. 예상 파급효과는 [긍정적 효과]와 [부정적 효과]가 있으며, 담당 공무원은 특히 [핵심 사항 1], [핵심 사항 2], [핵심 사항 3]에 유의하여 업무에 반영해야 합니다.`,
-            usage: "정책 브리핑 자료 준비, 내부 회의 전 사전 학습, 신규 직원 교육 자료 제작 등 다양한 상황에서 복잡한 문서를 빠르고 정확하게 이해하고 공유하는 데 활용할 수 있습니다. 이를 통해 의사결정 시간을 단축하고 업무의 질을 높일 수 있습니다."
+            title: "복잡한 정책 문서 요약 및 핵심 추출",
+            summary: "방대한 분량의 정책 문서, 보고서, 법규 등을 신속하게 요약하고 핵심 내용을 파악합니다.",
+            situation: "새로운 정책 법안이나 보고서를 검토해야 하는데 시간이 부족합니다. 방대한 양의 정보를 빠르게 이해하고 주요 쟁점을 파악해야 합니다.",
+            solution: "GPT에게 문서의 요약과 주요 쟁점, 담당 부서에 미칠 영향 등을 분석하도록 요청합니다.",
+            prompt: `다음 정책 문서의 주요 내용을 500자 이내로 요약하고, 핵심 쟁점 3가지와 우리 부서에 미칠 영향을 분석해줘. [문서 내용 붙여넣기]`,
+            result: `정확하고 간결한 요약본과 핵심 쟁점, 영향 분석을 통해 문서 이해 시간을 대폭 단축하고 업무 효율성을 높일 수 있습니다.`,
+            usage: "정책 기획, 법규 검토, 보고서 작성 전 사전 정보 습득"
         };
 
         // 🏛️ 지자체 AI 활용사례
         const localGovCase = {
             title: "정책평가연구원, AI 기반 정책리스크 대응 솔루션 'PERI AI' 오픈",
-            summary: "정책평가연구원이 정부 부처, 국회, 공공기관의 방대한 정책 정보를 대화형으로 제공하는 AI 기반 정책리스크 대응 솔루션 'PERI AI'를 정식 오픈했다. 이 플랫폼은 챗봇 기능과 맞춤형 알림 서비스를 통해 정책 정보를 쉽게 검색하고 신뢰도 높은 답변을 제공한다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHeZ7OaB1vqS21uzNVONEpWeN63tJ75In5YPc5UAlmqLwZG-8RKJQMhFO6G03SJvveP4KOzJFniCp0zonbIV0L-eEMt0m0e7XXy03MfJ7breMXvMNvQX4Rr6iq5pSLK9ZOnliN1bj15RVtC1TBto-I2TLfPEVYm4MCLgqtCA8Y="
+            summary: "정책평가연구원이 인공지능(AI) 기반 정책리스크 대응 솔루션 'PERI AI'를 정식 오픈했습니다. 이 플랫폼은 정부 부처, 국회, 공공기관의 방대한 정책 정보를 대화형·맞춤형으로 제공하며 챗봇 기능을 포함하여 스마트 행정을 지원합니다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHSE9PDnnDrrziSzNxjAWdhiK0wYG3d1L2CPLs8oRwCtGkc4MAaX6MIA32KHJHb_3-9iARdz57t6RJuCGYnsRmqAf4ADIIOaZtasrqAyiG9DpJXKS7bJJXMRbToWG9QJP8bAScFkRDpOCMzYfw7p9cOVPVrhz8XwuHT_80kRRs="
         };
 
         // 🔥 AI 핫이슈
         const hotIssue = {
-            title: "AI로 행정혁신 촉진…정부, '공공부문 인공지능 윤리원칙' 마련",
-            summary: "행정안전부는 인공지능(AI) 기술을 통한 행정혁신을 촉진하고 국민 신뢰를 확보하기 위해 '공공부문 인공지능 윤리원칙'을 마련했다. 이 원칙은 공공성, 투명성, 안전성, 형평성, 책임성을 목표로 한다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGU9Rm5KB1DQCQ9VxRLrUW_O-guG6r-GoZVglIgCYSj2mIepsohXW8f9uaCB_V_FtsCAUE5wu_U0ZW13m_Tz1uGkY0QSeHAk1IHDukrOfpeSVL7Wcsr_uvkZ1vRlcDJbJvjUPjrSu5TgvRYK6vbrDTGb6EKKYts"
+            title: "정책 실종 ICT 국감…답 못찾은 AI·보안·플랫폼 규제",
+            summary: "올해 과학기술정보방송통신위원회 국정감사에서 AI 전략, 보안, 플랫폼 규제 등 현안에 대한 여야 충돌로 검증과 해법 제시가 부족했다는 비판이 제기되었다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG7jbPr3eDiPqdNUpoio33au1DWhIzCclrE04LIivXBqzv_Y0lyMoDjooTyIGpkMeTI29vQyjjUAm7WBsEM3UJzqAXJ6Cfr6vFTgjEXHfBJcEQmlPVtuBeESO_EzNV1IFAhZmXlxgLftijz--ssAp49uNYKz4N5DJOScIPA"
         };
 
         // 📊 오늘의 AI 트렌드
-        const todayTrendsDescription = "생성형 AI가 공공 부문에서 보고서 작성, 민원 응대, 정책 분석 등 다양한 행정 업무에 활용되며 업무 효율성을 높이고 있습니다. 이를 통해 공무원은 더 중요한 전략적 업무에 집중하고 시민 서비스 품질을 향상시킬 수 있습니다.";
-        const todayTrends = ["#공공AI","#생성형AI","#정부혁신","#스마트행정","#AI활용"];
+        const todayTrendsDescription = "AI가 개인 맞춤형 공공 서비스 제공 및 민원 응대에 적극 활용되며 시민들의 만족도를 높이고 행정 효율성을 극대화하고 있습니다. 챗봇을 넘어선 능동적인 서비스 추천과 예측 기반의 선제적 행정 서비스가 가능해지고 있습니다.";
+        const todayTrends = ["#AI행정","#맞춤형서비스","#시민만족도","#스마트정부","#공공AI"];
 
         // 🏷️ OG 태그 (매일 업데이트)
         const ogTags = {
             title: "AI출근길 (25.11.06.목) - 공공 AI 실전팁",
-            description: "방대한 공공 문서 요약에 시간을 낭비하지 마세요. AI가 핵심 내용을 빠르게 파악하고 간결하게 정리하여 업무 효율을 극대화합니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
+            description: "방대한 분량의 정책 문서, 보고서, 법규 등을 신속하게 요약하고 핵심 내용을 파악합니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
         };
     </script>
     <!-- ============================================ -->
