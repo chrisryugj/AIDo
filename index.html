@@ -9,7 +9,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
     <meta property="og:title" content="AI출근길 (25.11.07.금) - 공공 AI 실전팁">
-    <meta property="og:description" content="복잡한 정책 문서를 GPT를 활용하여 신속하게 요약하고 핵심 내용을 파악합니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
+    <meta property="og:description" content="AI를 활용하여 방대한 분량의 보고서나 정책 문건에서 핵심 내용을 신속하게 요약하고 주요 사항을 추출하는 방법입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
     <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.jpg">
 
     <style>
@@ -487,43 +487,43 @@
 
         // 💬 오늘의 한마디 (매일 교체)
         const todayQuote = {
-            text: "세상을 위한 당신의 따뜻한 발걸음이 모여 아름다운 길을 만듭니다. 잠시 멈춰 서서, 그 길 위에서 당신의 평안을 찾으세요.",
+            text: "보이지 않는 곳에서 흘린 당신의 땀방울이 이 사회의 굳건한 뿌리가 됩니다. 잠시 숨을 고르고, 당신의 존재가 얼마나 소중한지 느껴보세요.",
             author: "마더 테레사"
         };
 
         // 💡 오늘의 실전 팁 (매일 새 주제)
         const todayTip = {
-            title: "정책 보고서 요약 및 핵심 도출",
-            summary: "복잡한 정책 문서를 GPT를 활용하여 신속하게 요약하고 핵심 내용을 파악합니다.",
-            situation: "새로 발표된 100페이지 분량의 환경 정책 보고서를 검토하고, 핵심 내용을 상부에 보고해야 합니다. 시간이 부족하여 전체를 자세히 읽기 어렵습니다.",
-            solution: "GPT에 보고서 내용을 붙여넣거나, 접근 가능한 경우 링크를 제공하여 핵심 요약과 주요 쟁점을 요청합니다. 특정 관점(예: 지역 경제에 미치는 영향)에서의 분석을 추가 요청할 수 있습니다.",
-            prompt: `다음 환경 정책 보고서의 주요 내용을 5가지 핵심 요점으로 요약해 주세요. 특히 지역 산업에 미칠 긍정적/부정적 영향에 초점을 맞춰 분석해 주세요. [보고서 내용 또는 링크]`,
-            result: `정책의 주요 목표, 변경 사항, 예상 효과, 지역 산업에 대한 영향(예: 신규 일자리 창출, 특정 산업 규제 강화 등)이 정리된 요약본.`,
-            usage: "정책 분석, 보고서 작성 초안, 회의 자료 준비"
+            title: "길고 복잡한 보고서, AI로 핵심만 쏙쏙!",
+            summary: "AI를 활용하여 방대한 분량의 보고서나 정책 문건에서 핵심 내용을 신속하게 요약하고 주요 사항을 추출하는 방법입니다.",
+            situation: "수많은 정책 보고서, 회의록, 민원 자료 등을 검토해야 하지만 시간이 부족하여 모든 내용을 꼼꼼히 읽기 어려운 경우가 많습니다.",
+            solution: "AI에게 문서의 목적과 대상 독자를 명시하고, 어떤 정보(예: 주요 문제점, 해결책, 다음 단계)를 중심으로 요약할지 지시하여 효율적으로 핵심 정보를 얻을 수 있습니다.",
+            prompt: `다음 [문서 종류: 예: 정책 보고서, 회의록, 민원 분석 자료]를 읽고, [대상: 예: 일반 시민, 상급자, 관련 부서]가 이해하기 쉽게 [핵심 내용, 주요 쟁점, 다음 조치]를 중심으로 500자 내외로 요약해 줘. 특히 [특정 주제: 예: 예산 배분, 사업 효과성]에 대한 내용을 강조해 줘. [여기에 문서 내용 붙여넣기]`,
+            result: `본 보고서는 [주요 주제]에 대한 [핵심 내용]을 다루고 있습니다. 주요 문제점으로는 [문제점 1], [문제점 2]가 도출되었으며, 이에 대한 해결책으로 [해결책 1], [해결책 2]가 제안되었습니다. 다음 단계로 [구체적인 다음 조치]가 필요합니다. 특히 [특정 강조 주제]와 관련하여 [핵심 요약 정보]를 확인할 수 있습니다.`,
+            usage: "요약된 내용을 바탕으로 상급자 보고 자료, 보도자료 초안, 민원인 설명 자료 등을 신속하게 작성할 수 있으며, 중요한 의사결정 자료로 활용할 수 있습니다."
         };
 
         // 🏛️ 지자체 AI 활용사례
         const localGovCase = {
-            title: "인제군, 생성형 AI 용량제 서비스 도입…'스마트 행정 도약'",
-            summary: "강원 인제군이 행정 업무 효율성 증대 및 직원 AI 활용 역량 강화를 위해 다양한 생성형 AI 용량제 서비스 '인제군 AI GPT'를 도입했다. 이는 공무원이 창의적 업무에 집중하고 군민에게 신속하고 정확한 행정 서비스를 제공하는 기반이 될 것으로 기대된다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHBxPlATnKIe87MDlpP1hBUQibqhUl52YHn39ftrPQWW-p6LdJHJ10Wld4q6WxVu_F0Qsvo7eaJfS34kcSq38Dly3yYgTCH59kt2hsgPWoSJCLoA6Tsxv0Mjorlz51OUQGF3A6qYVBQZ0k="
+            title: "인제군, 스마트 행정으로 도약...공무원 생성형 AI 용량제 서비스 '인제군 AI GPT' 도입",
+            summary: "인제군이 행정 업무 효율성 향상 및 직원들의 AI 활용 역량 강화를 위해 챗GPT, 제미나이 등 다양한 생성형 인공지능(AI)을 활용하는 '인제군 AI GPT' 서비스를 도입했다. 이 서비스는 10월 27일부터 업무에 적용되었으며, 민감 정보 입력 금지 등 공공기관 특성에 맞는 관리 원칙을 철저히 이행할 방침이다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHlQEAPNd00K1lz3iL9U74vffPMVrKouKt8tk1lCcrACjzcnku8Rr4M4427dcv_KyD33p-DJYlAqMyGENJoICZvihcLEQDBLYwVM-iUevWmzsJ_iAn-ZIbCmy4kD3qIjSskbnNuNgEQ95r8rmta6hnNp8i4"
         };
 
         // 🔥 AI 핫이슈
         const hotIssue = {
-            title: "'AI 완전자율운항선박' 기술개발 내년 착수…예타 면제 확정",
-            summary: "'AI 완전자율운항선박' 기술개발 내년 착수…예타 면제 확정에 관한 최신 뉴스입니다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGOhIZfQC8N2pc1wlOlPd9KPp-M89xU_MwSYp1BybDgRkAKxkIPs6KrhlpqUfxtpevLpg2LYwLcV5FPwjSH9geXIIemIrbMwXrRNpDFGFoOE3h9nsWbzMU0guc_Hrm1b4TNiiMH3atuzPNwwfaFcIx8xkX6Ep1F2w=="
+            title: "APEC 회원국들 '경주 선언' 채택... AI·인구문제 공동 문서도 합의",
+            summary: "2025 APEC 정상회의에서 'APEC AI 이니셔티브'를 포함한 '경주 선언'이 채택되었다. 이 선언은 AI 혁신을 통한 경제성장 및 AI 혜택 확산을 위한 한국 정부의 핵심 AI 정책과 협력 방안을 담고 있다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE5PuOssXKihibNDVumUUkG3YbusL3bikEqLcor5Ly9oDe4m1nryxpIoJYQDohzagFS0xShShi5qMa_mb94Awjam82FimNatc_Zb9O2kC0PNy_8QjOTUdzvBMbcLOOLXMNK7c2G-SIIAwmOpT0KBGLrOIV8V24="
         };
 
         // 📊 오늘의 AI 트렌드
-        const todayTrendsDescription = "생성형 AI가 공공 서비스의 개인화 시대를 열고 있습니다. 민원인의 질문에 맞춤형 답변을 제공하고, 정책 결정 과정에 필요한 데이터를 분석하여 효율적인 의사결정을 돕는 등 AI의 역할이 더욱 확대될 전망입니다.";
-        const todayTrends = ["#공공AI","#맞춤형서비스","#정책결정AI","#생성형AI","#행정효율화"];
+        const todayTrendsDescription = "최근 정부 및 공공기관에서 AI 도입을 통한 행정 효율성 증대와 대국민 서비스 개선 노력이 활발합니다. 단순 반복 업무 자동화부터 복잡한 데이터 분석까지 AI의 활용 범위가 점차 확대되는 추세입니다.";
+        const todayTrends = ["#공공AI","#행정혁신","#AI활용","#스마트정부","#데이터기반행정"];
 
         // 🏷️ OG 태그 (매일 업데이트)
         const ogTags = {
             title: "AI출근길 (25.11.07.금) - 공공 AI 실전팁",
-            description: "복잡한 정책 문서를 GPT를 활용하여 신속하게 요약하고 핵심 내용을 파악합니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
+            description: "AI를 활용하여 방대한 분량의 보고서나 정책 문건에서 핵심 내용을 신속하게 요약하고 주요 사항을 추출하는 방법입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
         };
     </script>
     <!-- ============================================ -->
