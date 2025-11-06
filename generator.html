@@ -13,8 +13,8 @@
         }
 
         @font-face {
-            font-family: 'SangjuDajeongdagam';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/SANGJUDajungdagam.woff') format('woff');
+            font-family: 'SimGyeongha';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/SimKyungha.woff') format('woff');
             font-weight: normal;
             font-display: swap;
         }
@@ -929,11 +929,12 @@ ${summaryContext}의 관점에서 중요한 점을 강조하되, 1-2문장으로
             const basePrompt = `공무원 AI 뉴스레터 콘텐츠 생성.
 날짜: ${dateInfo.full}${customPrompt ? `\n지시: ${customPrompt}` : ''}
 
-quote.author: 스티브 잡스, 빌 게이츠, 아인슈타인 등 유명 인물만. 단체명 금지.
+quote: 공직자에게 위로와 힘을 주는 따뜻한 문구. 힐링되고 마음이 편안해지는 내용. 부담 없이 읽을 수 있는 짧고 감성적인 표현.
+quote.author: 유명 인물, 작가, 시인, 철학자 등 다양하게.
 
 JSON만:
 {
-  "quote": {"text": "명언", "author": "실명"},
+  "quote": {"text": "위로와 힘이 되는 문구", "author": "실명"},
   "tip": {"title": "제목", "summary": "요약", "situation": "문제", "solution": "해결", "prompt": "프롬프트", "result": "결과", "usage": "활용"},
   "trends": {"description": "1-2문장 간결하게 (최대 3줄)", "hashtags": ["#1","#2","#3","#4","#5"]}
 }`;
@@ -1043,8 +1044,8 @@ JSON만:
         }
 
         @font-face {
-            font-family: 'SangjuDajeongdagam';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/SANGJUDajungdagam.woff') format('woff');
+            font-family: 'SimGyeongha';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/SimKyungha.woff') format('woff');
             font-weight: normal;
             font-display: swap;
         }
@@ -1584,7 +1585,7 @@ JSON만:
                     <span style="font-size: 1.25rem;">💡</span>
                     오늘의 한마디
                 </h2>
-                <p id="quote-text" style="font-family: 'SangjuDajeongdagam', sans-serif; font-size: 1.125rem; line-height: 1.6; margin-bottom: 0.75rem; font-weight: 500; word-break: keep-all;"></p>
+                <p id="quote-text" style="font-family: 'SimGyeongha', sans-serif; font-size: 1.125rem; line-height: 1.6; margin-bottom: 0.75rem; font-weight: 500; word-break: keep-all;"></p>
                 <div style="display: flex; align-items: center; gap: 0.5rem;">
                     <div style="height: 1px; flex: 1; background: rgba(255,255,255,0.3);"></div>
                     <p id="quote-author" style="font-size: 0.875rem; opacity: 0.95; font-weight: 500;"></p>
@@ -2001,7 +2002,7 @@ JSON 형식으로만 응답하세요. 다른 설명 없이 JSON만 반환하세�
                 let maxTokens = 2048; // 기본값
 
                 if (section === 'quote') {
-                    prompt = '유명인 명언 JSON: {"text":"명언","author":"스티브 잡스/빌 게이츠/아인슈타인 등"}';
+                    prompt = '공직자에게 위로와 힘을 주는 따뜻한 문구 JSON: {"text":"힐링되고 마음이 편안해지는 짧고 감성적인 문구","author":"작가/시인/철학자/유명인 등"}';
                     maxTokens = 2048;
                 } else if (section === 'tip') {
                     prompt = '공무원 GPT 활용팁 JSON만: {"title":"제목","summary":"요약","situation":"문제","solution":"해결","prompt":"프롬프트","result":"결과","usage":"활용"}';
