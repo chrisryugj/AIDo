@@ -556,9 +556,12 @@
             }
         });
 
-        // 오늘 날짜 설정
+        // 오늘 날짜 설정 (로컬 시간대 기준)
         const today = new Date();
-        document.getElementById('date').valueAsDate = today;
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        document.getElementById('date').value = `${year}-${month}-${day}`;
 
         // API 키 저장
         document.getElementById('apiKey').addEventListener('change', (e) => {
@@ -579,6 +582,70 @@
                 shortYMD: `${String(year).slice(2)}.${month}.${day}`,
                 dayShort: dayOfWeek
             };
+        }
+
+        // ========================================
+        // 중복 방지 관리 함수들
+        // ========================================
+
+        // 이전 팁 가져오기 (최근 30일)
+        function getPreviousTips() {
+            const stored = localStorage.getItem('previous_tips');
+            if (!stored) return [];
+
+            const tips = JSON.parse(stored);
+            const thirtyDaysAgo = Date.now() - (30 * 24 * 60 * 60 * 1000);
+
+            // 30일 이내 팁만 필터링
+            return tips.filter(tip => tip.timestamp > thirtyDaysAgo);
+        }
+
+        // 새 팁 저장
+        function saveTip(title, summary) {
+            const tips = getPreviousTips();
+            tips.push({
+                title: title,
+                summary: summary,
+                timestamp: Date.now()
+            });
+
+            // 최근 50개만 유지
+            const recentTips = tips.slice(-50);
+            localStorage.setItem('previous_tips', JSON.stringify(recentTips));
+        }
+
+        // 이전 뉴스 가져오기 (최근 14일)
+        function getPreviousNews() {
+            const stored = localStorage.getItem('previous_news');
+            if (!stored) return [];
+
+            const news = JSON.parse(stored);
+            const fourteenDaysAgo = Date.now() - (14 * 24 * 60 * 60 * 1000);
+
+            // 14일 이내 뉴스만 필터링
+            return news.filter(item => item.timestamp > fourteenDaysAgo);
+        }
+
+        // 새 뉴스 저장
+        function saveNews(title, url) {
+            const news = getPreviousNews();
+            news.push({
+                title: title,
+                url: url,
+                timestamp: Date.now()
+            });
+
+            // 최근 100개만 유지
+            const recentNews = news.slice(-100);
+            localStorage.setItem('previous_news', JSON.stringify(recentNews));
+        }
+
+        // 뉴스 중복 체크
+        function isDuplicateNews(title, url) {
+            const previousNews = getPreviousNews();
+            return previousNews.some(item =>
+                item.url === url || item.title === title
+            );
         }
 
         // 알림 표시
@@ -754,6 +821,13 @@
 
                     const dateStr = `${yesterday.getMonth()+1}월 ${yesterday.getDate()}일`;
 
+                    // 이전 뉴스 가져오기 (중복 방지)
+                    const previousNews = getPreviousNews();
+                    const previousNewsTitles = previousNews.map(n => n.title).slice(-10); // 최근 10개
+                    const newsExclusionNote = previousNewsTitles.length > 0
+                        ? `\n\n⚠️ 최근 사용한 뉴스 (중복 금지):\n${previousNewsTitles.map((t, i) => `${i + 1}. ${t}`).join('\n')}\n위 뉴스들과 다른 새로운 뉴스를 찾아주세요.`
+                        : '';
+
                     // AI 응답에서 직접 정보를 추출하도록 요청
                     const finalPrompt = `${dateStr} 기준 최근 1주일 이내의 "${searchPrompt}" 관련 최신 뉴스를 검색해줘.
 
@@ -768,7 +842,7 @@ URL: [뉴스 링크]
 - 정부기관(.go.kr), 공식 언론사 기사를 우선적으로 찾아줘
 - 실제 존재하는 뉴스만 알려줘
 - 제목은 반드시 실제 뉴스 헤드라인이어야 함
-- 요약은 짧고 간결하게 핵심만`;
+- 요약은 짧고 간결하게 핵심만${newsExclusionNote}`;
 
                     addLog(`  📡 검색: ${searchPrompt.substring(0, 50)}...`);
                     const searchData = await callGeminiAPI(apiKey, finalPrompt, true, 0.3, 2048);
@@ -852,6 +926,13 @@ URL: [뉴스 링크]
                         throw new Error('유효하지 않은 제목');
                     }
 
+                    // 중복 체크
+                    if (isDuplicateNews(extractedTitle, finalUrl)) {
+                        addLog(`  ⚠️ 중복된 뉴스 (최근 14일 내 사용). 재시도...`);
+                        if (attempt < maxRetries) continue;
+                        throw new Error('중복된 뉴스');
+                    }
+
                     const selectedNews = {
                         title: extractedTitle,
                         uri: finalUrl,
@@ -925,12 +1006,21 @@ ${summaryContext}의 관점에서 중요한 점을 강조하되, 1-2문장으로
             const stage1Start = Date.now();
             addLog('📝 1/3 단계: 기본 섹션 생성 중...');
 
+            // 이전 팁 가져오기 (중복 방지)
+            const previousTips = getPreviousTips();
+            const previousTitles = previousTips.map(t => t.title).slice(-10); // 최근 10개
+            const tipExclusionNote = previousTitles.length > 0
+                ? `\n\n⚠️ 최근 다룬 주제 (중복 금지):\n${previousTitles.map((t, i) => `${i + 1}. ${t}`).join('\n')}\n위 주제들과 완전히 다른 새로운 주제로 생성해주세요.`
+                : '';
+
             // 간결한 프롬프트로 속도 향상
             const basePrompt = `공무원 AI 뉴스레터 콘텐츠 생성.
 날짜: ${dateInfo.full}${customPrompt ? `\n지시: ${customPrompt}` : ''}
 
 quote: 공직자에게 위로와 힘을 주는 따뜻한 문구. 힐링되고 마음이 편안해지는 내용. 부담 없이 읽을 수 있는 짧고 감성적인 표현.
 quote.author: 반드시 실존하는 유명인의 실명만 사용. 예: 스티브 잡스, 빌 게이츠, 헬렌 켈러, 마더 테레사, 넬슨 만델라, 무명 작가나 "~이" 같은 표현 금지.
+
+tip: 공무원들이 실무에서 바로 활용할 수 있는 AI 실전 팁. 다양한 주제로 매일 새로운 내용 제공.${tipExclusionNote}
 
 JSON만:
 {
@@ -1000,6 +1090,12 @@ JSON만:
                     description: `${baseContent.tip.summary}, 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.`
                 }
             };
+
+            // 중복 방지를 위해 생성된 콘텐츠 저장
+            saveTip(baseContent.tip.title, baseContent.tip.summary);
+            saveNews(localGovCase.title, localGovCase.url);
+            saveNews(hotIssue.title, hotIssue.url);
+            addLog('💾 생성된 콘텐츠를 저장했습니다 (중복 방지용)');
 
             const totalTime = ((Date.now() - startTime) / 1000).toFixed(1);
             addLog('✅ 3단계 완료: 모든 콘텐츠 생성 성공!');
