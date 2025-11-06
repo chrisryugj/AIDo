@@ -930,7 +930,7 @@ ${summaryContext}의 관점에서 중요한 점을 강조하되, 1-2문장으로
 날짜: ${dateInfo.full}${customPrompt ? `\n지시: ${customPrompt}` : ''}
 
 quote: 공직자에게 위로와 힘을 주는 따뜻한 문구. 힐링되고 마음이 편안해지는 내용. 부담 없이 읽을 수 있는 짧고 감성적인 표현.
-quote.author: 유명 인물, 작가, 시인, 철학자 등 다양하게.
+quote.author: 반드시 실존하는 유명인의 실명만 사용. 예: 스티브 잡스, 빌 게이츠, 헬렌 켈러, 마더 테레사, 넬슨 만델라, 무명 작가나 "~이" 같은 표현 금지.
 
 JSON만:
 {
@@ -2002,8 +2002,8 @@ JSON 형식으로만 응답하세요. 다른 설명 없이 JSON만 반환하세�
                 let maxTokens = 2048; // 기본값
 
                 if (section === 'quote') {
-                    prompt = '공직자에게 위로와 힘을 주는 따뜻한 문구 JSON: {"text":"힐링되고 마음이 편안해지는 짧고 감성적인 문구","author":"작가/시인/철학자/유명인 등"}';
-                    maxTokens = 2048;
+                    prompt = '공직자에게 위로와 힘을 주는 따뜻한 문구 JSON: {"text":"힐링되고 마음이 편안해지는 짧고 감성적인 문구","author":"실존하는 유명인 실명만 (예: 스티브 잡스, 헬렌 켈러, 마더 테레사 등)"}';
+                    maxTokens = 4096;
                 } else if (section === 'tip') {
                     prompt = '공무원 GPT 활용팁 JSON만: {"title":"제목","summary":"요약","situation":"문제","solution":"해결","prompt":"프롬프트","result":"결과","usage":"활용"}';
                     maxTokens = 4096;
