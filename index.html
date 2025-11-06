@@ -9,7 +9,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
     <meta property="og:title" content="AI출근길 (25.11.06.목) - 공공 AI 실전팁">
-    <meta property="og:description" content="GPT를 활용하여 공무원 보고서 초안을 빠르고 정확하게 작성하고, 공문서 특유의 개조식 표현까지 다듬는 실용적인 팁입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
+    <meta property="og:description" content="AI를 활용하여 방대한 정책 문서나 회의록에서 핵심 내용을 빠르고 정확하게 요약하여 업무 효율성을 높이는 방법입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
     <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.jpg">
 
     <style>
@@ -480,73 +480,43 @@
 
         // 💬 오늘의 한마디 (매일 교체)
         const todayQuote = {
-            text: "변화는 고통스럽다. 그러나 변하지 않는 것은 더 고통스럽다. 변화를 두려워 말고, 혁신을 통해 더 나은 미래를 만들어가야 한다.",
-            author: "작가 미상"
+            text: "상상력은 지식보다 중요하다.",
+            author: "알베르트 아인슈타인"
         };
 
         // 💡 오늘의 실전 팁 (매일 새 주제)
         const todayTip = {
-            title: "보고서 초안 작성, GPT로 50% 시간 단축하기",
-            summary: "GPT를 활용하여 공무원 보고서 초안을 빠르고 정확하게 작성하고, 공문서 특유의 개조식 표현까지 다듬는 실용적인 팁입니다.",
-            situation: "방대한 자료를 바탕으로 보고서 초안을 작성해야 하지만, 시간 부족과 공문서 형식, 개조식 표현에 대한 고민으로 어려움을 겪는 경우가 많습니다.",
-            solution: "GPT에 명확한 지침과 자료를 제공하여 보고서의 핵심 내용을 빠르게 구조화하고, 공무원 특유의 개조식 문체로 다듬어 초안 작성 시간을 획기적으로 단축할 수 있습니다. 이를 통해 자료 조사 및 검토에 더 많은 시간을 할애할 수 있습니다.",
-            prompt: `당신은 행정 전문가이며, 다음 자료를 바탕으로 '2025년 인공지능 기반 민원 서비스 도입 방안'에 대한 보고서 초안을 작성해주세요.
-
-보고서는 [배경], [현황 및 문제점], [도입 방안], [기대 효과]의 목차로 구성하고, 각 항목은 개조식으로 3~5가지 핵심 내용을 포함해야 합니다.
-
-[자료]
-- 2024년 민원 처리 건수 1,000만 건 중 단순 반복 민원 40% 차지
-- AI 챗봇 도입 시 민원 처리 시간 평균 30% 단축 가능 (타 지자체 사례)
-- 인력 부족으로 인한 민원 응대 지연 문제 심화
-- 2025년 디지털플랫폼정부 구현 목표에 따른 AI 서비스 확대 필요성
-- 도입 방안: 1. AI 챗봇 기반 24시간 민원 상담 시스템 구축, 2. 복합 민원 자동 분류 및 담당 부서 연계 시스템 개발, 3. 민원 데이터 기반 맞춤형 정보 제공 서비스.
-- 기대 효과: 1. 민원 처리 효율성 증대 및 대국민 서비스 만족도 향상, 2. 공무원 업무 부담 경감 및 핵심 업무 집중도 제고, 3. 행정의 투명성 및 신뢰도 증진.`,
-            result: `## 2025년 인공지능 기반 민원 서비스 도입 방안 (초안)
-
-### 1. 배경
-*   단순 반복 민원 증가로 인한 행정 비효율 심화
-*   인력 부족 및 민원 처리 지연 문제 지속
-*   디지털플랫폼정부 구현을 위한 AI 서비스 확대 필요
-
-### 2. 현황 및 문제점
-*   2024년 전체 민원 중 단순 반복 민원이 40% 수준
-*   민원 처리 건수 증가 대비 인력 충원 한계
-*   기존 민원 시스템의 복합 민원 처리 및 24시간 응대 한계
-
-### 3. 도입 방안
-*   AI 챗봇 기반 24시간 민원 상담 시스템 구축
-*   복합 민원 자동 분류 및 담당 부서 연계 시스템 개발
-*   민원 데이터 기반 맞춤형 정보 제공 서비스 구현
-
-### 4. 기대 효과
-*   민원 처리 효율성 증대 및 대국민 서비스 만족도 향상
-*   공무원 업무 부담 경감 및 핵심 업무 집중도 제고
-*   행정의 투명성 및 신뢰도 증진`,
-            usage: "GPT가 생성한 초안은 사실 확인 및 내용의 정확성을 위해 반드시 교차 검토해야 합니다. 또한, 공문서의 세부 양식이나 기관별 특성을 반영하여 수정하는 과정을 거쳐야 합니다. GPT는 강력한 초안 작성 도구로 활용하되, 최종적인 판단과 책임은 사용자에게 있음을 인지해야 합니다."
+            title: "AI로 긴 문서 요약 및 핵심 추출하기",
+            summary: "AI를 활용하여 방대한 정책 문서나 회의록에서 핵심 내용을 빠르고 정확하게 요약하여 업무 효율성을 높이는 방법입니다.",
+            situation: "새로운 정책 발표를 준비하거나 중요한 회의록을 검토할 때, 방대한 분량의 원문을 일일이 읽고 핵심을 파악하는 데 많은 시간이 소요됩니다.",
+            solution: "AI에게 문서의 주요 목적과 요약에 필요한 관점을 제시하고, 특정 길이 또는 형식으로 요약하도록 요청하여 시간과 노력을 절약할 수 있습니다.",
+            prompt: `다음 정책 문서의 내용을 공무원들이 이해하기 쉽게 500자 내외로 요약해 주세요. 특히 '시민 참여 활성화 방안'과 '예산 집행 계획'에 중점을 두어 핵심 내용을 추출해 주세요. [여기에 문서 내용 붙여넣기]`,
+            result: `해당 정책 문서는 시민 참여를 활성화하고 효율적인 예산 집행을 목표로 합니다. 시민 참여는 온라인 플랫폼 구축 및 정기적인 간담회 개최를 통해 확대될 예정이며, 특히 청년층의 의견 수렴에 집중합니다. 예산은 총 100억 원이 편성되었으며, 이 중 30%는 시민 참여 프로그램 운영에, 50%는 인프라 구축에, 20%는 홍보 및 교육에 사용될 계획입니다. 예산 집행은 분기별 보고를 통해 투명성을 확보하고, 사업 진행 상황에 따라 유동적으로 조정될 수 있습니다.`,
+            usage: "요약된 내용을 바탕으로 보고서 초안 작성, 내부 회의 자료 준비, 대국민 브리핑 자료 구성 등에 활용하여 업무 효율성을 크게 높일 수 있습니다."
         };
 
         // 🏛️ 지자체 AI 활용사례
         const localGovCase = {
-            title: "경남도, AI 통합복지플랫폼 내년 운영…상담·민원처리 단축",
-            summary: "경남도는 내년 3월부터 전국 지자체에 도입될 통합돌봄서비스에 맞춰 생성형 AI 기반 통합복지플랫폼을 구축한다. 이 플랫폼은 AI를 활용한 상담 시스템과 포털 시스템을 포함하며, 민간 컨소시엄이 내년 4월까지 구축을 완료하여 상담 및 민원 처리 시간을 단축하고 복지 서비스의 효율성을 높일 예정이다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGUPDJpe3lwGhzmHQLe4kJWJWhpTTpbzkhkwBxypGif2zPoA9YrXYPqq6QJs2Qi5_r-5dGtKTqAG1r566POiiSpuJs3-SoVXhiQJkiTG-E760ju0OSkHQl2lgVO8iy3S1F4BGe3O11JgYxeOLwPAk_PKgrf"
+            title: "경기도, 지자체 최초 생성형 AI 행정업무에 도입",
+            summary: "경기도가 전국 지방자치단체 중 처음으로 자체 구축한 생성형 인공지능(AI)을 행정 전반에 도입하여 'AI 행정' 시대를 열었다. 이는 데이터 기반의 객관적 행정 실현을 가능하게 할 것으로 기대된다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFvC4Uj_MJC3Y1MNxIqpKy1mbe62aPWYMbmCIhLcmYAFqQA3jsXNrdR3ruEmG0L1oxYdte8tmzcUI6RW4b9ziKDzTcdrXGWDo8pYMkOHLmFNnYn0s_z6kEW0MwwzHPliQXdKwfoBzc="
         };
 
         // 🔥 AI 핫이슈
         const hotIssue = {
-            title: "행안부, '공공부문 AI 전환 총괄' 인공지능정부실 신설",
-            summary: "행정안전부가 공공부문의 인공지능 전환을 가속화하기 위해 조직 내 '인공지능정부실'을 신설하는 조직개편을 발표했다. 이는 기존 디지털 정부에서 한층 진화한 'AI 정부' 구현에 초점을 맞추고, 공공부문 AX(AI Transformation) 동력을 확보하여 행정 서비스의 질적 고도화를 목표로 한다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHHlodhgf_9072FvCdhG_TIjhkSMoio8GzeMV_UpPKN-qshSiLmQFlvWiUSftJi3NGqnaneawpZ0ce298srQmYByaT67bfOSjZVipR0znOmj1sy3fnqpIFtMS2N-vH_skI="
+            title: "정책 실종 ICT 국감…답 못찾은 AI·보안·플랫폼 규제",
+            summary: "올해 과학기술정보방송통신위원회 국정감사에서 AI 전략 및 빅테크 갈등 등 주요 현안들이 논의되었으나, 여야 충돌로 인해 실질적인 검증과 해법 제시가 미흡했다는 비판이 제기되었다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHVBwnQvYL-fChLTOEmNMKwPsfNfPs6esJksuiubidBp1b1JZ0KBUDT_VuF5mKLuutmr1PVJ0GZuM_Vwr_sSYO0ElzX0YcwV3we4z7fXJgoRDUx_aUUtjY6Et35umKJlBLWYKSE8JQqHRoE-eXHQADPOGLn4NR60kdG39VS"
         };
 
         // 📊 오늘의 AI 트렌드
-        const todayTrendsDescription = "공공 부문에서 인공지능의 윤리적이고 효율적인 활용을 위한 정책 및 조직 개편이 활발히 이루어지며, 실제 서비스 도입을 통해 행정 혁신을 가속화하는 추세입니다.";
-        const todayTrends = ["#공공AI","#AI정부","#디지털플랫폼정부","#AI윤리","#행정혁신"];
+        const todayTrendsDescription = "2025년에는 공공 부문 전반에 걸쳐 AI 기반의 '공무원 전용 비서' 도입이 가속화될 전망입니다. 이들은 단순 반복 업무를 넘어 정책 분석, 민원 응대 초안 작성 등 전문적인 업무를 지원하며 공무원의 생산성을 혁신적으로 향상시킬 것입니다.";
+        const todayTrends = ["#공공AI","#AI비서","#스마트행정","#업무자동화","#생산성향상"];
 
         // 🏷️ OG 태그 (매일 업데이트)
         const ogTags = {
             title: "AI출근길 (25.11.06.목) - 공공 AI 실전팁",
-            description: "GPT를 활용하여 공무원 보고서 초안을 빠르고 정확하게 작성하고, 공문서 특유의 개조식 표현까지 다듬는 실용적인 팁입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
+            description: "AI를 활용하여 방대한 정책 문서나 회의록에서 핵심 내용을 빠르고 정확하게 요약하여 업무 효율성을 높이는 방법입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
         };
     </script>
     <!-- ============================================ -->
@@ -769,7 +739,7 @@
             const a = document.createElement('a');
             const dateStr = new Date().toISOString().slice(2, 10).replace(/-/g, '');
             a.href = url;
-            a.download = 'AI-Do_오늘뭐이슈_' + dateStr + '.html';
+            a.download = 'AI출근길_' + dateStr + '.html';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
