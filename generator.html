@@ -3,6 +3,447 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI출근길 콘텐츠 생성기</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, hsl(210 20% 98%), hsl(215 25% 96%));
+            color: hsl(215 25% 20%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            color: hsl(215 85% 45%);
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: hsl(215 15% 50%);
+        }
+
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .card h2 {
+            font-size: 1.25rem;
+            color: hsl(215 85% 45%);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: hsl(215 25% 30%);
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"],
+        .form-group input[type="date"],
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid hsl(215 20% 90%);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: hsl(215 85% 45%);
+        }
+
+        .form-group small {
+            display: block;
+            margin-top: 0.25rem;
+            color: hsl(215 15% 50%);
+            font-size: 0.875rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, hsl(215 85% 45%), hsl(210 80% 55%));
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 110, 243, 0.3);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: hsl(215 20% 95%);
+            color: hsl(215 85% 45%);
+        }
+
+        .btn-secondary:hover {
+            background: hsl(215 20% 90%);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            color: hsl(215 85% 45%);
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 3px solid hsl(215 20% 90%);
+            border-top: 3px solid hsl(215 85% 45%);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .result {
+            display: none;
+        }
+
+        .result.active {
+            display: block;
+        }
+
+        .result textarea {
+            width: 100%;
+            height: 400px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            padding: 1rem;
+            border: 2px solid hsl(215 20% 90%);
+            border-radius: 0.5rem;
+            resize: vertical;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .alert-error {
+            background: hsl(0 100% 96%);
+            color: hsl(0 70% 40%);
+            border: 1px solid hsl(0 70% 85%);
+        }
+
+        .alert-success {
+            background: hsl(120 100% 96%);
+            color: hsl(120 70% 30%);
+            border: 1px solid hsl(120 70% 85%);
+        }
+
+        .preview {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: hsl(215 100% 98%);
+            border-radius: 0.5rem;
+            border: 1px solid hsl(215 85% 90%);
+        }
+
+        .preview h3 {
+            color: hsl(215 85% 45%);
+            margin-bottom: 1rem;
+        }
+
+        .preview-item {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid hsl(215 20% 90%);
+        }
+
+        .preview-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .preview-item strong {
+            display: block;
+            color: hsl(215 85% 45%);
+            margin-bottom: 0.5rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚇 AI출근길 콘텐츠 생성기</h1>
+            <p>Gemini API를 활용한 자동 콘텐츠 생성</p>
+        </div>
+
+        <div class="card">
+            <h2>🔑 API 설정</h2>
+            <div class="form-group">
+                <label for="apiKey">Gemini API 키</label>
+                <input type="password" id="apiKey" placeholder="AIza...">
+                <small>API 키는 브라우저에 안전하게 저장됩니다. <a href="https://aistudio.google.com/app/apikey" target="_blank">API 키 발급받기</a></small>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>📅 콘텐츠 설정</h2>
+            <div class="form-group">
+                <label for="date">날짜</label>
+                <input type="date" id="date">
+            </div>
+            <div class="form-group">
+                <label for="customPrompt">추가 지시사항 (선택)</label>
+                <textarea id="customPrompt" rows="3" placeholder="특정 주제나 키워드를 강조하고 싶다면 입력하세요 (예: 디지털 전환, 업무 자동화 등)"></textarea>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" id="generateBtn">
+                    ✨ 콘텐츠 생성하기
+                </button>
+            </div>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>AI가 콘텐츠를 생성하고 있습니다...</p>
+            <small>30초~1분 정도 소요됩니다</small>
+        </div>
+
+        <div id="alertContainer"></div>
+
+        <div class="result" id="result">
+            <div class="card">
+                <h2>📋 생성된 콘텐츠 미리보기</h2>
+                <div id="preview" class="preview"></div>
+            </div>
+
+            <div class="card">
+                <h2>📄 HTML 결과</h2>
+                <div class="form-group">
+                    <textarea id="htmlOutput" readonly></textarea>
+                    <small>위 HTML을 복사하여 index.html에 붙여넣으세요</small>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" id="copyBtn">
+                        📋 HTML 복사하기
+                    </button>
+                    <button class="btn btn-secondary" id="downloadBtn">
+                        💾 HTML 다운로드
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // API 키 로드
+        const savedApiKey = localStorage.getItem('gemini_api_key');
+        if (savedApiKey) {
+            document.getElementById('apiKey').value = savedApiKey;
+        }
+
+        // 오늘 날짜 설정
+        const today = new Date();
+        document.getElementById('date').valueAsDate = today;
+
+        // API 키 저장
+        document.getElementById('apiKey').addEventListener('change', (e) => {
+            localStorage.setItem('gemini_api_key', e.target.value);
+        });
+
+        // 날짜 포맷 함수
+        function formatDate(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const days = ['일', '월', '화', '수', '목', '금', '토'];
+            const dayOfWeek = days[date.getDay()];
+
+            return {
+                full: `${year}년 ${parseInt(month)}월 ${parseInt(day)}일 (${dayOfWeek})`,
+                short: `${String(year).slice(2)}.${month}.${day}.${dayOfWeek}`
+            };
+        }
+
+        // 알림 표시
+        function showAlert(message, type = 'error') {
+            const container = document.getElementById('alertContainer');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            alert.textContent = message;
+            container.innerHTML = '';
+            container.appendChild(alert);
+
+            setTimeout(() => {
+                alert.remove();
+            }, 5000);
+        }
+
+        // Gemini API 호출
+        async function generateContent(apiKey, dateInfo, customPrompt) {
+            const prompt = `당신은 공무원을 위한 AI 뉴스레터 "AI출근길"의 콘텐츠 생성 전문가입니다.
+
+오늘 날짜: ${dateInfo.full}
+
+다음 JSON 형식으로 콘텐츠를 생성해주세요. 반드시 유효한 JSON만 반환하세요:
+
+{
+  "quote": {
+    "text": "동기부여가 되는 명언 (공무원, 업무, 변화, 혁신 관련)",
+    "author": "명언 저자"
+  },
+  "tip": {
+    "title": "공무원 업무에 실제 도움이 되는 GPT 활용 팁 제목 (예: 보고서 초안 작성, 민원 답변 등)",
+    "summary": "한 줄 요약",
+    "situation": "어떤 업무 문제 상황인지 설명",
+    "solution": "GPT를 어떻게 활용하여 해결하는지 설명",
+    "prompt": "실제로 복사해서 사용할 수 있는 구체적인 GPT 프롬프트 예제",
+    "result": "프롬프트 실행 결과 예시 (실제 GPT 답변 형태로)",
+    "usage": "실무 적용 팁 및 주의사항"
+  },
+  "localGovCase": {
+    "title": "실제 지자체나 공공기관의 최근 AI 활용 사례 뉴스 제목",
+    "summary": "2-3문장 요약 (구체적인 내용과 효과 포함)",
+    "link": "https://www.example.go.kr (실제 존재할 법한 URL)"
+  },
+  "hotIssue": {
+    "title": "최근 공공 AI 관련 정책이나 이슈 뉴스 제목",
+    "summary": "2-3문장 요약 (정책 내용과 의미 포함)",
+    "link": "https://www.example.go.kr (실제 존재할 법한 URL)"
+  },
+  "trends": {
+    "description": "오늘의 AI 트렌드를 한 문장으로 설명",
+    "hashtags": ["#해시태그1", "#해시태그2", "#해시태그3", "#해시태그4", "#해시태그5"]
+  },
+  "ogTags": {
+    "title": "AI출근길 (${dateInfo.short}) - 공공 AI 실전팁",
+    "description": "오늘 팁의 핵심 키워드를 간단히, 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
+  }
+}
+
+${customPrompt ? `추가 지시사항: ${customPrompt}\n` : ''}
+주의사항:
+- 모든 내용은 공무원 업무에 실질적으로 도움이 되어야 합니다
+- 프롬프트는 실제로 GPT에 복사해서 사용할 수 있도록 구체적이어야 합니다
+- 뉴스는 2024-2025년 최근 트렌드를 반영해야 합니다
+- 해시태그는 정확히 5개여야 합니다
+- 반드시 유효한 JSON 형식으로만 응답하세요 (마크다운 코드블록 없이)`;
+
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${apiKey}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    contents: [{
+                        parts: [{
+                            text: prompt
+                        }]
+                    }],
+                    generationConfig: {
+                        temperature: 0.9,
+                        topK: 40,
+                        topP: 0.95,
+                        maxOutputTokens: 8192,
+                    }
+                })
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.error?.message || 'API 호출 실패');
+            }
+
+            const data = await response.json();
+            const text = data.candidates[0].content.parts[0].text;
+
+            // JSON 추출 (마크다운 코드블록이 있을 경우 제거)
+            let jsonText = text.trim();
+            if (jsonText.startsWith('```')) {
+                jsonText = jsonText.replace(/```json?\n?/g, '').replace(/```\n?$/g, '');
+            }
+
+            return JSON.parse(jsonText);
+        }
+
+        // HTML 템플릿 생성
+        function generateHTML(content, dateInfo) {
+            return `<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI출근길</title>
 
     <!-- OGP -->
@@ -468,81 +909,47 @@
     <!-- ============================================ -->
     <script>
         // 📅 날짜 정보 (매일 업데이트)
-        const currentDate = "2025년 11월 6일 (목)";
+        const currentDate = "${dateInfo.full}";
 
         // 💬 오늘의 한마디 (매일 교체)
         const todayQuote = {
-            text: "변화를 두려워하지 마라. 변화는 성장의 시작이다.",
-            author: "피터 드러커"
+            text: "${content.quote.text.replace(/"/g, '\\"')}",
+            author: "${content.quote.author.replace(/"/g, '\\"')}"
         };
 
         // 💡 오늘의 실전 팁 (매일 새 주제)
         const todayTip = {
-            title: "보고서 초안을 10분 만에 작성하는 GPT 프롬프트",
-            summary: "핵심 내용만 입력하면 체계적인 보고서 초안을 자동 생성",
-            situation: "보고서 작성 시 구조를 잡고 문장을 다듬는 데 1~2시간이 소요되어 업무 효율이 떨어집니다.",
-            solution: "GPT에 핵심 정보를 입력하면 공문서 형식에 맞는 보고서 초안을 자동으로 생성합니다.",
-            prompt: `다음 정보를 바탕으로 공식 보고서 형식으로 작성해줘:
-
-[제목]: (보고서 제목)
-[배경]: (추진 배경 및 필요성)
-[주요 내용]:
-- (핵심 내용 1)
-- (핵심 내용 2)
-- (핵심 내용 3)
-[예상 효과]: (기대 효과)
-[향후 계획]: (다음 단계)
-
-형식 요구사항:
-- 공식 보고서 어투 사용
-- 단락별 명확한 구분
-- 간결하고 명확한 문장`,
-            result: `[보고서]
-
-1. 추진 배경
-지역 주민의 디지털 역량 강화 수요 증가에 따라 체계적인 교육 프로그램 마련이 필요한 상황입니다.
-
-2. 주요 내용
-가. 교육 대상: 만 60세 이상 지역 주민 100명
-나. 교육 내용: 스마트폰 기초, 키오스크 사용법, 온라인 민원 처리
-다. 운영 기간: 2025년 1월~3월 (주 2회, 총 24회)
-
-3. 기대 효과
-디지털 소외 계층의 정보 접근성 향상 및 생활 편의 증진이 예상됩니다.
-
-4. 향후 계획
-12월 중 강사 선정 및 교육장 확보를 완료할 예정입니다.`,
-            usage: "보고서 골격을 잡은 후 세부 내용을 보강하면 작성 시간을 80% 단축할 수 있습니다. 전문 용어나 수치는 반드시 검토 후 사용하세요."
+            title: "${content.tip.title.replace(/"/g, '\\"')}",
+            summary: "${content.tip.summary.replace(/"/g, '\\"')}",
+            situation: "${content.tip.situation.replace(/"/g, '\\"')}",
+            solution: "${content.tip.solution.replace(/"/g, '\\"')}",
+            prompt: \`${content.tip.prompt.replace(/`/g, '\\`')}\`,
+            result: \`${content.tip.result.replace(/`/g, '\\`')}\`,
+            usage: "${content.tip.usage.replace(/"/g, '\\"')}"
         };
 
         // 🏛️ 지자체 AI 활용사례
         const localGovCase = {
-            title: "대구시, 지역 사투리 활용한 'AI 비서' 개발 추진",
-            summary: "대구시가 2025 서울미래컨퍼런스에서 지역 고유 데이터를 활용한 AI 비서 개발 계획을 발표했습니다. 지역 사투리를 학습한 AI로 시민 친화적 서비스를 제공하며, 예산 제약 속에서도 지자체 맞춤형 AI 솔루션을 구현하는 혁신 사례로 주목받고 있습니다.",
-            link: "https://www.daegu.go.kr"
+            title: "${content.localGovCase.title.replace(/"/g, '\\"')}",
+            summary: "${content.localGovCase.summary.replace(/"/g, '\\"')}",
+            link: "${content.localGovCase.link}"
         };
 
         // 🔥 AI 핫이슈
         const hotIssue = {
-            title: "디지털플랫폼정부위, 공공 AI 가이드라인 2.0 배포",
-            summary: "디지털플랫폼정부위원회가 중앙부처·지자체·공공기관에 '공공 분야 초거대 AI 도입·활용 가이드라인 2.0'을 배포했습니다. 사회문제 해결, 공공서비스 혁신, 업무 효율 향상이라는 3대 전략 목표를 제시하며, 무분별한 AI 도입을 방지하고 체계적인 활용을 지원합니다.",
-            link: "https://www.dpg.go.kr/DPG/contents/DPG02020000.do?schM=view&id=20250416111508521337&schBcid=press"
+            title: "${content.hotIssue.title.replace(/"/g, '\\"')}",
+            summary: "${content.hotIssue.summary.replace(/"/g, '\\"')}",
+            link: "${content.hotIssue.link}"
         };
 
         // 📊 오늘의 AI 트렌드
-        const todayTrendsDescription = "오늘은 프롬프트 엔지니어링과 업무 자동화가 주요 화제입니다. 특히 공공기관의 GPT 활용 사례가 증가하며, 디지털 전환의 핵심 도구로 자리잡고 있습니다.";
-        const todayTrends = [
-            "#프롬프트엔지니어링",
-            "#업무자동화",
-            "#GPT4활용",
-            "#공공AI",
-            "#디지털전환"
-        ];
+        const todayTrendsDescription = "${content.trends.description.replace(/"/g, '\\"')}";
+        const todayTrends = ${JSON.stringify(content.trends.hashtags)};
 
         // 🏷️ OG 태그 (매일 업데이트)
         const ogTags = {
-            title: "AI출근길 (25.11.06.목) - 공공 AI 실전팁",
-            description: "공무원 맞춤 GPT 실전 팁(보고서 초안), 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
+            title: "${content.ogTags.title.replace(/"/g, '\\"')}",
+            description: "${content.ogTags.description.replace(/"/g, '\\"')}"
         };
     </script>
     <!-- ============================================ -->
@@ -777,6 +1184,119 @@
             if (event.key === 'Escape') {
                 document.getElementById('tipModal').classList.remove('active');
             }
+        });
+    </script>
+</body>
+</html>`;
+        }
+
+        // 미리보기 생성
+        function createPreview(content) {
+            return `
+                <div class="preview-item">
+                    <strong>📅 날짜</strong>
+                    <p>${document.getElementById('date').value}</p>
+                </div>
+                <div class="preview-item">
+                    <strong>💬 오늘의 한마디</strong>
+                    <p>"${content.quote.text}"</p>
+                    <p style="text-align: right; color: hsl(215 15% 50%); margin-top: 0.5rem;">- ${content.quote.author}</p>
+                </div>
+                <div class="preview-item">
+                    <strong>💡 오늘의 실전 팁</strong>
+                    <p style="font-weight: 600; color: hsl(215 85% 45%); margin-top: 0.5rem;">${content.tip.title}</p>
+                    <p style="margin-top: 0.5rem;">${content.tip.summary}</p>
+                </div>
+                <div class="preview-item">
+                    <strong>🏛️ 지자체 AI 활용사례</strong>
+                    <p style="font-weight: 600; margin-top: 0.5rem;">${content.localGovCase.title}</p>
+                    <p style="margin-top: 0.5rem;">${content.localGovCase.summary}</p>
+                </div>
+                <div class="preview-item">
+                    <strong>🔥 AI 핫이슈</strong>
+                    <p style="font-weight: 600; margin-top: 0.5rem;">${content.hotIssue.title}</p>
+                    <p style="margin-top: 0.5rem;">${content.hotIssue.summary}</p>
+                </div>
+                <div class="preview-item">
+                    <strong>📊 오늘의 AI 트렌드</strong>
+                    <p style="margin-top: 0.5rem;">${content.trends.description}</p>
+                    <p style="margin-top: 0.5rem;">${content.trends.hashtags.join(' ')}</p>
+                </div>
+            `;
+        }
+
+        // 생성 버튼 클릭
+        document.getElementById('generateBtn').addEventListener('click', async () => {
+            const apiKey = document.getElementById('apiKey').value.trim();
+            const dateInput = document.getElementById('date').value;
+            const customPrompt = document.getElementById('customPrompt').value.trim();
+
+            if (!apiKey) {
+                showAlert('API 키를 입력해주세요.');
+                return;
+            }
+
+            if (!dateInput) {
+                showAlert('날짜를 선택해주세요.');
+                return;
+            }
+
+            const selectedDate = new Date(dateInput + 'T00:00:00');
+            const dateInfo = formatDate(selectedDate);
+
+            // UI 업데이트
+            document.getElementById('generateBtn').disabled = true;
+            document.getElementById('loading').classList.add('active');
+            document.getElementById('result').classList.remove('active');
+
+            try {
+                // 콘텐츠 생성
+                const content = await generateContent(apiKey, dateInfo, customPrompt);
+
+                // HTML 생성
+                const html = generateHTML(content, dateInfo);
+
+                // 결과 표시
+                document.getElementById('htmlOutput').value = html;
+                document.getElementById('preview').innerHTML = createPreview(content);
+                document.getElementById('result').classList.add('active');
+
+                showAlert('콘텐츠가 성공적으로 생성되었습니다!', 'success');
+
+                // 결과 영역으로 스크롤
+                document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('생성 중 오류가 발생했습니다: ' + error.message);
+            } finally {
+                document.getElementById('generateBtn').disabled = false;
+                document.getElementById('loading').classList.remove('active');
+            }
+        });
+
+        // 복사 버튼
+        document.getElementById('copyBtn').addEventListener('click', () => {
+            const textarea = document.getElementById('htmlOutput');
+            textarea.select();
+            document.execCommand('copy');
+            showAlert('HTML이 클립보드에 복사되었습니다!', 'success');
+        });
+
+        // 다운로드 버튼
+        document.getElementById('downloadBtn').addEventListener('click', () => {
+            const html = document.getElementById('htmlOutput').value;
+            const blob = new Blob([html], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            const dateStr = document.getElementById('date').value.replace(/-/g, '').slice(2);
+            a.href = url;
+            a.download = `AI출근길_${dateStr}.html`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showAlert('HTML 파일이 다운로드되었습니다!', 'success');
         });
     </script>
 </body>
