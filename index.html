@@ -9,7 +9,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
     <meta property="og:title" content="AI출근길 (25.11.08.토) - 공공 AI 실전팁">
-    <meta property="og:description" content="방대한 정책 보고서나 회의록을 핵심만 빠르게 파악해야 할 때, AI를 활용하여 시간 절약과 업무 효율을 극대화하는 방법을 소개합니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
+    <meta property="og:description" content="AI를 활용하여 기존의 틀을 깨는 창의적이고 다양한 정책 아이디어를 빠르게 생성하고, 초기 기획 단계의 효율성을 극대화하는 방법을 소개합니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
     <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.jpg">
 
     <style>
@@ -487,43 +487,47 @@
 
         // 💬 오늘의 한마디 (매일 교체)
         const todayQuote = {
-            text: "묵묵히 걷는 당신의 발걸음이 세상에 따뜻한 울림을 줍니다. 잠시 쉬어가도 괜찮아요.",
-            author: "마더 테레사"
+            text: "인생에서 가장 큰 영광은 넘어지지 않는 것에 있는 것이 아니라, 넘어질 때마다 일어서는 것에 있다.",
+            author: "넬슨 만델라"
         };
 
         // 💡 오늘의 실전 팁 (매일 새 주제)
         const todayTip = {
-            title: "장문 정책 보고서 핵심 요약, AI로 5분 만에 끝내기",
-            summary: "방대한 정책 보고서나 회의록을 핵심만 빠르게 파악해야 할 때, AI를 활용하여 시간 절약과 업무 효율을 극대화하는 방법을 소개합니다.",
-            situation: "새로운 법안이나 정책 자료, 또는 지난 회의록 등 수십 페이지에 달하는 문서를 짧은 시간 안에 읽고 핵심 내용을 파악해야 할 때가 많습니다. 중요한 내용을 놓치지 않으면서도 신속하게 업무에 적용해야 하는 부담이 있습니다.",
-            solution: "AI 챗봇(예: ChatGPT, Claude, Gemini 등)에 문서를 붙여넣거나 업로드하여 주요 내용, 핵심 논점, 결론, 다음 단계 등을 요약하도록 지시합니다. 특정 관점(예: 시민 관점, 예산 관점)에서 요약해달라고 요청할 수도 있습니다.",
-            prompt: `다음 정책 보고서를 읽고, 핵심 목표, 주요 내용, 예상되는 파급 효과, 그리고 제안된 다음 단계를 요약해 주세요. 요약은 간결하게 불릿 포인트 형식으로 작성하고, 일반 시민도 이해하기 쉬운 용어로 설명해 주세요. [보고서 내용 붙여넣기]`,
-            result: `AI는 복잡한 정책 용어를 일반적인 언어로 바꾸어 이해하기 쉽게 정리하고, 수십 페이지의 내용을 몇 개의 핵심 문장으로 압축하여 제공합니다. 이를 통해 보고서 전체를 읽는 시간을 획기적으로 단축할 수 있습니다.`,
-            usage: "요약된 내용을 바탕으로 보고서 작성, 브리핑 자료 준비, 내부 회의 안건 공유 등 다양한 업무에 활용할 수 있습니다. 특히, 여러 부서 간의 정보 공유 시 통일된 핵심 내용을 빠르게 전달하는 데 유용합니다."
+            title: "AI와 함께 혁신적인 정책 아이디어 발굴하기",
+            summary: "AI를 활용하여 기존의 틀을 깨는 창의적이고 다양한 정책 아이디어를 빠르게 생성하고, 초기 기획 단계의 효율성을 극대화하는 방법을 소개합니다.",
+            situation: "새로운 정책이나 사업을 기획할 때, 늘 비슷한 아이디어만 나오거나 참신한 접근 방식이 필요하지만, 시간과 자원의 제약으로 깊이 있는 브레인스토밍이 어려울 때가 있습니다.",
+            solution: "AI에게 특정 정책 목표와 대상, 제약 조건을 제시하고 다양한 관점에서 아이디어를 제안하도록 요청합니다. AI는 방대한 데이터를 기반으로 예상치 못한 연결고리를 찾아내고, 초기 아이디어의 폭을 넓혀줌으로써 혁신적인 정책 구상에 도움을 줍니다.",
+            prompt: `우리 지역의 청년층 이탈 문제를 해결하기 위한 혁신적인 정책 아이디어를 5가지 제안해 주세요. 특히 문화 콘텐츠, 주거 안정, 일자리 창출 세 가지 키워드를 중심으로, 20대 후반 청년들이 실제로 체감할 수 있는 실현 가능한 방안을 구체적으로 제시해 주세요. 각 아이디어별로 예상 효과와 필요한 자원도 간략히 포함해 주세요.`,
+            result: `1. **지역 특화 콘텐츠 크리에이터 육성 프로그램**: 지역 고유의 문화 자원을 활용한 숏폼 콘텐츠 제작 지원, 인큐베이팅 공간 제공. (효과: 지역 문화 활성화, 청년 유입, 신규 일자리 창출 / 자원: 전문가 멘토링, 스튜디오 공간, 초기 활동비)
+2. **워케이션 연계형 청년 주거 지원**: 지역 내 빈집 활용 또는 신축 공공임대주택에 워케이션 프로그램 결합, 초기 정착 지원금 제공. (효과: 주거 부담 완화, 지역 경제 활성화, 관계 인구 증가 / 자원: 주택 리모델링 예산, 워케이션 기업 연계)
+3. **청년 주도형 소셜 벤처 지원 플랫폼**: 지역 사회 문제 해결을 위한 청년 소셜 벤처 발굴 및 자금, 멘토링, 홍보 지원. (효과: 사회적 가치 창출, 청년 창업 활성화, 지역 활력 증진 / 자원: 초기 투자금, 전문 컨설팅, 네트워킹 행사)
+4. **AI 기반 맞춤형 직업 훈련 및 매칭 시스템**: 지역 산업 수요와 청년 개인 역량을 분석하여 맞춤형 교육 프로그램 제공, 지역 기업과의 인턴십 및 취업 연계. (효과: 미스매치 해소, 취업률 향상, 지역 산업 경쟁력 강화 / 자원: AI 개발 및 유지 보수, 교육기관 협력)
+5. **지역 청년 네트워크 활성화 커뮤니티 조성**: 온/오프라인 커뮤니티 공간 및 활동 지원, 지역 문화 행사 기획 및 참여 기회 제공. (효과: 청년 고립감 해소, 정보 교류 활성화, 지역 정착 유도 / 자원: 커뮤니티 공간 임대 및 운영비, 행사 기획 예산)`,
+            usage: "AI가 제안한 아이디어를 초기 브레인스토밍 자료로 활용하거나, 기존 아이디어에 새로운 관점을 추가하는 데 활용할 수 있습니다. 팀원들과 함께 AI가 제시한 아이디어를 심화 발전시켜 실제 정책으로 구체화하는 과정을 거치세요."
         };
 
-        // 🏛️ 지자체 AI 활용사례
+        // 🏛️ 공공·정부 AI 활용 사례
         const localGovCase = {
-            title: "인제군, 스마트 행정으로 도약...공무원 생성형 AI 용량제 서비스 '인제군 AI GPT' 도입",
-            summary: "인제군이 행정 업무 효율성을 높이고 직원들의 AI 활용 역량을 강화하기 위해 챗GPT, 제미나이 등 9개 생성형 AI 모델을 선택적으로 사용할 수 있는 '인제군 AI GPT' 서비스를 도입했다. 이 서비스는 10월 27일부터 업무에 적용되었으며, 공공기관 특성에 맞춘 관리 원칙을 준수한다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGEOLIt4sn2X33lbCetXMVbFyuBNVzvPWu16DQIzBHSULTALpvOEOtMiL_0kZw1HPha5D2hk-QvYN-oA1vOHePqlap0q23DZZQ3WNAD4eiEqoTnQJEU3a8qGVIjY6by0k53L6D-zVP1TNQnWlsunwwVGyZKZA=="
+            title: "LH, 고객상담 고도화 … 카카오톡·보이는 ARS 확대",
+            summary: "한국토지주택공사(LH)가 분양·임대 카카오톡 상담 및 보이는 ARS 서비스를 확대 시행하며 고객 상담을 고도화한다. LH는 콜센터 대기시간 단축과 고객 편의를 위해 인공지능 고객센터를 구축 중이며, 내년 하반기에는 생성형 인공지능(LLM) 챗봇을 도입할 예정이다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEOv6TDhKx_98aMP5k3KdwxpWDsUTvL_6GJneETkpPCA7qTCv7-HM84Z7QknIx-Y_CoTc7-miHNmEMxB2tbQ_60Yg0qifHuxrYacZBZaHlF57wb1-dbXfKWXry64yb_a8CODueqNaSUd50qPp6tWq9MsQ82rE2A0MdKQ-frxwN33nv-"
         };
 
-        // 🔥 AI 핫이슈
+        // 🔥 AI 핫이슈 (AI 기술·산업)
         const hotIssue = {
-            title: "행안부 개편…'공공부문 AI 전환 총괄' AI정부실 신설(종합)",
-            summary: "행정안전부가 공공부문의 인공지능 전환을 총괄하는 'AI정부실'을 신설하는 조직개편안을 발표했다. 이는 기존 디지털정부혁신실을 폐지하고 AI 정책 기능을 강화하여 공공부문 AI 전환 동력을 확보하기 위함이다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFwNh65gUEwwZnK3ZUwijVespSKWDbM_BVBqh9VeRI5rDazHhg8lnCYfrwAwRXq-Y2WK7QFumeQFQpjQzjc0CYLNqfN2Wfkiisxj-NKy-0L6gcgVROLLKnKqDxVoBq9sF2XSJz9eAVA1PbP"
+            title: "데이터스트림즈, 'DMTS 디지털미디어테크쇼'서 LLM 기반 지능형 업무 자동화 기술 공개",
+            summary: "데이터스트림즈가 'DMTS 디지털미디어테크쇼 2025'에서 데이터 패브릭 기반 LLM 플랫폼을 공개하며, 자연어 입력으로 국정감사 예상 쟁점 생성, 법령 및 규정 비교 등 반복 업무를 자동화하는 기술을 선보였다. 이 플랫폼은 RAG 기술을 통해 LLM의 할루시네이션 문제를 최소화하고 데이터 품질 기반의 AI 성능을 보장한다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEwPkibQlig08rGPxRygZkN1L-dT1EDSaZO27-AxrbM7welWFlEMk1U6_UrDueRTJPUcoXhRnAl45rywTqDqXA9hsJtcAm_UtXw5H9OB-SUSkuHnjV4xSTFsBtiEZBjFGA="
         };
 
         // 📊 오늘의 AI 트렌드
-        const todayTrendsDescription = "2025년에는 공공 부문 전반에 걸쳐 AI 기반 개인 비서 및 업무 자동화 도구 도입이 가속화될 전망입니다. 이는 단순 반복 업무를 줄이고 공무원들이 더 중요한 정책 개발 및 대민 서비스에 집중할 수 있도록 지원할 것입니다.";
-        const todayTrends = ["#공공AI","#AI비서","#스마트행정","#업무효율","#미래정부"];
+        const todayTrendsDescription = "2025년 하반기에는 공공 부문에서의 AI 활용이 더욱 고도화되어, 민원 응대 자동화는 물론 데이터 기반의 정책 의사결정 지원 시스템 도입이 가속화될 전망입니다. 특히, 생성형 AI를 활용한 맞춤형 서비스 개발 경쟁이 심화될 것으로 보입니다.";
+        const todayTrends = ["#공공AI","#생성형AI","#정책결정지원","#민원자동화","#디지털정부"];
 
         // 🏷️ OG 태그 (매일 업데이트)
         const ogTags = {
             title: "AI출근길 (25.11.08.토) - 공공 AI 실전팁",
-            description: "방대한 정책 보고서나 회의록을 핵심만 빠르게 파악해야 할 때, AI를 활용하여 시간 절약과 업무 효율을 극대화하는 방법을 소개합니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
+            description: "AI를 활용하여 기존의 틀을 깨는 창의적이고 다양한 정책 아이디어를 빠르게 생성하고, 초기 기획 단계의 효율성을 극대화하는 방법을 소개합니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
         };
     </script>
     <!-- ============================================ -->
@@ -588,11 +592,11 @@
             <p class="tip-link">클릭하여 상세 가이드 보기 →</p>
         </div>
 
-        <!-- 지자체 AI 활용사례 -->
+        <!-- 공공·정부 AI 활용 사례 -->
         <div class="card" id="local-card" style="cursor: pointer;" onclick="window.open(document.getElementById('local-link').href, '_blank')">
             <h3 class="card-title">
                 <span style="font-size: 1.25rem;">🏛️</span>
-                지자체 AI 활용사례
+                공공·정부 AI 활용 사례
             </h3>
             <p class="news-summary" id="local-summary"></p>
             <a class="news-link" id="local-link" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">
@@ -601,11 +605,11 @@
             </a>
         </div>
 
-        <!-- AI 핫이슈 -->
+        <!-- AI 핫이슈 (AI 기술·산업) -->
         <div class="card" id="hot-card" style="cursor: pointer;" onclick="window.open(document.getElementById('hot-link').href, '_blank')">
             <h3 class="card-title">
                 <span style="font-size: 1.25rem;">🔥</span>
-                AI 핫이슈
+                AI 핫이슈 (AI 기술·산업)
             </h3>
             <p class="news-summary" id="hot-summary"></p>
             <a class="news-link" id="hot-link" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">
@@ -694,12 +698,12 @@
             document.getElementById('tip-title').textContent = todayTip.title;
             document.getElementById('tip-summary').textContent = todayTip.summary;
 
-            // 지자체 AI 활용사례
+            // 공공·정부 AI 활용 사례
             document.getElementById('local-summary').textContent = localGovCase.summary;
             document.getElementById('local-title').textContent = localGovCase.title;
             document.getElementById('local-link').href = localGovCase.link;
 
-            // AI 핫이슈
+            // AI 핫이슈 (AI 기술·산업)
             document.getElementById('hot-summary').textContent = hotIssue.summary;
             document.getElementById('hot-title').textContent = hotIssue.title;
             document.getElementById('hot-link').href = hotIssue.link;
