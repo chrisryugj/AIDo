@@ -675,9 +675,9 @@
          *
          * 1. 검색 전략:
          *    - 자연스러운 한글 키워드로 검색 (site: 연산자 제거)
-         *    - 지자체: "한국 지자체 공공기관 AI 인공지능 스마트행정 챗봇 활용"
-         *    - 핫이슈: "한국 AI 인공지능 정책 제도 국감 표준 규제 가이드라인"
-         *    - 기간: 최근 1주일로 확대
+         *    - 공공·정부: "한국 지자체 공공기관 중앙부처 정부 AI 인공지능 스마트행정 챗봇 디지털전환 활용 도입"
+         *    - 핫이슈: "한국 AI 인공지능 신기술 LLM 생성형AI 모델 칩 산업 스타트업"
+         *    - 기간: 최근 1-2일 (한글 뉴스만)
          *
          * 2. 정보 추출 프로세스:
          *    - AI에게 구조화된 형식으로 응답 요청 (제목/출처/URL/요약)
@@ -793,18 +793,18 @@
         async function generateNewsSection(apiKey, section, dateInfo, maxRetries = 3) {
             const config = {
                 localGovCase: {
-                    name: '지자체 AI 활용사례',
-                    searchPrompt: '한국 지자체 공공기관 AI 인공지능 스마트행정 챗봇 활용 도입 최근 1주일',
-                    summaryContext: '지자체나 공공기관이 AI를 실무에 도입/활용한 사례',
-                    validDomains: ['.go.kr', 'news1.kr', 'dt.co.kr', 'yonhapnewstv.com', 'korea.kr', 'yna.co.kr', 'etnews.com'],
+                    name: '공공·정부 AI 활용 사례',
+                    searchPrompt: '한국 지자체 공공기관 중앙부처 정부 AI 인공지능 스마트행정 챗봇 디지털전환 활용 도입 최근 1-2일',
+                    summaryContext: '지자체 또는 정부기관(중앙부처, 공공기관 포함)이 AI를 실무에 도입/활용한 사례',
+                    validDomains: ['.go.kr', 'korea.kr', 'etnews.com', 'ddaily.co.kr', 'inews24.com', 'zdnet.co.kr', 'aitimes.com', 'yna.co.kr'],
                     preferredDomains: ['.go.kr', 'korea.kr'] // 우선순위 도메인
                 },
                 hotIssue: {
-                    name: 'AI 핫이슈',
-                    searchPrompt: '한국 AI 인공지능 정책 제도 국감 표준 규제 가이드라인 공공 최근 1주일',
-                    summaryContext: 'AI 정책이나 공공부문 AI 관련 중요 이슈',
-                    validDomains: ['korea.kr', 'etnews.com', 'dt.co.kr', 'zdnet.co.kr', 'sedaily.com', '.go.kr', 'msit.go.kr', 'yna.co.kr'],
-                    preferredDomains: ['korea.kr', '.go.kr', 'msit.go.kr'] // 우선순위 도메인
+                    name: 'AI 핫이슈 (AI 기술·산업)',
+                    searchPrompt: '한국 AI 인공지능 신기술 LLM 생성형AI 모델 칩 산업 스타트업 오픈AI 구글 네이버 카카오 최근 1-2일',
+                    summaryContext: '순수 AI 신기술, AI 모델 발표, AI 칩, AI 산업 동향, 글로벌 AI 기업 뉴스 (공공/정부 관련 제외)',
+                    validDomains: ['etnews.com', 'ddaily.co.kr', 'inews24.com', 'zdnet.co.kr', 'aitimes.com', 'tech42.co.kr', 'it.chosun.com'],
+                    preferredDomains: ['etnews.com', 'ddaily.co.kr', 'aitimes.com'] // 우선순위 도메인 (한글 IT 전문 매체)
                 }
             };
 
@@ -829,7 +829,7 @@
                         : '';
 
                     // AI 응답에서 직접 정보를 추출하도록 요청
-                    const finalPrompt = `${dateStr} 기준 최근 1주일 이내의 "${searchPrompt}" 관련 최신 뉴스를 검색해줘.
+                    const finalPrompt = `${dateStr} 기준 최근 1-2일 이내의 "${searchPrompt}" 관련 최신 뉴스를 검색해줘.
 
 다음 형식으로 정확히 1개의 뉴스만 알려줘:
 제목: [실제 뉴스 제목]
@@ -839,7 +839,8 @@ URL: [뉴스 링크]
 요약: [핵심만 1-2문장으로 간결하게, 최대 2줄 이내]
 
 주의사항:
-- 정부기관(.go.kr), 공식 언론사 기사를 우선적으로 찾아줘
+- **반드시 한글 뉴스만 수집** (영문 기사 제외)
+- ${section === 'localGovCase' ? '정부기관(.go.kr), 공식 언론사 기사를 우선적으로 찾아줘' : '한국 IT 전문 매체(전자신문, 디지털데일리, 아이뉴스24, 지디넷코리아, AI타임스, 테크42, IT조선) 기사를 우선적으로 찾아줘'}
 - 실제 존재하는 뉴스만 알려줘
 - 제목은 반드시 실제 뉴스 헤드라인이어야 함
 - 요약은 짧고 간결하게 핵심만${newsExclusionNote}`;
@@ -1614,14 +1615,14 @@ JSON만:
             usage: "${content.tip.usage.replace(/"/g, '\\"')}"
         };
 
-        // 🏛️ 지자체 AI 활용사례
+        // 🏛️ 공공·정부 AI 활용 사례
         const localGovCase = {
             title: "${content.localGovCase.title.replace(/"/g, '\\"')}",
             summary: "${content.localGovCase.summary.replace(/"/g, '\\"')}",
             link: "${content.localGovCase.link}"
         };
 
-        // 🔥 AI 핫이슈
+        // 🔥 AI 핫이슈 (AI 기술·산업)
         const hotIssue = {
             title: "${content.hotIssue.title.replace(/"/g, '\\"')}",
             summary: "${content.hotIssue.summary.replace(/"/g, '\\"')}",
@@ -1700,11 +1701,11 @@ JSON만:
             <p class="tip-link">클릭하여 상세 가이드 보기 →</p>
         </div>
 
-        <!-- 지자체 AI 활용사례 -->
+        <!-- 공공·정부 AI 활용 사례 -->
         <div class="card" id="local-card" style="cursor: pointer;" onclick="window.open(document.getElementById('local-link').href, '_blank')">
             <h3 class="card-title">
                 <span style="font-size: 1.25rem;">🏛️</span>
-                지자체 AI 활용사례
+                공공·정부 AI 활용 사례
             </h3>
             <p class="news-summary" id="local-summary"></p>
             <a class="news-link" id="local-link" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">
@@ -1713,11 +1714,11 @@ JSON만:
             </a>
         </div>
 
-        <!-- AI 핫이슈 -->
+        <!-- AI 핫이슈 (AI 기술·산업) -->
         <div class="card" id="hot-card" style="cursor: pointer;" onclick="window.open(document.getElementById('hot-link').href, '_blank')">
             <h3 class="card-title">
                 <span style="font-size: 1.25rem;">🔥</span>
-                AI 핫이슈
+                AI 핫이슈 (AI 기술·산업)
             </h3>
             <p class="news-summary" id="hot-summary"></p>
             <a class="news-link" id="hot-link" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">
@@ -1806,12 +1807,12 @@ JSON만:
             document.getElementById('tip-title').textContent = todayTip.title;
             document.getElementById('tip-summary').textContent = todayTip.summary;
 
-            // 지자체 AI 활용사례
+            // 공공·정부 AI 활용 사례
             document.getElementById('local-summary').textContent = localGovCase.summary;
             document.getElementById('local-title').textContent = localGovCase.title;
             document.getElementById('local-link').href = localGovCase.link;
 
-            // AI 핫이슈
+            // AI 핫이슈 (AI 기술·산업)
             document.getElementById('hot-summary').textContent = hotIssue.summary;
             document.getElementById('hot-title').textContent = hotIssue.title;
             document.getElementById('hot-link').href = hotIssue.link;
@@ -1905,7 +1906,7 @@ JSON만:
                     </div>
                 </div>
                 <div class="preview-item">
-                    <strong>🏛️ 지자체 AI 활용사례</strong>
+                    <strong>🏛️ 공공·정부 AI 활용 사례</strong>
                     <p style="font-weight: 600; margin-top: 0.5rem;">${content.localGovCase.title}</p>
                     <p style="margin-top: 0.5rem;">${content.localGovCase.summary}</p>
                     <p style="margin-top: 0.5rem;"><a href="${content.localGovCase.link}" target="_blank" rel="noopener" class="preview-link">🔗 ${content.localGovCase.link}</a></p>
@@ -1915,7 +1916,7 @@ JSON만:
                     </div>
                 </div>
                 <div class="preview-item">
-                    <strong>🔥 AI 핫이슈</strong>
+                    <strong>🔥 AI 핫이슈 (AI 기술·산업)</strong>
                     <p style="font-weight: 600; margin-top: 0.5rem;">${content.hotIssue.title}</p>
                     <p style="margin-top: 0.5rem;">${content.hotIssue.summary}</p>
                     <p style="margin-top: 0.5rem;"><a href="${content.hotIssue.link}" target="_blank" rel="noopener" class="preview-link">🔗 ${content.hotIssue.link}</a></p>
@@ -1945,7 +1946,7 @@ JSON만:
                 return;
             }
 
-            const sectionName = section === 'localGovCase' ? '지자체 AI 활용사례' : 'AI 핫이슈';
+            const sectionName = section === 'localGovCase' ? '공공·정부 AI 활용 사례' : 'AI 핫이슈 (AI 기술·산업)';
             const newsTitle = currentContent[section].title;
             const newsSummary = currentContent[section].summary;
 
@@ -2067,8 +2068,8 @@ JSON 형식으로만 응답하세요. 다른 설명 없이 JSON만 반환하세�
             const sectionNames = {
                 quote: '오늘의 한마디',
                 tip: '오늘의 실전 팁',
-                localGovCase: '지자체 AI 활용사례',
-                hotIssue: 'AI 핫이슈',
+                localGovCase: '공공·정부 AI 활용 사례',
+                hotIssue: 'AI 핫이슈 (AI 기술·산업)',
                 trends: '오늘의 AI 트렌드'
             };
 
