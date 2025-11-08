@@ -78,16 +78,39 @@ git push
 
 ```
 AIDo/
-├── index.html              # 메인 뉴스레터 페이지
-├── generator.html          # 콘텐츠 자동생성 웹앱 🆕
+├── index.html              # 메인 뉴스레터 페이지 (최종 결과물)
+│
+├── 🆕 콘텐츠 생성기 (3개 파일로 분리됨)
+│   ├── generator.html      # 생성기 웹앱 HTML 구조 (174줄)
+│   ├── generator.css       # 생성기 스타일시트 (320줄)
+│   └── generator.js        # 생성기 로직 (1980줄)
+│                            ⚠️ 뉴스 수집 설정은 generator.js 수정
+│
 ├── daily-update-prompt.md  # 수동 업데이트 가이드
 ├── CLAUDE.md              # Claude Code용 프로젝트 가이드
 ├── images/                # 이미지 파일
-│   └── aido-og-image.png
+│   └── aido-og-image.jpg
 ├── 250902.html            # 아카이브 (예시)
 ├── 250903.html            # NotebookLM 가이드
 └── coupon.html            # 쿠폰 페이지
 ```
+
+### 생성기 파일 설명
+
+**generator.html** (174줄)
+- HTML 구조만 포함
+- CSS/JS는 외부 파일로 분리
+- 편집하기 쉬운 크기
+
+**generator.css** (320줄)
+- 생성기 UI 스타일
+- 폰트, 색상, 레이아웃 등
+
+**generator.js** (1980줄)
+- 모든 로직 포함
+- **뉴스 수집 설정 위치**: 라인 ~800
+- **HTML 템플릿**: 라인 ~1600
+- **프롬프트 설정**: 라인 ~1050
 
 ## 🎨 주요 기능
 

@@ -9,7 +9,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Project Structure
 
 - **index.html** - Main daily newsletter page with embedded JavaScript for dynamic content
-- **generator.html** - AI-powered content generation web app using Gemini API (NEW)
+- **Content Generator (3 separate files for maintainability)**:
+  - **generator.html** (174 lines) - HTML structure only
+  - **generator.css** (320 lines) - All UI styles
+  - **generator.js** (1980 lines) - All logic including Gemini API integration
+    - ⚠️ News collection settings at ~line 800
+    - ⚠️ HTML template at ~line 1600
+    - ⚠️ Prompt configuration at ~line 1050
 - **daily-update-prompt.md** - Comprehensive guide for manual content updates (Korean)
 - **README.md** - Project documentation and usage guide
 - **CLAUDE.md** - This file, guidance for Claude Code
@@ -17,6 +23,25 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **coupon.html** - Separate HTML page (likely for special promotions or events)
 - **images/** - Contains cover images and OG (Open Graph) images for social media sharing
 - **250903.html** - NotebookLM tutorial guide (a separate educational resource)
+
+### Generator File Breakdown (as of 2025-11-08)
+
+The content generator was refactored from a monolithic 2390-line file into three modular files for easier maintenance:
+
+**Before refactoring:**
+- `generator.html`: 95KB, 2390 lines (difficult to edit)
+
+**After refactoring:**
+- `generator.html`: 8.9KB, 174 lines (HTML structure + external references)
+- `generator.css`: 6.5KB, 320 lines (all styles)
+- `generator.js`: 81KB, 1980 lines (all logic)
+
+Each file includes comprehensive header documentation explaining:
+- Purpose and usage
+- Warning about what NOT to modify
+- Common modification scenarios
+- Change history
+- Related files
 
 ## Architecture
 
@@ -149,15 +174,61 @@ Downloaded files use: `AI-Do_오늘뭐이슈_YYMMDD.html`
 - **API Security**: Gemini API keys stored in browser localStorage only, never transmitted to servers other than Google's API
 - **Content Validation**: Generated news links should be manually verified as the AI may generate plausible but non-existent URLs
 
-## generator.html Technical Details
+## Generator Technical Details
 
-### API Integration
-- **Endpoint**: `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent`
-- **Model**: `gemini-2.0-flash-exp` (latest Gemini model as of implementation)
+### File Organization (Refactored 2025-11-08)
+
+The generator is split across three files for maintainability:
+
+**generator.html** (174 lines)
+- Minimal HTML structure
+- Links to external CSS and JS
+- Contains all UI elements (forms, inputs, buttons, modals)
+- Easy to modify layout without touching logic
+
+**generator.css** (320 lines)
+- All styling for the generator interface
+- Fonts: Atomy, SimGyeongha
+- Blue gradient color scheme matching index.html
+- Button styles, form controls, loading spinners, alerts
+- Note: This is NOT for index.html - those styles are embedded in generator.js
+
+**generator.js** (1980 lines)
+- All JavaScript logic
+- Complete header documentation with function index
+- Three critical sections to modify:
+  1. **News collection config (~line 800)**:
+     - Public/Gov AI news: Keywords, domains, date range
+     - AI Hot Issue: Tech/industry focus, Korean sources only
+  2. **HTML template (~line 1600)**:
+     - Complete index.html structure embedded as template literal
+     - Modify this to change the final output HTML
+  3. **Prompt configuration (~line 1050)**:
+     - AI prompt structure that affects content quality
+     - Adjust for different content styles
+
+### API Integration (in generator.js)
+- **Endpoint**: `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent`
+- **Model**: `gemini-2.5-flash` with grounding (Google Search integration)
 - **Parameters**:
-  - temperature: 0.9 (for creative content)
-  - maxOutputTokens: 8192
+  - temperature: 0.3-0.9 (varies by section)
+  - maxOutputTokens: 2048-8192
   - topK: 40, topP: 0.95
+  - tools: googleSearch (for news collection)
+
+### News Collection Strategy (Updated 2025-11-08)
+- **Public/Government AI Cases**:
+  - Focus: Local gov + central gov + public institutions
+  - Keywords: 지자체, 공공기관, 중앙부처, 정부, AI, 스마트행정, 디지털전환
+  - Time range: 1-2 days (tightened from 1 week)
+  - Language: Korean only
+
+- **AI Hot Issues**:
+  - Focus: Pure AI tech/industry (NOT public sector)
+  - Keywords: AI 신기술, LLM, 생성형AI, 모델, 칩, 산업, 스타트업
+  - Sources: Korean IT media (etnews, ddaily, inews24, zdnet, aitimes, tech42, it.chosun)
+  - Time range: 1-2 days
+  - Language: Korean only
 
 ### Prompt Engineering
 The generator uses a structured prompt that requests JSON output with specific fields matching the index.html content structure. The prompt includes:
@@ -172,11 +243,19 @@ The generator uses a structured prompt that requests JSON output with specific f
 - JSON parsing with markdown code block stripping
 - User-friendly error messages
 - Loading indicators during API calls
+- News deduplication (tracks last 14 days in localStorage)
 
 ### Data Flow
-1. User inputs date and optional custom prompt
-2. Structured prompt sent to Gemini API
-3. API returns JSON with all content sections
-4. JSON parsed and validated
-5. Content inserted into index.html template
-6. Full HTML displayed for copy/download
+1. User inputs date and optional custom prompt in generator.html
+2. generator.js builds structured prompt
+3. Structured prompt sent to Gemini API (with Google Search grounding)
+4. API returns JSON with all content sections
+5. JSON parsed and validated
+6. Content inserted into embedded index.html template (in generator.js)
+7. Full HTML displayed for copy/download
+
+### Maintenance Notes
+- To modify news keywords: Edit generator.js ~line 800
+- To modify UI colors: Edit generator.css
+- To modify HTML layout: Edit generator.html (structure) or generator.js (template)
+- All files have detailed header comments explaining their role
