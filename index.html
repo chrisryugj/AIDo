@@ -9,7 +9,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
     <meta property="og:title" content="AI출근길 (25.11.09.일) - 공공 AI 실전팁">
-    <meta property="og:description" content="바쁜 일정 속에서도 AI를 활용하여 공식 행사 연설문의 초안을 빠르고 효과적으로 작성하는 방법을 소개합니다. 핵심 메시지를 명확히 전달하고, 청중에게 깊은 인상을 남길 수 있는 연설문을 AI의 도움으로 만들어 보세요., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
+    <meta property="og:description" content="방대한 회의록이나 보고서에서 핵심 내용을 빠르게 파악하고 요약하여 업무 효율을 극대화하는 AI 활용법입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
     <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.jpg">
 
     <style>
@@ -487,54 +487,47 @@
 
         // 💬 오늘의 한마디 (매일 교체)
         const todayQuote = {
-            text: "세상에서 가장 아름다운 것들은 보거나 만질 수 없습니다. 오직 마음으로만 느낄 수 있습니다.",
-            author: "헬렌 켈러"
+            text: "우리가 할 수 있는 위대한 일은 많지 않지만, 위대한 사랑으로 작은 일들을 할 수 있습니다.",
+            author: "마더 테레사"
         };
 
         // 💡 오늘의 실전 팁 (매일 새 주제)
         const todayTip = {
-            title: "AI로 5분 만에 '공식 행사 연설문' 초안 작성하기",
-            summary: "바쁜 일정 속에서도 AI를 활용하여 공식 행사 연설문의 초안을 빠르고 효과적으로 작성하는 방법을 소개합니다. 핵심 메시지를 명확히 전달하고, 청중에게 깊은 인상을 남길 수 있는 연설문을 AI의 도움으로 만들어 보세요.",
-            situation: "중요한 공식 행사를 앞두고 있지만, 연설문 작성에 할애할 시간이 부족하고 어떤 내용으로 시작해야 할지 막막할 때가 많습니다. 시간은 없고, 연설의 품격과 메시지 전달력은 놓칠 수 없습니다.",
-            solution: "AI에 행사 정보, 목적, 청중, 핵심 메시지 등을 입력하면, AI가 해당 정보를 바탕으로 연설문의 구조와 내용을 제안하고 초안을 빠르게 작성해 줍니다. 이를 통해 연설문 작성 시간을 대폭 단축하고, 내용의 완성도를 높일 수 있습니다.",
-            prompt: `당신은 경험 많은 연설문 작성 전문가입니다.
-다음 정보를 바탕으로 [행사명]에 대한 5분 분량의 연설문 초안을 작성해 주세요.
-연설문은 [청중]에게 [목적]을 달성하는 데 중점을 두어야 합니다.
-다음 핵심 메시지들을 반드시 포함해 주세요:
-1. [핵심 메시지 1]
-2. [핵심 메시지 2]
-3. [핵심 메시지 3]
-연설문은 [어조]로 작성하고, 시작과 끝 인사말을 포함하며, 자연스럽고 감동적인 마무리를 해주세요.`,
-            result: `안녕하세요, [행사명]에 참석해주신 존경하는 [청중] 여러분!
-오늘 이 자리에 함께하게 되어 매우 기쁩니다. ... [핵심 메시지 1], [핵심 메시지 2], [핵심 메시지 3]을 담아 연설문이 완성됩니다. ... 이 자리에 함께해주신 모든 분들께 다시 한번 감사드립니다.`,
-            usage: "시간 절약: 복잡한 연설문 구성에 대한 고민 없이 초안을 빠르게 확보하여 다른 업무에 집중할 수 있습니다.
-메시지 명확화: AI가 제시한 구조를 통해 핵심 메시지를 효과적으로 전달하는 연설문을 만들 수 있습니다.
-초기 아이디어: 연설문의 방향을 잡기 어려울 때 AI가 제공하는 초안이 훌륭한 출발점이 됩니다.
-맞춤형 연설: 청중과 목적에 맞춰 프롬프트를 조정하여 다양한 상황에 맞는 연설문을 생성할 수 있습니다."
+            title: "AI로 긴 보고서 및 회의록 핵심 요약하기",
+            summary: "방대한 회의록이나 보고서에서 핵심 내용을 빠르게 파악하고 요약하여 업무 효율을 극대화하는 AI 활용법입니다.",
+            situation: "주간 회의록, 감사 보고서, 정책 자료 등 긴 문서들을 검토하고 핵심을 추출하는 데 많은 시간이 소요되어 업무 부담이 가중됩니다.",
+            solution: "AI에 문서를 입력하고 특정 목적에 맞는 요약 프롬프트를 사용하여, 필요한 정보만을 간결하게 정리하고 정책적 시사점까지 도출할 수 있습니다.",
+            prompt: `다음 [문서 종류, 예: 주간 회의록, 감사 보고서]를 읽고, 주요 결정 사항, 핵심 논의 쟁점, 그리고 다음 조치 사항을 중심으로 500자 이내로 요약해 주세요. 각 항목은 명확한 소제목으로 구분하고, 공직자로서 정책 결정에 참고할 만한 시사점을 2-3문장으로 추가해 주세요.`,
+            result: `예시:
+**주요 결정 사항:** A안 확정, B사업 추진팀 구성.
+**핵심 논의 쟁점:** 예산 확보 방안, 주민 의견 수렴 절차의 투명성 강화.
+**다음 조치 사항:** 11월 15일까지 세부 계획 수립 및 관련 부서 협의 진행.
+**정책 결정 시사점:** 주민 참여 확대와 투명한 예산 집행은 장기적인 사업 성공과 신뢰 구축에 필수적인 요소입니다. 이를 통해 정책 수용성을 높일 수 있을 것입니다.`,
+            usage: "정기적인 회의록 요약, 신규 정책 자료 검토, 국회 자료나 언론 보도 요약 등 다양한 문서 작업에 활용하여 업무 시간을 절약하고 핵심 정보 파악 능력을 향상시킬 수 있습니다."
         };
 
         // 🏛️ 공공·정부 AI 활용 사례
         const localGovCase = {
-            title: "코레일, AI로 내부 감시 강화 … 'Audit AX' 도입",
-            summary: "한국철도공사(코레일)가 감사 업무에 생성형 인공지능(AI) 기반 시스템 'Audit AX'를 도입하여 내부 통제를 강화한다. 이 시스템은 과거 감사 사례와 사고 이력을 학습해 조직 전반의 리스크를 자동 분석하고 잠재적인 위험 요소를 사전에 찾아낸다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFcOUHMwyh7tTASmyDNJuWBNB_ArberxwJNIWFNDH2pW-qybkfNd0LOfne5j0xAlK0iBwlQQhtDStxS5-esl_vF6lAhj_gCDVhnzuyuz035zsqDNhStRm993u-tSEW5gcXGzin8J120yUTGaPOGYDZP40Wj8W27yOBwBvnyOCe-AKs="
+            title: "“공공재정 관리도 AI로”…기재부, 국제포럼 개최",
+            summary: "“공공재정 관리도 AI로”…기재부, 국제포럼 개최에 관한 최신 뉴스입니다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGPvFDgmjmSDssUYQBWFeFsa18W1QPH2FpeF6FHzCVZI_viRpKEgj_kxH1hkRHZXJ_tTZlsJSW2KXp1B95WaCCjfkoQks_D3eYxA8VAknMAbHqUI7vv11NkvJm1VNFURw=="
         };
 
         // 🔥 AI 핫이슈 (AI 기술·산업)
         const hotIssue = {
-            title: "[빅테크칼럼] 구글, '아이언우드'로 AI반도체 판 흔든다…고성능·고효율로 '엔비디아' 정조준",
-            summary: "구글이 AI 추론에 최적화된 7세대 TPU '아이언우드'를 전 세계 클라우드 고객에게 공식 출시하며 엔비디아에 도전장을 내밀었다. 아이언우드는 기존 대비 최대 10배 성능 향상과 뛰어난 에너지 효율을 제공하며, 대규모 AI 모델 학습 및 추론 환경에 혁신을 가져올 것으로 기대된다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEe4B_VuwcmDyQQg7zfI3-9YDsiDQuyS3CMloQmLb4j-2NPblXNf5EP4MWkfJdJmVBUKGw_rfo8P0-k7Btcc4Hdlxk9uyBtEbfCLd_Uvs9NRlxwAvKUe6RoPmtvCzX71rTbNY_ywDOjCpR6J4i-"
+            title: "[현장] SK AI 서밋 2025, AI 모델 트랙 가보니...\"글로벌 초격차 좁히는 한국형 AI 주권 시동\"",
+            summary: "SK AI 서밋 2025에서 한국형 AI 모델과 주권 확보를 위한 국내 기업들의 노력이 조명되었습니다. 업스테이지, SK텔레콤, 트릴리온랩스 등 국내 스타트업과 빅테크가 LLM 및 AI 에이전트 개발을 통해 글로벌 AI 경쟁에서 격차를 줄이고자 합니다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHbj1pj_RUxoYmGx_cM7a2HMZdH5fqps-gmYj8P6vRL3M4d21Ca2oX4z8ql4e4Wz4y5FQJ7r0jcdNUzpiQUtTC-e1YXsP5m9pRjFhyspNKEpcX6XBogc9UoiAvojFrW1mCgwkYSvjORaXzHAqMAj_TqbiTp8a-0T51wqYu7eDkfnvpK2moDr6_EzGVSwMGdc3UkabAlBNWd3R6miuCGw99mfkgjseSdxS27Bm5A_eY4njU-qWDa_gCs9cQV3mfHn3RYRCXy_X2QnpRiiQHCtB79XIhubAfIIFYVisRrWWc1TiQvT17wD69k7iYHSSm6hyks952pO7l81liQ0lHOt3aROI7BWeqs7_ik2HwUTwJXheLRFzMoWA=="
         };
 
         // 📊 오늘의 AI 트렌드
-        const todayTrendsDescription = "2025년, AI는 시민 개개인의 필요에 맞춘 맞춤형 공공 서비스를 제공하고, 정책 결정 과정에 시민 참여를 더욱 활성화하는 핵심 도구로 자리매김하고 있습니다. 데이터 분석을 넘어 예측 및 선제적 대응으로 진화하며, 미래형 공공 행정의 지평을 열고 있습니다.";
-        const todayTrends = ["#AI공공서비스","#맞춤형행정","#시민참여AI","#미래행정","#AI거버넌스"];
+        const todayTrendsDescription = "최근 AI 기술의 발전과 함께 공공 부문에서의 책임감 있는 AI 활용 및 거버넌스 구축이 핵심 과제로 떠오르고 있습니다. 개인 정보 보호와 투명성을 확보하며 AI를 행정에 통합하는 방안이 활발히 논의되고 있습니다.";
+        const todayTrends = ["#공공AI거버넌스","#책임감있는AI","#AI윤리","#행정혁신","#개인정보보호"];
 
         // 🏷️ OG 태그 (매일 업데이트)
         const ogTags = {
             title: "AI출근길 (25.11.09.일) - 공공 AI 실전팁",
-            description: "바쁜 일정 속에서도 AI를 활용하여 공식 행사 연설문의 초안을 빠르고 효과적으로 작성하는 방법을 소개합니다. 핵심 메시지를 명확히 전달하고, 청중에게 깊은 인상을 남길 수 있는 연설문을 AI의 도움으로 만들어 보세요., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
+            description: "방대한 회의록이나 보고서에서 핵심 내용을 빠르게 파악하고 요약하여 업무 효율을 극대화하는 AI 활용법입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
         };
     </script>
     <!-- ============================================ -->
