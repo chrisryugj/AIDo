@@ -383,25 +383,34 @@
         }
 
         // 뉴스 섹션 독립 생성 (병렬 호출 가능) - AI 응답 텍스트 파싱 방식 v3.3
-        async function generateNewsSection(apiKey, section, dateInfo, maxRetries = 3) {
+        async function generateNewsSection(apiKey, section, dateInfo, maxRetries = 3, dateRangeDays = 2) {
             const config = {
                 localGovCase: {
                     name: '공공·정부 AI 활용 사례',
-                    searchPrompt: '한국 지자체 공공기관 중앙부처 정부 AI 인공지능 스마트행정 챗봇 디지털전환 활용 도입 최근 1-2일',
+                    searchKeywords: '한국 지자체 공공기관 중앙부처 정부 AI 인공지능 스마트행정 챗봇 디지털전환 활용 도입',
                     summaryContext: '지자체 또는 정부기관(중앙부처, 공공기관 포함)이 AI를 실무에 도입/활용한 사례',
                     validDomains: ['.go.kr', 'korea.kr', 'etnews.com', 'ddaily.co.kr', 'inews24.com', 'zdnet.co.kr', 'aitimes.com', 'yna.co.kr'],
                     preferredDomains: ['.go.kr', 'korea.kr'] // 우선순위 도메인
                 },
                 hotIssue: {
                     name: 'AI 핫이슈 (AI 기술·산업)',
-                    searchPrompt: '한국 AI 인공지능 신기술 LLM 생성형AI 모델 칩 산업 스타트업 오픈AI 구글 네이버 카카오 최근 1-2일',
+                    searchKeywords: '한국 AI 인공지능 신기술 LLM 생성형AI 모델 칩 산업 스타트업 오픈AI 구글 네이버 카카오',
                     summaryContext: '순수 AI 신기술, AI 모델 발표, AI 칩, AI 산업 동향, 글로벌 AI 기업 뉴스 (공공/정부 관련 제외)',
                     validDomains: ['etnews.com', 'ddaily.co.kr', 'inews24.com', 'zdnet.co.kr', 'aitimes.com', 'tech42.co.kr', 'it.chosun.com'],
                     preferredDomains: ['etnews.com', 'ddaily.co.kr', 'aitimes.com'] // 우선순위 도메인 (한글 IT 전문 매체)
                 }
             };
 
-            const { name, searchPrompt, summaryContext, validDomains, preferredDomains } = config[section];
+            const { name, searchKeywords, summaryContext, validDomains, preferredDomains } = config[section];
+
+            // 날짜 범위 텍스트 동적 생성
+            const dateRangeText = dateRangeDays <= 2 ? '최근 1-2일'
+                                : dateRangeDays <= 5 ? '최근 3-5일'
+                                : '최근 1주일';
+
+            const searchPrompt = `${searchKeywords} ${dateRangeText}`;
+
+            addLog(`[${name}] 검색 범위: ${dateRangeText}`);
 
             for (let attempt = 1; attempt <= maxRetries; attempt++) {
                 addLog(`[${name}] 시도 ${attempt}/${maxRetries} 시작`);
@@ -422,7 +431,7 @@
                         : '';
 
                     // AI 응답에서 직접 정보를 추출하도록 요청
-                    const finalPrompt = `${dateStr} 기준 최근 1-2일 이내의 "${searchPrompt}" 관련 최신 뉴스를 검색해줘.
+                    const finalPrompt = `${dateStr} 기준 ${dateRangeText} 이내의 "${searchPrompt}" 관련 최신 뉴스를 검색해줘.
 
 다음 형식으로 정확히 1개의 뉴스만 알려줘:
 제목: [실제 뉴스 제목]
@@ -594,6 +603,15 @@ ${summaryContext}의 관점에서 중요한 점을 강조하되, 1-2문장으로
             const startTime = Date.now();
             addLog('=== 🚀 콘텐츠 생성 시작 (3단계 프로세스) ===');
 
+            // 주말 감지 및 안내
+            const today = new Date();
+            const dayOfWeek = today.getDay(); // 0=일요일, 6=토요일
+            if (dayOfWeek === 0 || dayOfWeek === 6) {
+                const dayName = dayOfWeek === 0 ? '일요일' : '토요일';
+                addLog(`📅 오늘은 ${dayName}입니다. 최신 뉴스가 적을 수 있습니다.`);
+                addLog('💡 뉴스 검색 실패 시 🔄 내용교체 버튼을 눌러주세요 (자동으로 검색 범위 확대)');
+            }
+
             // ========================================
             // 1단계: 기본 섹션 생성 (quote, tip, trends)
             // ========================================
@@ -660,13 +678,53 @@ JSON만:
             const stage2Start = Date.now();
             addLog('🔍 2/3 단계: 뉴스 섹션 병렬 검색 중...');
 
-            const [localGovCase, hotIssue] = await Promise.all([
+            // Promise.allSettled 사용: 하나 실패해도 나머지는 완성
+            const newsResults = await Promise.allSettled([
                 generateNewsSection(apiKey, 'localGovCase', dateInfo),
                 generateNewsSection(apiKey, 'hotIssue', dateInfo)
             ]);
 
+            // 결과 처리 (실패 시 placeholder)
+            const localGovCase = newsResults[0].status === 'fulfilled'
+                ? newsResults[0].value
+                : {
+                    title: '⚠️ 뉴스를 찾지 못했습니다',
+                    summary: '최근 1-2일 이내 관련 뉴스가 없습니다. 아래 🔄 내용교체 버튼을 눌러 더 넓은 기간에서 검색하세요.',
+                    link: '#',
+                    _failed: true
+                };
+
+            const hotIssue = newsResults[1].status === 'fulfilled'
+                ? newsResults[1].value
+                : {
+                    title: '⚠️ 뉴스를 찾지 못했습니다',
+                    summary: '최근 1-2일 이내 관련 뉴스가 없습니다. 아래 🔄 내용교체 버튼을 눌러 더 넓은 기간에서 검색하세요.',
+                    link: '#',
+                    _failed: true
+                };
+
+            // 실패 로그
+            if (newsResults[0].status === 'rejected') {
+                addLog(`⚠️ 공공·정부 AI 뉴스 검색 실패: ${newsResults[0].reason?.message || '알 수 없는 오류'}`);
+            }
+            if (newsResults[1].status === 'rejected') {
+                addLog(`⚠️ AI 핫이슈 뉴스 검색 실패: ${newsResults[1].reason?.message || '알 수 없는 오류'}`);
+            }
+
             const stage2Time = ((Date.now() - stage2Start) / 1000).toFixed(1);
-            addLog(`✅ 2단계 완료: 뉴스 섹션 생성됨 (${stage2Time}초)`);
+            const successCount = newsResults.filter(r => r.status === 'fulfilled').length;
+            addLog(`✅ 2단계 완료: 뉴스 섹션 생성 (성공 ${successCount}/2, ${stage2Time}초)`);
+
+            // 뉴스 실패 시 재생성 안내
+            if (successCount < 2) {
+                addLog('');
+                addLog('💡 ===== 중요 안내 =====');
+                addLog('📰 일부 뉴스를 찾지 못했지만 나머지 콘텐츠는 완성되었습니다!');
+                addLog('🔄 미리보기에서 실패한 뉴스 섹션의 "내용교체" 버튼을 눌러주세요.');
+                addLog('   → 자동으로 더 넓은 기간(3-5일 → 1주일)에서 검색합니다.');
+                addLog('======================');
+                addLog('');
+            }
 
             // ========================================
             // 3단계: 최종 병합
@@ -685,10 +743,14 @@ JSON만:
                 }
             };
 
-            // 중복 방지를 위해 생성된 콘텐츠 저장
+            // 중복 방지를 위해 생성된 콘텐츠 저장 (성공한 것만)
             saveTip(baseContent.tip.title, baseContent.tip.summary);
-            saveNews(localGovCase.title, localGovCase.url);
-            saveNews(hotIssue.title, hotIssue.url);
+            if (!localGovCase._failed) {
+                saveNews(localGovCase.title, localGovCase.url);
+            }
+            if (!hotIssue._failed) {
+                saveNews(hotIssue.title, hotIssue.url);
+            }
             addLog('💾 생성된 콘텐츠를 저장했습니다 (중복 방지용)');
 
             const totalTime = ((Date.now() - startTime) / 1000).toFixed(1);
@@ -1672,8 +1734,32 @@ JSON 형식으로만 응답하세요. 다른 설명 없이 JSON만 반환하세�
             try {
                 // 뉴스 섹션은 전용 함수 사용 (검증 강화)
                 if (section === 'localGovCase' || section === 'hotIssue') {
-                    const newsData = await generateNewsSection(apiKey, section, dateInfo);
+                    // localStorage에서 재시도 횟수 가져오기
+                    const retryKey = `news_retry_${section}`;
+                    let retryCount = parseInt(localStorage.getItem(retryKey) || '0');
+
+                    // 재시도 횟수에 따라 날짜 범위 확대
+                    const dateRangeDays = retryCount === 0 ? 2   // 1차: 1-2일
+                                        : retryCount === 1 ? 5   // 2차: 3-5일
+                                        : 7;                     // 3차: 1주일
+
+                    const rangeText = dateRangeDays === 2 ? '1-2일' : dateRangeDays === 5 ? '3-5일' : '1주일';
+                    addLog(`🔄 재생성 시도 ${retryCount + 1}회차 (검색 범위: ${rangeText})`);
+
+                    if (retryCount > 0) {
+                        showAlert(`더 넓은 기간(${rangeText})에서 검색합니다...`, 'success');
+                    }
+
+                    const newsData = await generateNewsSection(apiKey, section, dateInfo, 3, dateRangeDays);
                     currentContent[section] = newsData;
+
+                    // 재시도 횟수 증가 (최대 3회)
+                    if (retryCount < 2) {
+                        localStorage.setItem(retryKey, (retryCount + 1).toString());
+                    } else {
+                        // 3회 이후엔 초기화 (다음에는 다시 1-2일부터 시작)
+                        localStorage.removeItem(retryKey);
+                    }
 
                     // HTML 재생성
                     const html = generateHTML(currentContent, dateInfo);
@@ -1816,6 +1902,11 @@ JSON 형식으로만 응답하세요. 다른 설명 없이 JSON만 반환하세�
             document.getElementById('generateBtn').disabled = true;
             document.getElementById('loading').classList.add('active');
             document.getElementById('result').classList.remove('active');
+
+            // 새로운 콘텐츠 생성 시 재시도 카운터 초기화
+            localStorage.removeItem('news_retry_localGovCase');
+            localStorage.removeItem('news_retry_hotIssue');
+            addLog('🔄 뉴스 재시도 카운터 초기화 (새 생성)');
 
             try {
                 // 콘텐츠 생성
