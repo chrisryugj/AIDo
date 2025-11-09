@@ -76,13 +76,44 @@
             }
 
             const tip = currentContent.tip;
+
+            // Helper function to format long text for better readability
+            function formatText(text) {
+                if (!text) return '';
+
+                // Split by common sentence endings and add proper spacing
+                let formatted = text
+                    .replace(/\. /g, '.\n\n')  // Add double line break after periods
+                    .replace(/\? /g, '?\n\n')  // Add double line break after question marks
+                    .replace(/\! /g, '!\n\n')  // Add double line break after exclamation marks
+                    .replace(/: /g, ':\n')     // Add single line break after colons
+                    .trim();
+
+                // If text is very long (>300 chars), create summary
+                if (formatted.length > 300) {
+                    const sentences = formatted.split('\n\n').filter(s => s.trim());
+                    if (sentences.length > 3) {
+                        // Take first 2 sentences and add summary
+                        const preview = sentences.slice(0, 2).join('\n\n');
+                        const rest = sentences.slice(2).join(' ');
+                        return `${preview}\n\n📌 ${rest}`;
+                    }
+                }
+
+                return formatted;
+            }
+
             document.getElementById('tipModalTitle').textContent = tip.title;
             document.getElementById('tipModalSummary').textContent = tip.summary;
-            document.getElementById('tipModalSituation').textContent = tip.situation;
-            document.getElementById('tipModalSolution').textContent = tip.solution;
+
+            // Apply improved formatting to verbose sections
+            document.getElementById('tipModalSituation').innerHTML = formatText(tip.situation).replace(/\n/g, '<br>');
+            document.getElementById('tipModalSolution').innerHTML = formatText(tip.solution).replace(/\n/g, '<br>');
+            document.getElementById('tipModalUsage').innerHTML = formatText(tip.usage).replace(/\n/g, '<br>');
+
+            // Keep prompt and result as-is (they're already formatted)
             document.getElementById('tipModalPrompt').textContent = tip.prompt;
             document.getElementById('tipModalResult').textContent = tip.result;
-            document.getElementById('tipModalUsage').textContent = tip.usage;
 
             document.getElementById('tipPreviewModal').style.display = 'block';
             document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
@@ -1255,38 +1286,38 @@ JSON만:
 
         // 💬 오늘의 한마디 (매일 교체)
         const todayQuote = {
-            text: "${content.quote.text.replace(/"/g, '\\"')}",
-            author: "${content.quote.author.replace(/"/g, '\\"')}"
+            text: "${(content.quote?.text || '').replace(/"/g, '\\"')}",
+            author: "${(content.quote?.author || '').replace(/"/g, '\\"')}"
         };
 
         // 💡 오늘의 실전 팁 (매일 새 주제)
         const todayTip = {
-            title: "${content.tip.title.replace(/"/g, '\\"')}",
-            summary: "${content.tip.summary.replace(/"/g, '\\"')}",
-            situation: "${content.tip.situation.replace(/"/g, '\\"')}",
-            solution: "${content.tip.solution.replace(/"/g, '\\"')}",
-            prompt: \`${content.tip.prompt.replace(/`/g, '\\`')}\`,
-            result: \`${content.tip.result.replace(/`/g, '\\`')}\`,
-            usage: "${content.tip.usage.replace(/"/g, '\\"')}"
+            title: "${(content.tip?.title || '').replace(/"/g, '\\"')}",
+            summary: "${(content.tip?.summary || '').replace(/"/g, '\\"')}",
+            situation: "${(content.tip?.situation || '').replace(/"/g, '\\"')}",
+            solution: "${(content.tip?.solution || '').replace(/"/g, '\\"')}",
+            prompt: \`${(content.tip?.prompt || '').replace(/`/g, '\\`')}\`,
+            result: \`${(content.tip?.result || '').replace(/`/g, '\\`')}\`,
+            usage: "${(content.tip?.usage || '').replace(/"/g, '\\"')}"
         };
 
         // 🏛️ 공공·정부 AI 활용 사례
         const localGovCase = {
-            title: "${content.localGovCase.title.replace(/"/g, '\\"')}",
-            summary: "${content.localGovCase.summary.replace(/"/g, '\\"')}",
-            link: "${content.localGovCase.link}"
+            title: "${(content.localGovCase?.title || '').replace(/"/g, '\\"')}",
+            summary: "${(content.localGovCase?.summary || '').replace(/"/g, '\\"')}",
+            link: "${content.localGovCase?.link || '#'}"
         };
 
         // 🔥 AI 핫이슈 (AI 기술·산업)
         const hotIssue = {
-            title: "${content.hotIssue.title.replace(/"/g, '\\"')}",
-            summary: "${content.hotIssue.summary.replace(/"/g, '\\"')}",
-            link: "${content.hotIssue.link}"
+            title: "${(content.hotIssue?.title || '').replace(/"/g, '\\"')}",
+            summary: "${(content.hotIssue?.summary || '').replace(/"/g, '\\"')}",
+            link: "${content.hotIssue?.link || '#'}"
         };
 
         // 📊 오늘의 AI 트렌드
-        const todayTrendsDescription = "${content.trends.description.replace(/"/g, '\\"')}";
-        const todayTrends = ${JSON.stringify(content.trends.hashtags)};
+        const todayTrendsDescription = "${(content.trends?.description || '').replace(/"/g, '\\"')}";
+        const todayTrends = ${JSON.stringify(content.trends?.hashtags || [])};
 
         // 🏷️ OG 태그 (매일 업데이트)
         const ogTags = {
