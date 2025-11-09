@@ -1286,43 +1286,43 @@ JSON만:
 
         // 💬 오늘의 한마디 (매일 교체)
         const todayQuote = {
-            text: "${(content.quote?.text || '').replace(/"/g, '\\"')}",
-            author: "${(content.quote?.author || '').replace(/"/g, '\\"')}"
+            text: "${(content.quote?.text || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            author: "${(content.quote?.author || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}"
         };
 
         // 💡 오늘의 실전 팁 (매일 새 주제)
         const todayTip = {
-            title: "${(content.tip?.title || '').replace(/"/g, '\\"')}",
-            summary: "${(content.tip?.summary || '').replace(/"/g, '\\"')}",
-            situation: "${(content.tip?.situation || '').replace(/"/g, '\\"')}",
-            solution: "${(content.tip?.solution || '').replace(/"/g, '\\"')}",
-            prompt: \`${(content.tip?.prompt || '').replace(/`/g, '\\`')}\`,
-            result: \`${(content.tip?.result || '').replace(/`/g, '\\`')}\`,
-            usage: "${(content.tip?.usage || '').replace(/"/g, '\\"')}"
+            title: "${(content.tip?.title || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            summary: "${(content.tip?.summary || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            situation: "${(content.tip?.situation || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            solution: "${(content.tip?.solution || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            prompt: \`${(content.tip?.prompt || '').replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\r/g, '')}\`,
+            result: \`${(content.tip?.result || '').replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\r/g, '')}\`,
+            usage: "${(content.tip?.usage || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}"
         };
 
         // 🏛️ 공공·정부 AI 활용 사례
         const localGovCase = {
-            title: "${(content.localGovCase?.title || '').replace(/"/g, '\\"')}",
-            summary: "${(content.localGovCase?.summary || '').replace(/"/g, '\\"')}",
+            title: "${(content.localGovCase?.title || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            summary: "${(content.localGovCase?.summary || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
             link: "${content.localGovCase?.link || '#'}"
         };
 
         // 🔥 AI 핫이슈 (AI 기술·산업)
         const hotIssue = {
-            title: "${(content.hotIssue?.title || '').replace(/"/g, '\\"')}",
-            summary: "${(content.hotIssue?.summary || '').replace(/"/g, '\\"')}",
+            title: "${(content.hotIssue?.title || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            summary: "${(content.hotIssue?.summary || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
             link: "${content.hotIssue?.link || '#'}"
         };
 
         // 📊 오늘의 AI 트렌드
-        const todayTrendsDescription = "${(content.trends?.description || '').replace(/"/g, '\\"')}";
+        const todayTrendsDescription = "${(content.trends?.description || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}";
         const todayTrends = ${JSON.stringify(content.trends?.hashtags || [])};
 
         // 🏷️ OG 태그 (매일 업데이트)
         const ogTags = {
-            title: "${ogTitle.replace(/"/g, '\\"')}",
-            description: "${ogDescription.replace(/"/g, '\\"')}"
+            title: "${ogTitle.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            description: "${ogDescription.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}"
         };
     <\/script>
     <!-- ============================================ -->
