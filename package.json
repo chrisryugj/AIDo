@@ -1,0 +1,21 @@
+{
+  "name": "aido-newsletter",
+  "version": "1.0.0",
+  "description": "AI출근길 - AI Daily Newsletter for Korean Public Servants",
+  "main": "auto-generate.js",
+  "scripts": {
+    "generate": "node auto-generate.js",
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "keywords": [
+    "ai",
+    "newsletter",
+    "automation",
+    "telegram"
+  ],
+  "author": "ryuseungin@gwangjin.go.kr",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

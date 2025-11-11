@@ -1,0 +1,68 @@
+name: Daily Newsletter Generation
+
+on:
+  # 매일 오전 8시 (KST = UTC+9, 즉 UTC 23시)
+  schedule:
+    - cron: '0 23 * * *'
+
+  # 수동 실행 가능 (Actions 탭에서 버튼 클릭)
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write  # Git push 권한
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 전체 히스토리 가져오기
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 📋 Show date info
+        run: |
+          echo "🕐 UTC Time: $(date -u)"
+          echo "🇰🇷 KST Time: $(TZ='Asia/Seoul' date)"
+
+      - name: 🚀 Generate content
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          echo "📝 Starting content generation..."
+          node auto-generate.js
+
+      - name: 📊 Check if index.html changed
+        id: check_changes
+        run: |
+          if git diff --quiet index.html; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "ℹ️ No changes detected"
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "✅ Changes detected"
+          fi
+
+      - name: 💾 Commit and push
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config --global user.name "AI-Do Bot"
+          git config --global user.email "action@github.com"
+
+          # 날짜 정보
+          DATE=$(TZ='Asia/Seoul' date '+%Y-%m-%d')
+
+          git add index.html
+          git commit -m "Update daily content for ${DATE}"
+          git push
+
+      - name: ✅ Done
+        run: echo "🎉 Daily newsletter generation complete!"
