@@ -664,11 +664,15 @@ quote: 공직자에게 위로와 힘을 주는 따뜻한 문구. 힐링되고 �
 quote.author: 반드시 실존하는 유명인의 실명만 사용. 예: 스티브 잡스, 빌 게이츠, 헬렌 켈러, 마더 테레사, 넬슨 만델라, 무명 작가나 "~이" 같은 표현 금지.
 
 tip: 공무원들이 실무에서 바로 활용할 수 있는 AI 실전 팁. 다양한 주제로 매일 새로운 내용 제공.${tipExclusionNote}
+tip.situation: 문제 상황을 2-3개 핵심 포인트로 개조식 작성 (각 항목 1줄, 짧고 명확하게)
+tip.solution: 해결방법을 2-3개 핵심 단계로 개조식 작성 (각 항목 1줄, 실행 가능한 구체적 방법)
+tip.usage: 업무 적용 팁을 2-3개 핵심 포인트로 개조식 작성 (각 항목 1줄, 실용적이고 간결하게)
+⚠️ situation, solution, usage는 반드시 개조식(bullet list)으로 작성. 각 항목은 짧은 한 줄로, 불필요한 서술 금지.
 
 JSON만:
 {
   "quote": {"text": "위로와 힘이 되는 문구", "author": "실명"},
-  "tip": {"title": "제목", "summary": "요약", "situation": "문제", "solution": "해결", "prompt": "프롬프트", "result": "결과", "usage": "활용"},
+  "tip": {"title": "제목", "summary": "요약", "situation": "• 핵심포인트1\n• 핵심포인트2", "solution": "• 단계1\n• 단계2", "prompt": "프롬프트", "result": "결과", "usage": "• 팁1\n• 팁2"},
   "trends": {"description": "1-2문장 간결하게 (최대 3줄)", "hashtags": ["#1","#2","#3","#4","#5"]}
 }`;
 
@@ -1812,7 +1816,7 @@ JSON 형식으로만 응답하세요. 다른 설명 없이 JSON만 반환하세�
                     prompt = '공직자에게 위로와 힘을 주는 따뜻한 문구 JSON: {"text":"힐링되고 마음이 편안해지는 짧고 감성적인 문구","author":"실존하는 유명인 실명만 (예: 스티브 잡스, 헬렌 켈러, 마더 테레사 등)"}';
                     maxTokens = 4096;
                 } else if (section === 'tip') {
-                    prompt = '공무원 GPT 활용팁 JSON만: {"title":"제목","summary":"요약","situation":"문제","solution":"해결","prompt":"프롬프트","result":"결과","usage":"활용"}';
+                    prompt = '공무원 GPT 활용팁 (개조식 필수). situation/solution/usage는 2-3개 핵심 포인트만 개조식으로. JSON만: {"title":"제목","summary":"요약","situation":"• 핵심1\\n• 핵심2","solution":"• 단계1\\n• 단계2","prompt":"프롬프트","result":"결과","usage":"• 팁1\\n• 팁2"}';
                     maxTokens = 4096;
                 } else if (section === 'trends') {
                     prompt = 'AI 트렌드를 1-2문장으로 간결하게. JSON만: {"description":"짧은 설명 (최대 3줄)","hashtags":["#1","#2","#3","#4","#5"]}';
