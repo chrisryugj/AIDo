@@ -166,19 +166,122 @@ function extractJSON(text) {
     }
 }
 
-// 뉴스 섹션 생성 (재시도 로직 포함)
+// ===== 뉴스 생성 헬퍼 함수 =====
+
+// 뉴스 히스토리 파일 경로
+const NEWS_HISTORY_FILE = path.join(__dirname, '.news-history.json');
+
+// 이전 뉴스 가져오기 (14일 이내)
+function getPreviousNews() {
+    try {
+        if (!fs.existsSync(NEWS_HISTORY_FILE)) {
+            return [];
+        }
+
+        const stored = fs.readFileSync(NEWS_HISTORY_FILE, 'utf8');
+        const news = JSON.parse(stored);
+        const fourteenDaysAgo = Date.now() - (14 * 24 * 60 * 60 * 1000);
+
+        // 14일 이내 뉴스만 필터링
+        return news.filter(item => item.timestamp > fourteenDaysAgo);
+    } catch (error) {
+        console.warn('⚠️ 뉴스 히스토리 로드 실패:', error.message);
+        return [];
+    }
+}
+
+// 새 뉴스 저장
+function saveNews(title, url) {
+    try {
+        const news = getPreviousNews();
+        news.push({
+            title: title,
+            url: url,
+            timestamp: Date.now()
+        });
+
+        // 최근 100개만 유지
+        const recentNews = news.slice(-100);
+        fs.writeFileSync(NEWS_HISTORY_FILE, JSON.stringify(recentNews, null, 2), 'utf8');
+    } catch (error) {
+        console.warn('⚠️ 뉴스 히스토리 저장 실패:', error.message);
+    }
+}
+
+// 뉴스 중복 체크
+function isDuplicateNews(title, url) {
+    const previousNews = getPreviousNews();
+    return previousNews.some(item =>
+        item.url === url || item.title === title
+    );
+}
+
+// 링크 유효성 검증
+function isValidNewsUrl(url) {
+    if (!url || !url.startsWith('http')) return false;
+
+    // PDF, HWP 등 파일 차단 (뉴스 아님!)
+    const fileExtensions = ['.pdf', '.hwp', '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx', '.zip'];
+    if (fileExtensions.some(ext => url.toLowerCase().includes(ext))) {
+        return false;
+    }
+
+    // Google redirect URL은 실제로 작동하므로 허용!
+    if (url.includes('vertexaisearch.cloud.google.com/grounding-api-redirect/')) {
+        return true;
+    }
+
+    // 포털 메인 페이지는 제외
+    const mainPages = [
+        'https://naver.com', 'https://www.naver.com',
+        'https://daum.net', 'https://www.daum.net',
+        'https://google.com', 'https://www.google.com'
+    ];
+
+    if (mainPages.some(page => url === page || url === page + '/')) {
+        return false;
+    }
+
+    // 최소 경로 길이 체크
+    try {
+        const urlObj = new URL(url);
+        if (urlObj.pathname.length < 5) return false;
+    } catch {
+        return false;
+    }
+
+    return true;
+}
+
+// 제목 유효성 검증 (도메인명만 있는 경우 제외)
+function isValidNewsTitle(title) {
+    if (!title || title.trim().length < 5) return false;
+
+    // 도메인명만 있는 경우 (예: "ebn.co.kr", "korea.kr")
+    const domainOnlyPattern = /^[a-z0-9]+\.(co\.kr|kr|com|net|org)$/i;
+    if (domainOnlyPattern.test(title.trim())) {
+        return false;
+    }
+
+    // 너무 짧은 제목 제외
+    if (title.trim().length < 10) return false;
+
+    return true;
+}
+
+// 뉴스 섹션 생성 (TEXT PARSING 방식 - generator.js 참고)
 async function generateNewsSection(section, dateInfo, maxRetries = 5) {
     const config = {
         localGovCase: {
             name: '공공·정부 AI 활용 사례',
             searchKeywords: '한국 지자체 공공기관 중앙부처 정부 AI 인공지능 스마트행정 챗봇 디지털전환 활용 도입',
             summaryContext: '지자체 또는 정부기관(중앙부처, 공공기관 포함)이 AI를 실무에 도입/활용한 사례',
-            validDomains: ['.go.kr', 'korea.kr', 'etnews.com', 'ddaily.co.kr', 'inews24.com']
+            validDomains: ['.go.kr', 'korea.kr', 'etnews.com', 'ddaily.co.kr', 'inews24.com', 'zdnet.co.kr', 'aitimes.com', 'yna.co.kr']
         },
         hotIssue: {
             name: 'AI 핫이슈 (AI 기술·산업)',
             searchKeywords: '한국 AI 인공지능 신기술 LLM 생성형AI 모델 칩 산업 스타트업 오픈AI 구글 네이버 카카오',
-            summaryContext: '순수 AI 신기술, AI 모델 발표, AI 칩, AI 산업 동향 (공공/정부 관련 제외)',
+            summaryContext: '순수 AI 신기술, AI 모델 발표, AI 칩, AI 산업 동향, 글로벌 AI 기업 뉴스 (공공/정부 관련 제외)',
             validDomains: ['etnews.com', 'ddaily.co.kr', 'inews24.com', 'zdnet.co.kr', 'aitimes.com', 'tech42.co.kr', 'it.chosun.com']
         }
     };
@@ -196,94 +299,211 @@ async function generateNewsSection(section, dateInfo, maxRetries = 5) {
 
     for (let attempt = 0; attempt < maxRetries; attempt++) {
         const retryConfig = retryConfigs[Math.min(attempt, retryConfigs.length - 1)];
-        const dateRangeDays = retryConfig.days;
         const dateRangeText = retryConfig.text;
 
         console.log(`📰 ${sectionConfig.name} 검색 중 (${dateRangeText}, 시도 ${attempt + 1}/${maxRetries})...`);
 
-        const prompt = `🔍 **뉴스 검색 및 JSON 반환**
-
-검색 키워드: ${sectionConfig.searchKeywords}
-기간: ${dateRangeText}
-조건: ${sectionConfig.summaryContext}
-출처: 한국어 IT 매체 (${sectionConfig.validDomains.slice(0, 3).join(', ')} 등)
-
-⚠️ **중요: 아래 JSON 형식으로만 반환하세요. 다른 설명이나 텍스트 없이 JSON만 출력하세요.**
-
-\`\`\`json
-{
-  "title": "뉴스 제목",
-  "summary": "2-3문장으로 핵심 내용 요약",
-  "link": "https://... (실제 뉴스 URL)"
-}
-\`\`\`
-
-**JSON만 반환하세요. 설명 금지.**`;
-
         try {
-            // temperature를 0.5로 올려서 더 창의적이고 다양한 응답 유도
-            const data = await callGeminiAPI(prompt, true, 0.5, 2048);
+            // 날짜 정보
+            const today = new Date();
+            const yesterday = new Date(today);
+            yesterday.setDate(yesterday.getDate() - 1);
+            const dateStr = `${yesterday.getMonth() + 1}월 ${yesterday.getDate()}일`;
 
-            // API 응답 검증
-            if (!data.candidates || !data.candidates[0]) {
-                throw new Error('API 응답에 candidates가 없습니다');
+            // 이전 뉴스 가져오기 (중복 방지)
+            const previousNews = getPreviousNews();
+            const previousNewsTitles = previousNews.map(n => n.title).slice(-10);
+            const newsExclusionNote = previousNewsTitles.length > 0
+                ? `\n\n⚠️ 최근 사용한 뉴스 (중복 금지):\n${previousNewsTitles.map((t, i) => `${i + 1}. ${t}`).join('\n')}\n위 뉴스들과 다른 새로운 뉴스를 찾아주세요.`
+                : '';
+
+            // TEXT 형식 프롬프트 (JSON 아님!)
+            const searchPrompt = `${sectionConfig.searchKeywords} ${dateRangeText}`;
+            const finalPrompt = `${dateStr} 기준 ${dateRangeText} 이내의 "${searchPrompt}" 관련 최신 뉴스를 검색해줘.
+
+다음 형식으로 정확히 1개의 뉴스만 알려줘:
+제목: [실제 뉴스 제목]
+출처: [언론사명 또는 기관명]
+날짜: [발표 날짜]
+URL: [뉴스 링크]
+요약: [핵심만 1-2문장으로 간결하게, 최대 2줄 이내]
+
+주의사항:
+- **반드시 한글 뉴스만 수집** (영문 기사 제외)
+- ${section === 'localGovCase' ? '정부기관(.go.kr), 공식 언론사 기사를 우선적으로 찾아줘' : '한국 IT 전문 매체(전자신문, 디지털데일리, 아이뉴스24, 지디넷코리아, AI타임스, 테크42, IT조선) 기사를 우선적으로 찾아줘'}
+- 실제 존재하는 뉴스만 알려줘
+- 제목은 반드시 실제 뉴스 헤드라인이어야 함
+- 요약은 짧고 간결하게 핵심만${newsExclusionNote}`;
+
+            // API 호출 (temperature: 0.3, maxTokens: 2048)
+            let data;
+            try {
+                data = await callGeminiAPI(finalPrompt, true, 0.3, 2048);
+            } catch (apiError) {
+                // MAX_TOKENS 에러시 4096으로 재시도
+                if (apiError.message.includes('MAX_TOKENS') || apiError.message.includes('RECITATION')) {
+                    console.log(`   🔄 4096 토큰으로 재시도...`);
+                    data = await callGeminiAPI(finalPrompt, true, 0.3, 4096);
+                } else {
+                    throw apiError;
+                }
             }
 
-            const candidate = data.candidates[0];
-
-            // finishReason 확인
-            if (candidate.finishReason && candidate.finishReason !== 'STOP') {
-                throw new Error(`API 응답 중단: ${candidate.finishReason}`);
+            // 응답 텍스트 추출
+            let responseText = '';
+            if (data.candidates && data.candidates[0] &&
+                data.candidates[0].content &&
+                data.candidates[0].content.parts &&
+                data.candidates[0].content.parts[0]) {
+                responseText = data.candidates[0].content.parts[0].text.trim();
             }
 
-            if (!candidate.content || !candidate.content.parts || !candidate.content.parts[0]) {
-                throw new Error('API 응답 content 구조 오류');
+            console.log(`   📄 AI 응답 길이: ${responseText.length}자`);
+
+            if (!responseText || responseText.length < 50) {
+                console.log(`   ⚠️ ${sectionConfig.name} 시도 ${attempt + 1} 실패: AI 응답 없음`);
+                if (attempt < maxRetries - 1) {
+                    console.log(`   🔄 재시도 중... (${attempt + 2}/${maxRetries})`);
+                    continue;
+                }
+                throw new Error('AI 응답 없음');
             }
 
-            let newsText = candidate.content.parts[0].text.trim();
+            // TEXT 파싱 (정규식 사용)
+            const titleMatch = responseText.match(/제목:\s*([^\n]+)/);
+            const sourceMatch = responseText.match(/출처:\s*([^\n]+)/);
+            const dateMatch = responseText.match(/날짜:\s*([^\n]+)/);
+            const urlMatch = responseText.match(/URL:\s*([^\n]+)/);
+            const summaryMatch = responseText.match(/요약:\s*([^\n]+(?:\n[^\n]+)?)/);
 
-            // 디버깅 로그
-            console.log(`   AI 응답 (첫 150자): ${newsText.substring(0, 150).replace(/\n/g, ' ')}...`);
-
-            const newsData = extractJSON(newsText);
-
-            // 뉴스 데이터 검증
-            if (!newsData || typeof newsData !== 'object') {
-                throw new Error('JSON 파싱 결과가 객체가 아닙니다');
+            if (!titleMatch || !urlMatch) {
+                console.log(`   ⚠️ ${sectionConfig.name} 시도 ${attempt + 1} 실패: 필수 정보 누락 (제목/URL)`);
+                console.log(`   [DEBUG] 응답 일부: ${responseText.substring(0, 200)}...`);
+                if (attempt < maxRetries - 1) {
+                    console.log(`   🔄 재시도 중... (${attempt + 2}/${maxRetries})`);
+                    continue;
+                }
+                throw new Error('뉴스 정보 파싱 실패');
             }
 
-            if (!newsData.title || !newsData.summary) {
-                throw new Error(`필수 필드 누락: title=${!!newsData.title}, summary=${!!newsData.summary}`);
+            const extractedTitle = titleMatch[1].trim();
+            const extractedUrl = urlMatch[1].trim();
+            const extractedSummary = summaryMatch ? summaryMatch[1].trim() : '';
+
+            console.log(`   📰 추출된 제목: ${extractedTitle.substring(0, 50)}...`);
+            console.log(`   🔗 추출된 URL: ${extractedUrl.substring(0, 60)}...`);
+
+            // Grounding metadata에서 실제 redirect URL 찾기
+            const metadata = data.candidates?.[0]?.groundingMetadata;
+            const chunks = metadata?.groundingChunks || [];
+
+            console.log(`   🔍 Grounding chunks: ${chunks.length}개`);
+
+            let finalUrl = extractedUrl;
+
+            // chunks에서 redirect URL 찾기
+            if (chunks.length > 0) {
+                const webChunks = chunks.filter(c => c.web && c.web.uri);
+                if (webChunks.length > 0) {
+                    // 추출된 URL과 가장 관련있는 chunk 찾기
+                    const matchedChunk = webChunks.find(c => {
+                        const uri = c.web.uri;
+                        return uri.includes('vertexaisearch.cloud.google.com');
+                    });
+
+                    if (matchedChunk) {
+                        finalUrl = matchedChunk.web.uri;
+                        console.log(`   ✅ Redirect URL 발견`);
+                    }
+                }
             }
 
-            if (newsData.title.includes('찾지 못했습니다') || newsData.title.includes('없습니다')) {
-                throw new Error('AI가 뉴스를 찾지 못했다고 응답했습니다');
+            // URL 검증
+            if (!isValidNewsUrl(finalUrl)) {
+                console.log(`   ⚠️ ${sectionConfig.name} 시도 ${attempt + 1} 실패: 유효하지 않은 URL`);
+                if (attempt < maxRetries - 1) {
+                    console.log(`   🔄 재시도 중... (${attempt + 2}/${maxRetries})`);
+                    continue;
+                }
+                throw new Error('유효하지 않은 URL');
             }
 
-            console.log(`✅ ${sectionConfig.name}: ${newsData.title.substring(0, 40)}...`);
-            return newsData;
+            // 제목 검증
+            if (!isValidNewsTitle(extractedTitle)) {
+                console.log(`   ⚠️ ${sectionConfig.name} 시도 ${attempt + 1} 실패: 유효하지 않은 제목`);
+                if (attempt < maxRetries - 1) {
+                    console.log(`   🔄 재시도 중... (${attempt + 2}/${maxRetries})`);
+                    continue;
+                }
+                throw new Error('유효하지 않은 제목');
+            }
+
+            // 중복 체크
+            if (isDuplicateNews(extractedTitle, finalUrl)) {
+                console.log(`   ⚠️ ${sectionConfig.name} 시도 ${attempt + 1} 실패: 중복된 뉴스 (최근 14일 내 사용)`);
+                if (attempt < maxRetries - 1) {
+                    console.log(`   🔄 재시도 중... (${attempt + 2}/${maxRetries})`);
+                    continue;
+                }
+                throw new Error('중복된 뉴스');
+            }
+
+            // 요약 최적화
+            let finalSummary = '';
+
+            if (extractedSummary && extractedSummary.trim().length > 30) {
+                // AI가 이미 요약을 제공한 경우 그대로 사용
+                finalSummary = extractedSummary.trim();
+                console.log(`   ✅ AI 제공 요약 사용: ${finalSummary.substring(0, 60)}...`);
+            } else {
+                // 추가 요약이 필요한 경우
+                console.log(`   📝 추가 요약 생성 중...`);
+                try {
+                    const summaryPrompt = `"${extractedTitle}"
+
+위 뉴스를 공무원 독자를 위해 핵심만 간결하게 요약해주세요.
+${sectionConfig.summaryContext}의 관점에서 중요한 점을 강조하되, 1-2문장으로 최대 2줄 이내로만 작성해주세요.
+
+요약:`;
+
+                    const summaryData = await callGeminiAPI(summaryPrompt, false, 0.7, 256);
+
+                    if (summaryData.candidates?.[0]?.content?.parts?.[0]) {
+                        finalSummary = summaryData.candidates[0].content.parts[0].text.trim();
+                        finalSummary = finalSummary.replace(/^요약:\s*/i, '');
+                        console.log(`   ✅ 추가 요약 생성됨`);
+                    }
+                } catch (summaryError) {
+                    console.log(`   ⚠️ 추가 요약 실패: ${summaryError.message}`);
+                    finalSummary = `${extractedTitle}에 관한 최신 뉴스입니다.`;
+                }
+            }
+
+            // 최종 검증 (너무 짧으면 기본 문장 사용)
+            if (finalSummary.length < 15) {
+                finalSummary = `${extractedTitle}에 관한 최신 뉴스입니다.`;
+            }
+
+            console.log(`   📋 최종 요약: ${finalSummary.substring(0, 60)}...`);
+
+            // 뉴스 히스토리에 저장
+            saveNews(extractedTitle, finalUrl);
+
+            return {
+                title: extractedTitle,
+                summary: finalSummary,
+                link: finalUrl
+            };
 
         } catch (error) {
-            const errorMsg = error.message || String(error);
-            console.warn(`⚠️ ${sectionConfig.name} 시도 ${attempt + 1} 실패: ${errorMsg}`);
-
-            // 마지막 시도가 아니면 계속 재시도
+            console.log(`   ⚠️ ${sectionConfig.name} 시도 ${attempt + 1} 실패: ${error.message}`);
             if (attempt < maxRetries - 1) {
                 console.log(`   🔄 재시도 중... (${attempt + 2}/${maxRetries})`);
-                await new Promise(resolve => setTimeout(resolve, 1000)); // 1초 대기
                 continue;
             }
+            throw new Error(`[${sectionConfig.name}] 생성 실패: ${error.message}`);
         }
     }
-
-    // 모든 재시도 실패
-    console.error(`❌ ${sectionConfig.name} 최종 실패 (${maxRetries}번 시도)`);
-    return {
-        title: '⚠️ 뉴스를 찾지 못했습니다',
-        summary: `${maxRetries}번 재시도했지만 관련 뉴스를 찾지 못했습니다.`,
-        link: '#',
-        _failed: true
-    };
 }
 
 // 메인 콘텐츠 생성
