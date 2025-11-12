@@ -114,16 +114,27 @@ async function callGeminiAPI(prompt, useSearch = false, temperature = 0.7, maxTo
     return data;
 }
 
-// JSON 추출 헬퍼
+// JSON 추출 헬퍼 (강화된 버전)
 function extractJSON(text) {
-    // 마크다운 코드블록 제거
-    let jsonText = text.trim();
-    if (jsonText.includes('```')) {
-        const match = jsonText.match(/```(?:json)?\s*\n?([\s\S]*?)```/);
-        if (match) jsonText = match[1].trim();
+    if (!text || typeof text !== 'string') {
+        throw new Error('Invalid text input');
     }
 
-    // Balanced braces 추출
+    let jsonText = text.trim();
+
+    // 시도 1: 마크다운 코드블록 (```json ... ```)
+    if (jsonText.includes('```')) {
+        const codeBlockMatch = jsonText.match(/```(?:json)?\s*\n?([\s\S]*?)```/);
+        if (codeBlockMatch) {
+            try {
+                return JSON.parse(codeBlockMatch[1].trim());
+            } catch (e) {
+                // 코드블록 내에서도 파싱 실패하면 계속 진행
+            }
+        }
+    }
+
+    // 시도 2: Balanced braces로 첫 번째 JSON 객체 추출
     let braceCount = 0, startIdx = -1, endIdx = -1;
     for (let i = 0; i < jsonText.length; i++) {
         if (jsonText[i] === '{') {
@@ -139,10 +150,20 @@ function extractJSON(text) {
     }
 
     if (startIdx !== -1 && endIdx !== -1) {
-        jsonText = jsonText.substring(startIdx, endIdx + 1);
+        const extracted = jsonText.substring(startIdx, endIdx + 1);
+        try {
+            return JSON.parse(extracted);
+        } catch (e) {
+            throw new Error(`JSON 파싱 실패: ${e.message} (추출된 텍스트: ${extracted.substring(0, 100)}...)`);
+        }
     }
 
-    return JSON.parse(jsonText);
+    // 시도 3: 전체 텍스트를 JSON으로 파싱
+    try {
+        return JSON.parse(jsonText);
+    } catch (e) {
+        throw new Error(`JSON을 찾을 수 없습니다. 응답 내용: ${jsonText.substring(0, 200)}...`);
+    }
 }
 
 // 뉴스 섹션 생성 (재시도 로직 포함)
@@ -180,35 +201,71 @@ async function generateNewsSection(section, dateInfo, maxRetries = 5) {
 
         console.log(`📰 ${sectionConfig.name} 검색 중 (${dateRangeText}, 시도 ${attempt + 1}/${maxRetries})...`);
 
-        const prompt = `한국어 뉴스 검색: ${sectionConfig.searchKeywords}
+        const prompt = `🔍 **뉴스 검색 및 JSON 반환**
 
-${dateRangeText} 이내 ${sectionConfig.summaryContext}를 찾아 요약.
-한국어 IT 매체만 (${sectionConfig.validDomains.join(', ')}).
+검색 키워드: ${sectionConfig.searchKeywords}
+기간: ${dateRangeText}
+조건: ${sectionConfig.summaryContext}
+출처: 한국어 IT 매체 (${sectionConfig.validDomains.slice(0, 3).join(', ')} 등)
 
-JSON:
-{"title":"제목","summary":"2-3문장 요약","link":"실제URL"}`;
+⚠️ **중요: 아래 JSON 형식으로만 반환하세요. 다른 설명이나 텍스트 없이 JSON만 출력하세요.**
+
+\`\`\`json
+{
+  "title": "뉴스 제목",
+  "summary": "2-3문장으로 핵심 내용 요약",
+  "link": "https://... (실제 뉴스 URL)"
+}
+\`\`\`
+
+**JSON만 반환하세요. 설명 금지.**`;
 
         try {
-            const data = await callGeminiAPI(prompt, true, 0.3, 2048);
+            // temperature를 0.5로 올려서 더 창의적이고 다양한 응답 유도
+            const data = await callGeminiAPI(prompt, true, 0.5, 2048);
 
             // API 응답 검증
-            if (!data.candidates || !data.candidates[0] || !data.candidates[0].content || !data.candidates[0].content.parts || !data.candidates[0].content.parts[0]) {
-                throw new Error('API 응답 구조 오류');
+            if (!data.candidates || !data.candidates[0]) {
+                throw new Error('API 응답에 candidates가 없습니다');
             }
 
-            const newsText = data.candidates[0].content.parts[0].text.trim();
+            const candidate = data.candidates[0];
+
+            // finishReason 확인
+            if (candidate.finishReason && candidate.finishReason !== 'STOP') {
+                throw new Error(`API 응답 중단: ${candidate.finishReason}`);
+            }
+
+            if (!candidate.content || !candidate.content.parts || !candidate.content.parts[0]) {
+                throw new Error('API 응답 content 구조 오류');
+            }
+
+            let newsText = candidate.content.parts[0].text.trim();
+
+            // 디버깅 로그
+            console.log(`   AI 응답 (첫 150자): ${newsText.substring(0, 150).replace(/\n/g, ' ')}...`);
+
             const newsData = extractJSON(newsText);
 
             // 뉴스 데이터 검증
-            if (!newsData.title || !newsData.summary || newsData.title.includes('찾지 못했습니다')) {
-                throw new Error('유효한 뉴스 데이터를 찾지 못했습니다');
+            if (!newsData || typeof newsData !== 'object') {
+                throw new Error('JSON 파싱 결과가 객체가 아닙니다');
+            }
+
+            if (!newsData.title || !newsData.summary) {
+                throw new Error(`필수 필드 누락: title=${!!newsData.title}, summary=${!!newsData.summary}`);
+            }
+
+            if (newsData.title.includes('찾지 못했습니다') || newsData.title.includes('없습니다')) {
+                throw new Error('AI가 뉴스를 찾지 못했다고 응답했습니다');
             }
 
             console.log(`✅ ${sectionConfig.name}: ${newsData.title.substring(0, 40)}...`);
             return newsData;
 
         } catch (error) {
-            console.warn(`⚠️ ${sectionConfig.name} 시도 ${attempt + 1} 실패: ${error.message}`);
+            const errorMsg = error.message || String(error);
+            console.warn(`⚠️ ${sectionConfig.name} 시도 ${attempt + 1} 실패: ${errorMsg}`);
 
             // 마지막 시도가 아니면 계속 재시도
             if (attempt < maxRetries - 1) {
