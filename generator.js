@@ -677,7 +677,27 @@ JSON만:
 }`;
 
             const baseData = await callGeminiAPI(apiKey, basePrompt, false, 0.7, 6144);
-            let baseText = baseData.candidates[0].content.parts[0].text.trim();
+
+            // API 응답 안전성 체크
+            if (!baseData.candidates || !baseData.candidates[0]) {
+                addLog('ERROR: 기본 콘텐츠 생성 API 응답에 candidates가 없습니다.');
+                throw new Error('API 응답 없음. 잠시 후 다시 시도해주세요.');
+            }
+
+            const baseCandidate = baseData.candidates[0];
+
+            if (baseCandidate.finishReason && baseCandidate.finishReason !== 'STOP') {
+                addLog(`ERROR: 기본 콘텐츠 생성이 비정상 종료되었습니다. finishReason: ${baseCandidate.finishReason}`);
+                throw new Error(`API 응답 중단 (${baseCandidate.finishReason}). 다시 시도해주세요.`);
+            }
+
+            if (!baseCandidate.content || !baseCandidate.content.parts ||
+                !baseCandidate.content.parts[0] || !baseCandidate.content.parts[0].text) {
+                addLog('ERROR: 기본 콘텐츠 생성 API 응답 구조가 올바르지 않습니다.');
+                throw new Error('API 응답 구조 오류. 잠시 후 다시 시도해주세요.');
+            }
+
+            let baseText = baseCandidate.content.parts[0].text.trim();
 
             // JSON 추출
             if (baseText.includes('```')) {
@@ -1698,7 +1718,35 @@ JSON 형식으로만 응답하세요. 다른 설명 없이 JSON만 반환하세�
                     }
                 }
 
-                let jsonText = data.candidates[0].content.parts[0].text.trim();
+                // API 응답 안전성 체크
+                if (!data.candidates || !data.candidates[0]) {
+                    addLog('ERROR: API 응답에 candidates가 없습니다.');
+                    addLog('API 응답: ' + JSON.stringify(data, null, 2).substring(0, 500));
+                    throw new Error('API 응답 없음. 잠시 후 다시 시도해주세요.');
+                }
+
+                const candidate = data.candidates[0];
+
+                // finishReason 체크 (SAFETY, MAX_TOKENS 등의 문제)
+                if (candidate.finishReason && candidate.finishReason !== 'STOP') {
+                    addLog(`ERROR: API 응답이 비정상 종료되었습니다. finishReason: ${candidate.finishReason}`);
+                    if (candidate.finishReason === 'SAFETY') {
+                        throw new Error('안전 필터로 인해 응답이 차단되었습니다. 다시 시도해주세요.');
+                    } else if (candidate.finishReason === 'MAX_TOKENS') {
+                        throw new Error('응답이 너무 길어 중단되었습니다. 다시 시도해주세요.');
+                    } else {
+                        throw new Error(`API 응답 중단 (${candidate.finishReason}). 다시 시도해주세요.`);
+                    }
+                }
+
+                if (!candidate.content || !candidate.content.parts ||
+                    !candidate.content.parts[0] || !candidate.content.parts[0].text) {
+                    addLog('ERROR: API 응답 구조가 올바르지 않습니다.');
+                    addLog('candidate: ' + JSON.stringify(candidate, null, 2).substring(0, 500));
+                    throw new Error('API 응답 구조 오류. 잠시 후 다시 시도해주세요.');
+                }
+
+                let jsonText = candidate.content.parts[0].text.trim();
                 addLog('AI 응답: ' + jsonText.substring(0, 200));
 
                 if (jsonText.startsWith('```')) {
