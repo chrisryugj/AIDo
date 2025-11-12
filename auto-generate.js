@@ -145,8 +145,8 @@ function extractJSON(text) {
     return JSON.parse(jsonText);
 }
 
-// 뉴스 섹션 생성
-async function generateNewsSection(section, dateInfo, dateRangeDays = 2) {
+// 뉴스 섹션 생성 (재시도 로직 포함)
+async function generateNewsSection(section, dateInfo, maxRetries = 5) {
     const config = {
         localGovCase: {
             name: '공공·정부 AI 활용 사례',
@@ -163,11 +163,24 @@ async function generateNewsSection(section, dateInfo, dateRangeDays = 2) {
     };
 
     const sectionConfig = config[section];
-    const dateRangeText = dateRangeDays <= 2 ? '최근 1-2일' : dateRangeDays <= 5 ? '최근 3-5일' : '최근 1주일';
 
-    console.log(`📰 ${sectionConfig.name} 검색 중 (${dateRangeText})...`);
+    // 재시도 로직: 점진적으로 날짜 범위 확대
+    const retryConfigs = [
+        { days: 2, text: '최근 1-2일' },
+        { days: 3, text: '최근 2-3일' },
+        { days: 5, text: '최근 3-5일' },
+        { days: 7, text: '최근 1주일' },
+        { days: 14, text: '최근 2주일' }
+    ];
 
-    const prompt = `한국어 뉴스 검색: ${sectionConfig.searchKeywords}
+    for (let attempt = 0; attempt < maxRetries; attempt++) {
+        const retryConfig = retryConfigs[Math.min(attempt, retryConfigs.length - 1)];
+        const dateRangeDays = retryConfig.days;
+        const dateRangeText = retryConfig.text;
+
+        console.log(`📰 ${sectionConfig.name} 검색 중 (${dateRangeText}, 시도 ${attempt + 1}/${maxRetries})...`);
+
+        const prompt = `한국어 뉴스 검색: ${sectionConfig.searchKeywords}
 
 ${dateRangeText} 이내 ${sectionConfig.summaryContext}를 찾아 요약.
 한국어 IT 매체만 (${sectionConfig.validDomains.join(', ')}).
@@ -175,22 +188,45 @@ ${dateRangeText} 이내 ${sectionConfig.summaryContext}를 찾아 요약.
 JSON:
 {"title":"제목","summary":"2-3문장 요약","link":"실제URL"}`;
 
-    try {
-        const data = await callGeminiAPI(prompt, true, 0.3, 2048);
-        const newsText = data.candidates[0].content.parts[0].text.trim();
-        const newsData = extractJSON(newsText);
+        try {
+            const data = await callGeminiAPI(prompt, true, 0.3, 2048);
 
-        console.log(`✅ ${sectionConfig.name}: ${newsData.title.substring(0, 40)}...`);
-        return newsData;
-    } catch (error) {
-        console.warn(`⚠️ ${sectionConfig.name} 검색 실패:`, error.message);
-        return {
-            title: '⚠️ 뉴스를 찾지 못했습니다',
-            summary: `최근 ${dateRangeText} 이내 관련 뉴스가 없습니다.`,
-            link: '#',
-            _failed: true
-        };
+            // API 응답 검증
+            if (!data.candidates || !data.candidates[0] || !data.candidates[0].content || !data.candidates[0].content.parts || !data.candidates[0].content.parts[0]) {
+                throw new Error('API 응답 구조 오류');
+            }
+
+            const newsText = data.candidates[0].content.parts[0].text.trim();
+            const newsData = extractJSON(newsText);
+
+            // 뉴스 데이터 검증
+            if (!newsData.title || !newsData.summary || newsData.title.includes('찾지 못했습니다')) {
+                throw new Error('유효한 뉴스 데이터를 찾지 못했습니다');
+            }
+
+            console.log(`✅ ${sectionConfig.name}: ${newsData.title.substring(0, 40)}...`);
+            return newsData;
+
+        } catch (error) {
+            console.warn(`⚠️ ${sectionConfig.name} 시도 ${attempt + 1} 실패: ${error.message}`);
+
+            // 마지막 시도가 아니면 계속 재시도
+            if (attempt < maxRetries - 1) {
+                console.log(`   🔄 재시도 중... (${attempt + 2}/${maxRetries})`);
+                await new Promise(resolve => setTimeout(resolve, 1000)); // 1초 대기
+                continue;
+            }
+        }
     }
+
+    // 모든 재시도 실패
+    console.error(`❌ ${sectionConfig.name} 최종 실패 (${maxRetries}번 시도)`);
+    return {
+        title: '⚠️ 뉴스를 찾지 못했습니다',
+        summary: `${maxRetries}번 재시도했지만 관련 뉴스를 찾지 못했습니다.`,
+        link: '#',
+        _failed: true
+    };
 }
 
 // 메인 콘텐츠 생성
@@ -225,18 +261,20 @@ JSON만:
 
     console.log('✅ 1단계 완료');
 
-    // 2단계: 뉴스 섹션 병렬 생성
-    console.log('🔍 2/3: 뉴스 섹션 생성 중...');
+    // 2단계: 뉴스 섹션 생성 (재시도 포함)
+    console.log('🔍 2/3: 뉴스 섹션 생성 중 (각각 최대 5번 재시도)...');
 
-    const [localGovResult, hotIssueResult] = await Promise.allSettled([
-        generateNewsSection('localGovCase', dateInfo),
-        generateNewsSection('hotIssue', dateInfo)
-    ]);
+    // 순차적으로 실행해서 로그가 깔끔하게 보이도록
+    const localGovCase = await generateNewsSection('localGovCase', dateInfo, 5);
+    const hotIssue = await generateNewsSection('hotIssue', dateInfo, 5);
 
-    const localGovCase = localGovResult.status === 'fulfilled' ? localGovResult.value : localGovResult.reason;
-    const hotIssue = hotIssueResult.status === 'fulfilled' ? hotIssueResult.value : hotIssueResult.reason;
+    // 성공 여부 확인
+    const successCount = [localGovCase, hotIssue].filter(news => !news._failed).length;
+    console.log(`✅ 2단계 완료 (성공: ${successCount}/2)`);
 
-    console.log('✅ 2단계 완료');
+    if (successCount < 2) {
+        console.warn(`⚠️ ${2 - successCount}개 뉴스 섹션이 실패했습니다.`);
+    }
 
     // 3단계: 최종 조합
     console.log('🎨 3/3: 콘텐츠 조합 중...');
@@ -1045,8 +1083,7 @@ async function sendTelegramMessage(message) {
 
     const postData = JSON.stringify({
         chat_id: TELEGRAM_CHAT_ID,
-        text: message,
-        parse_mode: 'Markdown'
+        text: message
     });
 
     const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
@@ -1094,16 +1131,16 @@ async function main() {
         const duration = ((Date.now() - startTime) / 1000).toFixed(1);
 
         // 성공 메시지
-        const successMessage = `✅ *AI출근길 자동 생성 성공!*
+        const successMessage = `✅ AI출근길 자동 생성 성공!
 
 📅 날짜: ${dateInfo.full}
 ⏱ 소요시간: ${duration}초
 
-💡 오늘의 팁: ${content.tip.title}
-💬 오늘의 한마디: ${content.quote.text.substring(0, 50)}...
+💡 오늘의 팁: ${toSafeString(content.tip.title).substring(0, 60)}
+💬 오늘의 한마디: ${toSafeString(content.quote.text).substring(0, 50)}...
 
-🏛️ 공공·정부 AI: ${content.localGovCase._failed ? '❌ 검색 실패' : '✅ ' + content.localGovCase.title.substring(0, 30) + '...'}
-🔥 AI 핫이슈: ${content.hotIssue._failed ? '❌ 검색 실패' : '✅ ' + content.hotIssue.title.substring(0, 30) + '...'}
+🏛️ 공공·정부 AI: ${content.localGovCase._failed ? '❌ 검색 실패' : '✅ ' + toSafeString(content.localGovCase.title).substring(0, 30) + '...'}
+🔥 AI 핫이슈: ${content.hotIssue._failed ? '❌ 검색 실패' : '✅ ' + toSafeString(content.hotIssue.title).substring(0, 30) + '...'}
 
 🔗 확인: https://chrisryugj.github.io/AIDo/`;
 
@@ -1117,7 +1154,7 @@ async function main() {
         console.error(error.stack);
 
         // 실패 메시지
-        const failMessage = `❌ *AI출근길 자동 생성 실패*
+        const failMessage = `❌ AI출근길 자동 생성 실패
 
 📅 날짜: ${formatDate(new Date()).full}
 ⚠️ 오류: ${error.message}
