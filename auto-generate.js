@@ -32,18 +32,24 @@ if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
     console.warn('⚠️ Telegram 환경변수가 없습니다. 알림을 건너뜁니다.');
 }
 
-// 날짜 포맷팅 함수
+// 날짜 포맷팅 함수 (한국 시간 기준)
 function formatDate(date) {
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
+    // UTC 시간을 한국 시간(UTC+9)으로 변환
+    const kstDate = new Date(date.getTime() + (9 * 60 * 60 * 1000));
+
+    const year = kstDate.getUTCFullYear();
+    const month = kstDate.getUTCMonth() + 1;
+    const day = kstDate.getUTCDate();
     const dayNames = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
-    const dayName = dayNames[date.getDay()];
+    const dayNamesShort = ['일', '월', '화', '수', '목', '금', '토'];
+    const dayName = dayNames[kstDate.getUTCDay()];
+    const dayShort = dayNamesShort[kstDate.getUTCDay()];
 
     return {
         full: `${year}년 ${month}월 ${day}일 ${dayName}`,
         short: `${year}.${month}.${day}`,
-        yymmdd: `${String(year).slice(2)}${String(month).padStart(2, '0')}${String(day).padStart(2, '0')}`
+        yymmdd: `${String(year).slice(2)}${String(month).padStart(2, '0')}${String(day).padStart(2, '0')}`,
+        dayShort: dayShort
     };
 }
 
@@ -304,11 +310,12 @@ async function generateNewsSection(section, dateInfo, maxRetries = 5) {
         console.log(`📰 ${sectionConfig.name} 검색 중 (${dateRangeText}, 시도 ${attempt + 1}/${maxRetries})...`);
 
         try {
-            // 날짜 정보
-            const today = new Date();
-            const yesterday = new Date(today);
-            yesterday.setDate(yesterday.getDate() - 1);
-            const dateStr = `${yesterday.getMonth() + 1}월 ${yesterday.getDate()}일`;
+            // 날짜 정보 (한국 시간 기준)
+            const now = new Date();
+            const kstNow = new Date(now.getTime() + (9 * 60 * 60 * 1000));
+            const yesterday = new Date(kstNow);
+            yesterday.setUTCDate(yesterday.getUTCDate() - 1);
+            const dateStr = `${yesterday.getUTCMonth() + 1}월 ${yesterday.getUTCDate()}일`;
 
             // 이전 뉴스 가져오기 (중복 방지)
             const previousNews = getPreviousNews();
@@ -580,7 +587,7 @@ function toSafeString(value) {
 // HTML 생성 (generator.js의 generateHTML 함수와 동일한 로직)
 function generateHTML(content, dateInfo) {
     // OG 태그 동적 생성
-    const ogTitle = `AI출근길 (${dateInfo.yymmdd.slice(0,2)}.${dateInfo.yymmdd.slice(2,4)}.${dateInfo.yymmdd.slice(4,6)}) - 공공 AI 실전팁`;
+    const ogTitle = `AI출근길 (${dateInfo.yymmdd.slice(0,2)}.${dateInfo.yymmdd.slice(2,4)}.${dateInfo.yymmdd.slice(4,6)}.${dateInfo.dayShort}) - 공공 AI 실전팁`;
     const ogDescription = `${content.tip.summary}, 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.`;
 
     return `<!DOCTYPE html>
