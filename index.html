@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI출근길 (25.11.12) - 공공 AI 실전팁</title>
+    <title>AI출근길 (25.11.13.목) - 공공 AI 실전팁</title>
 
     <!-- OGP -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
-    <meta property="og:title" content="AI출근길 (25.11.12) - 공공 AI 실전팁">
-    <meta property="og:description" content="방대한 보고서와 회의록에서 중요한 내용을 빠르게 파악하고 싶을 때 AI를 활용해 시간을 절약하는 방법을 소개합니다. 핵심 정보를 놓치지 않고 효율적으로 업무를 처리하세요., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
+    <meta property="og:title" content="AI출근길 (25.11.13.목) - 공공 AI 실전팁">
+    <meta property="og:description" content="AI를 활용하여 청중의 시선을 사로잡는 발표 자료의 구성과 시각화 아이디어를 빠르게 얻고, 초안 작성 시간을 획기적으로 단축하는 방법입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
     <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.jpg">
 
     <style>
@@ -483,47 +483,56 @@
     <!-- ============================================ -->
     <script>
         // 📅 날짜 정보 (매일 업데이트)
-        const currentDate = "2025년 11월 12일 수요일";
+        const currentDate = "2025년 11월 13일 (목)";
 
         // 💬 오늘의 한마디 (매일 교체)
         const todayQuote = {
-            text: "삶의 폭풍우 속에서도 우리 안에는 고요한 평화가 존재합니다. 그 평화를 찾아 잠시 쉬어가세요.",
-            author: "마야 안젤루"
+            text: "세상을 위한 당신의 따뜻한 헌신에 깊이 감사드립니다. 잠시 멈춰 서서 당신 안의 사랑을 느끼고, 스스로에게 따뜻한 위로를 건네세요.",
+            author: "마더 테레사"
         };
 
         // 💡 오늘의 실전 팁 (매일 새 주제)
         const todayTip = {
-            title: "복잡한 정책 문서, AI로 1분 만에 핵심 요약하기",
-            summary: "방대한 보고서와 회의록에서 중요한 내용을 빠르게 파악하고 싶을 때 AI를 활용해 시간을 절약하는 방법을 소개합니다. 핵심 정보를 놓치지 않고 효율적으로 업무를 처리하세요.",
-            situation: "방대한 정책 문서나 회의록 검토에 시간 소요\n• 핵심 내용 파악 및 보고서 작성에 어려움\n• 중요 정보 누락 위험으로 인한 불안감",
-            solution: "요약하고 싶은 문서를 AI 도구에 업로드 또는 붙여넣기\n• '핵심 요약' 또는 '주요 내용 추출' 프롬프트 입력\n• AI가 생성한 요약본을 검토 및 필요한 부분 수정",
-            prompt: `다음 정책 문서의 핵심 내용을 500자 이내로 요약하고, 주요 정책 목표와 기대 효과를 3가지씩 명확히 제시해 주세요. 그리고 이 문서에서 가장 중요한 의사결정 사항은 무엇인지 알려주세요.`,
-            result: `이 문서는 [정책명] 도입을 위한 세부 계획을 담고 있습니다. 주요 목표는 [목표1], [목표2], [목표3]이며, 기대 효과는 [효과1], [효과2], [효과3]입니다. 가장 중요한 의사결정 사항은 [특정 예산 승인/사업 추진 여부]입니다.`,
-            usage: "회의 전 주요 안건 요약으로 효율적인 논의 준비\n• 신규 정책 검토 시 핵심 내용 신속 파악\n• 보고서 초안 작성 시 중요 정보 누락 방지"
+            title: "AI로 돋보이는 정책 발표 자료, 5분 만에 초안 완성하기",
+            summary: "AI를 활용하여 청중의 시선을 사로잡는 발표 자료의 구성과 시각화 아이디어를 빠르게 얻고, 초안 작성 시간을 획기적으로 단축하는 방법입니다.",
+            situation: "• 발표 자료 준비 시간 부족으로 인한 부담\n• 내용 전달은 충분하나 시각적 구성이 밋밋함\n• 청중의 집중도와 이해도를 높일 방안 모색 필요",
+            solution: "• AI에 발표 주제와 핵심 내용을 구체적으로 입력\n• AI가 제안하는 슬라이드별 구성, 제목, 시각화 아이디어 검토\n• 생성된 초안을 바탕으로 세부 내용 추가 및 디자인 보완",
+            prompt: `다음 정책 발표를 위한 10페이지 분량의 프레젠테이션 초안을 작성해줘. 발표 주제는 '탄소중립 스마트 도시 조성 방안'이며, 핵심 내용은 '재생에너지 도입 확대, 친환경 교통 시스템 구축, 시민 참여 유도'야. 각 슬라이드별 제목과 주요 내용을 개조식으로 제시하고, 시각화 아이디어도 포함해줘.`,
+            result: `슬라이드 1: 제목 - 탄소중립 스마트 도시, 우리의 미래 (이미지: 미래 도시 전경)
+슬라이드 2: 목차 - 정책 개요, 핵심 추진 전략, 기대 효과, 질의응답
+슬라이드 3: 정책 개요 - 배경 및 필요성 (인포그래픽: 현재 탄소 배출량 및 목표치)
+슬라이드 4: 핵심 전략 1: 재생에너지 도입 확대 - 태양광, 풍력 발전 설치 및 지원 (사진: 친환경 에너지 시설)
+슬라이드 5: 핵심 전략 2: 친환경 교통 시스템 구축 - 대중교통 활성화, 전기차 인프라 확대 (일러스트: 스마트 교통 시스템)
+슬라이드 6: 핵심 전략 3: 시민 참여 유도 및 교육 - 캠페인, 교육 프로그램 운영 (사진: 시민 참여 모습)
+슬라이드 7: 기대 효과 - 환경 개선, 경제 활성화, 삶의 질 향상 (그래프: 예상 효과 데이터)
+슬라이드 8: 성공 사례 - 국내외 벤치마킹 사례 (지도: 성공 도시 위치 표시)
+슬라이드 9: 추진 로드맵 - 단계별 실행 계획 (타임라인: 단기, 중장기 계획)
+슬라이드 10: 질의응답 및 마무리 - 경청해 주셔서 감사합니다 (아이콘: 질문 표시)`,
+            usage: "• 발표 자료 구성 및 내용 전개 아이디어 빠르게 확보\n• 시각적 자료 예시로 디자인 방향 설정 시간 단축\n• 반복적인 자료 작성 업무 부담 경감 및 효율 증대"
         };
 
         // 🏛️ 공공·정부 AI 활용 사례
         const localGovCase = {
-            title: "더존비즈온, '서울시 AI 행정체계' 공공 특화 '원AI PE'로 구축",
-            summary: "더존비즈온이 서울시 AI 행정 혁신사업에 참여하여 내부망에서 활용 가능한 생성형 AI 플랫폼 '원AI PE'를 공급한다. 이 플랫폼은 서울시의 AI 전환을 위한 핵심 기술 파트너로서 행정업무 전 과정에 AI를 활용하여 공공 행정 효율성을 높이는 데 기여할 예정이다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH0MnKwFvqEhA6kdDt22pO5O_k1X2shdPMTk8NTpzRvnWecPxU9GVqZoIgAzBDNLqMh1NBAm9jan2SOahsPFfOtkz4P1OU2xBpWJHihgoIGrotvVTAHH-NhHcdHRxrPN6c="
+            title: "전 세계 최초 `범정부 AI 공통기반` 속도…삼성·네이버 플랫폼 얹는다",
+            summary: "대한민국 정부가 중앙부처, 지방자치단체, 공공기관 공무원들이 생성형 AI를 업무에 안전하게 활용할 수 있는 '범정부 AI 공통기반' 구축 사업에 속도를 내고 있다. 이 사업은 삼성과 네이버 등 국내 기업의 플랫폼을 활용하여 공공 부문의 AI 전환을 가속화하는 것을 목표로 한다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEzPq929z_R-G--brycBOm1IxZuu3NVBlVjioRvzI2BA4wc6kuAeTC6p2TBhvX_TwmTTQ9xQmQLTVpVX4mlhruwmoVZXQQZpc2VzAPi8sPxzfx0u2UVrEwB0fPc_Ysobp8NZPYhmU6_PrplhWeSEJZm"
         };
 
         // 🔥 AI 핫이슈 (AI 기술·산업)
         const hotIssue = {
-            title: "[특징주] 삼성·LG·네이버·카카오 모두 투자한 AI 업체 노타 강세",
-            summary: "[특징주] 삼성·LG·네이버·카카오 모두 투자한 AI 업체 노타 강세에 관한 최신 뉴스입니다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFs35-9Y_8Ai9S6i2z-gD2AMBLzT-XYtJFFCEoNVh1TkkxSQm2NU5-rQlM7gStoaOErhlc4W0IlqU4JVeKtljZYPrENYhy5HU9_FkAcFBDTcNS4oVq5Lbxj_pWvnjUNlwdbqxan_ydhK-2NPWyzP00plvTprx4Rdz1QZNwqRiSr7rAb2nKeAaSvJ0enkBmBDDYPzrAkGEZWn7pEJXyZVkKnis7q52WzoHkYkv1_ULWBQ_i90nHGw8rvAcO2EGgaPbvxD2-AuMauRpyHqiNEQAkmHGHMizg40g=="
+            title: "AI가 짠 코드 믿고 쓴다...ETRI, LLM 기반 신뢰형 코드 생성 기술 공개",
+            summary: "한국전자통신연구원(ETRI)이 대규모 언어모델(LLM)을 활용해 소스코드를 정확하고 안전하게 생성할 수 있는 핵심 기술을 개발했다. 이 기술은 AI·소프트웨어 엔지니어링·프로그래밍 언어 분야 융합을 통해 AI의 코드 생성 능력을 고도화했다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEl_eObDscQeDiHVgJ53YSxDRvizJXJz08daMORoEIfz62AEMOg51JeRIjWuxyqre0LvPZRl3T3NwVMkGCT4apdZC3A4PfA9S-QAizsR0Fm5rA-AshZOUCZ_ZZTjJWsQKdqxCG8CJadEMWJSFF5KpC-AzcDpBeR8WE="
         };
 
         // 📊 오늘의 AI 트렌드
-        const todayTrendsDescription = "최근 AI 기술은 공공 부문 효율성 증대를 위한 핵심 도구로 부상하고 있습니다. 특히 문서 처리, 민원 상담, 데이터 분석 등 다양한 행정 업무에 AI 도입이 활발히 논의되며 스마트 정부 구현을 가속화하고 있습니다.";
-        const todayTrends = ["#공공AI","#스마트정부","#AI활용","#업무자동화","#디지털전환"];
+        const todayTrendsDescription = "최근 생성형 AI는 공공 부문에서 단순 업무 자동화를 넘어, 복잡한 정보를 시각적으로 효과적으로 전달하는 데 중요한 도구로 부상하고 있습니다. AI 기반의 프레젠테이션 및 보고서 작성 도구들은 공직자들이 더 매력적이고 설득력 있는 자료를 만들 수 있도록 지원하며, 정책 소통의 질을 한 단계 높이는 데 기여하고 있습니다.";
+        const todayTrends = ["#AI활용","#스마트행정","#공공AI","#정책소통","#생성형AI"];
 
         // 🏷️ OG 태그 (매일 업데이트)
         const ogTags = {
-            title: "AI출근길 (25.11.12) - 공공 AI 실전팁",
-            description: "방대한 보고서와 회의록에서 중요한 내용을 빠르게 파악하고 싶을 때 AI를 활용해 시간을 절약하는 방법을 소개합니다. 핵심 정보를 놓치지 않고 효율적으로 업무를 처리하세요., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
+            title: "AI출근길 (25.11.13.목) - 공공 AI 실전팁",
+            description: "AI를 활용하여 청중의 시선을 사로잡는 발표 자료의 구성과 시각화 아이디어를 빠르게 얻고, 초안 작성 시간을 획기적으로 단축하는 방법입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
         };
     </script>
     <!-- ============================================ -->
