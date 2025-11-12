@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI출근길 (25.11.12.수) - 공공 AI 실전팁</title>
+    <title>AI출근길 (25.11.12) - 공공 AI 실전팁</title>
 
     <!-- OGP -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
-    <meta property="og:title" content="AI출근길 (25.11.12.수) - 공공 AI 실전팁">
-    <meta property="og:description" content="복잡한 보고서의 개요 및 초안을 빠르고 체계적으로 작성하여 업무 효율 증대., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
+    <meta property="og:title" content="AI출근길 (25.11.12) - 공공 AI 실전팁">
+    <meta property="og:description" content="방대한 업무 자료와 보고서를 AI로 빠르게 요약하여 핵심을 파악하고 업무 효율을 극대화하는 방법입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
     <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.jpg">
 
     <style>
@@ -483,47 +483,56 @@
     <!-- ============================================ -->
     <script>
         // 📅 날짜 정보 (매일 업데이트)
-        const currentDate = "2025년 11월 12일 (수)";
+        const currentDate = "2025년 11월 12일 수요일";
 
         // 💬 오늘의 한마디 (매일 교체)
         const todayQuote = {
-            text: "자신을 발견하는 가장 좋은 방법은 타인을 위한 봉사 속에서 자신을 잃어버리는 것이다.",
-            author: "마하트마 간디"
+            text: "세상에 위대한 일은 없다. 오직 위대한 방법으로 행해진 작은 일들이 있을 뿐이다.",
+            author: "마더 테레사"
         };
 
         // 💡 오늘의 실전 팁 (매일 새 주제)
         const todayTip = {
-            title: "보고서 초안 신속 작성",
-            summary: "복잡한 보고서의 개요 및 초안을 빠르고 체계적으로 작성하여 업무 효율 증대.",
-            situation: "새로운 정책 보고서를 작성해야 하는데, 방대한 자료와 촉박한 마감 기한으로 인해 시작하기가 막막합니다.",
-            solution: "GPT에게 보고서의 목적, 핵심 내용, 대상 독자를 알려주고 개요나 초안 작성을 요청하여 초기 방향을 설정하고 시간을 절약합니다.",
-            prompt: `다음 주제로 정책 보고서 초안을 작성해 줘. 보고서의 목적은 [시민 건강 증진 방안 마련], 대상 독자는 [시장 및 관련 부서 공무원], 포함되어야 할 핵심 내용은 [현황 분석, 문제점 진단, 해외 사례, 정책 제안(3가지), 기대 효과]. 보고서는 서론, 본론(3~4개 소제목), 결론으로 구성해 줘. 각 섹션별로 주요 논점과 포함될 내용을 간략히 설명해 줘.`,
-            result: `주제에 맞는 체계적인 보고서 개요와 각 섹션별 주요 내용이 정리된 초안.`,
-            usage: "정책 보고서, 사업 계획서, 연구 보고서 등 문서 초안 작성 시 활용."
+            title: "장문 보고서, AI로 30초 만에 핵심만 쏙쏙!",
+            summary: "방대한 업무 자료와 보고서를 AI로 빠르게 요약하여 핵심을 파악하고 업무 효율을 극대화하는 방법입니다.",
+            situation: "• 복잡하고 긴 정책 보고서 전체를 읽기 부담스러움\n• 회의록이나 민원 서류에서 중요한 내용만 빠르게 추출해야 함\n• 여러 자료를 취합해 간결한 요약본을 만들어야 할 때",
+            solution: "• AI 챗봇에 요약할 문서 내용 또는 링크 제공\n• 핵심 요약 및 특정 정보 추출을 요청하는 프롬프트 입력\n• 생성된 요약문을 검토하고 필요에 따라 추가 질문",
+            prompt: `다음 [문서 종류: 예: 2024년 상반기 정책 성과 보고서]의 내용을 분석하여, 주요 성과 3가지와 향후 개선 과제 2가지를 중심으로 500자 이내로 요약해 주세요. 각 항목은 명확한 제목과 함께 개조식으로 작성해 주세요.`,
+            result: `2024년 상반기 정책 성과 보고서 요약:
+
+주요 성과:
+• 스마트시티 구축 사업 목표 대비 120% 달성, 시민 만족도 85% 기록.
+• 청년 일자리 창출 지원 사업을 통해 500명 고용 연계 성공.
+• 노인 복지 인프라 확충으로 지역사회 돌봄 기능 강화.
+
+향후 개선 과제:
+• 지역 균형 발전을 위한 추가 투자 유치 방안 마련.
+• 민원 처리 시스템 디지털 전환 가속화 및 사용자 교육 강화.`,
+            usage: "• 복잡한 정책 보고서 핵심 내용 신속 파악\n• 대내외 공유용 자료 및 브리핑 초안 작성 시간 단축\n• 민원인에게 복잡한 내용을 쉽고 간결하게 설명"
         };
 
         // 🏛️ 공공·정부 AI 활용 사례
         const localGovCase = {
-            title: "충북대병원, 행안부 'AI 챔피언' 인증자 10명 배출",
-            summary: "충북대병원이 행정안전부 주관 'AI 챔피언' 인증 과정에서 10명의 직원을 배출하며 공공의료 분야의 디지털 전환 및 AI 기반 행정혁신 역량을 공식적으로 인정받았다. 병원은 AI 기반 진료지원, 행정, 민원, 데이터 관리 프로젝트를 추진하며 환자 경험 향상과 공공서비스 품질 제고를 목표로 한다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFgSg3KhtTlbPDhGk7Nd1jS9HLTOsQiefmq0YSx5HoIuQz_bkTCQk3_ZwwB8vAhdBoZECGVPXFNuQSh8veLMSnirOX9L2f2H902Pkt-EV4Xp7TkepieVoIYq4xCGq4EtTasxQGEUN51_E9Z6buwgtwLD_-eLvA="
+            title: "⚠️ 뉴스를 찾지 못했습니다",
+            summary: "최근 최근 1-2일 이내 관련 뉴스가 없습니다.",
+            link: "#"
         };
 
         // 🔥 AI 핫이슈 (AI 기술·산업)
         const hotIssue = {
-            title: "“데이터 준비도는 높지만 신뢰 투자는 미흡”… 한국, AI 신기술 수용 '양극화'",
-            summary: "한국 기업들이 세계적으로 높은 데이터 인프라를 보유하고 있지만, 신뢰 기반의 인공지능(AI) 투자와 생성형 AI 등 신기술 수용에는 보수적인 양극화 현상을 보이고 있다는 조사 결과가 나왔다. 이는 국내 기업들이 AI 활용의 초기 단계에 머물러 있으며, 장기적인 AI 로드맵 구축이 필요함을 시사한다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE0VT1qHrGahbI3n3rD-_DYdS4GHLrVDno_Arf-gO9CLIrNTXi_y12aeW5F1tEH5J9WpiiM8cbEGDJ3ednLlAnNVwW4lw9A6b2VDhVtEs_dnuzPNHwhl21VrVXP78W6VL8="
+            title: "[AI 한쿡] SK `AI 동맹`과 네이버 `에이전트 N`... 韓-글로벌 파트너십 강화",
+            summary: "최근 SK그룹은 'SK AI 서밋 2025'를 개최하여 오픈AI, AWS 등 글로벌 빅테크와의 'AI 인프라 동맹'을 강조하고 HBM 공급망 확장 및 제조 AI 전략을 발표했습니다. 네이버는 'DAN 25' 컨퍼런스에서 모든 서비스를 통합하는 '에이전트 N'을 공개하며 '실행형 AI' 비전을 제시했습니다. 이와 함께 모티프테크와 제논 등 AI 스타트업들도 자체 LLM 및 '액셔너블 AI'를 선보이며 AI 기술 경쟁이 심화되고 있습니다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHMj5s6nUeEFoTzKxtrGK7y0AWlqIKS-c0RGPoWqnZZbVkUvq4JH76p7QscbqVDE6NfsDZdzGa-WGO6puDc6TdFN8NCVUTQ6a7hgRgNk1AVG_-2afZXvFsyWjIYa3gXdCr5EWV32MoJNtuIuo3A1g=="
         };
 
         // 📊 오늘의 AI 트렌드
-        const todayTrendsDescription = "공공 부문에서의 AI 활용이 점차 고도화되면서, 공직자들의 AI 리터러시 강화가 중요해지고 있습니다. 실무 적용을 위한 교육 프로그램과 가이드라인 마련이 활발히 논의되고 있습니다.";
-        const todayTrends = ["#공공AI","#AI리터러시","#디지털정부","#AI활용","#스마트워크"];
+        const todayTrendsDescription = "최근 정부 및 공공기관에서 인공지능 활용이 확산됨에 따라, AI 윤리 및 책임 있는 AI 구현에 대한 논의가 더욱 활발해지고 있습니다. 투명하고 공정한 AI 시스템 구축이 중요한 과제로 떠오르고 있습니다.";
+        const todayTrends = ["#AI윤리","#책임있는AI","#공공AI","#디지털정부","#AI거버넌스"];
 
         // 🏷️ OG 태그 (매일 업데이트)
         const ogTags = {
-            title: "AI출근길 (25.11.12.수) - 공공 AI 실전팁",
-            description: "복잡한 보고서의 개요 및 초안을 빠르고 체계적으로 작성하여 업무 효율 증대., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
+            title: "AI출근길 (25.11.12) - 공공 AI 실전팁",
+            description: "방대한 업무 자료와 보고서를 AI로 빠르게 요약하여 핵심을 파악하고 업무 효율을 극대화하는 방법입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
         };
     </script>
     <!-- ============================================ -->
