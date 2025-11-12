@@ -1045,8 +1045,7 @@ async function sendTelegramMessage(message) {
 
     const postData = JSON.stringify({
         chat_id: TELEGRAM_CHAT_ID,
-        text: message,
-        parse_mode: 'Markdown'
+        text: message
     });
 
     const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
@@ -1094,16 +1093,16 @@ async function main() {
         const duration = ((Date.now() - startTime) / 1000).toFixed(1);
 
         // 성공 메시지
-        const successMessage = `✅ *AI출근길 자동 생성 성공!*
+        const successMessage = `✅ AI출근길 자동 생성 성공!
 
 📅 날짜: ${dateInfo.full}
 ⏱ 소요시간: ${duration}초
 
-💡 오늘의 팁: ${content.tip.title}
-💬 오늘의 한마디: ${content.quote.text.substring(0, 50)}...
+💡 오늘의 팁: ${toSafeString(content.tip.title).substring(0, 60)}
+💬 오늘의 한마디: ${toSafeString(content.quote.text).substring(0, 50)}...
 
-🏛️ 공공·정부 AI: ${content.localGovCase._failed ? '❌ 검색 실패' : '✅ ' + content.localGovCase.title.substring(0, 30) + '...'}
-🔥 AI 핫이슈: ${content.hotIssue._failed ? '❌ 검색 실패' : '✅ ' + content.hotIssue.title.substring(0, 30) + '...'}
+🏛️ 공공·정부 AI: ${content.localGovCase._failed ? '❌ 검색 실패' : '✅ ' + toSafeString(content.localGovCase.title).substring(0, 30) + '...'}
+🔥 AI 핫이슈: ${content.hotIssue._failed ? '❌ 검색 실패' : '✅ ' + toSafeString(content.hotIssue.title).substring(0, 30) + '...'}
 
 🔗 확인: https://chrisryugj.github.io/AIDo/`;
 
@@ -1117,7 +1116,7 @@ async function main() {
         console.error(error.stack);
 
         // 실패 메시지
-        const failMessage = `❌ *AI출근길 자동 생성 실패*
+        const failMessage = `❌ AI출근길 자동 생성 실패
 
 📅 날짜: ${formatDate(new Date()).full}
 ⚠️ 오류: ${error.message}
