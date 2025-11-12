@@ -253,6 +253,15 @@ JSON만:
     return content;
 }
 
+// HTML 생성 헬퍼: 배열/객체/문자열을 안전하게 문자열로 변환
+function toSafeString(value) {
+    if (!value) return '';
+    if (typeof value === 'string') return value;
+    if (Array.isArray(value)) return value.join('\n• ');
+    if (typeof value === 'object') return JSON.stringify(value);
+    return String(value);
+}
+
 // HTML 생성 (generator.js의 generateHTML 함수와 동일한 로직)
 function generateHTML(content, dateInfo) {
     // OG 태그 동적 생성
@@ -748,43 +757,43 @@ function generateHTML(content, dateInfo) {
 
         // 💬 오늘의 한마디 (매일 교체)
         const todayQuote = {
-            text: "${(content.quote?.text || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
-            author: "${(content.quote?.author || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}"
+            text: "${toSafeString(content.quote?.text).replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            author: "${toSafeString(content.quote?.author).replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}"
         };
 
         // 💡 오늘의 실전 팁 (매일 새 주제)
         const todayTip = {
-            title: "${(content.tip?.title || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
-            summary: "${(content.tip?.summary || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
-            situation: "${(content.tip?.situation || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
-            solution: "${(content.tip?.solution || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
-            prompt: \`${(content.tip?.prompt || '').replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\r/g, '')}\`,
-            result: \`${(content.tip?.result || '').replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\r/g, '')}\`,
-            usage: "${(content.tip?.usage || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}"
+            title: "${toSafeString(content.tip?.title).replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            summary: "${toSafeString(content.tip?.summary).replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            situation: "${toSafeString(content.tip?.situation).replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            solution: "${toSafeString(content.tip?.solution).replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            prompt: \`${toSafeString(content.tip?.prompt).replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\r/g, '')}\`,
+            result: \`${toSafeString(content.tip?.result).replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\r/g, '')}\`,
+            usage: "${toSafeString(content.tip?.usage).replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}"
         };
 
         // 🏛️ 공공·정부 AI 활용 사례
         const localGovCase = {
-            title: "${(content.localGovCase?.title || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
-            summary: "${(content.localGovCase?.summary || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            title: "${toSafeString(content.localGovCase?.title).replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            summary: "${toSafeString(content.localGovCase?.summary).replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
             link: "${content.localGovCase?.link || '#'}"
         };
 
         // 🔥 AI 핫이슈 (AI 기술·산업)
         const hotIssue = {
-            title: "${(content.hotIssue?.title || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
-            summary: "${(content.hotIssue?.summary || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            title: "${toSafeString(content.hotIssue?.title).replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            summary: "${toSafeString(content.hotIssue?.summary).replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
             link: "${content.hotIssue?.link || '#'}"
         };
 
         // 📊 오늘의 AI 트렌드
-        const todayTrendsDescription = "${(content.trends?.description || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}";
+        const todayTrendsDescription = "${toSafeString(content.trends?.description).replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}";
         const todayTrends = ${JSON.stringify(content.trends?.hashtags || [])};
 
         // 🏷️ OG 태그 (매일 업데이트)
         const ogTags = {
-            title: "${ogTitle.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
-            description: "${ogDescription.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}"
+            title: "${toSafeString(ogTitle).replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            description: "${toSafeString(ogDescription).replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}"
         };
     <\/script>
     <!-- ============================================ -->
