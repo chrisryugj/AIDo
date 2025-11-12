@@ -255,25 +255,774 @@ JSON만:
 
 // HTML 생성 (generator.js의 generateHTML 함수와 동일한 로직)
 function generateHTML(content, dateInfo) {
-    // generator.js의 index.html 템플릿을 그대로 읽어옴
-    const generatorPath = path.join(__dirname, 'generator.js');
-    const generatorContent = fs.readFileSync(generatorPath, 'utf8');
+    // OG 태그 동적 생성
+    const ogTitle = `AI출근길 (${dateInfo.yymmdd.slice(0,2)}.${dateInfo.yymmdd.slice(2,4)}.${dateInfo.yymmdd.slice(4,6)}) - 공공 AI 실전팁`;
+    const ogDescription = `${content.tip.summary}, 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.`;
 
-    // generateHTML 함수 추출
-    const funcMatch = generatorContent.match(/function generateHTML\(content, dateInfo\) \{[\s\S]*?return html;[\s\S]*?\}/);
+    return `<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${ogTitle}</title>
 
-    if (!funcMatch) {
-        throw new Error('generator.js에서 generateHTML 함수를 찾을 수 없습니다.');
-    }
+    <!-- OGP -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
+    <meta property="og:title" content="${ogTitle}">
+    <meta property="og:description" content="${ogDescription}">
+    <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.jpg">
 
-    // 함수 실행을 위한 컨텍스트 생성
-    const ogTitle = `AI출근길 ${dateInfo.short} - ${content.tip.title}`;
-    const ogDescription = content.tip.summary;
+    <style>
+        @font-face {
+            font-family: 'GiantsInline';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Inline.woff2') format('woff2');
+            font-weight: normal;
+            font-display: swap;
+        }
 
-    // eval을 사용하여 함수 실행 (보안상 문제가 있지만, 이 경우는 우리 코드이므로 안전)
-    const generateHTMLFunc = eval(`(${funcMatch[0]})`);
+        @font-face {
+            font-family: 'Atomy';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/Atomy-Bold.woff') format('woff');
+            font-weight: normal;
+            font-display: swap;
+        }
 
-    return generateHTMLFunc(content, dateInfo);
+        @font-face {
+            font-family: 'SimGyeongha';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/SimKyungha.woff') format('woff');
+            font-weight: normal;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, hsl(210 20% 98%), hsl(215 25% 96%));
+            color: hsl(215 25% 20%);
+            min-height: 100vh;
+        }
+
+        .header {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, hsl(215 85% 45%), hsl(210 80% 55%));
+            color: white;
+            padding: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header-bg {
+            position: absolute;
+            inset: 0;
+            opacity: 0.1;
+        }
+
+        .header-bg-circle-1 {
+            position: absolute;
+            top: 0;
+            left: 25%;
+            width: 16rem;
+            height: 16rem;
+            background: white;
+            border-radius: 50%;
+            filter: blur(60px);
+        }
+
+        .header-bg-circle-2 {
+            position: absolute;
+            bottom: 0;
+            right: 25%;
+            width: 24rem;
+            height: 24rem;
+            background: white;
+            border-radius: 50%;
+            filter: blur(60px);
+        }
+
+        .header-content {
+            position: relative;
+            max-width: 48rem;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .date-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.375rem 1rem;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(8px);
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .date-download-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .pulse-dot {
+            width: 0.5rem;
+            height: 0.5rem;
+            background: white;
+            border-radius: 50%;
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .title {
+            font-family: 'GiantsInline', sans-serif;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .title-icon {
+            font-size: 2.5rem;
+            line-height: 1;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .title {
+                font-size: 3rem;
+            }
+            .title-icon {
+                font-size: 3rem;
+            }
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.95;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .subtitle-line {
+            height: 1px;
+            width: 3rem;
+            background: rgba(255,255,255,0.5);
+        }
+
+        .container {
+            max-width: 48rem;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .download-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.375rem;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(8px);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 2rem;
+            height: 2rem;
+        }
+
+        .download-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+
+        .download-btn .icon {
+            width: 1rem;
+            height: 1rem;
+            stroke: white;
+        }
+
+        .card {
+            background: white;
+            padding: 1.25rem;
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        }
+
+        .quote-card {
+            background: linear-gradient(135deg, hsl(215 85% 45%), hsl(210 80% 55%));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-card::before,
+        .quote-card::after {
+            content: '';
+            position: absolute;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .quote-card::before {
+            width: 8rem;
+            height: 8rem;
+            top: -4rem;
+            right: -4rem;
+        }
+
+        .quote-card::after {
+            width: 6rem;
+            height: 6rem;
+            bottom: -3rem;
+            left: -3rem;
+        }
+
+        .card-title {
+            font-family: 'Atomy', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 1.125rem;
+            font-weight: bold;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tip-card {
+            border: 2px solid hsla(215 85% 45% / 0.3);
+            cursor: pointer;
+            position: relative;
+            animation: tip-pulse 2s ease-in-out infinite;
+        }
+
+        .tip-card:hover {
+            border-color: hsla(215 85% 45% / 0.8);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 24px rgba(33, 110, 243, 0.2);
+            animation: tip-shake 0.5s ease-in-out;
+        }
+
+        @keyframes tip-pulse {
+            0%, 100% {
+                box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 0 0 0 rgba(33, 110, 243, 0.4);
+            }
+            50% {
+                box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 0 0 8px rgba(33, 110, 243, 0);
+            }
+        }
+
+        @keyframes tip-shake {
+            0%, 100% { transform: translateY(-2px) scale(1.02) rotate(0deg); }
+            25% { transform: translateY(-2px) scale(1.02) rotate(-1deg); }
+            75% { transform: translateY(-2px) scale(1.02) rotate(1deg); }
+        }
+
+        .tip-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: hsl(215 85% 45%);
+            margin-bottom: 0.5rem;
+            word-break: keep-all;
+        }
+
+        @media (min-width: 768px) {
+            .tip-title {
+                font-size: 1.125rem;
+            }
+        }
+
+        .tip-summary {
+            font-size: 0.875rem;
+            color: hsl(215 15% 50%);
+            margin-bottom: 0.5rem;
+            word-break: keep-all;
+        }
+
+        .tip-link {
+            font-size: 0.75rem;
+            color: hsl(215 85% 45%);
+            font-weight: 500;
+        }
+
+        .tip-card:hover .tip-link {
+            text-decoration: underline;
+        }
+
+        .news-summary {
+            font-size: 0.875rem;
+            color: hsl(215 15% 50%);
+            line-height: 1.5;
+            margin-bottom: 0.75rem;
+            word-break: keep-all;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .news-link {
+            color: hsl(215 85% 45%);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            word-break: keep-all;
+        }
+
+        .news-link:hover {
+            color: hsl(215 85% 35%);
+            text-decoration: underline;
+        }
+
+        .trends-desc {
+            font-size: 0.875rem;
+            color: hsl(215 15% 50%);
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            padding: 0.5rem 1rem;
+            background: hsl(215 100% 96%);
+            color: hsl(215 85% 40%);
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .footer {
+            background: white;
+            border-top: 1px solid hsl(215 20% 90%);
+            padding: 2rem 1rem;
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+
+        .footer > * {
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: 0.875rem;
+            color: hsl(215 15% 50%);
+            margin: 0.5rem 0;
+            text-align: center;
+        }
+
+        .footer-small {
+            font-size: 0.75rem;
+            color: hsl(215 15% 50%);
+            text-align: center;
+        }
+
+        /* 모달 */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 50;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 1rem;
+            max-width: 42rem;
+            width: 100%;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid hsl(215 20% 90%);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+            overflow-y: auto;
+            max-height: 60vh;
+        }
+
+        .modal-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-section-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: hsl(215 85% 45%);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .modal-text {
+            line-height: 1.6;
+        }
+
+        .code-block {
+            background: hsl(210 15% 95%);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid hsl(215 20% 90%);
+            font-family: monospace;
+            font-size: 0.875rem;
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+
+        .result-block {
+            background: hsla(215 100% 96% / 0.5);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid hsla(215 85% 45% / 0.2);
+            font-size: 0.875rem;
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+
+        .icon {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- ============================================ -->
+    <!-- 🔄 매일 변경되는 콘텐츠 영역 START -->
+    <!-- ============================================ -->
+    <script>
+        // 📅 날짜 정보 (매일 업데이트)
+        const currentDate = "${dateInfo.full}";
+
+        // 💬 오늘의 한마디 (매일 교체)
+        const todayQuote = {
+            text: "${(content.quote?.text || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            author: "${(content.quote?.author || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}"
+        };
+
+        // 💡 오늘의 실전 팁 (매일 새 주제)
+        const todayTip = {
+            title: "${(content.tip?.title || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            summary: "${(content.tip?.summary || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            situation: "${(content.tip?.situation || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            solution: "${(content.tip?.solution || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            prompt: \`${(content.tip?.prompt || '').replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\r/g, '')}\`,
+            result: \`${(content.tip?.result || '').replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\r/g, '')}\`,
+            usage: "${(content.tip?.usage || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}"
+        };
+
+        // 🏛️ 공공·정부 AI 활용 사례
+        const localGovCase = {
+            title: "${(content.localGovCase?.title || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            summary: "${(content.localGovCase?.summary || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            link: "${content.localGovCase?.link || '#'}"
+        };
+
+        // 🔥 AI 핫이슈 (AI 기술·산업)
+        const hotIssue = {
+            title: "${(content.hotIssue?.title || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            summary: "${(content.hotIssue?.summary || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            link: "${content.hotIssue?.link || '#'}"
+        };
+
+        // 📊 오늘의 AI 트렌드
+        const todayTrendsDescription = "${(content.trends?.description || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}";
+        const todayTrends = ${JSON.stringify(content.trends?.hashtags || [])};
+
+        // 🏷️ OG 태그 (매일 업데이트)
+        const ogTags = {
+            title: "${ogTitle.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}",
+            description: "${ogDescription.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '')}"
+        };
+    <\/script>
+    <!-- ============================================ -->
+    <!-- 🔄 매일 변경되는 콘텐츠 영역 END -->
+    <!-- ============================================ -->
+
+    <!-- 헤더 -->
+    <header class="header">
+        <div class="header-bg">
+            <div class="header-bg-circle-1"></div>
+            <div class="header-bg-circle-2"></div>
+        </div>
+        <div class="header-content">
+            <div class="date-download-wrapper">
+                <div class="date-badge">
+                    <span class="pulse-dot"></span>
+                    <span id="date-display"></span>
+                </div>
+                <button class="download-btn" onclick="downloadHTML()">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                    </svg>
+                </button>
+            </div>
+            <h1 class="title">
+                <span>AI출근길</span>
+                <span class="title-icon">🚇</span>
+            </h1>
+            <div class="subtitle">
+                <div class="subtitle-line"></div>
+                <p>출근길 공무원을 위한 AI 한스푼</p>
+                <div class="subtitle-line"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 메인 콘텐츠 -->
+    <div class="container">
+        <!-- 오늘의 한마디 -->
+        <div class="card quote-card" style="position: relative; z-index: 1;">
+            <div style="position: relative;">
+                <h2 class="card-title">
+                    <span style="font-size: 1.25rem;">💡</span>
+                    오늘의 한마디
+                </h2>
+                <p id="quote-text" style="font-family: 'SimGyeongha', sans-serif; font-size: 1.125rem; line-height: 1.6; margin-bottom: 0.75rem; font-weight: 500; word-break: keep-all;"></p>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <div style="height: 1px; flex: 1; background: rgba(255,255,255,0.3);"></div>
+                    <p id="quote-author" style="font-size: 0.875rem; opacity: 0.95; font-weight: 500;"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 오늘의 실전 팁 -->
+        <div class="card tip-card" onclick="openModal()">
+            <h2 class="card-title">
+                <span style="font-size: 1.25rem;">💡</span>
+                오늘의 실전 팁
+            </h2>
+            <h3 class="tip-title" id="tip-title"></h3>
+            <p class="tip-summary" id="tip-summary"></p>
+            <p class="tip-link">클릭하여 상세 가이드 보기 →</p>
+        </div>
+
+        <!-- 공공·정부 AI 활용 사례 -->
+        <div class="card" id="local-card" style="cursor: pointer;" onclick="window.open(document.getElementById('local-link').href, '_blank')">
+            <h3 class="card-title">
+                <span style="font-size: 1.25rem;">🏛️</span>
+                공공·정부 AI 활용 사례
+            </h3>
+            <p class="news-summary" id="local-summary"></p>
+            <a class="news-link" id="local-link" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">
+                <span id="local-title"></span>
+                <span style="font-size: 0.75rem;">↗</span>
+            </a>
+        </div>
+
+        <!-- AI 핫이슈 (AI 기술·산업) -->
+        <div class="card" id="hot-card" style="cursor: pointer;" onclick="window.open(document.getElementById('hot-link').href, '_blank')">
+            <h3 class="card-title">
+                <span style="font-size: 1.25rem;">🔥</span>
+                AI 핫이슈 (AI 기술·산업)
+            </h3>
+            <p class="news-summary" id="hot-summary"></p>
+            <a class="news-link" id="hot-link" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">
+                <span id="hot-title"></span>
+                <span style="font-size: 0.75rem;">↗</span>
+            </a>
+        </div>
+
+        <!-- 오늘의 AI 트렌드 -->
+        <div class="card">
+            <h3 class="card-title">
+                <span style="font-size: 1.25rem;">📊</span>
+                오늘의 AI 트렌드
+            </h3>
+            <p class="trends-desc" id="trends-desc"></p>
+            <div class="tags" id="trends-tags"></div>
+        </div>
+    </div>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div>
+            <img src="https://hitscounter.dev/api/hit?url=https%3A%2F%2Fchrisryugj.github.io%2FAIDo%2F&label=AI-Do&icon=book-half&color=%23cc9a06&message=&style=flat&tz=Asia%2FSeoul" alt="조회수">
+        </div>
+        <p class="footer-text">제작: AI.Do 개친절한 류주임</p>
+        <p class="footer-text">문의: ryuseungin@gwangjin.go.kr</p>
+        <p class="footer-small">📧 피드백은 언제나 환영합니다!</p>
+    </footer>
+
+    <!-- 팁 모달 -->
+    <div class="modal" id="tipModal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-title"></h2>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3 class="modal-section-title">
+                        <span style="font-size: 1.125rem;">🎯</span> 상황/문제
+                    </h3>
+                    <p class="modal-text" id="modal-situation"></p>
+                </div>
+
+                <div class="modal-section">
+                    <h3 class="modal-section-title">
+                        <span style="font-size: 1.125rem;">💡</span> 해결방법
+                    </h3>
+                    <p class="modal-text" id="modal-solution"></p>
+                </div>
+
+                <div class="modal-section">
+                    <h3 class="modal-section-title">
+                        <span style="font-size: 1.125rem;">📝</span> 복붙 가능한 예제 프롬프트
+                    </h3>
+                    <div class="code-block" id="modal-prompt"></div>
+                </div>
+
+                <div class="modal-section">
+                    <h3 class="modal-section-title">
+                        <span style="font-size: 1.125rem;">✅</span> 실제 결과 예시
+                    </h3>
+                    <div class="result-block" id="modal-result"></div>
+                </div>
+
+                <div class="modal-section">
+                    <h3 class="modal-section-title">
+                        <span style="font-size: 1.125rem;">💼</span> 업무 적용 팁
+                    </h3>
+                    <p class="modal-text" id="modal-usage"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 페이지 로드 시 콘텐츠 렌더링
+        document.addEventListener('DOMContentLoaded', function() {
+            // 날짜
+            document.getElementById('date-display').textContent = currentDate;
+
+            // 오늘의 한마디
+            document.getElementById('quote-text').textContent = '"' + todayQuote.text + '"';
+            document.getElementById('quote-author').textContent = todayQuote.author;
+
+            // 오늘의 실전 팁
+            document.getElementById('tip-title').textContent = todayTip.title;
+            document.getElementById('tip-summary').textContent = todayTip.summary;
+
+            // 공공·정부 AI 활용 사례
+            document.getElementById('local-summary').textContent = localGovCase.summary;
+            document.getElementById('local-title').textContent = localGovCase.title;
+            document.getElementById('local-link').href = localGovCase.link;
+
+            // AI 핫이슈 (AI 기술·산업)
+            document.getElementById('hot-summary').textContent = hotIssue.summary;
+            document.getElementById('hot-title').textContent = hotIssue.title;
+            document.getElementById('hot-link').href = hotIssue.link;
+
+            // 오늘의 AI 트렌드
+            document.getElementById('trends-desc').textContent = todayTrendsDescription;
+            const tagsContainer = document.getElementById('trends-tags');
+            todayTrends.forEach(function(trend) {
+                const tag = document.createElement('span');
+                tag.className = 'tag';
+                tag.textContent = trend;
+                tagsContainer.appendChild(tag);
+            });
+
+            // OG 태그 업데이트
+            document.title = ogTags.title;
+            document.querySelector('meta[property="og:title"]').setAttribute('content', ogTags.title);
+            document.querySelector('meta[property="og:description"]').setAttribute('content', ogTags.description);
+        });
+
+        // 모달 열기
+        function openModal() {
+            document.getElementById('modal-title').textContent = todayTip.title;
+            document.getElementById('modal-situation').textContent = todayTip.situation;
+            document.getElementById('modal-solution').textContent = todayTip.solution;
+            document.getElementById('modal-prompt').textContent = todayTip.prompt;
+            document.getElementById('modal-result').textContent = todayTip.result;
+            document.getElementById('modal-usage').textContent = todayTip.usage;
+            document.getElementById('tipModal').classList.add('active');
+        }
+
+        // 모달 닫기
+        function closeModal(event) {
+            if (event.target === document.getElementById('tipModal')) {
+                document.getElementById('tipModal').classList.remove('active');
+            }
+        }
+
+        // HTML 다운로드
+        function downloadHTML() {
+            const htmlContent = document.documentElement.outerHTML;
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            const dateStr = new Date().toISOString().slice(2, 10).replace(/-/g, '');
+            a.href = url;
+            a.download = 'AI출근길_' + dateStr + '.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // ESC 키로 모달 닫기
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                document.getElementById('tipModal').classList.remove('active');
+            }
+        });
+    <\/script>
+</body>
+</html>`;
 }
 
 // Telegram 메시지 전송
