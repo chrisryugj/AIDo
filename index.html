@@ -9,7 +9,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
     <meta property="og:title" content="AI출근길 (25.11.12) - 공공 AI 실전팁">
-    <meta property="og:description" content="AI를 활용하여 복잡한 보고서 초안을 빠르고 효율적으로 작성하는 방법., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
+    <meta property="og:description" content="방대한 보고서와 회의록에서 중요한 내용을 빠르게 파악하고 싶을 때 AI를 활용해 시간을 절약하는 방법을 소개합니다. 핵심 정보를 놓치지 않고 효율적으로 업무를 처리하세요., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
     <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.jpg">
 
     <style>
@@ -487,43 +487,43 @@
 
         // 💬 오늘의 한마디 (매일 교체)
         const todayQuote = {
-            text: "세상을 바꾸기 위해 위대한 일을 할 필요는 없습니다. 작은 일들을 위대한 사랑으로 하는 것만으로도 충분합니다.",
-            author: "마더 테레사"
+            text: "삶의 폭풍우 속에서도 우리 안에는 고요한 평화가 존재합니다. 그 평화를 찾아 잠시 쉬어가세요.",
+            author: "마야 안젤루"
         };
 
         // 💡 오늘의 실전 팁 (매일 새 주제)
         const todayTip = {
-            title: "보고서 초안 작성, AI로 10분 만에 끝내기",
-            summary: "AI를 활용하여 복잡한 보고서 초안을 빠르고 효율적으로 작성하는 방법.",
-            situation: "• 보고서 작성 시간 부족\n• 초안 구성 아이디어 부재\n• 다양한 자료 취합의 어려움",
-            solution: "• AI에 보고서 주제와 핵심 정보 입력\n• 초안 구조 및 목차 생성 요청\n• 내용 보강 및 세부 항목 작성 지시",
-            prompt: `다음 정보를 바탕으로 [보고서 제목]의 초안을 작성해 줘. 보고서의 목적은 [목적]이고, 주요 내용은 [핵심 내용 1], [핵심 내용 2] 등이야. 목차를 포함하고, 각 섹션별로 간략한 설명을 덧붙여줘.`,
-            result: `입력한 정보와 목적에 맞는 보고서 목차와 각 섹션별 핵심 내용이 포함된 초안 생성.`,
-            usage: "• 복잡한 정책 보고서 초안 작성\n• 회의록, 보도자료 등 다양한 문서에 응용\n• 초안 검토 및 수정 시간 단축"
+            title: "복잡한 정책 문서, AI로 1분 만에 핵심 요약하기",
+            summary: "방대한 보고서와 회의록에서 중요한 내용을 빠르게 파악하고 싶을 때 AI를 활용해 시간을 절약하는 방법을 소개합니다. 핵심 정보를 놓치지 않고 효율적으로 업무를 처리하세요.",
+            situation: "방대한 정책 문서나 회의록 검토에 시간 소요\n• 핵심 내용 파악 및 보고서 작성에 어려움\n• 중요 정보 누락 위험으로 인한 불안감",
+            solution: "요약하고 싶은 문서를 AI 도구에 업로드 또는 붙여넣기\n• '핵심 요약' 또는 '주요 내용 추출' 프롬프트 입력\n• AI가 생성한 요약본을 검토 및 필요한 부분 수정",
+            prompt: `다음 정책 문서의 핵심 내용을 500자 이내로 요약하고, 주요 정책 목표와 기대 효과를 3가지씩 명확히 제시해 주세요. 그리고 이 문서에서 가장 중요한 의사결정 사항은 무엇인지 알려주세요.`,
+            result: `이 문서는 [정책명] 도입을 위한 세부 계획을 담고 있습니다. 주요 목표는 [목표1], [목표2], [목표3]이며, 기대 효과는 [효과1], [효과2], [효과3]입니다. 가장 중요한 의사결정 사항은 [특정 예산 승인/사업 추진 여부]입니다.`,
+            usage: "회의 전 주요 안건 요약으로 효율적인 논의 준비\n• 신규 정책 검토 시 핵심 내용 신속 파악\n• 보고서 초안 작성 시 중요 정보 누락 방지"
         };
 
         // 🏛️ 공공·정부 AI 활용 사례
         const localGovCase = {
-            title: "경기도 '2025 아소시오 디지털 정부상' 수상",
-            summary: "경기도가 인공지능(AI) 기반의 공공서비스 혁신 성과를 인정받아 '2025 아소시오 디지털 서밋'에서 '디지털 정부상'을 수상했다. 경기도는 AI 돌봄로봇, 발달장애인 행동분석 시스템, AI 기반 119 신고접수, 경기도형 AI 행정 플랫폼 구축 등 행정·복지·산업 전반의 AI 전환 노력을 인정받았다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHsH81p0Y8o_OQGlNVOnim8MZxSg9DWYm8I3qRI8UBuQE0f3VqHp0JyoLC29GURGLD1tEHZ78ZagOXz2HY_8AkI7qlo7HdB-g8NqExlSdifHttcc_0GJEsw1jFh8OesowmwXHI0om30wvoeH0W0S2_mVNj1BJLzsSM="
+            title: "더존비즈온, '서울시 AI 행정체계' 공공 특화 '원AI PE'로 구축",
+            summary: "더존비즈온이 서울시 AI 행정 혁신사업에 참여하여 내부망에서 활용 가능한 생성형 AI 플랫폼 '원AI PE'를 공급한다. 이 플랫폼은 서울시의 AI 전환을 위한 핵심 기술 파트너로서 행정업무 전 과정에 AI를 활용하여 공공 행정 효율성을 높이는 데 기여할 예정이다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH0MnKwFvqEhA6kdDt22pO5O_k1X2shdPMTk8NTpzRvnWecPxU9GVqZoIgAzBDNLqMh1NBAm9jan2SOahsPFfOtkz4P1OU2xBpWJHihgoIGrotvVTAHH-NhHcdHRxrPN6c="
         };
 
         // 🔥 AI 핫이슈 (AI 기술·산업)
         const hotIssue = {
-            title: "Arm 이어 실리콘밸리 VC까지...리벨리온 투자유치 누적 6500억원",
-            summary: "AI 반도체 스타트업 리벨리온이 미국 실리콘밸리 벤처캐피탈로부터 시리즈C 투자를 추가 유치하며 누적 투자금 6500억원을 달성했다. 이는 리벨리온의 기술력과 성장성을 글로벌 시장에서 인정받았음을 의미한다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG_UGpf7LzExYjSm5laz1VS8z_31RUhmWJ38iypGal7BG_llbcE_o0BD91hC9pUPqPo1pfOjlamyUWRzYDew-IZm1HPG8Ix5S5Op5JqJisT_TMs5MMKCCtOMR0ZNIGAbOIRH0uaQ7M="
+            title: "[특징주] 삼성·LG·네이버·카카오 모두 투자한 AI 업체 노타 강세",
+            summary: "[특징주] 삼성·LG·네이버·카카오 모두 투자한 AI 업체 노타 강세에 관한 최신 뉴스입니다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFs35-9Y_8Ai9S6i2z-gD2AMBLzT-XYtJFFCEoNVh1TkkxSQm2NU5-rQlM7gStoaOErhlc4W0IlqU4JVeKtljZYPrENYhy5HU9_FkAcFBDTcNS4oVq5Lbxj_pWvnjUNlwdbqxan_ydhK-2NPWyzP00plvTprx4Rdz1QZNwqRiSr7rAb2nKeAaSvJ0enkBmBDDYPzrAkGEZWn7pEJXyZVkKnis7q52WzoHkYkv1_ULWBQ_i90nHGw8rvAcO2EGgaPbvxD2-AuMauRpyHqiNEQAkmHGHMizg40g=="
         };
 
         // 📊 오늘의 AI 트렌드
-        const todayTrendsDescription = "공공 부문에서 AI 도입이 가속화되며 행정 효율성 증대와 대민 서비스 개선에 기여하고 있습니다. 특히 데이터 분석, 민원 응대, 문서 작업 자동화 분야에서 주목할 만한 성과를 보입니다.";
-        const todayTrends = ["#공공AI","#행정효율화","#AI활용","#스마트행정","#미래공무원"];
+        const todayTrendsDescription = "최근 AI 기술은 공공 부문 효율성 증대를 위한 핵심 도구로 부상하고 있습니다. 특히 문서 처리, 민원 상담, 데이터 분석 등 다양한 행정 업무에 AI 도입이 활발히 논의되며 스마트 정부 구현을 가속화하고 있습니다.";
+        const todayTrends = ["#공공AI","#스마트정부","#AI활용","#업무자동화","#디지털전환"];
 
         // 🏷️ OG 태그 (매일 업데이트)
         const ogTags = {
             title: "AI출근길 (25.11.12) - 공공 AI 실전팁",
-            description: "AI를 활용하여 복잡한 보고서 초안을 빠르고 효율적으로 작성하는 방법., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
+            description: "방대한 보고서와 회의록에서 중요한 내용을 빠르게 파악하고 싶을 때 AI를 활용해 시간을 절약하는 방법을 소개합니다. 핵심 정보를 놓치지 않고 효율적으로 업무를 처리하세요., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
         };
     </script>
     <!-- ============================================ -->
