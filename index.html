@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI출근길 (25.11.13.목) - 공공 AI 실전팁</title>
+    <title>AI출근길 (25.11.14.금) - 공공 AI 실전팁</title>
 
     <!-- OGP -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
-    <meta property="og:title" content="AI출근길 (25.11.13.목) - 공공 AI 실전팁">
-    <meta property="og:description" content="AI를 활용하여 청중의 시선을 사로잡는 발표 자료의 구성과 시각화 아이디어를 빠르게 얻고, 초안 작성 시간을 획기적으로 단축하는 방법입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
+    <meta property="og:title" content="AI출근길 (25.11.14.금) - 공공 AI 실전팁">
+    <meta property="og:description" content="방대한 보고서 내용을 AI가 핵심만 요약해주어 업무 효율을 극대화하고 의사결정을 돕는 방법을 소개합니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
     <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.jpg">
 
     <style>
@@ -483,56 +483,53 @@
     <!-- ============================================ -->
     <script>
         // 📅 날짜 정보 (매일 업데이트)
-        const currentDate = "2025년 11월 13일 (목)";
+        const currentDate = "2025년 11월 14일 금요일";
 
         // 💬 오늘의 한마디 (매일 교체)
         const todayQuote = {
-            text: "세상을 위한 당신의 따뜻한 헌신에 깊이 감사드립니다. 잠시 멈춰 서서 당신 안의 사랑을 느끼고, 스스로에게 따뜻한 위로를 건네세요.",
-            author: "마더 테레사"
+            text: "당신의 헌신과 노력은 보이지 않는 곳에서도 빛나고 있습니다. 잠시 멈춰 서서 스스로에게 따뜻한 격려를 보내세요. 당신의 작은 움직임이 세상을 더 나은 곳으로 만듭니다.",
+            author: "마야 안젤루"
         };
 
         // 💡 오늘의 실전 팁 (매일 새 주제)
         const todayTip = {
-            title: "AI로 돋보이는 정책 발표 자료, 5분 만에 초안 완성하기",
-            summary: "AI를 활용하여 청중의 시선을 사로잡는 발표 자료의 구성과 시각화 아이디어를 빠르게 얻고, 초안 작성 시간을 획기적으로 단축하는 방법입니다.",
-            situation: "• 발표 자료 준비 시간 부족으로 인한 부담\n• 내용 전달은 충분하나 시각적 구성이 밋밋함\n• 청중의 집중도와 이해도를 높일 방안 모색 필요",
-            solution: "• AI에 발표 주제와 핵심 내용을 구체적으로 입력\n• AI가 제안하는 슬라이드별 구성, 제목, 시각화 아이디어 검토\n• 생성된 초안을 바탕으로 세부 내용 추가 및 디자인 보완",
-            prompt: `다음 정책 발표를 위한 10페이지 분량의 프레젠테이션 초안을 작성해줘. 발표 주제는 '탄소중립 스마트 도시 조성 방안'이며, 핵심 내용은 '재생에너지 도입 확대, 친환경 교통 시스템 구축, 시민 참여 유도'야. 각 슬라이드별 제목과 주요 내용을 개조식으로 제시하고, 시각화 아이디어도 포함해줘.`,
-            result: `슬라이드 1: 제목 - 탄소중립 스마트 도시, 우리의 미래 (이미지: 미래 도시 전경)
-슬라이드 2: 목차 - 정책 개요, 핵심 추진 전략, 기대 효과, 질의응답
-슬라이드 3: 정책 개요 - 배경 및 필요성 (인포그래픽: 현재 탄소 배출량 및 목표치)
-슬라이드 4: 핵심 전략 1: 재생에너지 도입 확대 - 태양광, 풍력 발전 설치 및 지원 (사진: 친환경 에너지 시설)
-슬라이드 5: 핵심 전략 2: 친환경 교통 시스템 구축 - 대중교통 활성화, 전기차 인프라 확대 (일러스트: 스마트 교통 시스템)
-슬라이드 6: 핵심 전략 3: 시민 참여 유도 및 교육 - 캠페인, 교육 프로그램 운영 (사진: 시민 참여 모습)
-슬라이드 7: 기대 효과 - 환경 개선, 경제 활성화, 삶의 질 향상 (그래프: 예상 효과 데이터)
-슬라이드 8: 성공 사례 - 국내외 벤치마킹 사례 (지도: 성공 도시 위치 표시)
-슬라이드 9: 추진 로드맵 - 단계별 실행 계획 (타임라인: 단기, 중장기 계획)
-슬라이드 10: 질의응답 및 마무리 - 경청해 주셔서 감사합니다 (아이콘: 질문 표시)`,
-            usage: "• 발표 자료 구성 및 내용 전개 아이디어 빠르게 확보\n• 시각적 자료 예시로 디자인 방향 설정 시간 단축\n• 반복적인 자료 작성 업무 부담 경감 및 효율 증대"
+            title: "AI로 업무보고서 핵심 쏙쏙! 빠른 요약 비법",
+            summary: "방대한 보고서 내용을 AI가 핵심만 요약해주어 업무 효율을 극대화하고 의사결정을 돕는 방법을 소개합니다.",
+            situation: "• 긴 보고서 내용을 빠르게 파악해야 함\n• 핵심 내용을 놓치지 않고 요약해야 함\n• 회의 전 자료 검토 시간이 부족함",
+            solution: "• AI 도구에 보고서 텍스트를 입력\n• 요약 ���식과 길이를 구체적으로 지시\n• 생성된 요약문을 검토 및 필요시 수정",
+            prompt: `다음 업무보고서 내용을 500자 이내로 요약하고, 주요 성과와 향후 과제를 중심으로 개조식으로 정리해줘.`,
+            result: `• **주요 성과:**
+    - 스마트시티 구축 사업 1단계 성공적 완료 (예산 100% 집행, 참여율 85%)
+    - 민원 처리 시스템 AI 도입으로 처리 시간 30% 단축
+• **향후 과제:**
+    - 2단계 사업 추진을 위한 예산 확보 및 파트너십 강화
+    - AI 시스템 적용 범위 확대 및 사용자 교육 강화
+    - 시민 의견 수렴 채널 다양화 및 피드백 반영`,
+            usage: "• 회의 전 자료 검토 시간 대폭 단축\n• 상급자 보고 시 핵심 내용만 간결하게 전달\n• 정책 자료 요약으로 신속한 의사결정 지원"
         };
 
         // 🏛️ 공공·정부 AI 활용 사례
         const localGovCase = {
-            title: "전 세계 최초 `범정부 AI 공통기반` 속도…삼성·네이버 플랫폼 얹는다",
-            summary: "대한민국 정부가 중앙부처, 지방자치단체, 공공기관 공무원들이 생성형 AI를 업무에 안전하게 활용할 수 있는 '범정부 AI 공통기반' 구축 사업에 속도를 내고 있다. 이 사업은 삼성과 네이버 등 국내 기업의 플랫폼을 활용하여 공공 부문의 AI 전환을 가속화하는 것을 목표로 한다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEzPq929z_R-G--brycBOm1IxZuu3NVBlVjioRvzI2BA4wc6kuAeTC6p2TBhvX_TwmTTQ9xQmQLTVpVX4mlhruwmoVZXQQZpc2VzAPi8sPxzfx0u2UVrEwB0fPc_Ysobp8NZPYhmU6_PrplhWeSEJZm"
+            title: "인공지능 산업 발전과 안전·신뢰 기반 조성을 위한 「인공지능 기본법 시행령」 제정안 입법예고",
+            summary: "과학기술정보통신부는 인공지능 산업 발전과 안전·신뢰 기반 조성을 위한 '인공지능 기본법 시행령' 제정안을 마련하여 11월 12일부터 입법 예고한다고 밝혔다. 이 제정안은 AI 산업 육성 지원 기준 등을 명확히 하고 AI 안전·신뢰 확보를 위한 제도를 구체���하는 내용을 담고 있다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE8ImzoW9quNE8utJhhSZpdqWlTQTsjob0vrzlgLlIyYmT4PlrQwB50NvXuAL2LWS2xrBS1gIJHaaFSb_L7mtmse8OvDlqFe5AT8DhxtkSGn2Kbiq5jJ5r3HpWV_vJD-p7BC88x6VzMfHhzOsgEFrJjLy3b9DjjU-DGy2hG_xfV2sTIVEIqbq3d-Iz3J3HdCw=="
         };
 
         // 🔥 AI 핫이슈 (AI 기술·산업)
         const hotIssue = {
-            title: "AI가 짠 코드 믿고 쓴다...ETRI, LLM 기반 신뢰형 코드 생성 기술 공개",
-            summary: "한국전자통신연구원(ETRI)이 대규모 언어모델(LLM)을 활용해 소스코드를 정확하고 안전하게 생성할 수 있는 핵심 기술을 개발했다. 이 기술은 AI·소프트웨어 엔지니어링·프로그래밍 언어 분야 융합을 통해 AI의 코드 생성 능력을 고도화했다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEl_eObDscQeDiHVgJ53YSxDRvizJXJz08daMORoEIfz62AEMOg51JeRIjWuxyqre0LvPZRl3T3NwVMkGCT4apdZC3A4PfA9S-QAizsR0Fm5rA-AshZOUCZ_ZZTjJWsQKdqxCG8CJadEMWJSFF5KpC-AzcDpBeR8WE="
+            title: "오픈AI, 한국서 첫 개발자 행사…\"기술 교류 확대\"",
+            summary: "오픈AI가 한국에서 첫 개발자 행사를 개최하며 국내 기술 교류 확대를 모색한다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGMIKzd1QqHu2GEwS4-yxMy4xIxX6i7XPZf8yk8kM-RO452hgvi_JAQK1JvL-DMvxTk9ivFxtTFnERbuibitnbCn2BIHUxin_aJfw4jsb8="
         };
 
         // 📊 오늘의 AI 트렌드
-        const todayTrendsDescription = "최근 생성형 AI는 공공 부문에서 단순 업무 자동화를 넘어, 복잡한 정보를 시각적으로 효과적으로 전달하는 데 중요한 도구로 부상하고 있습니다. AI 기반의 프레젠테이션 및 보고서 작성 도구들은 공직자들이 더 매력적이고 설득력 있는 자료를 만들 수 있도록 지원하며, 정책 소통의 질을 한 단계 높이는 데 기여하고 있습니다.";
-        const todayTrends = ["#AI활용","#스마트행정","#공공AI","#정책소통","#생성형AI"];
+        const todayTrendsDescription = "공공 부문에서 AI 활용이 단순 업무 자동화를 넘어 시민 서비스 향상과 정책 결정 지원 등 다각적인 방향으로 진화하고 있습니다. 데이터 기반의 맞춤형 서비스 제공 및 투명성 확보가 핵심 과제로 부상하고 있습니다.";
+        const todayTrends = ["#공공AI","#시민서비스혁신","#AI거버넌스","#데이터기반행정","#미래���부"];
 
         // 🏷️ OG 태그 (매일 업데이트)
         const ogTags = {
-            title: "AI출근길 (25.11.13.목) - 공공 AI 실전팁",
-            description: "AI를 활용하여 청중의 시선을 사로잡는 발표 자료의 구성과 시각화 아이디어를 빠르게 얻고, 초안 작성 시간을 획기적으로 단축하는 방법입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
+            title: "AI출근길 (25.11.14.금) - 공공 AI 실전팁",
+            description: "방대한 보고서 내용을 AI가 핵심만 요약해주어 업무 효율을 극대화하고 의사결정을 돕는 방법을 소개합니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
         };
     </script>
     <!-- ============================================ -->
