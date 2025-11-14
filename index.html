@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI출근길 (25.11.14.금) - 공공 AI 실전팁</title>
+    <title>AI출근길 (25.11.15.토) - 공공 AI 실전팁</title>
 
     <!-- OGP -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
-    <meta property="og:title" content="AI출근길 (25.11.14.금) - 공공 AI 실전팁">
-    <meta property="og:description" content="AI를 활용하여 정책 제안서의 핵심 아이디어를 구조화하고 초안을 빠르게 생성하는 방법, 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
+    <meta property="og:title" content="AI출근길 (25.11.15.토) - 공공 AI 실전팁">
+    <meta property="og:description" content="방대한 분량의 보고서나 정책 문서를 빠르게 이해하고 핵심 내용을 파악해야 할 때, AI 요약 기능을 활용하면 시간을 절약하고 업무 효율을 높일 수 있습니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
     <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.jpg">
 
     <style>
@@ -483,51 +483,47 @@
     <!-- ============================================ -->
     <script>
         // 📅 날짜 정보 (매일 업데이트)
-        const currentDate = "2025년 11월 14일 (금)";
+        const currentDate = "2025년 11월 15일 토요일";
 
         // 💬 오늘의 한마디 (매일 교체)
         const todayQuote = {
-            text: "가장 어려운 순간에도 우리 안에는 항상 희망과 평화가 존재합니다. 그 작은 불씨를 찾아 스스로를 다독이는 시간을 가지세요.",
-            author: "마야 안젤루"
+            text: "우리가 할 수 있는 일은 바다에 한 방울을 더하는 것에 불과할지 모르지만, 그 한 방울이 없었다면 바다는 그만큼 줄어들었을 것입니다.",
+            author: "마더 테레사"
         };
 
         // 💡 오늘의 실전 팁 (매일 새 주제)
         const todayTip = {
-            title: "AI로 정책 제안서 초안 신속 작성하기",
-            summary: "AI를 활용하여 정책 제안서의 핵심 아이디어를 구조화하고 초안을 빠르게 생성하는 방법",
-            situation: "• 정책 제안서 작성 시간 부족\n• 복잡한 정보를 효과적으로 요약하기 어려움\n• 아이디어 구체화 및 논리적 흐름 구성 난항",
-            solution: "• AI에 핵심 정보와 목표 전달\n• 제안서의 주요 섹션별 아이디어 요청\n• AI가 생성한 초안을 바탕으로 세부 내용 보완",
-            prompt: `당신은 정책 전문가입니다. 다음 정보를 바탕으로 [주제: 예: 고령층 디지털 격차 해소]에 대한 정책 제안서 초안을 작성해주세요.
-- 핵심 목표: [예: 고령층의 디지털 기기 활용 능력 향상 및 정보 접근성 강화]
-- 주요 내용: [예: 스마트폰 교육 프로그램 확대, 키오스크 사용법 교육, 찾아가는 디지털 튜터 운영]
-- 기대 효과: [예: 고령층의 삶의 질 향상, 사회 참여 증진, 디지털 소외 해소]
-- 포함할 섹션: 배경 및 필요성, 현황 분석, 정책 목표, 세부 추진 방안, 기대 효과. 각 섹션별로 3-5문장으로 간결하게 작성해주세요.`,
-            result: `AI가 제안서의 주요 섹션별로 배경, 현황, 목표, 방안, 효과 등을 구조화된 형태로 초안을 제시.`,
-            usage: "• 정책 아이디어 구체화 및 초기 문서화 시간 단축\n• 다양한 정책 대안 탐색 및 비교 자료 생성\n• 상급자 보고 전 기초 자료 준비에 활용"
+            title: "길고 복잡한 보고서, AI로 핵심만 쏙쏙!",
+            summary: "방대한 분량의 보고서나 정책 문서를 빠르게 이해하고 핵심 내용을 파악해야 할 때, AI 요약 기능을 활용하면 시간을 절약하고 업무 효율을 높일 수 있습니다.",
+            situation: "• 방대한 정책 보고서 검토에 시간 소요\n• 핵심 내용 파악 및 요약에 어려움\n• 잦은 회의 전 자료 숙지 부담",
+            solution: "• 보고서 전문을 AI에 입력\n• 주요 내용과 결론 요약 요청\n• 질의응답으로 추가 정보 확인",
+            prompt: `다음 [보고서/정책 문서]의 핵심 내용과 주요 결론을 500자 이내로 요약해 주세요. 주요 정책 제언이 있다면 함께 정리해 주세요. 그리고 이 문서에 대해 제가 추가로 질문할 만한 3가지 질문을 생성해 주세요.`,
+            result: `이 보고서는 [주제]에 대한 현황 분석과 [문제점]을 지적하며, [해결책]을 위한 [정책 제언]을 제시합니다. 주요 내용은 [핵심 내용 1, 2, 3]입니다. / 추가 질문: 1. 이 정책 제언의 예상되는 부작용은 무엇인가요? 2. 예산은 어떻게 확보할 계획인가요? 3. 유사 해외 사례는 있나요?`,
+            usage: "• 회의 전 핵심 자료 빠르게 숙지\n• 상급자 보고용 요약 자료 생성\n• 새로운 정책 분야 학습 시간 단축"
         };
 
         // 🏛️ 공공·정부 AI 활용 사례
         const localGovCase = {
-            title: "경기도, 아시아·오세아니아 대표 AI 행정혁신 모델로 인정받다 – 2025 ASOCIO Digital Goverment Award 수상",
-            summary: "경기도가 인공지능(AI)을 행정 전반에 도입하여 공공서비스 혁신을 이끈 성과를 국제적으로 인정받아 2025 아소시오 디지털 서밋에서 '디지털 정부상'을 수상했다. 이는 아시아·오세아니아 24개국이 참여하는 국제 정보통신기술(ICT) 협의체에서 AI와 디지털 전환을 선도한 기관에 수여하는 상이다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHABE770fgAv2zyASCxvCVxLMkWcuMCGRt-rpruSH6qBOjSzho0p81_RzVaKzARsg8RBqzQhJCZFIFYhouf3hqHO8DBB46Tb78g8IbFcR1wKl-VGVwAPA8Q1BxOe35OKfDBXzvxGNQcx2uV-I7YYg14GTwx778="
+            title: "메타빌드, 'AI 기반 대국민 복지안내 솔루션 개발 및 실증' 사업 본격 착수",
+            summary: "메타빌드가 과학기술정보통신부 주관 'AI 기반 대국민 복지안내 솔루션 개발 및 실증' 사업에 착수했다. 이 사업은 복지행정 전반에 생성형 AI를 도입하여 국민이 체감하는 AI 복지 서비스 혁신을 목표로 한다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEboW6ZNQsI9uIi0tJlvmlQ4YOGV09R8fCH5jS4XG2zGLpTGyhTOAreyRloU_B_zLdBpC0q0m7f0aQc1KZLMvgu1OHMMEM4W3d-OlVNCPIRJeJpJ0q7r8s00HfhekL4VG0kyM4EDjpmsGOG9QTCcCMq"
         };
 
         // 🔥 AI 핫이슈 (AI 기술·산업)
         const hotIssue = {
-            title: "LG유플러스 AI 비서 '익시오'에 제미나이…구글과 협력 본격화",
-            summary: "LG유플러스가 구글과의 협력을 통해 생성형 AI 기반의 '익시오 AI 비서' 서비스를 공개했다. 이 서비스는 구글의 최신 LLM 모델인 제미나이 2.5 플래시 라이브를 활용하여 통화 중 실시간으로 정보를 검색하고 제공한다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHJnMr_25dRf_TtCvbrWH8NKGskvON_YoVp2ZNCzj2nQsc-Aqi3mdL6Lwp0ExcUssLkQj874gnuXrdEoVYlxumm0rGI-u4TMO2FtX_7rt38F9LglztGgl_OHztnNjt7Cg=="
+            title: "월드랩스, 첫 상용 월드 모델 '마블' 공개…시공간 AI 경쟁 '시동'",
+            summary: "월드랩스가 텍스트, 이미지, 영상 등을 편집 가능한 3D 환경으로 변환하는 생성형 월드 모델 '마블'을 출시하며 시공간 기반 인공지능",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHEoH9DDPGEpiI_HV2WbacyNdNou2xMYcNfV0w7PO2EXy6uRbQRJebTNxW9c-mlfFA6ILCi0o8kfS4fOIdgbiGhDXAJFMUfU7sIszUwTBPM28VyqxhyxQWhALpkgagWNhVX_XMA4g=="
         };
 
         // 📊 오늘의 AI 트렌드
-        const todayTrendsDescription = "2025년 11월에는 AI의 윤리적 사용과 투명성에 대한 논의가 더욱 활발해질 것으로 예상됩니다. 공공 부문에서의 AI 도입이 가속화됨에 따라, AI 시스템의 공정성과 책임성을 확보하기 위한 가이드라인과 기술적 해결책 마련이 중요해지고 있습니다.";
-        const todayTrends = ["#AI윤리","#공공AI","#AI투명성","#디지털정부","#책임있는AI"];
+        const todayTrendsDescription = "최근 공공 부문에서 생성형 AI 도입이 가속화되며 단순 반복 업무 자동화는 물론, 정책 기획 및 대민 서비스 개선에 활용되는 사례가 늘고 있습니다. 이는 공직 사회의 생산성 향상과 혁신을 이끌 중요한 동력으로 주목받고 있습니다.";
+        const todayTrends = ["#생성형AI","#공공행정혁신","#AI정부","#업무자동화","#디지털전환"];
 
         // 🏷️ OG 태그 (매일 업데이트)
         const ogTags = {
-            title: "AI출근길 (25.11.14.금) - 공공 AI 실전팁",
-            description: "AI를 활용하여 정책 제안서의 핵심 아이디어를 구조화하고 초안을 빠르게 생성하는 방법, 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
+            title: "AI출근길 (25.11.15.토) - 공공 AI 실전팁",
+            description: "방대한 분량의 보고서나 정책 문서를 빠르게 이해하고 핵심 내용을 파악해야 할 때, AI 요약 기능을 활용하면 시간을 절약하고 업무 효율을 높일 수 있습니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
         };
     </script>
     <!-- ============================================ -->
