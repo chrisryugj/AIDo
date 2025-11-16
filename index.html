@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI출근길 (25.11.16.일) - 공공 AI 실전팁</title>
+    <title>AI출근길 (25.11.17.월) - 공공 AI 실전팁</title>
 
     <!-- OGP -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
-    <meta property="og:title" content="AI출근길 (25.11.16.일) - 공공 AI 실전팁">
-    <meta property="og:description" content="반복적인 민원 응대 부담을 줄이고, 효율적인 정보 제공을 위한 AI 활용 팁입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
+    <meta property="og:title" content="AI출근길 (25.11.17.월) - 공공 AI 실전팁">
+    <meta property="og:description" content="긴 회의록을 AI가 핵심만 쏙 뽑아 요약해 줍니다. 중요한 내용 놓치지 않고 빠르게 파악하세요., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
     <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.jpg">
 
     <style>
@@ -483,51 +483,62 @@
     <!-- ============================================ -->
     <script>
         // 📅 날짜 정보 (매일 업데이트)
-        const currentDate = "2025년 11월 16일 일요일";
+        const currentDate = "2025년 11월 17일 월요일";
 
         // 💬 오늘의 한마디 (매일 교체)
         const todayQuote = {
-            text: "당신의 헌신과 노력은 보이지 않는 곳에서 세상을 움직이는 힘이 됩니다. 잠시 멈춰 숨을 고르고, 당신의 소중함을 기억하세요.",
+            text: "사람들이 당신이 한 말을 잊을 수도 있고, 당신이 한 행동을 잊을 수도 있지만, 당신이 그들에게 느끼게 한 감정은 결코 잊지 않을 것입니다.",
             author: "마야 안젤루"
         };
 
         // 💡 오늘의 실전 팁 (매일 새 주제)
         const todayTip = {
-            title: "AI로 민원 FAQ, 챗봇 콘텐츠 쉽게 만들기",
-            summary: "반복적인 민원 응대 부담을 줄이고, 효율적인 정보 제공을 위한 AI 활용 팁입니다.",
-            situation: "• 반복적인 민원 질문에 시간 소모\n• 신규 민원인에게 정보 전달 어려움\n• FAQ 자료 업데이트에 많은 노력 필요",
-            solution: "• 기존 민원 질의응답 자료 수집\n• AI에 해당 자료를 입력하고 FAQ 생성 지시\n• 생성된 FAQ 내용 정확성 검토 및 수정",
-            prompt: `당신은 공공기관 민원 처리 전문가입니다. 다음 민원 자료를 바탕으로, 민원인이 자주 묻는 질문(FAQ) 10개와 그에 대한 답변을 생성해 주세요. 답변은 간결하고 명확하며, 필요한 경우 관련 법규나 절차를 포함해 주세요. 생성된 FAQ는 챗봇 또는 웹사이트에 바로 활용할 수 있는 형식으로 작성해 주세요. [자료: (여기에 실제 민원 관련 규정, 사례 등의 자료를 넣어주세요)]`,
-            result: `• Q1: [질문 내용]
-  A1: [답변 내용 (관련 법규, 절차 포함)]
-• Q2: [질문 내용]
-  A2: [답변 내용 (관련 법규, 절차 포함)]
-(이하 10개 항목)`,
-            usage: "• 민원 응대 시간 대폭 단축\n• 신속하고 일관된 정보 제공 가능\n• 챗봇 또는 웹사이트 FAQ 자동 업데이트"
+            title: "AI로 복잡한 회의록 간편 요약하기",
+            summary: "긴 회의록을 AI가 핵심만 쏙 뽑아 요약해 줍니다. 중요한 내용 놓치지 않고 빠르게 파악하세요.",
+            situation: "• 장시간 회의 후 방대한 회의록 정리 필요\n• 핵심 내용 파악에 많은 시간 소요\n• 중요 결정사항 누락 위험",
+            solution: "• AI 도구에 회의록 텍스트 입력\n• 주요 안건, 결정사항, 다음 조치 요청\n• 요약된 내용 검토 및 최종 확인",
+            prompt: `다음 회의록을 읽고, 주요 논의 안건, 결정 사항, 그리고 각 안건별 다음 조치 사항을 명확하게 요약해 주세요. 각 항목은 개조식으로 작성해 주십시오.
+
+[여기에 회의록 텍스트 삽입]`,
+            result: `**주요 논의 안건:**
+• 2026년 예산안 편성 방향 논의
+• 민원 처리 시스템 개선 방안 검토
+• 부서별 협업 강화 방안 모색
+
+**결정 사항:**
+• 예산안은 시민 체감형 사업 위주로 편성
+• 민원 시스템은 사용자 의견 반영하여 UI/UX 개선
+• 월 1회 부서장 정기 간담회 신설
+
+**다음 조치 사항:**
+• 기획팀: 예산안 초안 11월 말까지 제출
+• 정보화팀: 시스템 개선 T/F 구성 및 보고
+• 총무과: 간담회 일정 조율 및 공지`,
+            usage: "• 정기 회의 후 빠른 정보 공유\n• 보고서 작성 시 핵심 내용 추출\n• 신규 직원 업무 인수인계 자료 활용"
         };
 
         // 🏛️ 공공·정부 AI 활용 사례
         const localGovCase = {
-            title: "“지방정부 AX시대 열렸다”…개발원·디지털정부학회, AI행정혁신 공동선언",
-            summary: "한국지역정보개발원과 한국디지털정부학회가 'AI 3대 강국 도약을 위한 중앙정부와 지방정부의 AX과제'를 주제로 추계학술대회를 공동 개최하며 AI 기반 행정혁신 전략을 논의했다. 이 행사는 중앙 및 지방정부의 AI 행정 역량을 강화하여 주민이 체감하는 '민주 AI 정부'를 구현하는 것을 목표로 한다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGbm19uHCkSXq3MRi8fjewXDWe7bzxzj_e9B0aOIUxOfttMamtt5NbNphXrdYKYsJh11fye1VmYgV99gPht_fLnktIzJevHROE5SactAcuBb3b2TGuHic_3-WHEfPneOIt5fWesaJmBUB4yqVERnfxJQJs1vyPlSrQ="
+            title: "[제26회 공공솔루션마켓]공공 AX, 글로벌 협력·AI 에이전트 등 전방위 움직여야",
+            summary: "제26회 공공솔루션마켓에서 정부의 공공 AI 전환(AX) 목표 달성을 위해 글로벌 협력과 AI 에이전트 기술 활용의 중요성이 강조되었다. 행정안전부는 AI 에이전트 기술을 통해 공공 서비스를 혁신하고 국민이 체감할 수 있는 원스톱 서비스를 구현할 계획이다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGO5v9KrDQo4gp7CRALXZCSIpy3J5A_j-uuP-b1Mqg4VIBiUCbNs4weoiv-j_88yjvM5FXJU73pk72M7kW-lYJBMj0bSKOxYfP5NLPvhV08p_71me9zoCQG62VUo3lRBs8="
         };
 
         // 🔥 AI 핫이슈 (AI 기술·산업)
         const hotIssue = {
-            title: "삼성전자, AI 반도체 '총력전'...평택 신규 인프라 기획·ASML 회동까지",
-            summary: "삼성전자, AI 반도체 '총력전'...평택 신규 인프라 기획·ASML 회동까지에 관한 최신 뉴스입니다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH9R7YIwo-jZ_TLzEKtjNNVAf_EB"
+            title: "\"이대로면 중국이 미국 제칠 것\"…젠슨황의 경고, 이유 있었다 [글로벌 머니 X파일]",
+            summary: "최근 미국과 중국 간 첨단 인공지능(AI) 기술 격차가 크게 줄어들었으며, AI 모델 성능에서 중국이 미국과 대등하거나 오히려 뛰어나다는 분석이 나왔다. 엔비디아 CEO 젠슨 황은 중국이 AI 경쟁에서 미국을 바짝 추격하고 있다고 경고했다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGF6U8n8CSIc6Y_BnLy8_ZELjYbPcAoSoPbTw3JPSmorGyOQRL3b1rjkMbKwqDKi_I19aqAyPLFtAi8-H0f_qMdEJSTsmsknUzJQm0SuXfxLOyYVuzcYfq-DrA3pko2qGS5tEfiA6dRhNo="
         };
 
         // 📊 오늘의 AI 트렌드
-        const todayTrendsDescription = "최근 공공 부문에서 AI 기술 도입이 가속화되면서, 공무원의 AI 활용 역량 강화와 윤리적 사용에 대한 중요성이 더욱 부각되고 있습니다. AI 리터러시 교육 프로그램과 가이드라인 마련이 활발히 논의되고 있습니다.";
-        const todayTrends = ["#공무원AI","#AI리터러시","#공공AI","#AI윤리","#디지털정부"];
+        const todayTrendsDescription = "최근 공공 부문에서 AI를 활용한 행정 효율성 증대와 데이터 기반 의사결정 지원이 가속화되고 있습니다. 특히, 복잡한 민원 데이터 분석 및 정책 수립 과정에서 AI 도입이 활발합니다.";
+        const todayTrends = ["#공공AI","#행정효율","#데이터기반정책","#AI활용","#스마트정부"];
 
         // 🏷️ OG 태그 (매일 업데이트)
         const ogTags = {
-            title: "AI출근길 (25.11.16.일) - 공공 AI 실전팁",
-            description: "반복적인 민원 응대 부담을 줄이고, 효율적인 정보 제공을 위한 AI 활용 팁입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
+            title: "AI출근길 (25.11.17.월) - 공공 AI 실전팁",
+            description: "긴 회의록을 AI가 핵심만 쏙 뽑아 요약해 줍니다. 중요한 내용 놓치지 않고 빠르게 파악하세요., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
         };
     </script>
     <!-- ============================================ -->
