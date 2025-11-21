@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI출근길 (25.11.21.금) - 공공 AI 실전팁</title>
+    <title>AI출근길 (25.11.22.토) - 공공 AI 실전팁</title>
 
     <!-- OGP -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
-    <meta property="og:title" content="AI출근길 (25.11.21.금) - 공공 AI 실전팁">
-    <meta property="og:description" content="방대한 문서를 빠르고 정확하게 핵심만 파악해야 할 때 AI를 활용하여 시간과 노력을 절약하는 방법입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
+    <meta property="og:title" content="AI출근길 (25.11.22.토) - 공공 AI 실전팁">
+    <meta property="og:description" content="복잡한 보고서나 회의록의 핵심 내용을 AI로 빠르게 파악하여 업무 효율을 높이는 방법입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
     <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.jpg">
 
     <style>
@@ -483,47 +483,50 @@
     <!-- ============================================ -->
     <script>
         // 📅 날짜 정보 (매일 업데이트)
-        const currentDate = "2025년 11월 21일 금요일";
+        const currentDate = "2025년 11월 22일 토요일";
 
         // 💬 오늘의 한마디 (매일 교체)
         const todayQuote = {
-            text: "봉사는 우리 자신을 잊고 남을 위해 살아갈 때 비로소 진정한 기쁨을 찾을 수 있게 해줍니다.",
-            author: "마더 테레사"
+            text: "세상은 고통으로 가득하지만, 그것을 극복하는 사람들로도 가득하다.",
+            author: "헬렌 켈러"
         };
 
         // 💡 오늘의 실전 팁 (매일 새 주제)
         const todayTip = {
-            title: "장문 보고서 핵심 요약",
-            summary: "방대한 문서를 빠르고 정확하게 핵심만 파악해야 할 때 AI를 활용하여 시간과 노력을 절약하는 방법입니다.",
-            situation: "• 긴 보고서나 회의록 검토에 시간 소요\n• 핵심 내용 파악 및 전달에 어려움\n• 중요 정보 누락 우려",
-            solution: "• AI 도구(ChatGPT 등)에 문서 내용 입력\n• 요약 요청 프롬프트 구체화\n• 생성된 요약본 검토 및 보완",
-            prompt: `다음 보고서 내용을 읽고, 핵심 내용을 300자 ���내로 요약해 주세요. 보고서의 주요 목적, 핵심 주장, 그리고 결론을 포함해야 합니다. [보고서 내용 붙여넣기]`,
-            result: `본 보고서는 [주제]에 대한 현황 분석과 [문제점]을 지적하며, [해결 방안]을 제안합니다. 주요 목표는 [목표] 달성을 위한 [구체적 방안] 마련이며, 이를 통해 [기대 효과]를 얻을 수 있을 것으로 기대됩니다.`,
-            usage: "• 정례 보고서 및 회의록 핵심 요약\n• 복잡한 법규 및 지침 신속 이해\n• 대외 자료 검토 시간 단축"
+            title: "AI로 장문 보고서 핵심 요약하기",
+            summary: "복잡한 보고서나 회의록의 핵심 내용을 AI로 빠르게 파악하여 업무 효율을 높이는 방법입니다.",
+            situation: "• 방대한 분량의 보고서 검토 시간 부족\n• 회의록에서 주요 결정사항 파악의 어려움\n• 핵심 내용 누락 없이 신속한 이해 필요",
+            solution: "• AI 도구(ChatGPT 등)에 보고서 내용 붙여넣기\n• 요약 및 핵심 추출 프롬프트 입력\n• AI가 제공한 요약 내용 검토 및 활용",
+            prompt: `다음 보고서의 핵심 내용을 500자 이내로 요약하고, 주요 정책 제안 3가지를 개조식으로 정리해 줘. 보고서: [여기에 보고서 내용을 붙여넣으세요]`,
+            result: `이 보고서는 지역 경제 활성화를 위한 방안을 다루고 있으며, 특히 청년 창업 지원과 스마트 농업 육성에 중점을 둡니다. 주요 정책 제안은 다음과 같습니다.
+• 청년 창업 초기 자금 지원 확대
+• 스마트 농업 기술 교육 프로그램 도입
+• 지역 특화형 관광 상품 개발`,
+            usage: "• 중요한 문서 검토 전 사전 요약 자료로 활용\n• 회의 참석 전 안건 핵심 파악에 도움\n• 동료와의 정보 공유 시 요약본 제공"
         };
 
         // 🏛️ 공공·정부 AI 활용 사례
         const localGovCase = {
-            title: "정부, 지자체 재산 관리 전담기관 검토…5년마다 총조사 추진",
-            summary: "정부는 지방자치단체의 부실한 재산 매각을 방지하고 관리 효율성을 높이기 위해 5년 주기 재산 총조사와 인공지능(AI) 기반 관리체계 도입 등 공유재산 관리 강화 방안을 추진 중이다. 행정안전부는 지자체 재산 관리의 전문성 강화를 위해 전담기관 지정 등 여러 대안을 검토하고 있다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFBmluASOGgaFmIf096YHkfdZ274dAYL-ejhzfDo1XcrG1eCnaWadYw3Rxjtawxvu8R6ISTcLiZmN7GwEw-rIb-lP7YSsfY3KxovKNpsIk1C8J3mUchkHuEsX1WPjKrfUcU"
+            title: "AI로 공원 안전 지킨 하남시, 오토바이 불법 통행 82% 감소…대통령상 수상",
+            summary: "하남시가 AI 기반 불법통행 오토바이 단속 서비스를 도입하여 공원 내 오토바이 불법 통행을 82% 감소시키고 관련 민원을 96% 줄여 대통령상을 수상했다. 이 서비스는 AI 영상인식 카메라, AI 스피커 등을 결합한 실시간 감지·안내·단속 체계로 스마트 행정의 우수 사례로 평가받았다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGmXrXgXK2nJisFqVJNKM2biAT48SZ66r_xVcQgCVQT3yuq-3Pf7Qkn_DA8hPWzVjVFXmka4FPkaDArFQhH-DbbwQmB17tW_LUdnvO_WUVqvtmvKoekIBSEWBCJeY_4YWs1gCJSnbm2mvnycXdY"
         };
 
         // 🔥 AI 핫이슈 (AI 기술·산업)
         const hotIssue = {
-            title: "\"뉴스 소비도 아이디어 싸움\"…네이버·다음, 신기술 시험대",
-            summary: "네이버는 인공지능(AI) 기술을 활용한 기사 본문 내 키워드 검색 기능을 도입했으며, 다음 포털은 대화형 댓글 서비스 '타임톡'을 연예 섹션으로 확대 적용하며 뉴스 소비 방식에 신기술을 시험하고 있다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFbDjAUXHjcvLxKVgs3zXuWS6JxJtFi-YBw4YoghDUB6l1EzjXyy_D_vIORiGL4Ntb0Q6Nv_1o_DypTQw5rqWFbx7zydkAr3huVoB---R91-7o2riDZi0IL6LDNb1XkStlVl_SU1yV-hqf8kY3En6w="
+            title: "[김대식·김혜연의 AHA]\"실리콘밸리는 결심의 힘으로 움직인다\"",
+            summary: "손재권 더밀크 대표는 실리콘밸리의 혁신 비결로 기업가 정신을 꼽으며, 한국 AI가 LLM 같은 소프트웨어 AI보다 로봇과 제조업의 결합인 '피지컬 AI'에서 경쟁력을 가질 수 있다고 강조했다. 그는 한국이 하드웨어와 소프트웨어, 서비스 모두에 강점을 가지고 있어 피지컬 AI로 나아가기에 최적의 국가라고 평가했다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGTZAMJBbYipfVbJSvmx34bDhMy8sgpKVUS3k9L3LYgjzd4h-4yvitUtbqAppY-c7YbokHSFbztgiWdRIk0LR6hjOxAtUQYv2uS8eUAfwJlsBdPbVWg6J07Iy0KQLSeoiDK"
         };
 
         // 📊 오늘의 AI 트렌드
-        const todayTrendsDescription = "AI 기술이 공공 서비스 혁신을 가속화하며, 민원 처리부터 정책 분석까지 다양한 행정 업무에 적용되고 있습니다. 이는 공무원의 업무 효율성을 높이고 시민들에게 더 나은 서비스를 제공하는 기반이 될 것입니다.";
-        const todayTrends = ["#공공AI","#행정혁신","#스마트행정","#AI활용","#업무자동화"];
+        const todayTrendsDescription = "AI 기술은 공공 서비스 혁신을 가속화하며, 행정 효율성 증대와 시민 맞춤형 서비스 제공에 핵심적인 역할을 하고 있습니다. 특히 데이터 분석 기반의 정책 수립과 민원 응대 시스템 고도화가 주목받고 있습니다.";
+        const todayTrends = ["#AI행정","#스마트정부","#공공AI","#AI활용","#디지털전환"];
 
         // 🏷️ OG 태그 (매일 업데이트)
         const ogTags = {
-            title: "AI출근길 (25.11.21.금) - 공공 AI 실전팁",
-            description: "방대한 문서를 빠르고 정확하게 핵심만 파악해야 할 때 AI를 활용하여 시간과 노력을 절약하는 방법입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
+            title: "AI출근길 (25.11.22.토) - 공공 AI 실전팁",
+            description: "복잡한 보고서나 회의록의 핵심 내용을 AI로 빠르게 파악하여 업무 효율을 높이는 방법입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
         };
     </script>
     <!-- ============================================ -->
