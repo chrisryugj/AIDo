@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI출근길 (25.11.24.월) - 공공 AI 실전팁</title>
+    <title>AI출근길 (25.11.25.화) - 공공 AI 실전팁</title>
 
     <!-- OGP -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
-    <meta property="og:title" content="AI출근길 (25.11.24.월) - 공공 AI 실전팁">
-    <meta property="og:description" content="방대한 보고서에서 중요한 내용만 빠르고 정확하게 파악하는 AI 활용 노하우를 소개합니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
+    <meta property="og:title" content="AI출근길 (25.11.25.화) - 공공 AI 실전팁">
+    <meta property="og:description" content="중요한 회의 내용을 놓치지 않고, AI를 활용하여 신속하게 회의록 초안을 작성하는 방법을 알려드립니다. 핵심 내용을 빠르게 정리하고 공유하여 업무 효율을 높여보세요., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
     <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.jpg">
 
     <style>
@@ -483,57 +483,62 @@
     <!-- ============================================ -->
     <script>
         // 📅 날짜 정보 (매일 업데이트)
-        const currentDate = "2025년 11월 24일 월요일";
+        const currentDate = "2025년 11월 25일 화요일";
 
         // 💬 오늘의 한마디 (매일 교체)
         const todayQuote = {
-            text: "아무리 작은 일이라도, 세상을 더 좋게 만들려는 당신의 노력은 결코 헛되지 않습니다. 그 마음이 모여 큰 변화를 이끌어냅니다.",
-            author: "마야 안젤루"
+            text: "평화는 내면에서 온다. 밖에서 찾지 말라.",
+            author: "붓다"
         };
 
         // 💡 오늘의 실전 팁 (매일 새 주제)
         const todayTip = {
-            title: "장문 보고서 핵심 요약 및 정보 추출 AI 활용법",
-            summary: "방대한 보고서에서 중요한 내용만 빠르고 정확하게 파악하는 AI 활용 노하우를 소개합니다.",
-            situation: "방대한 보고서 검토에 많은 시간 소요\n• 핵심 내용 파악 및 요약의 어려움\n• 중요 정보 누락 가능성",
-            solution: "AI에게 보고서 전문 입력\n• 특정 정보 추출 및 요약 ��청\n• AI 결과 검토 및 필요한 부분 수정",
-            prompt: `다음 보고서의 핵심 내용을 5가지 주요 요점으로 요약하고, 이 보고서에서 강조하는 정책 방향 3가지를 추출해줘. [보고서 전문 붙여넣기]`,
-            result: `보고서 핵심 요약:
-1. (보고서의 첫 번째 핵심 내용)
-2. (보고서의 두 번째 핵심 내용)
-3. (보고서의 세 번째 핵심 내용)
-4. (보고서의 네 번째 핵심 내용)
-5. (보고서의 다섯 번째 핵심 내용)
+            title: "AI로 회의록 초안 순삭!",
+            summary: "중요한 회의 내용을 놓치지 않고, AI를 활용하여 신속하게 회의록 초안을 작성하는 방법을 알려드립니다. 핵심 내용을 빠르게 정리하고 공유하여 업무 효율을 높여보세요.",
+            situation: "• 회의 내용이 방대하고 복잡하여 정리 시간 소요\n• 핵심 의사결정 및 액션 아이템 누락 우려\n• 잦은 회의로 회의록 작성 부담 가중",
+            solution: "• 회의록 초안 작성을 위한 AI 프롬프트 준비\n• 회의 녹취록 또는 핵심 키워드 정리본 입력\n• AI가 생성한 초안을 검토 및 ��완",
+            prompt: `다음 회의 내용을 바탕으로 회의록 초안을 작성해 주세요. 필수 포함 내용은 '회의 개요', '주요 논의 내용', '결정 사항', '향후 조치 사항'입니다. 각 항목은 개조식으로 간결하게 작성하고, 회의 참석자의 발언은 익명으로 처리해 주세요.
 
-강조하는 정책 방향:
-1. (보고서에서 강조하는 정책 방향 1)
-2. (보고서에서 강조하는 정책 방향 2)
-3. (보고서에서 강조하는 정책 방향 3)`,
-            usage: "정책 자료 및 법규 검토 시간 대폭 단축\n• 회의 전 주요 안건 및 배경 정보 신속 파악\n• 민원 답변 자료의 핵심 내용 빠르고 정확하게 요약"
+[여기에 회의 녹취록 또는 주요 키워드를 입력하세요. 예: '일시: 2025년 11월 24일 14:00, 장소: 3층 대회의실, 참석자: 김과장, 이주무관, 박팀장, 주제: 2026년 신규 사업 추진 방안 논의. 김과장: 예산 확보 방안 중요성 강조, 이주무관: 시민 의견 수렴 필요성 제기, 박팀장: 타 지자체 사례 분석 제안. 결정: 시민 의견 수렴 후 사업 계획 구체화. 조치: 이주무관 시민 의견 수렴 담당, 박팀장 사례 분석 담당.']`,
+            result: `• **회의 개요**
+    • 일시: 2025년 11월 24일 14:00
+    • 장소: 3층 대회의실
+    • 참석자: 김과장 외 2명
+    • 주제: 2026년 신규 사업 추진 방안 논의
+• **주요 논의 내용**
+    • 신규 사업 예산 확보의 중요성 강조.
+    • 사업 추진 시 시민 의견 수렴의 필요성 제기.
+    • 타 지자체 유사 사업 사례 분석 제안.
+• **결정 사항**
+    • 시민 의견 수렴 ���차를 거쳐 사업 계획을 구체화하기로 결정.
+• **향후 조치 사항**
+    • 시민 의견 수렴 담당: 이주무관
+    • 타 지자체 사례 분석 담당: 박팀장`,
+            usage: "• 회의 후 즉시 AI 활용하여 초안 생성\n• 주요 결정 및 액션 아이템 누락 방지\n• 초안 기반으로 담당자와 신속하게 내용 확정"
         };
 
         // 🏛️ 공공·정부 AI 활용 사례
         const localGovCase = {
-            title: "'국가AI액션플랜' 이르면 내달 초 발표…공공IT 관리 통합안도 나오나",
-            summary: "국가인공지능(AI) 액션플랜이 오는 12월 발표될 예정이며, 인프라, 산업, 인재 등 8개 분과별 정량 목표가 제시될 것으로 보인다. 또한, 행정안전부, 과학기술정보통신부, 국가정보원 등으로 파편화된 공공IT 거버넌스 통합안도 논의될 가능성이 있다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEu6Bd8NItXgbFcq6gmhVUblXIj9uqOzJ_y0EHhs-06QemLUit_IdV0TLTPkyhbuzpHqTPEOuOUzVXE9i55_PjOm8xUWycMeakJ5hjN8dzp4R5qJIwdJol4yEYstIQJmQQZY0uyDGXmWSkRMDMvcOCZFIHt"
+            title: "민간 AI, 행정망으로…범정부 공통기반 시범 가동",
+            summary: "행정안전부와 과학기술정보통신부가 중앙·지방정부가 내부 행정망에서 민간 인공지능 서비스를 안전하게 활용할 수 있는 '범정부 AI 공통기반' 서비스를 개시했다. 이를 통해 공공부문의 일하는 방식 혁신과 행정 효율성 증대가 기대된다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGcir38cCbvwPOpipXJb7x7D8pwqphRJ8pvbcjQIFdEk-5slAXdgui2N6YuuxWIpQNUkObVQcFiWfpVcsTU1HNLdUzlaugUqyTazJdXCiVuAJdLF5p8Vdo0UEJK5QaI4z6xT0lmn7E="
         };
 
         // 🔥 AI 핫이슈 (AI 기술·산업)
         const hotIssue = {
-            title: "창업하자 350억 모였다… “같은 비용으로 AI 검색 성능 10배”[허진석의 톡톡 스타트업]",
-            summary: "한국 스타트업 디노티시아가 LLM의 AI 검색 성능을 10배 높이고 데이터센터 비용을 80% 절감하는 세계 최초 AI 벡터DB 칩을 개발해 350억 원의 투자를 유치했다. 이 기술은 검색증강생성(RAG)의 정확성과 속도를 향상시켜 AI 데이터 처리의 효율성을 극대화한다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFcajSSUfYT1WS5IOFvFvSWo1IgA5Rn_qRHB0GQIPuuyNvpAdJHDNEmFJFgIcTiQgzx2TYkoLfUmU-y61PRBXu0H1sUBiRACczcVNMFQB4JTZFgMz8mN93f1bl7hJ2Nm8zjpihjzBK0sy70x-G-wry5g-fGr1DSYqQa"
+            title: "정부, '전국민 AI 일상화' 추진…2030년까지 13조5천억원 투입",
+            summary: "정부, '전국민 AI 일상화' 추진…2030년까지 13조5천억원 투입에 관한 최신 뉴스입니다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH7MDEaPEnZ87EgfJHZ9-vfQqQ40l5bJxbJZ6nyQmoAZxuIONe175uc9Ly3RvQhT_3b0tj9wYuD6g0k3TdOqFSgR7jOn9U9eY2juJ8M-ClRqm9qTKdi4PS2wIH8SC2KVigZa_9KsFf5NQvkZqAzdzI3dIj9"
         };
 
         // 📊 오늘의 AI 트렌드
-        const todayTrendsDescription = "2025년 하반기, 공공 부문 AI 도입이 더욱 가속화되며 행정 효율성 증대와 대국민 서비스 혁신에 기여하고 있습니다. 특히 데이터 기반의 맞춤형 정책 수립 지원 및 민원 처리 자동화 분야에서 두각을 나타내고 있습니다.";
-        const todayTrends = ["#공공AI","#행정���신","#AI활용","#스마트정부","#민원서비스"];
+        const todayTrendsDescription = "최근 생성형 AI 기술이 공공 서비스 분야에서 큰 주목을 받고 있습니다. 단순 반복 업무 자동화를 넘어, 정책 기획 지원, 민원 응대 효율화 등 다양한 방식으로 공공 행정 혁신에 기여할 잠재력을 보여주고 있습니다.";
+        const todayTrends = ["#생성형AI","#공공행정혁신","#AI활용","#디지털정부","#업무자동화"];
 
         // 🏷️ OG 태그 (매일 업데이트)
         const ogTags = {
-            title: "AI출근길 (25.11.24.월) - 공공 AI 실전팁",
-            description: "방대한 보고서에서 중요한 내용만 빠르고 정확하게 파악하는 AI 활용 노하우를 소개합니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
+            title: "AI출근길 (25.11.25.화) - 공공 AI 실전팁",
+            description: "중요한 회의 내용을 놓치지 않고, AI를 활용하여 신속하게 회의록 초안을 작성하는 방법을 알려드립니다. 핵심 내용을 빠르게 정리하고 공유하여 업무 효율을 높여보세요., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
         };
     </script>
     <!-- ============================================ -->
