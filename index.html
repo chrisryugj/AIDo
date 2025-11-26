@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI출근길 (25.11.26.수) - 공공 AI 실전팁</title>
+    <title>AI출근길 (25.11.27.목) - 공공 AI 실전팁</title>
 
     <!-- OGP -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
-    <meta property="og:title" content="AI출근길 (25.11.26.수) - 공공 AI 실전팁">
-    <meta property="og:description" content="반복적인 민원 질문에 대한 답변을 AI로 자동 생성하여 업무 효율을 높이는 방법입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
+    <meta property="og:title" content="AI출근길 (25.11.27.목) - 공공 AI 실전팁">
+    <meta property="og:description" content="방대한 민원 서류나 보고서에서 핵심 내용을 신속하게 파악하고 싶을 때, AI 요약 기능을 활용하여 업무 효율을 극대화하는 방법입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
     <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.jpg">
 
     <style>
@@ -483,47 +483,53 @@
     <!-- ============================================ -->
     <script>
         // 📅 날짜 정보 (매일 업데이트)
-        const currentDate = "2025년 11월 26일 수요일";
+        const currentDate = "2025년 11월 27일 목요일";
 
         // 💬 오늘의 한마디 (매일 교체)
         const todayQuote = {
-            text: "세상은 고통으로 가득하지만, 그것을 극복하는 이야기들로도 가득하다.",
+            text: "세상은 고통으로 가득하지만, 그것을 극복하는 힘 또한 가득하다.",
             author: "헬렌 켈러"
         };
 
         // 💡 오늘의 실전 팁 (매일 새 주제)
         const todayTip = {
-            title: "AI를 활용한 민원 응대 FAQ 자동화",
-            summary: "반복적인 민원 질문에 대한 답변을 AI로 자동 생성하여 업무 효율을 높이는 방법입니다.",
-            situation: "• 반복적인 민원 질문에 시간 소모\n• 답변 일관성 유지의 어려움\n• 신규 직원의 민원 응대 교육 부담",
-            solution: "• 자주 묻는 질문(FAQ) 리스트와 모범 답변을 준비\n• AI에 FAQ 데이터 학습 및 답변 생성 요청\n• 생성된 답변을 검토 후 공식 답변으로 확정",
-            prompt: `다음 민원 질문에 대해 공무원으로서 친절하고 명확하게 답변해 주세요. 답변은 200자 이내로 작성하고, 관련 법령(예시: 「개인정보보호법」 제15조)을 언급하며 근거를 제시해 주세요. [질문: 출생신고 시 필요한 서류는 무엇이며, 처리 기간은 얼마나 걸리나요?]`,
-            result: `안녕하세요. 출생신고는 자녀의 출생일로부터 1개월 이내에 하셔야 합니다. 필요한 서류는 출생증명서, 신분증이며, 부모의 혼인관계증명서 등 추가 서류가 필요할 수 있습니다. 처리 기간은 당일이며, 자세한 내용은 관할 주민센터에 문의하시기 바랍니다. 관련 법령은 「가족관계의 등록 등에 관한 법률」 제44조입니다.`,
-            usage: "• 민원 상담 전 AI로 초안 답변 생성\n• 새로운 민원 유형 발생 시 AI로 답변 초안 마련\n• 내부 직원 교육 자료로 AI 생성 답변 활용"
+            title: "복잡한 민원 서류, AI로 30초 만에 핵심 요약하기",
+            summary: "방대한 민원 서류나 보고서에서 핵심 내용을 신속하게 파악하고 싶을 때, AI 요약 기능을 활용하여 업무 효율을 극대화하는 방법입니다.",
+            situation: "• 방대한 민원 서류 검토에 시간 소요\n• 핵심 내용 파악 및 보고서 작성 지연\n• 중요 정보 누락 위험 및 업무 피로도 증가",
+            solution: "• AI 도구에 서류 내용 붙여넣기\n• 핵심 요약 프롬프트 입력\n• AI가 생성한 요약 내용 확인 및 활용",
+            prompt: `다음 민원 서류의 내용을 300자 이내로 요약하고, 핵심 쟁점 3가지와 필요한 조치 사항 2가지를 명확히 구분하여 개조식으로 작성해 줘. 존대하는 어조로 작성해.`,
+            result: `해당 민원은 [민원 내용]에 대한 것으로, 다음과 같은 핵심 쟁점과 조치 사항이 파악됩니다.
+• 핵심 쟁점 1: [구체적 쟁점 내용]
+• 핵심 쟁점 2: [구체적 쟁점 내용]
+• 핵심 쟁점 3: [구체적 쟁점 내용]
+• 조치 사항 1: [구체적 조치 내용]
+• 조치 사항 2: [구체적 조치 내용]
+추가 검토 후 신속한 처리가 필요합니다.`,
+            usage: "• 회의 전 자료 핵심 파악 및 안건 준비\n• 복잡한 법률/규정 문서 신속 이해\n• 상급자 보고 시 주요 내용 간결하게 전달"
         };
 
         // 🏛️ 공공·정부 AI 활용 사례
         const localGovCase = {
-            title: "정부, 내부망에서도 민간 AI 쓴다…해외 공공부문과 나란히 'AI 행정' 가속",
-            summary: "행정안전부와 과학기술정보통신부가 중앙·지방정부가 민간 AI 대화형 서비스를 내부망에서 안전하게 활용할 수 있는 '범정부 AI 공통기반' 시범 운영을 시작하며 AI 행정 전환을 가속화한다. 이를 통해 공무원들은 복잡한 행정 용어 설명이나 법령 요약 등 질의응답형 비서로 AI 챗봇을 활용할 수 있게 된다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGlIhQGsQlkZ8OF45CPsXKSxn_o4ayjP7fyDfKyUgiN6Z16fb4R8njAZEWmJwqIkU5wN3uaO2G1Hist6WJSdUcLYMn1RF4yIPdYpNkgkuoCHwL0u8R1IvSXJdyXxvWnByDdqEq7_S1fU0Jdpo2OmbmaVqiRS-6J"
+            title: "\"개통만 하면 장애\" 공공SW 관행 깬 'e-사람'…인사혁신처·아이티센의 무장애 비법은",
+            summary: "인사혁신처가 50만 공무원이 사용하는 차세대 전자인사관리시스템 'e-사람'을 성공적으로 개통하여, AI 기반 개인 맞춤형 정보 제공 기능을 더한 디지털 전환을 이루었다. 이 시스템은 공무원 인사업무 전 과정을 디지털화하고 안정적으로 운영되고 있다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGDmUnlJ5_QNr_JCG9P1_p2DJIbKYzWHf_IZOVWVsb7sEZgPnJ4NeJH8yuOH9FuKm75XmGNxyf1akVJlDnI7i0syFR4Rq8oIHUem94oIT7p_RgMrwbQtWRdtdwGQkpR59zm9qRnBUo="
         };
 
         // 🔥 AI 핫이슈 (AI 기술·산업)
         const hotIssue = {
-            title: "[현장] 국산 AI 반도체·클라우드 결합 '시동'…국가 인프라 강화 선언",
-            summary: "[현장] 국산 AI 반도체·클라우드 결합 '시동'…국가 인프라 강화 선언에 관한 최신 뉴스입니다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGc17tFUkjFAUGsF4VzNsgaq72NI8aBCanFo4ISMoNDZEyQ-gFtFB335IciDqeP-SGC6hQY3ocXL2Wj-N8PLPoNOHvAe7s4VAknpi2Af_YtqwBNiz48YNPYQinCfuoeCSDI"
+            title: "센드버드, 'AWS 생성형 AI 컴피턴시' 획득",
+            summary: "글로벌 AI 고객경험 기업 센드버드가 아마존웹서비스(AWS)로부터 'AWS 생성형 AI 컴피턴시' 인증을 획득했다. 이는 AWS 핵심 생성형 AI 기술을 기반으로 고객 맞춤형 솔루션을 성공적으로 구축한 파트너에게 부여되는 최고 수준의 기술 전문 인증이다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHuUFitofPclg20AvHxuqQM4TVMEGip78akI-5BY2Oimr4ryzsejTeS3FRoRVa1RGPGPyDWH3Z1OjVtlcAdsijw2wk_z7DWuPHKhqAMNAqNQdioHS6zKQNmExAJkE2itsMqjUPj9FG699Hp3b5ZN8gZ2muqoQ=="
         };
 
         // 📊 오늘의 AI 트렌드
-        const todayTrendsDescription = "최근 공공 부문 맞춤형 AI 모델 개발이 활발합니다. 민원 처리, 데이터 분석 등 특정 업무에 특화된 AI 도입으로 공직 사회의 생산성이 향상될 것으로 기대됩니다.";
-        const todayTrends = ["#공공AI","#민원자동화","#업무효율","#AI활용","#디지털정부"];
+        const todayTrendsDescription = "최근 공공 부문에서 AI 기반의 '초개인화 서비스' 도입이 활발해지고 있습니다. 시민 개개인의 필요에 맞춰 맞춤형 정보를 제공하고, 선제적으로 필요한 서비스를 제안하여 행정 서비스 만족도를 높이는 데 기여하고 있습니다.";
+        const todayTrends = ["#공공AI","#초개인화서비스","#행정효율","#AI트렌드","#스마트정부"];
 
         // 🏷️ OG 태그 (매일 업데이트)
         const ogTags = {
-            title: "AI출근길 (25.11.26.수) - 공공 AI 실전팁",
-            description: "반복적인 민원 질문에 대한 답변을 AI로 자동 생성하여 업무 효율을 높이는 방법입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
+            title: "AI출근길 (25.11.27.목) - 공공 AI 실전팁",
+            description: "방대한 민원 서류나 보고서에서 핵심 내용을 신속하게 파악하고 싶을 때, AI 요약 기능을 활용하여 업무 효율을 극대화하는 방법입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
         };
     </script>
     <!-- ============================================ -->
