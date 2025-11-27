@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI출근길 (25.11.27.목) - 공공 AI 실전팁</title>
+    <title>AI출근길 (25.11.28.금) - 공공 AI 실전팁</title>
 
     <!-- OGP -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
-    <meta property="og:title" content="AI출근길 (25.11.27.목) - 공공 AI 실전팁">
-    <meta property="og:description" content="방대한 민원 서류나 보고서에서 핵심 내용을 신속하게 파악하고 싶을 때, AI 요약 기능을 활용하여 업무 효율을 극대화하는 방법입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
+    <meta property="og:title" content="AI출근길 (25.11.28.금) - 공공 AI 실전팁">
+    <meta property="og:description" content="방대한 자료와 지시사항을 바탕으로 보고서 초안을 빠르게 생성하여 업무 시간을 절약하고 효율성을 높이는 AI 활용 팁입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
     <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.jpg">
 
     <style>
@@ -483,53 +483,60 @@
     <!-- ============================================ -->
     <script>
         // 📅 날짜 정보 (매일 업데이트)
-        const currentDate = "2025년 11월 27일 목요일";
+        const currentDate = "2025년 11월 28일 금요일";
 
         // 💬 오늘의 한마디 (매일 교체)
         const todayQuote = {
-            text: "세상은 고통으로 가득하지만, 그것을 극복하는 힘 또한 가득하다.",
-            author: "헬렌 켈러"
+            text: "당신이 있는 곳에서 작은 선행을 베푸세요. 그 작은 선행들이 모여 세상을 압도할 것입니다.",
+            author: "데스몬드 투투"
         };
 
         // 💡 오늘의 실전 팁 (매일 새 주제)
         const todayTip = {
-            title: "복잡한 민원 서류, AI로 30초 만에 핵심 요약하기",
-            summary: "방대한 민원 서류나 보고서에서 핵심 내용을 신속하게 파악하고 싶을 때, AI 요약 기능을 활용하여 업무 효율을 극대화하는 방법입니다.",
-            situation: "• 방대한 민원 서류 검토에 시간 소요\n• 핵심 내용 파악 및 보고서 작성 지연\n• 중요 정보 누락 위험 및 업무 피로도 증가",
-            solution: "• AI 도구에 서류 내용 붙여넣기\n• 핵심 요약 프롬프트 입력\n• AI가 생성한 요약 내용 확인 및 활용",
-            prompt: `다음 민원 서류의 내용을 300자 이내로 요약하고, 핵심 쟁점 3가지와 필요한 조치 사항 2가지를 명확히 구분하여 개조식으로 작성해 줘. 존대하는 어조로 작성해.`,
-            result: `해당 민원은 [민원 내용]에 대한 것으로, 다음과 같은 핵심 쟁점과 조치 사항이 파악됩니다.
-• 핵심 쟁점 1: [구체적 쟁점 내용]
-• 핵심 쟁점 2: [구체적 쟁점 내용]
-• 핵심 쟁점 3: [구체적 쟁점 내용]
-• 조치 사항 1: [구체적 조치 내용]
-• 조치 사항 2: [구체적 조치 내용]
-추가 검토 후 신속한 처리가 필요합니다.`,
-            usage: "• 회의 전 자료 핵심 파악 및 안건 준비\n• 복잡한 법률/규정 문서 신속 이해\n• 상급자 보고 시 주요 내용 간결하게 전달"
+            title: "AI로 복잡한 보고서 초안 신속하게 작성하기",
+            summary: "방대한 자료와 지시사항을 바탕으로 보고서 초안을 빠르게 생성하여 업무 시간을 절약하고 효율성을 높이는 AI 활용 팁입니다.",
+            situation: "• 방대한 자료를 바탕으로 보고서 초안 작성 시간 부족\n• 핵심 내용을 놓치지 않으면서 간결하게 정리해야 함\n• 여러 부서의 의견을 종합하여 보고서에 반영 필요",
+            solution: "• 주요 자료와 지시사항을 AI에 명확히 입력\n• 보고서의 목적과 대상 독자를 구체적으로 제시\n• AI가 생성한 초안을 바탕으로 세부 내용 보강 및 수정",
+            prompt: `다음 정보를 바탕으로 '[주제]'에 대한 '[보고서 종류, 예: 정책 제안 보고서]' 초안을 작성해 주세요. 보고서의 목적은 '[목적]', 대상은 '[대상]'입니다. 다음 핵심 내용을 반드시 포함해 주세요: [핵심 내용1], [핵심 내용2], [핵심 내용3]. 또한, [특정 형식/어조]으로 작성해 주세요.`,
+            result: `**[주제]에 대한 [보고서 종류] 초안**
+
+**Ⅰ. 서론**
+[보고서 배경 및 목적 요약]
+
+**Ⅱ. 현황 분석**
+[핵심 내용1에 대한 간략한 분석]
+[핵심 내용2에 대한 간략한 분석]
+
+**Ⅲ. 정책 제안 (또는 해결 방안)**
+[핵심 내용3을 바탕으로 한 제안 요약]
+
+**Ⅳ. 결론 및 기대효과**
+[종합 의견 및 예상 효과 요약]`,
+            usage: "• 회의록, 정책 자료 등 방대한 텍스트 요약에 활용\n• 다양한 보고서(기획안, 결과 보고서 등) 초안 작성 시간 단축\n• 부서 간 협업 시 공통 보고서 양식 및 내용 통일에 기여"
         };
 
         // 🏛️ 공공·정부 AI 활용 사례
         const localGovCase = {
-            title: "\"개통만 하면 장애\" 공공SW 관행 깬 'e-사람'…인사혁신처·아이티센의 무장애 비법은",
-            summary: "인사혁신처가 50만 공무원이 사용하는 차세대 전자인사관리시스템 'e-사람'을 성공적으로 개통하여, AI 기반 개인 맞춤형 정보 제공 기능을 더한 디지털 전환을 이루었다. 이 시스템은 공무원 인사업무 전 과정을 디지털화하고 안정적으로 운영되고 있다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGDmUnlJ5_QNr_JCG9P1_p2DJIbKYzWHf_IZOVWVsb7sEZgPnJ4NeJH8yuOH9FuKm75XmGNxyf1akVJlDnI7i0syFR4Rq8oIHUem94oIT7p_RgMrwbQtWRdtdwGQkpR59zm9qRnBUo="
+            title: "헌법재판소·인권위 업무에 AI 입힌다…NIA, 지능정보화 로드맵 수립",
+            summary: "헌법재판소, 국가인권위원회, 한국산업인력공단 등 주요 국가기관 업무에 인공지능(AI)이 본격 도입된다. 한국지능정보사회진흥원(NIA)은 27일 이들 3개 기관의 정보화전략계획(ISP) 수립 결과를 발표하며 AI 기반 디지털 전환 로드맵을 제시했다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGjQf1kAAJvO8UhFzl1DpkkEOJj9Qj11Kn4THVrjwZjZnJSA5sfavgRIBlJxIq8Fk7Y_9_-TPDCcGcR2RFv9VGwSWSlyLBPu-Q7xEFTxTcxZUKdhQauTx0Q5Ytms3iCP8A="
         };
 
         // 🔥 AI 핫이슈 (AI 기술·산업)
         const hotIssue = {
-            title: "센드버드, 'AWS 생성형 AI 컴피턴시' 획득",
-            summary: "글로벌 AI 고객경험 기업 센드버드가 아마존웹서비스(AWS)로부터 'AWS 생성형 AI 컴피턴시' 인증을 획득했다. 이는 AWS 핵심 생성형 AI 기술을 기반으로 고객 맞춤형 솔루션을 성공적으로 구축한 파트너에게 부여되는 최고 수준의 기술 전문 인증이다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHuUFitofPclg20AvHxuqQM4TVMEGip78akI-5BY2Oimr4ryzsejTeS3FRoRVa1RGPGPyDWH3Z1OjVtlcAdsijw2wk_z7DWuPHKhqAMNAqNQdioHS6zKQNmExAJkE2itsMqjUPj9FG699Hp3b5ZN8gZ2muqoQ=="
+            title: "[엔터프라이즈핫이슈] 엔비디아 겨냥 빅클라우드 도전 성과 '속속'",
+            summary: "AI 칩 시장에서 엔비디아의 독주에 맞서 구글과 아마존웹서비스(AWS) 등 빅 클라우드 기업들이 자체 AI 칩 개발 성과를 내며 도전하고 있다. 특히 구글은 자체 개발한 AI 칩인 TPU(tensor processing units)를 클라우드 고객뿐 아니라 외부 데이터센터로도 공급을 확대하려는 움직임을 보이고 있다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHCohqLNtDs_aHYYsGIQgJz8ftgZ6Ev7SC2Ml3joz6X84CEZPE-9qnn0Pk-gpV1S2H9Jp5uVA-7n1bEbZ5Gyt7bhuEEzI6QKYLG4hqYhNAlPkwdeBGm3aOxGOl2Qzws8W6cF2JWY_vEB7llcFAQX020zj9VFnbKxLPyV2TZ"
         };
 
         // 📊 오늘의 AI 트렌드
-        const todayTrendsDescription = "최근 공공 부문에서 AI 기반의 '초개인화 서비스' 도입이 활발해지고 있습니다. 시민 개개인의 필요에 맞춰 맞춤형 정보를 제공하고, 선제적으로 필요한 서비스를 제안하여 행정 서비스 만족도를 높이는 데 기여하고 있습니다.";
-        const todayTrends = ["#공공AI","#초개인화서비스","#행정효율","#AI트렌드","#스마트정부"];
+        const todayTrendsDescription = "공공 부문에서 생성형 AI 도입이 가속화되며, 행정 업무 효율화와 민원 서비스 개선에 기여하고 있습니다. AI 윤리 및 데이터 보안 확보는 지속적인 과제로 논의되고 있습니다.";
+        const todayTrends = ["#공공AI","#행정혁신","#생성형AI","#AI윤리","#데이터기반행정"];
 
         // 🏷️ OG 태그 (매일 업데이트)
         const ogTags = {
-            title: "AI출근길 (25.11.27.목) - 공공 AI 실전팁",
-            description: "방대한 민원 서류나 보고서에서 핵심 내용을 신속하게 파악하고 싶을 때, AI 요약 기능을 활용하여 업무 효율을 극대화하는 방법입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
+            title: "AI출근길 (25.11.28.금) - 공공 AI 실전팁",
+            description: "방대한 자료와 지시사항을 바탕으로 보고서 초안을 빠르게 생성하여 업무 시간을 절약하고 효율성을 높이는 AI 활용 팁입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
         };
     </script>
     <!-- ============================================ -->
