@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI출근길 (25.11.28.금) - 공공 AI 실전팁</title>
+    <title>AI출근길 (25.11.29.토) - 공공 AI 실전팁</title>
 
     <!-- OGP -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://chrisryugj.github.io/AIDo/">
-    <meta property="og:title" content="AI출근길 (25.11.28.금) - 공공 AI 실전팁">
-    <meta property="og:description" content="방대한 자료와 지시사항을 바탕으로 보고서 초안을 빠르게 생성하여 업무 시간을 절약하고 효율성을 높이는 AI 활용 팁입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
+    <meta property="og:title" content="AI출근길 (25.11.29.토) - 공공 AI 실전팁">
+    <meta property="og:description" content="방대한 정책 문서나 보고서의 핵심 내용을 AI를 활용해 신속하게 파악하고 요약하는 실전 팁입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함.">
     <meta property="og:image" content="https://chrisryugj.github.io/AIDo/images/aido-og-image.jpg">
 
     <style>
@@ -483,60 +483,47 @@
     <!-- ============================================ -->
     <script>
         // 📅 날짜 정보 (매일 업데이트)
-        const currentDate = "2025년 11월 28일 금요일";
+        const currentDate = "2025년 11월 29일 토요일";
 
         // 💬 오늘의 한마디 (매일 교체)
         const todayQuote = {
-            text: "당신이 있는 곳에서 작은 선행을 베푸세요. 그 작은 선행들이 모여 세상을 압도할 것입니다.",
-            author: "데스몬드 투투"
+            text: "당신은 어쩌면 많은 패배를 만날지 모르지만, 패배해서는 안 됩니다.",
+            author: "마야 안젤루"
         };
 
         // 💡 오늘의 실전 팁 (매일 새 주제)
         const todayTip = {
-            title: "AI로 복잡한 보고서 초안 신속하게 작성하기",
-            summary: "방대한 자료와 지시사항을 바탕으로 보고서 초안을 빠르게 생성하여 업무 시간을 절약하고 효율성을 높이는 AI 활용 팁입니다.",
-            situation: "• 방대한 자료를 바탕으로 보고서 초안 작성 시간 부족\n• 핵심 내용을 놓치지 않으면서 간결하게 정리해야 함\n• 여러 부서의 의견을 종합하여 보고서에 반영 필요",
-            solution: "• 주요 자료와 지시사항을 AI에 명확히 입력\n• 보고서의 목적과 대상 독자를 구체적으로 제시\n• AI가 생성한 초안을 바탕으로 세부 내용 보강 및 수정",
-            prompt: `다음 정보를 바탕으로 '[주제]'에 대한 '[보고서 종류, 예: 정책 제안 보고서]' 초안을 작성해 주세요. 보고서의 목적은 '[목적]', 대상은 '[대상]'입니다. 다음 핵심 내용을 반드시 포함해 주세요: [핵심 내용1], [핵심 내용2], [핵심 내용3]. 또한, [특정 형식/어조]으로 작성해 주세요.`,
-            result: `**[주제]에 대한 [보고서 종류] 초안**
-
-**Ⅰ. 서론**
-[보고서 배경 및 목적 요약]
-
-**Ⅱ. 현황 분석**
-[핵심 내용1에 대한 간략한 분석]
-[핵심 내용2에 대한 간략한 분석]
-
-**Ⅲ. 정책 제안 (또는 해결 방안)**
-[핵심 내용3을 바탕으로 한 제안 요약]
-
-**Ⅳ. 결론 및 기대효과**
-[종합 의견 및 예상 효과 요약]`,
-            usage: "• 회의록, 정책 자료 등 방대한 텍스트 요약에 활용\n• 다양한 보고서(기획안, 결과 보고서 등) 초안 작성 시간 단축\n• 부서 간 협업 시 공통 보고서 양식 및 내용 통일에 기여"
+            title: "복잡한 정책 자료, AI로 1분 만에 핵심 요약하기",
+            summary: "방대한 정책 문서나 보고서의 핵심 내용을 AI를 활용해 신속하게 파악하고 요약하는 실전 팁입니다.",
+            situation: "• 방대한 정책 자료 분석 시간 부족\n• 핵심 내용 파악 및 보고서 초안 작성 애로\n• 다양한 문서 간 정보 비교 및 통합 필요",
+            solution: "• AI 도구에 문서 업로드 또는 텍스트 붙여넣기\n• 주요 내용, 결론, 시사점 위주로 요약 요청\n• 특정 키워드나 관점으로 추가 분석 지시",
+            prompt: `다음 정책 보고서의 핵심 내용, 주요 정책 제안, 그리고 예상되는 파급 효과를 500자 이내로 요약해 주세요. 특히 공무원이 실무에 적용할 수 있는 부분을 강조해 주세요. [여기에 보고서 텍스트 붙여넣기]`,
+            result: `해당 정책 보고서는 [주요 주제]에 대한 [핵심 문제점]을 지적하며, [주요 해결책 A, B]를 제안합니다. 공무원은 [실무 적용 방안 1]을 통해 [기대 효과]를 달성하고, [실무 적용 방안 2]를 통해 [또 다른 기대 효과]를 기대할 수 있습니다. 보고서는 또한 [예상되는 파급 효과]에 대해 언급하고 있습니다.`,
+            usage: "• 정기 보고서 및 회의 자료 준비 시간 단축\n• 새로운 정책 입안 시 배경 자료 신속 분석\n• 대민 설명 자료의 핵심 내용 간결화"
         };
 
         // 🏛️ 공공·정부 AI 활용 사례
         const localGovCase = {
-            title: "헌법재판소·인권위 업무에 AI 입힌다…NIA, 지능정보화 로드맵 수립",
-            summary: "헌법재판소, 국가인권위원회, 한국산업인력공단 등 주요 국가기관 업무에 인공지능(AI)이 본격 도입된다. 한국지능정보사회진흥원(NIA)은 27일 이들 3개 기관의 정보화전략계획(ISP) 수립 결과를 발표하며 AI 기반 디지털 전환 로드맵을 제시했다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGjQf1kAAJvO8UhFzl1DpkkEOJj9Qj11Kn4THVrjwZjZnJSA5sfavgRIBlJxIq8Fk7Y_9_-TPDCcGcR2RFv9VGwSWSlyLBPu-Q7xEFTxTcxZUKdhQauTx0Q5Ytms3iCP8A="
+            title: "수원시,'지방자치콘텐츠대상'서 AI·디지털 분야 대상 수상",
+            summary: "수원시가 '2025 지방자치콘텐츠대상'에서 AI·디지털 분야 대상을 수상하며, 전국 지자체 최초로 국 단위 AI 전담조직을 신설하고 빅데이터 플랫폼, AI 도로분석 시스템, AI 복지상담 서비스, 수원형 AI 챗봇 구축 등을 통해 생활밀착형 디지털 전환을 이끌었다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGmtllppQsk5qAQK4TroELHMvubjYUi6L1fpEyutRnmRCJrG1CDJ_dZbLdsEuRkuGJkcfbms6k4ZcMquZktVFN2tWu0aOAyqI0aeLLSLArgpxVCsqMFNk-ziUqwmxd0AQHVY6M7B9bb2Ks="
         };
 
         // 🔥 AI 핫이슈 (AI 기술·산업)
         const hotIssue = {
-            title: "[엔터프라이즈핫이슈] 엔비디아 겨냥 빅클라우드 도전 성과 '속속'",
-            summary: "AI 칩 시장에서 엔비디아의 독주에 맞서 구글과 아마존웹서비스(AWS) 등 빅 클라우드 기업들이 자체 AI 칩 개발 성과를 내며 도전하고 있다. 특히 구글은 자체 개발한 AI 칩인 TPU(tensor processing units)를 클라우드 고객뿐 아니라 외부 데이터센터로도 공급을 확대하려는 움직임을 보이고 있다.",
-            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHCohqLNtDs_aHYYsGIQgJz8ftgZ6Ev7SC2Ml3joz6X84CEZPE-9qnn0Pk-gpV1S2H9Jp5uVA-7n1bEbZ5Gyt7bhuEEzI6QKYLG4hqYhNAlPkwdeBGm3aOxGOl2Qzws8W6cF2JWY_vEB7llcFAQX020zj9VFnbKxLPyV2TZ"
+            title: "네이버·두나무, AI·웹3 글로벌 선점 노린다...5년간 10조원 투자",
+            summary: "네이버와 두나무가 인공지능(AI) 및 웹3 글로벌 시장 선점을 위해 향후 5년간 10조원을 투자한다. 두나무의 네이버 계열 편입을 통해 기술·인재·인프라 생태계를 확장하고 'K핀테크'의 저력을 세계에 보여줄 계획이다.",
+            link: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEEgpXoyc0ZgIinfTqv93waFAGHhF-BIQTCyWwNk8WOr4kgrfhtJ2DvTd9tvS37evwLMocqGGv5umQxqFe8szn8SMUcNxZYg2XmkZ-X4xXIPwKIvaYTPqijLJRrvtbd98M="
         };
 
         // 📊 오늘의 AI 트렌드
-        const todayTrendsDescription = "공공 부문에서 생성형 AI 도입이 가속화되며, 행정 업무 효율화와 민원 서비스 개선에 기여하고 있습니다. AI 윤리 및 데이터 보안 확보는 지속적인 과제로 논의되고 있습니다.";
-        const todayTrends = ["#공공AI","#행정혁신","#생성형AI","#AI윤리","#데이터기반행정"];
+        const todayTrendsDescription = "최근 AI 기술은 공공 서비스 분야에서 단순 업무 자동화를 넘어, 민원인의 맞춤형 정보 제공 및 복잡한 정책 결정 지원 도구로 진화하고 있습니다. 이는 공공 행정의 효율성과 투명성을 높이는 데 기여할 것입니다.";
+        const todayTrends = ["#공공AI","#행정혁신","#AI활용팁","#디지털정부","#스마트행정"];
 
         // 🏷️ OG 태그 (매일 업데이트)
         const ogTags = {
-            title: "AI출근길 (25.11.28.금) - 공공 AI 실전팁",
-            description: "방대한 자료와 지시사항을 바탕으로 보고서 초안을 빠르게 생성하여 업무 시간을 절약하고 효율성을 높이는 AI 활용 팁입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
+            title: "AI출근길 (25.11.29.토) - 공공 AI 실전팁",
+            description: "방대한 정책 문서나 보고서의 핵심 내용을 AI를 활용해 신속하게 파악하고 요약하는 실전 팁입니다., 지자체 사례·핫이슈 1건씩, 오늘의 한 문장 포함."
         };
     </script>
     <!-- ============================================ -->
