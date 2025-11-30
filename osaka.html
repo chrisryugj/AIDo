@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오사카·교토 여행 총무 가이드</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #e0f2fe 0%, #ddd6fe 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+            color: white;
+            padding: 30px;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        
+        .header p {
+            color: #bfdbfe;
+            font-size: 14px;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .section-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .section-number.blue { background: #dbeafe; color: #2563eb; }
+        .section-number.green { background: #d1fae5; color: #059669; }
+        .section-number.purple { background: #e9d5ff; color: #7c3aed; }
+        
+        .section h2 {
+            font-size: 20px;
+            color: #1f2937;
+        }
+        
+        .checklist {
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 16px;
+        }
+        
+        .check-item {
+            display: flex;
+            align-items: start;
+            gap: 8px;
+            padding: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .check-item:hover {
+            background: #f3f4f6;
+        }
+        
+        .check-item input[type="checkbox"] {
+            margin-top: 4px;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            accent-color: #2563eb;
+        }
+        
+        .check-item label {
+            flex: 1;
+            font-size: 14px;
+            color: #374151;
+            cursor: pointer;
+            line-height: 1.5;
+        }
+        
+        .check-item.checked label {
+            text-decoration: line-through;
+            color: #9ca3af;
+        }
+        
+        .info-box {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 16px;
+            border-radius: 4px;
+            margin-top: 16px;
+        }
+        
+        .info-box strong {
+            color: #92400e;
+        }
+        
+        .info-box p {
+            font-size: 14px;
+            color: #78350f;
+            margin: 0;
+        }
+        
+        .payment-card {
+            border-left: 4px solid;
+            padding: 16px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+        }
+        
+        .payment-card.blue {
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+        
+        .payment-card.green {
+            border-color: #10b981;
+            background: #ecfdf5;
+        }
+        
+        .payment-card.amber {
+            border-color: #f59e0b;
+            background: #fffbeb;
+        }
+        
+        .payment-card h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .payment-card.blue h3 { color: #1e40af; }
+        .payment-card.green h3 { color: #047857; }
+        .payment-card.amber h3 { color: #92400e; }
+        
+        .payment-card p {
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+        
+        .payment-card.blue p { color: #1e40af; }
+        .payment-card.green p { color: #047857; }
+        .payment-card.amber p { color: #92400e; }
+        
+        .payment-card small {
+            font-size: 12px;
+        }
+        
+        .payment-card.blue small { color: #1d4ed8; }
+        .payment-card.green small { color: #059669; }
+        .payment-card.amber small { color: #b45309; }
+        
+        .tips-box {
+            background: linear-gradient(135deg, #fce7f3 0%, #e9d5ff 100%);
+            border-radius: 8px;
+            padding: 24px;
+        }
+        
+        .tips-box h2 {
+            font-size: 18px;
+            margin-bottom: 16px;
+            color: #1f2937;
+        }
+        
+        .tips-box ul {
+            list-style: none;
+        }
+        
+        .tips-box li {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #374151;
+        }
+        
+        .tips-box .tip-number {
+            color: #ec4899;
+            font-weight: bold;
+        }
+        
+        .reset-button {
+            text-align: center;
+            padding-top: 20px;
+        }
+        
+        .reset-button button {
+            background: #e5e7eb;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #374151;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .reset-button button:hover {
+            background: #d1d5db;
+        }
+        
+        @media (max-width: 640px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 20px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🇯🇵 오사카·교토 여행 총무 가이드</h1>
+            <p>핵심만 빠르게 체크하세요</p>
+        </div>
+        
+        <div class="content">
+            <!-- 출발 전 -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-number blue">1</div>
+                    <h2>출발 전 (D-30~D-7)</h2>
+                </div>
+                <div class="checklist" id="before-trip">
+                    <div class="check-item" data-id="info1">
+                        <input type="checkbox">
+                        <label>멤버 정보: 여권명/생년월일/비상연락처</label>
+                    </div>
+                    <div class="check-item" data-id="info2">
+                        <input type="checkbox">
+                        <label>특이사항: 알레르기, 침대선호, 코골이 여부</label>
+                    </div>
+                    <div class="check-item" data-id="info3">
+                        <input type="checkbox">
+                        <label>단톡 공지: 항공편, 호텔주소, 주요일정</label>
+                    </div>
+                    <div class="check-item" data-id="budget1">
+                        <input type="checkbox">
+                        <label>1인 예산안 공유 (교통+숙박+식비)</label>
+                    </div>
+                    <div class="check-item" data-id="budget2">
+                        <input type="checkbox">
+                        <label>결제 룰 합의: 공동경비 vs 개인경비 구분</label>
+                    </div>
+                    <div class="check-item" data-id="budget3">
+                        <input type="checkbox">
+                        <label>총무카드 + 공동현금(1인 1~2만엔) 준비</label>
+                    </div>
+                    <div class="check-item" data-id="reserve1">
+                        <input type="checkbox">
+                        <label>숙소 재확인: 예약자명, 조식, 체크인 방식</label>
+                    </div>
+                    <div class="check-item" data-id="reserve2">
+                        <input type="checkbox">
+                        <label>교통패스 구매: ICOCA 충전 or 패스권</label>
+                    </div>
+                    <div class="check-item" data-id="reserve3">
+                        <input type="checkbox">
+                        <label>필수 예약: 유니버설/인기 식당 선결제</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 여행 중 -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-number green">2</div>
+                    <h2>여행 중 (D-Day)</h2>
+                </div>
+                <div class="checklist" id="during-trip">
+                    <div class="check-item" data-id="arrive1">
+                        <input type="checkbox">
+                        <label>공항 도착 후: 유심/ICOCA 작동 확인</label>
+                    </div>
+                    <div class="check-item" data-id="arrive2">
+                        <input type="checkbox">
+                        <label>호텔 체크인: 여권 취합 후 룸 배정</label>
+                    </div>
+                    <div class="check-item" data-id="daily1">
+                        <input type="checkbox">
+                        <label>매일 아침: 당일 일정 및 예상 지출 브리핑</label>
+                    </div>
+                    <div class="check-item" data-id="daily2">
+                        <input type="checkbox">
+                        <label>결제 직후 기록: 날짜/항목/금액/수단 카톡 전송</label>
+                    </div>
+                    <div class="check-item" data-id="daily3">
+                        <input type="checkbox">
+                        <label>현금 부족 전 미리 공지하여 추가 갹출</label>
+                    </div>
+                </div>
+                
+                <div class="info-box">
+                    <p><strong>💡 기록 예시:</strong> "12/5 점심 라멘 4인 / 4,800엔 / 총무카드 / 공동"</p>
+                </div>
+            </div>
+            
+            <!-- 귀국 후 -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-number purple">3</div>
+                    <h2>귀국 후 정산</h2>
+                </div>
+                <div class="checklist" id="after-trip">
+                    <div class="check-item" data-id="settle1">
+                        <input type="checkbox">
+                        <label>지출 내역 통합: 카드명세서 + 영수증</label>
+                    </div>
+                    <div class="check-item" data-id="settle2">
+                        <input type="checkbox">
+                        <label>1/N 계산: 총 공동경비 ÷ 인원수</label>
+                    </div>
+                    <div class="check-item" data-id="settle3">
+                        <input type="checkbox">
+                        <label>차액 정산: 개인 선결제 - 1인 부담금</label>
+                    </div>
+                    <div class="check-item" data-id="settle4">
+                        <input type="checkbox">
+                        <label>정산표 공유 후 송금 요청 (3일 내)</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 결제 수단 -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>💳 상황별 결제 수단</h2>
+                </div>
+                
+                <div class="payment-card blue">
+                    <h3>💳 트래블카드 (해외결제 특화)</h3>
+                    <p><strong>어디서:</strong> 호텔, 백화점, 돈키호테, 체인 식당, 유니버설</p>
+                    <small>✓ 수수료 0원 + 앱 자동 기록 = 정산 편함</small>
+                </div>
+                
+                <div class="payment-card green">
+                    <h3>🐧 ICOCA (교통카드)</h3>
+                    <p><strong>어디서:</strong> 지하철, 버스, 편의점, 자판기, 코인락커</p>
+                    <small>✓ 잔돈 걱정 없음, 1초 결제 (3,000~5,000엔 충전 추천)</small>
+                </div>
+                
+                <div class="payment-card amber">
+                    <h3>💴 현금 (공동지갑)</h3>
+                    <p><strong>어디서:</strong> 오래된 맛집, 신사/사찰, 길거리 음식</p>
+                    <small>✓ 1인당 2,000엔 갹출하여 공동지갑 운영</small>
+                </div>
+            </div>
+            
+            <!-- 꿀팁 -->
+            <div class="section">
+                <div class="tips-box">
+                    <h2>💡 총무 스트레스 제로 꿀팁</h2>
+                    <ul>
+                        <li>
+                            <span class="tip-number">①</span>
+                            <span>10엔, 100원 오차는 운영비 처리 (완벽주의 NO)</span>
+                        </li>
+                        <li>
+                            <span class="tip-number">②</span>
+                            <span>영수증+가게 간판 사진 촬영 = 기록 완료</span>
+                        </li>
+                        <li>
+                            <span class="tip-number">③</span>
+                            <span>돈 부족하기 전에 미리 공지 (기분 상하지 않게)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 초기화 버튼 -->
+            <div class="reset-button">
+                <button onclick="resetChecklist()">체크리스트 초기화</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // localStorage에서 체크 상태 불러오기
+        function loadChecklist() {
+            const saved = localStorage.getItem('osakaChecklist');
+            const checklist = saved ? JSON.parse(saved) : {};
+            
+            document.querySelectorAll('.check-item').forEach(item => {
+                const id = item.getAttribute('data-id');
+                const checkbox = item.querySelector('input[type="checkbox"]');
+                
+                if (checklist[id]) {
+                    checkbox.checked = true;
+                    item.classList.add('checked');
+                }
+                
+                // 체크박스 클릭 이벤트
+                checkbox.addEventListener('change', function() {
+                    toggleCheck(id, this.checked);
+                });
+            });
+        }
+        
+        // 체크 상태 토글 및 저장
+        function toggleCheck(id, checked) {
+            const saved = localStorage.getItem('osakaChecklist');
+            const checklist = saved ? JSON.parse(saved) : {};
+            
+            checklist[id] = checked;
+            localStorage.setItem('osakaChecklist', JSON.stringify(checklist));
+            
+            // UI 업데이트
+            const item = document.querySelector(`[data-id="${id}"]`);
+            if (checked) {
+                item.classList.add('checked');
+            } else {
+                item.classList.remove('checked');
+            }
+        }
+        
+        // 초기화
+        function resetChecklist() {
+            if (confirm('모든 체크 항목을 초기화할까요?')) {
+                localStorage.removeItem('osakaChecklist');
+                document.querySelectorAll('.check-item').forEach(item => {
+                    item.classList.remove('checked');
+                    item.querySelector('input[type="checkbox"]').checked = false;
+                });
+            }
+        }
+        
+        // 페이지 로드 시 실행
+        window.addEventListener('DOMContentLoaded', loadChecklist);
+    </script>
+</body>
+</html>
